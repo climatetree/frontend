@@ -5,6 +5,5 @@ cache:
   directories:
     - node_modules
 script:
-  - cd climatetree
   - npm test
   - npm run build
