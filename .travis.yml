@@ -7,3 +7,13 @@ cache:
 script:
   - npm test
   - npm run build
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "climatetree"
+    token:
+      secure: "edwN5zBYb9JZmMqyloaFW+kQNmFZwbJMvTiaxudJXudU2sqPf29pvBCJpBjIwoJIOW3h2StypCZy+bEZXYdkreJVJftc7ticDWT0J5d/mPTIy+kW2cnXatF5Yto2b8vi/5URSTfhQnRmUXGdTeq5UtbnhI7I9+iswrQWi3Ox/WlTohXTZkZS7Px9ZCMA9k54L3T+l+W3LUXRPba0W7BTCyjLH1tId+M34/AFdYg7qpIkgjDAlukKXm/cm6ZNRAYLg/54HsRziKqphUPOe0L1VtU0mMUr1u+ZfzVSc0qCPnkJcxb9bQDtmpH74oRp3/9YV972POqLXr02/UAn73C961wBC7hyE0Pc+FWrvCoKzxwb/ih0U62/VvD1lyYxZW6eJSqgoQkoLOgBLPcvYyU7KiDC4Cn/csgklvRnezWOyZ+3rsx+vo++0hnY62uLH4UnW3OR7ff3tS/PePgnmoZ+e0pC+U0yUkS8C+2z/Nt4+aCreWBqaEIEU3oR+pJNXU6f0vtzEpUN8GQYsdrmW1HRUl9NQxcSgLekpUXFtUTh8xBXDRVozfgN+fUvYJgl5PzlhIscsiS0SiWaVosz9UE4Ua6aVVO+V/VI4w6GYEfnsAOst2bADp4rhvHWeA0BAIkdOojiZ+NAzKTy6sHwfq9iHkOEjIquscgeAZOQ5RrVQ48=" # encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - sonar-scanner
