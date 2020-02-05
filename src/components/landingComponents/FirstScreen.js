@@ -22,8 +22,8 @@ function FirstScreen() {
             <Link to="/maps">Map</Link>
           </button>
         </div>
-        <div id="background"></div>
       </div>
+      <div id="background"></div>
     </section>
   );
 }
