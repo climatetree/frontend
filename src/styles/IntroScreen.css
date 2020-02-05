@@ -1,0 +1,39 @@
+/* intro screen */
+#intro-screen {
+  height: 500px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 150px auto;
+  gap: 1rem;
+  background: linear-gradient(to bottom, transparent 300px, #0d0d0d 200px);
+}
+
+#intro-header {
+  color: #ffffff;
+  text-transform: capitalize;
+  width: 75%;
+  grid-area: 1 / 1 / 1 / 4;
+  opacity: 0;
+}
+.intro {
+  opacity: 0;
+}
+.intro h3 {
+  color: #ffffff;
+  transform: translateY(20px);
+}
+.intro p {
+  color: #91949a;
+  font-weight: 300;
+  transform: translateY(20px);
+}
+
+/* narrow screens */
+@media (max-width: 767px) {
+  #intro-screen {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 6rem;
+  }
+}

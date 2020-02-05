@@ -1,9 +1,12 @@
 import React from "react";
 
+import Nav from "./landingComponents/Nav";
+
 const About = () => {
   return (
     <div>
-      <h1>About</h1>
+      <Nav />
+      <h1 style={{ color: "black", paddingTop: "90px" }}>About</h1>
     </div>
   );
 };

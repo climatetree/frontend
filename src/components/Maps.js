@@ -3,7 +3,7 @@ import React from "react";
 const Maps = () => {
   return (
     <div>
-      <h1>Maps</h1>
+      <h1 style={{ color: "black" }}>Maps</h1>
     </div>
   );
 };
