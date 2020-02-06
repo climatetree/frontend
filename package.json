@@ -17,6 +17,33 @@
     "test": "jest",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "collectCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$": "jest-transform-stub",
+      "^.+\\.(js|jsx)?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "testMatch": [
+      "<rootDir>/tests/*"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -33,6 +60,9 @@
     ]
   },
   "devDependencies": {
-    "jest": "^25.1.0"
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
+    "jest-transform-stub": "^2.0.0",
+    "vue-jest": "^3.0.5"
   }
 }
