@@ -11,7 +11,7 @@ import GeoJSON from 'ol/format/GeoJSON';
 import { fromLonLat } from 'ol/proj';
 
 import getStyles from './helpers/olStyles';
-import {getData, jsonToGeoJson} from './helpers/data';
+import { getData, jsonToGeoJson } from './helpers/data';
 
 const OlMap = (props) => {
     // OpenLayers code to render the map
@@ -52,7 +52,7 @@ const OlMap = (props) => {
         // The map and view
         new Map({
             // Div id to put map in
-            target: 'map',
+            target: props.mapId,
             layers: [basemap, places],
             view: new View({
                 center: fromLonLat([0, 0]),
@@ -63,11 +63,15 @@ const OlMap = (props) => {
 
     return (
         <div className="OlMap"
-             id="map"
-             style={{
-                    width: '100vw',
-                    height: '100vh',
-                }}>
+            id={props.mapId}
+            style={{
+                width: '100vw',
+                height: '100vh',
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                zIndex: -1
+            }}>
         </div>
     );
 }

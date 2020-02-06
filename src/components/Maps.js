@@ -19,19 +19,27 @@ const Maps = () => {
 
   return (
     <div className='MapsPage'>
-      <input
-        type="text"
-        style={{ color: "#000" }}
-        placeholder="Enter a place"
-        value={searchPlace}
-        onChange={event => whenUserInputPlace(event)}
-      />
-      <button style={{ color: "#000" }} onClick={onSearchPlaceClick}>
-        Search
-      </button>
-      <br></br>
-      <span style={{ color: "#000" }}>{places.length}</span>
-      <OlMap />
+      <OlMap mapId="map" />
+      {/* Search Box */}
+      <div
+        id="search"
+        style={{
+          marginLeft: '50px',
+          marginTop: '10px'
+        }}>
+        <input
+          type="text"
+          style={{ color: "#000" }}
+          placeholder="Enter a place"
+          value={searchPlace}
+          onChange={event => whenUserInputPlace(event)}
+        />
+        <button style={{ color: "#000" }} onClick={onSearchPlaceClick}>
+          Search
+        </button>
+        <br></br>
+        <span style={{ color: "#000" }}>{places.length}</span>
+      </div>
     </div>
   );
 };
