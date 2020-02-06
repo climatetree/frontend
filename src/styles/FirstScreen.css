@@ -6,6 +6,21 @@
   justify-content: center;
 }
 
+#animation-first {
+  animation: firstScreen 2s ease-in-out 0s forwards;
+}
+
+@keyframes firstScreen {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 #first-screen h1 {
   text-transform: uppercase;
   margin: 0;
