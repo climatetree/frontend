@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
+
+import OlMap from './mapsComponents/OlMap';
 
 const Maps = () => {
   return (
-    <div>
-      <h1 style={{ color: "black" }}>Maps</h1>
+    <div className='MapsPage'>
+      <OlMap />
     </div>
   );
 };
