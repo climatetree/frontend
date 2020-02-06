@@ -19,7 +19,6 @@ const Maps = () => {
 
   return (
     <div className='MapsPage'>
-      <OlMap />
       <input
         type="text"
         style={{ color: "#000" }}
@@ -32,6 +31,7 @@ const Maps = () => {
       </button>
       <br></br>
       <span style={{ color: "#000" }}>{places.length}</span>
+      <OlMap />
     </div>
   );
 };

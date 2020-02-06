@@ -59,7 +59,7 @@ const OlMap = (props) => {
                 zoom: 1,
             }),
         });
-    });
+    }, []);  // End useEffect. Empty list => Not re-run
 
     return (
         <div className="OlMap"
