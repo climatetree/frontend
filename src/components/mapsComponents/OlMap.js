@@ -16,8 +16,7 @@ import { getData, jsonToGeoJson } from './helpers/data';
 const OlMap = (props) => {
     // OpenLayers code to render the map
     useEffect(() => {
-
-        /* Mapping */
+        /* Mapping Logic*/
 
         // Enable clustering for points
         let clusterSource = new Cluster({
