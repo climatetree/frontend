@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import OlMap from './mapsComponents/OlMap';
 import { getPlacesByName } from "../services/fetchPlaces";
 
+import '../styles/Maps.css';
+
 const Maps = () => {
   const [searchPlace, setSearchPlaceTerm] = useState("");
   const [places, setPlaces] = useState([]);
@@ -21,12 +23,7 @@ const Maps = () => {
     <div className='MapsPage'>
       <OlMap mapId="map" />
       {/* Search Box */}
-      <div
-        id="search"
-        style={{
-          marginLeft: '50px',
-          marginTop: '10px'
-        }}>
+      <div id="search">
         <input
           type="text"
           style={{ color: "#000" }}

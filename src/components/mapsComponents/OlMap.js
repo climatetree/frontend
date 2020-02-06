@@ -62,16 +62,9 @@ const OlMap = (props) => {
     }, []);  // End useEffect. Empty list => Not re-run
 
     return (
-        <div className="OlMap"
-            id={props.mapId}
-            style={{
-                width: '100vw',
-                height: '100vh',
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                zIndex: -1
-            }}>
+        <div 
+            className="OlMap"
+            id={props.mapId} >
         </div>
     );
 }

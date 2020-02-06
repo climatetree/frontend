@@ -1,0 +1,17 @@
+#search {
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.ol-attribution li, .ol-attribution a {
+    color: black;
+}
