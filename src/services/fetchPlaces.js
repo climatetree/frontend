@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getPlacesByName = async () => {
+export const getPlacesByName = place => {
   return axios
-    .get("http://localhost:8080/names/man")
+    .get(`http://localhost:8080/names/${place}`)
     .then(response => response.data);
 };

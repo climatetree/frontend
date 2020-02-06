@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { getPlacesByName } from "../services/fetchPlaces";
 
 const Maps = () => {
+  const [searchPlace, setSearchPlaceTerm] = useState("");
   const [places, setPlaces] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await getPlacesByName();
-      setPlaces(response);
-    })();
-  }, []);
+  const whenUserInputPlace = event => {
+    setSearchPlaceTerm(event.target.value);
+  };
+
+  const onSearchPlaceClick = async () => {
+    const response = await getPlacesByName(searchPlace);
+    setPlaces(response);
+    setSearchPlaceTerm("");
+  };
 
   return (
-    <ul>
-      <h1 style={{ color: "black" }}>Maps</h1>
-      {places.map(p => (
-        <li style={{ color: "black" }}>{p.name}</li>
-      ))}
-    </ul>
+    <div>
+      <input
+        type="text"
+        style={{ color: "#000" }}
+        placeholder="Enter a place"
+        value={searchPlace}
+        onChange={event => whenUserInputPlace(event)}
+      />
+      <button style={{ color: "#000" }} onClick={onSearchPlaceClick}>
+        Search
+      </button>
+      <br></br>
+      <span style={{ color: "#000" }}>{places.length}</span>
+    </div>
   );
 };
 
