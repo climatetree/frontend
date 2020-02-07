@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  color: #ffffff;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+body {
+  width: 100%;
+}
+section {
+  padding: 0 10rem;
+}
+h1 {
+  font-size: 4rem;
+}
+h2 {
+  font-size: 2.25rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  nav, section, footer {
+    padding: 0 6rem;
+  }
+  h1 {
+    font-size: 3.2rem;
+  }
+  h2 {
+    font-size: 2.25rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+  nav, section, footer {
+    padding: 0 2rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out 0s forwards;
+}
+.move-up {
+  transform: translateY(-20px);
+  transition: transform 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
