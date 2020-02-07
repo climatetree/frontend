@@ -1,4 +1,4 @@
-/* Data */
+import GeoJSON from 'ol/format/GeoJSON';
 
 // TODO: take a URL and fetch API data
 const getData = () => {
@@ -14,7 +14,7 @@ const getData = () => {
             "popdensity": 276559.5484,
             "pointX": 146.9123013,
             "pointY": -2.088797733,
-    
+
         },
         {
             "placeId": 2,
@@ -94,4 +94,15 @@ const jsonToGeoJson = (jsonData) => {
     return geoData;
 }
 
-export {getData, jsonToGeoJson};
+/**
+ * Creates an OpenLayers GeoJSON formatter object then uses it
+ * to create an array of Feature objects.
+ */
+const getGeoJson = () => {
+    return (new GeoJSON({
+        // converts lat/long to map readable
+        featureProjection: 'EPSG:3857',
+    })).readFeatures(jsonToGeoJson(getData()))
+}
+
+export { getData, jsonToGeoJson, getGeoJson };

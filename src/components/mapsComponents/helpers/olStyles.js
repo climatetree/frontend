@@ -51,4 +51,4 @@ const styleFunction = (feature) => {
     return style;
 }
 
-export default styleFunction;
+export { styleFunction };
