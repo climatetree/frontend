@@ -17,7 +17,7 @@ const Search = (props) => {
     };
 
     return (
-        <div id="search">
+        <form id="search">
             <input
                 type="text"
                 style={{ color: "#000" }}
@@ -30,7 +30,7 @@ const Search = (props) => {
             </button>
             <br></br>
             <span style={{ color: "#000" }}>{places.length}</span>
-        </div>
+        </form>
     );
 }
 

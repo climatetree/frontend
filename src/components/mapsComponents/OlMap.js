@@ -65,7 +65,17 @@ const OlMap = (props) => {
         // Add a click handler to the map to render the popup.
         map.on('singleclick', evt => popUpHandler(evt, map, overlay));
 
-    }, [props.mapId]);  // End useEffect. Empty list => Not re-run
+        let searchBar = document.getElementById("search");
+        searchBar.addEventListener('submit', evt => {
+            evt.preventDefault();
+            let collection = map.getLayers();
+            collection.setAt(1, new VectorLayer({
+                source: clusterSource,
+                //style: getStyles,
+            }));
+        });
+
+    }, [props]);  // End useEffect. Empty list => Not re-run
 
     return (
         <div className="OlMap">
