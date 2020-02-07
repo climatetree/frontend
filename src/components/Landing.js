@@ -31,13 +31,13 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div id='LandingPage'>
       <Nav />
       <FirstScreen />
       <IntroScreen />
       <ExploreScreen />
       <Footer />
-    </>
+    </div>
   );
 }
 
