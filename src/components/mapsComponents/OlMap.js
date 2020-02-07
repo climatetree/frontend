@@ -87,18 +87,19 @@ const OlMap = (props) => {
             }),
         });
 
-
         // Add a click handler to the map to render the popup.
         map.on('singleclick', evt => {
             let pixel = evt.pixel;
             let coord = evt.coordinate;
             // Highly nested data! These are the places in an array
             let features = map.getFeaturesAtPixel(pixel);
+
+            // Ignore clicks on map that aren't on a feature
             if (features.length === 0) {
                 return;
             }
+            
             let places = map.getFeaturesAtPixel(pixel)[0].getProperties().features;
-
             let html;
             if (places.length > 1) {        // This is a cluster
                 html = `
@@ -109,7 +110,6 @@ const OlMap = (props) => {
                 `
             } else {                        // This is a single place
                 let place = places[0].getProperties();
-                console.log(place);
                 html = `
                     <p>
                         Name: <strong>${place.name}</strong><br>

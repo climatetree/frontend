@@ -15,7 +15,7 @@ const styleFunction = (feature) => {
     if (!(numInCluster in styleCache)) {
         // Determine a radius size
         let radius;
-        let baseVal = 5;
+        let baseVal = 6;
         let test = numInCluster / 10;
         if (numInCluster === 1) {        // single feature point
             radius = baseVal;
