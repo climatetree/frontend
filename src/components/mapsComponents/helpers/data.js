@@ -53,6 +53,35 @@ const getData = () => {
     return data;
 }
 
+const getData2 = () => {
+    let data = [
+        {
+            "placeId": 1,
+            "name": "Manus",
+            "typeName": "COUNTRY",
+            "population": 32,
+            "carbon": 0.010221047,
+            "percapcarb": 4.5E-9,
+            "popdensity": 276559.5484,
+            "pointX": 146.9123013,
+            "pointY": -2.088797733,
+
+        },
+        {
+            "placeId": 2,
+            "name": "Papua New Guinea",
+            "typeName": "COUNTRY",
+            "population": 33,
+            "carbon": 0.010221047,
+            "percapcarb": 4.5E-9,
+            "popdensity": 276559.5484,
+            "pointX": 145.8584213,
+            "pointY": -6.757976652,
+        },
+    ]
+    return data;
+}
+
 /**
  * Converts JSON data into GeoJSON for rendering in a map.
  * @param {Object} jsonData JSON with the following fields: 
@@ -98,11 +127,11 @@ const jsonToGeoJson = (jsonData) => {
  * Creates an OpenLayers GeoJSON formatter object then uses it
  * to create an array of Feature objects.
  */
-const getGeoJson = () => {
+const getGeoJson = (json) => {
     return (new GeoJSON({
         // converts lat/long to map readable
         featureProjection: 'EPSG:3857',
-    })).readFeatures(jsonToGeoJson(getData()))
+    })).readFeatures(jsonToGeoJson(json));
 }
 
-export { getData, jsonToGeoJson, getGeoJson };
+export { getData, getData2, jsonToGeoJson, getGeoJson };

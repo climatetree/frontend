@@ -10,7 +10,7 @@ import XYZ from 'ol/source/XYZ';
 import { fromLonLat } from 'ol/proj';
 
 import { styleFunction as getStyles } from './helpers/olStyles';
-import { getGeoJson } from './helpers/data';
+import { getGeoJson, getData, getData2 } from './helpers/data';
 import { popUpHandler } from './helpers/eventHandlers';
 import { createPopupOverlay } from './helpers/popups';
 
@@ -25,7 +25,7 @@ const OlMap = (props) => {
             // Data
             source: new VectorSource({
                 // Extract features from GeoJSON data
-                features: getGeoJson(),
+                features: getGeoJson(getData()),
             }),
             // Min point distance to cause clustering
             distance: clusterDist,
@@ -69,13 +69,12 @@ const OlMap = (props) => {
         searchBar.addEventListener('submit', evt => {
             evt.preventDefault();
             let collection = map.getLayers();
-            collection.setAt(1, new VectorLayer({
-                source: clusterSource,
-                //style: getStyles,
-            }));
+            let dataSource = collection.getArray()[1].getSource().getSource();
+            dataSource.clear({ fast: true });
+            dataSource.addFeatures(getGeoJson(getData2()));
         });
 
-    }, [props]);  // End useEffect. Empty list => Not re-run
+    }, [props] );  // End useEffect. Empty list => Not re-run
 
     return (
         <div className="OlMap">

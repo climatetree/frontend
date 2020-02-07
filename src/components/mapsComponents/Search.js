@@ -11,9 +11,14 @@ const Search = (props) => {
     };
 
     const onSearchPlaceClick = async () => {
-        const response = await getPlacesByName(searchPlace);
-        setPlaces(response);
-        setSearchPlaceTerm("");
+        try {
+            const response = await getPlacesByName(searchPlace);
+            setPlaces(response);
+            setSearchPlaceTerm("");
+        } catch (err) {
+            console.log("Error getting response " + err);
+        }
+
     };
 
     return (
