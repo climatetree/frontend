@@ -1,0 +1,127 @@
+/* frist screen */
+#first-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#animation-first {
+  animation: firstScreen 2s ease-in-out 0s forwards;
+}
+
+@keyframes firstScreen {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+#first-screen h1 {
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 600;
+}
+#first-screen p {
+  width: 50%;
+  margin: 2rem 0;
+  font-weight: 300;
+  font-size: 1.35rem;
+}
+#first-screen-search {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+  width: 75%;
+}
+#first-screen input {
+  width: 100%;
+  color: #0d0d0d;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: none;
+  padding: 1rem 1.6rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+#first-screen-search img {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  transform: translateX(-1.6rem);
+}
+.primary-btn {
+  background-color: rgba(255, 255, 255, 0.85);
+  width: 10rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  font-size: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+.primary-btn a {
+  text-decoration: none;
+}
+.primary-btn a:link,
+.primary-btn a:active,
+.primary-btn a:visited {
+  color: #000000;
+}
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(100vh + 300px);
+  background-image: url("../images/nasa-Q1p7bh3SHj8-unsplash.jpg");
+  background-size: cover;
+  z-index: -1;
+  box-shadow: 1vw -50vh 50vh 0 #0d0d0d inset;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  #first-screen p {
+    width: 90%;
+    margin: 2rem 0;
+    font-weight: 300;
+    font-size: 1.1rem;
+  }
+  #first-screen input {
+    width: 100%;
+    padding: 0.8rem 1.4rem;
+    font-size: 1.1rem;
+  }
+  #first-screen-search img {
+    transform: translateX(-1.4rem);
+  }
+}
+
+@media (max-width: 767px) {
+  #first-screen p {
+    width: 100%;
+    font-size: 1rem;
+  }
+  #first-screen-search {
+    width: 100%;
+  }
+  #first-screen input {
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+  }
+  #first-screen-search img {
+    transform: translateX(-1.2rem);
+  }
+  .primary-btn {
+    width: 6rem;
+    height: 2.4rem;
+    border-radius: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 0.8rem;
+    cursor: pointer;
+  }
+}
