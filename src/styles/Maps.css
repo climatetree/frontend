@@ -1,17 +1,16 @@
 /* Overrides white from Nav.css */
-#MapPage * {
+#MapsPage {
     color: black;
 }
 #search {
-    margin-top: 10px;
-    margin-left: 50px;
+    display: inline-block;
+    position: absolute;
+    left: 50px;
+    top: 10px;
 }
 #map {
     width: 100vw;
     height: 100vh;
-    position: absolute;
-    left: 0;
-    top: 0;
     z-index: -1;
 }
 .ol-attribution span {

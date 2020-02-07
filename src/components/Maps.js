@@ -20,7 +20,7 @@ const Maps = () => {
   };
 
   return (
-    <div className='MapsPage'>
+    <div id='MapsPage'>
       <OlMap mapId="map" />
       {/* Search Box */}
       <div id="search">
