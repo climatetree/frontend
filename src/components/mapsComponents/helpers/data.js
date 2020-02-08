@@ -40,7 +40,7 @@ const getData = () => {
         },
         {
             "placeId": 4,
-            "name": "Manastiur",
+            "name": "NEW NAME",
             "typeName": "COUNTY",
             "population": 33,
             "carbon": 0.010221047,

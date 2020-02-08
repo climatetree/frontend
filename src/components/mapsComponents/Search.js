@@ -18,13 +18,13 @@ const Search = (props) => {
         } catch (err) {
             console.log("Error getting response " + err);
         }
-
     };
 
     return (
         <form id="search">
             <input
                 type="text"
+                name="place"
                 style={{ color: "#000" }}
                 placeholder="Enter a place"
                 value={searchPlace}

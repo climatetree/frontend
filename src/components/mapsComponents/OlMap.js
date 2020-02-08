@@ -13,6 +13,8 @@ import { styleFunction as getStyles } from './helpers/olStyles';
 import { getGeoJson, getData, getData2 } from './helpers/data';
 import { popUpHandler } from './helpers/eventHandlers';
 import { createPopupOverlay } from './helpers/popups';
+import { getPlacesByName } from "../../services/fetchPlaces";
+
 
 const OlMap = (props) => {
     // OpenLayers code to render the map
@@ -25,13 +27,13 @@ const OlMap = (props) => {
             // Data
             source: new VectorSource({
                 // Extract features from GeoJSON data
-                features: getGeoJson(getData()),
+                features: getGeoJson([]),
             }),
             // Min point distance to cause clustering
             distance: clusterDist,
         });
 
-        // Create the layer
+        // Create the Data layer
         let places = new VectorLayer({
             source: clusterSource,
             style: getStyles,
@@ -66,15 +68,27 @@ const OlMap = (props) => {
         map.on('singleclick', evt => popUpHandler(evt, map, overlay));
 
         let searchBar = document.getElementById("search");
-        searchBar.addEventListener('submit', evt => {
+        searchBar.addEventListener('submit', async evt => {
+            // Prevent refresh
             evt.preventDefault();
-            let collection = map.getLayers();
-            let dataSource = collection.getArray()[1].getSource().getSource();
-            dataSource.clear({ fast: true });
-            dataSource.addFeatures(getGeoJson(getData2()));
+            // Get search term from form
+            let placeTerm = evt.target.elements['place'].value;
+            console.log(placeTerm);
+            // Attempt to call places API
+            let response = [];
+            try {
+                response = await getPlacesByName(placeTerm);
+                let collection = map.getLayers();
+                let dataSource = collection.getArray()[1].getSource().getSource();
+                dataSource.clear({ fast: true });
+                dataSource.addFeatures(getGeoJson(response));
+            } catch (err) {
+                console.log("Error getting response " + err);
+            }
+
         });
 
-    }, [props] );  // End useEffect. Empty list => Not re-run
+    }, [props]);  // End useEffect. Empty list => Not re-run
 
     return (
         <div className="OlMap">
