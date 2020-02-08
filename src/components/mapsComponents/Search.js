@@ -1,37 +1,42 @@
-import React, { useState } from 'react';
+import React, { Component } from "react";
 
-import { getPlacesByName } from "../../services/fetchPlaces";
+class Search extends Component {
+  state = { searchTerm: "" };
 
-const Search = (props) => {
-    const [searchPlace, setSearchPlaceTerm] = useState("");
-    const [places, setPlaces] = useState([]);
+  whenUserInputPlace = event => {
+    this.setState({ searchTerm: event.target.value });
+  };
 
-    const whenUserInputPlace = event => {
-        setSearchPlaceTerm(event.target.value);
-    };
+  onSearchClick = () => {
+    this.props.onClick(this.state.searchTerm);
 
-    const onSearchPlaceClick = async () => {
-        const response = await getPlacesByName(searchPlace);
-        setPlaces(response);
-        setSearchPlaceTerm("");
-    };
+    this.setState({
+      searchTerm: ""
+    });
+  };
 
+  render() {
+    const { searchTerm } = this.state;
     return (
-        <form id="search">
-            <input
-                type="text"
-                style={{ color: "#000" }}
-                placeholder="Enter a place"
-                value={searchPlace}
-                onChange={event => whenUserInputPlace(event)}
-            />
-            <button style={{ color: "#000" }} onClick={onSearchPlaceClick}>
-                Search
-            </button>
-            <br></br>
-            <span style={{ color: "#000" }}>{places.length}</span>
-        </form>
+      <div id="search">
+        <input
+          type="text"
+          style={{ color: "#000" }}
+          placeholder="Enter a place"
+          value={searchTerm}
+          onChange={event => this.whenUserInputPlace(event)}
+        />
+        <button
+          style={{ color: "#000" }}
+          onClick={() => this.onSearchClick(searchTerm)}
+        >
+          Search
+        </button>
+        <br></br>
+        <span style={{ color: "#000" }}>{this.props.places.length}</span>
+      </div>
     );
+  }
 }
 
 export default Search;

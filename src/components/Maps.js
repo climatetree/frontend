@@ -1,17 +1,32 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
 
-import OlMap from './mapsComponents/OlMap';
-import Search from './mapsComponents/Search';
+import OlMap from "./mapsComponents/OlMap";
+import Search from "./mapsComponents/Search";
 
-import '../styles/Maps.css';
+import "../styles/Maps.css";
 
-const Maps = () => {
-  return (
-    <div id='MapsPage'>
-      <OlMap mapId="map" />
-      <Search />
-    </div>
-  );
-};
+class Maps extends Component {
+  state = { term: "", places: [] };
+
+  whenUserClickSearch = search => {
+    this.setState({
+      term: search
+    });
+
+    return axios
+      .get(`http://localhost:8080/names/${search}`)
+      .then(resp => this.setState({ places: resp.data }));
+  };
+
+  render() {
+    return (
+      <div id="MapsPage">
+        <Search onClick={this.whenUserClickSearch} places={this.state.places} />
+        <OlMap mapId="map" places={this.state.places} term={this.state.term} />
+      </div>
+    );
+  }
+}
 
 export default Maps;
