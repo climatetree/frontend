@@ -15,7 +15,7 @@ class Maps extends Component {
     });
 
     return axios
-      .get(`http://localhost:8080/names/${search}`)
+      .get(`https://places-postgres.azurewebsites.net/api/names/${search}`)
       .then(resp => this.setState({ places: resp.data }));
   };
 

@@ -7,7 +7,8 @@ class Search extends Component {
     this.setState({ searchTerm: event.target.value });
   };
 
-  onSearchClick = () => {
+  onSearchClick = event => {
+    event.preventDefault();
     this.props.onClick(this.state.searchTerm);
 
     this.setState({
@@ -28,7 +29,7 @@ class Search extends Component {
         />
         <button
           style={{ color: "#000" }}
-          onClick={() => this.onSearchClick(searchTerm)}
+          onClick={event => this.onSearchClick(event)}
         >
           Search
         </button>
