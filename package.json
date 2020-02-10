@@ -43,7 +43,7 @@
       "<rootDir>/tests/*"
     ],
     "transformIgnorePatterns": [
-      "<rootDir>/node_modules/"
+      "/node_modules/(?!(ol|labelgun|mapbox-to-ol-style|ol-mapbox-style)/).*/"
     ]
   },
   "eslintConfig": {
