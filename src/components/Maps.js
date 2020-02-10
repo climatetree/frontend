@@ -30,7 +30,9 @@ function Maps() {
         places={mapStates.places}
         term={mapStates.term}
       />
-      <Filters />
+      <Filters
+        onSearch={handleSearch}
+      />
     </div>
   ); 
 }

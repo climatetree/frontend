@@ -6,20 +6,15 @@ import MinMaxRange from './MinMaxRange';
 import Range from './Range';
 import searchIcon from '../../images/search.svg';
 import './Filters.css';
+import SearchBar from './SearchBar';
 
-function Filters(initialValues) {
+function Filters({onSearch}) {
   const [values, setValues] = useState({
     selectRadioOption: 'radio1',
   });
   return (
     <form>
-      <div id='main-search'>
-        <input
-          type="text"
-          placeholder="Search Climate Tree"
-        />
-        <img src={searchIcon} alt="search" id="search" />
-      </div>
+      <SearchBar onSearch={onSearch} />
       <div id='ct-map-controls'>
         <Checkbox />
         <RadioGroup
