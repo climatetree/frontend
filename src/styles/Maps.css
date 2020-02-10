@@ -2,13 +2,13 @@
 #MapsPage {
   color: black;
 }
-#search {
+/* #search {
   display: inline-block;
   position: absolute;
   left: 50px;
   top: 10px;
   z-index: 1;
-}
+} */
 #map {
   width: 100vw;
   height: 100vh;
