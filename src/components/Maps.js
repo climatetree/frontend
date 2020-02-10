@@ -1,37 +1,32 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import axios from "axios";
 
-import { getPlacesByName } from "../services/fetchPlaces";
+import OlMap from "./mapsComponents/OlMap";
+import Search from "./mapsComponents/Search";
 
-const Maps = () => {
-  const [searchPlace, setSearchPlaceTerm] = useState("");
-  const [places, setPlaces] = useState([]);
+import "../styles/Maps.css";
 
-  const whenUserInputPlace = event => {
-    setSearchPlaceTerm(event.target.value);
+class Maps extends Component {
+  state = { term: "", places: [] };
+
+  whenUserClickSearch = search => {
+    this.setState({
+      term: search
+    });
+
+    return axios
+      .get(`https://places-postgres.azurewebsites.net/api/names/${search}`)
+      .then(resp => this.setState({ places: resp.data }));
   };
 
-  const onSearchPlaceClick = async () => {
-    const response = await getPlacesByName(searchPlace);
-    setPlaces(response);
-    setSearchPlaceTerm("");
-  };
-
-  return (
-    <div>
-      <input
-        type="text"
-        style={{ color: "#000" }}
-        placeholder="Enter a place"
-        value={searchPlace}
-        onChange={event => whenUserInputPlace(event)}
-      />
-      <button style={{ color: "#000" }} onClick={onSearchPlaceClick}>
-        Search
-      </button>
-      <br></br>
-      <span style={{ color: "#000" }}>{places.length}</span>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div id="MapsPage">
+        <Search onClick={this.whenUserClickSearch} places={this.state.places} />
+        <OlMap mapId="map" places={this.state.places} term={this.state.term} />
+      </div>
+    );
+  }
+}
 
 export default Maps;
