@@ -1,32 +1,38 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-
 import OlMap from "./mapsComponents/OlMap";
 import Search from "./mapsComponents/Search";
-
+import { getData, getGeoJson } from "./mapsComponents/helpers/data";
 import "../styles/Maps.css";
 
-class Maps extends Component {
-  state = { term: "", places: [] };
+import Filters from './mapsComponents/Filters';
+import './mapsComponents/OlMap.css';
 
-  whenUserClickSearch = search => {
-    this.setState({
-      term: search
+function Maps() {
+  const [mapStates, setMapStates] = useState({
+    term: '',
+    places: [],
+  });
+  const handleSearch = (term) => {
+    const places = getGeoJson(getData());
+    setMapStates({
+      term,
+      places,
     });
-
-    return axios
-      .get(`https://places-postgres.azurewebsites.net/api/names/${search}`)
-      .then(resp => this.setState({ places: resp.data }));
+    //     return axios
+    //       .get(`https://places-postgres.azurewebsites.net/api/names/${search}`)
+    //       .then(resp => this.setState({ places: resp.data }));
   };
-
-  render() {
-    return (
-      <div id="MapsPage">
-        <Search onClick={this.whenUserClickSearch} places={this.state.places} />
-        <OlMap mapId="map" places={this.state.places} term={this.state.term} />
-      </div>
-    );
-  }
+  return (
+    <div id="maps-page">
+      <OlMap
+        mapId="map"
+        places={mapStates.places}
+        term={mapStates.term}
+      />
+      <Filters />
+    </div>
+  ); 
 }
 
 export default Maps;

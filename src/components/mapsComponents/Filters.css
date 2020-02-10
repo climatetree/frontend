@@ -1,0 +1,10 @@
+button {
+  display: inline;
+  background-color: rgba(0,60,136,0.5);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  padding: 5px 15px;
+}
