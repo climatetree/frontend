@@ -1,28 +1,28 @@
 language: node_js
 node_js:
-  - "stable"
-
+- stable
 services:
-  - docker
-
+- docker
 cache:
   directories:
-    - node_modules
+  - node_modules
 script:
-  - npm test
-  - npm run build
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner
-
+- npm test
+- npm run build
+- sonar-scanner
 dist: trusty
 addons:
   sonarcloud:
-    organization: "climatetree"
+    organization: climatetree
     token:
-      secure: "edwN5zBYb9JZmMqyloaFW+kQNmFZwbJMvTiaxudJXudU2sqPf29pvBCJpBjIwoJIOW3h2StypCZy+bEZXYdkreJVJftc7ticDWT0J5d/mPTIy+kW2cnXatF5Yto2b8vi/5URSTfhQnRmUXGdTeq5UtbnhI7I9+iswrQWi3Ox/WlTohXTZkZS7Px9ZCMA9k54L3T+l+W3LUXRPba0W7BTCyjLH1tId+M34/AFdYg7qpIkgjDAlukKXm/cm6ZNRAYLg/54HsRziKqphUPOe0L1VtU0mMUr1u+ZfzVSc0qCPnkJcxb9bQDtmpH74oRp3/9YV972POqLXr02/UAn73C961wBC7hyE0Pc+FWrvCoKzxwb/ih0U62/VvD1lyYxZW6eJSqgoQkoLOgBLPcvYyU7KiDC4Cn/csgklvRnezWOyZ+3rsx+vo++0hnY62uLH4UnW3OR7ff3tS/PePgnmoZ+e0pC+U0yUkS8C+2z/Nt4+aCreWBqaEIEU3oR+pJNXU6f0vtzEpUN8GQYsdrmW1HRUl9NQxcSgLekpUXFtUTh8xBXDRVozfgN+fUvYJgl5PzlhIscsiS0SiWaVosz9UE4Ua6aVVO+V/VI4w6GYEfnsAOst2bADp4rhvHWeA0BAIkdOojiZ+NAzKTy6sHwfq9iHkOEjIquscgeAZOQ5RrVQ48=" # encrypted value of your token
-
+      secure: edwN5zBYb9JZmMqyloaFW+kQNmFZwbJMvTiaxudJXudU2sqPf29pvBCJpBjIwoJIOW3h2StypCZy+bEZXYdkreJVJftc7ticDWT0J5d/mPTIy+kW2cnXatF5Yto2b8vi/5URSTfhQnRmUXGdTeq5UtbnhI7I9+iswrQWi3Ox/WlTohXTZkZS7Px9ZCMA9k54L3T+l+W3LUXRPba0W7BTCyjLH1tId+M34/AFdYg7qpIkgjDAlukKXm/cm6ZNRAYLg/54HsRziKqphUPOe0L1VtU0mMUr1u+ZfzVSc0qCPnkJcxb9bQDtmpH74oRp3/9YV972POqLXr02/UAn73C961wBC7hyE0Pc+FWrvCoKzxwb/ih0U62/VvD1lyYxZW6eJSqgoQkoLOgBLPcvYyU7KiDC4Cn/csgklvRnezWOyZ+3rsx+vo++0hnY62uLH4UnW3OR7ff3tS/PePgnmoZ+e0pC+U0yUkS8C+2z/Nt4+aCreWBqaEIEU3oR+pJNXU6f0vtzEpUN8GQYsdrmW1HRUl9NQxcSgLekpUXFtUTh8xBXDRVozfgN+fUvYJgl5PzlhIscsiS0SiWaVosz9UE4Ua6aVVO+V/VI4w6GYEfnsAOst2bADp4rhvHWeA0BAIkdOojiZ+NAzKTy6sHwfq9iHkOEjIquscgeAZOQ5RrVQ48=
 deploy:
   provider: script
   script: bash ./docker_push.sh
   on:
     branch: master
+notifications:
+  slack:
+    secure: jo9MANnRDVEXdboMLWEX7hY5DIi13C5+1A2q8b8x61DjeR6LDdpM81rE+12cVcGbYy60CMecfQGDBEwmZIrXpjEdq200ruObrCtJ1Pi2A0WfaLVA9at44cndJp4M9K1/uaF6LcDZiib0ZY2gIrUpGkQbnFHH1ENZuPN9nwVwD6TohRYp3UJ4/PXG1avl9atc2WC0dzjrRzzHsuMYL2lgBaT1qBhHQrjrajYOi71Hk34Wyz1UzW+MUOB738/NLFMH42/Z06TV+Q1RIwVe4B6Xwhvh8doOmz0VtHimIOHgK7VKhkN41vaO/eGYwYpiWGsI+0MHzC6cDPD3dly81ib0OevxWrLCa5Y8O6QfzlkC/atxMOztYK7P7BunzLXAxlExRDhH1xaoSoIEgUh1sJNwcDOtcT+SiRS76qnIQRpegnILqNVBmwDKnTrwQxKHDHysouulYa/BqbR9EiQpZIY+jdhzK/1cZWoTVMxEPZc6nq9bXFD+bOgrx2eK3KVTZbBqQgYzeAHA/PLSgoKJf4M6qwtz8cvexMWAvWNWlBM2xLCUEHxFd0ESQOVgZucEq9B162zjGybfFcRagW0Ah4i+McSvYOwyaSl4D42PQ+/4sZNBza9bna9rbQzubNPXNqllcjT9W8Znk2Qm/CaUWrCQr76GW9Nj9+p6UHVfYNGWO9o=
+    on_success: never
+    on_failure: always

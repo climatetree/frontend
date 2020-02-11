@@ -1,37 +1,39 @@
 import React, { useState } from "react";
+import axios from "axios";
+import OlMap from "./mapsComponents/OlMap";
+import Filters from './mapsComponents/Filters';
+import Places from './mapsComponents/Places';
+import "../styles/Maps.css";
+import './mapsComponents/OlMap.css';
 
-import { getPlacesByName } from "../services/fetchPlaces";
 
-const Maps = () => {
-  const [searchPlace, setSearchPlaceTerm] = useState("");
-  const [places, setPlaces] = useState([]);
-
-  const whenUserInputPlace = event => {
-    setSearchPlaceTerm(event.target.value);
-  };
-
-  const onSearchPlaceClick = async () => {
-    const response = await getPlacesByName(searchPlace);
-    setPlaces(response);
-    setSearchPlaceTerm("");
-  };
-
+function Maps() {
+  const [mapStates, setMapStates] = useState({
+    term: '',
+    places: [],
+  });
+  const handleSearch = async (term, filterFn = () => true) => {
+    const response = await axios.get(`https://places-postgres.azurewebsites.net/api/names/${term}`);
+    setMapStates({
+      ...mapStates,
+      places: response.data.filter(filterFn),
+    });
+  }
   return (
-    <div>
-      <input
-        type="text"
-        style={{ color: "#000" }}
-        placeholder="Enter a place"
-        value={searchPlace}
-        onChange={event => whenUserInputPlace(event)}
+    <div id="maps-page">
+      <OlMap
+        mapId="map"
+        places={mapStates.places}
       />
-      <button style={{ color: "#000" }} onClick={onSearchPlaceClick}>
-        Search
-      </button>
-      <br></br>
-      <span style={{ color: "#000" }}>{places.length}</span>
+      <Filters
+        term={mapStates.term}
+        onSearch={handleSearch}
+      />
+      <Places
+        places={mapStates.places}
+      />
     </div>
-  );
-};
+  ); 
+}
 
 export default Maps;

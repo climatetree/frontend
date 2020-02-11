@@ -5,6 +5,11 @@ header {
   height: 5rem;
   z-index: 1;
 }
+
+nav * {
+  color: #ffffff;
+}
+
 nav {
   height: 100%;
   display: flex;
