@@ -1,0 +1,9 @@
+.min-max-container {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+.min-max-container input {
+  margin: 0 5px;
+  width: 80px;
+}
