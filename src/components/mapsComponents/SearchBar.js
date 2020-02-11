@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import searchIcon from '../../images/search.svg';
 import './SearchBar.css';
 
-function SearchBar({onSearch}) {
+function SearchBar({
+  onSearch,
+  filters,
+}) {
   const [term, setTerm] = useState('');
-  const handleSearch = () => {
-    onSearch(term);
-    setTerm('');
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onSearch(term, filters);
+    }
   };
   return (
     <div id='main-search'>
@@ -15,12 +19,13 @@ function SearchBar({onSearch}) {
         placeholder="Search Climate Tree"
         value={term}
         onChange={(event) => setTerm(event.target.value)}
+        onKeyDown={(event) => handleKeyDown(event)}
       />
       <img
         src={searchIcon}
         alt="search"
         id="search"
-        onClick={handleSearch}
+        onClick={() => onSearch(term, filters)}
       />
     </div>
   );

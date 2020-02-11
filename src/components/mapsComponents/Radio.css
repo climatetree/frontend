@@ -9,7 +9,6 @@
   width: max-content;
   cursor: pointer;
 }
-
 .radio-custom {
   height: 20px;
   width: 20px;
@@ -17,6 +16,7 @@
   border-radius: 50%;
   border: 2px solid #dddddd;
   position: relative;
+  margin-right: 5px;
 }
 .radio-custom::after {
   content: "";
@@ -33,7 +33,6 @@
   background-color: rgba(0,60,136,0.5);
   border: none;
 }
-
 .radio {
   display: none;
 }

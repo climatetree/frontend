@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Switch.css';
 
-function Switch() {
-  const [on, setOn] = useState(false);
+function Switch({
+  on,
+  onChange,
+}) {
   return (
     <div className="switch-container">
       <input
@@ -11,7 +13,7 @@ function Switch() {
         id="s1"
         className="switch"
         checked={on}
-        onChange={() => setOn(!on)}
+        onChange={() => onChange(!on)}
       />
       <label
         htmlFor="s1"

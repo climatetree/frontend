@@ -1,22 +1,43 @@
 import React, { useState } from 'react';
+import SearchBar from './SearchBar';
 import Checkbox from './Checkbox';
 import RadioGroup from './RadioGroup';
 import Switch from './Switch';
 import MinMaxRange from './MinMaxRange';
 import Range from './Range';
-import searchIcon from '../../images/search.svg';
 import './Filters.css';
-import SearchBar from './SearchBar';
 
-function Filters({onSearch}) {
+function Filters({
+  onSearch,
+}) {
   const [values, setValues] = useState({
+    checkboxChecked: true,
     selectRadioOption: 'radio1',
+    switchOn: true,
+    min: '0',
+    max: '',
   });
+  const filterFn = (place) => {
+    const maxValue = values.max === '' ? Number.MAX_VALUE : parseInt(values.max);
+    return values.checkboxChecked &&
+      values.switchOn &&
+      place.population >= parseInt(values.min) &&
+      place.population <= maxValue;
+  }
   return (
-    <form>
-      <SearchBar onSearch={onSearch} />
+    <>
+      <SearchBar
+        onSearch={onSearch}
+        filters={filterFn}
+      />
       <div id='ct-map-controls'>
-        <Checkbox />
+        <Checkbox
+          checked={values.checkboxChecked}
+          onChange={(value) => setValues({
+            ...values,
+            checkboxChecked: value,
+          })}
+        />
         <RadioGroup
           radio={["radio1", "radio2", "radio3"]}
           name="radio-demo"
@@ -26,17 +47,25 @@ function Filters({onSearch}) {
             selectRadioOption: value,
           })}
         />
-        <Switch />
-        <MinMaxRange />
+        <Switch
+          on={values.switchOn}
+          onChange={(value) => setValues({
+            ...values,
+            switchOn: value,
+          })}
+        />
+        <MinMaxRange
+          min={values.min}
+          max={values.max}
+          onChange={({min, max}) => setValues({
+            ...values,
+            min,
+            max,
+          })}
+        />
         <Range />
-        <button
-          onClick={(event) => {
-            event.preventDefault();
-            console.log(values);
-          }}
-        >Apply</button>
       </div>
-    </form>
+    </>
   );
 }
 

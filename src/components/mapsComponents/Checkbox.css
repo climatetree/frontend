@@ -16,6 +16,7 @@
   border-radius: 5px;
   border: 2px solid #dddddd;
   position: relative;
+  margin-right: 5px;
 }
 .checkbox-custom::after {
   content: "";
@@ -28,12 +29,10 @@
   left: 7px;
   top: 4px;
 }
-
 .checkbox:checked + .checkbox-custom {
   background-color: rgba(0,60,136,0.5);
   border: none;
 }
-
 .checkbox {
   display: none;
 }
