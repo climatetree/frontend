@@ -13,9 +13,6 @@ html {
 body {
   width: 100%;
 }
-#LandingPage * {
-  color: white;
-}
 section {
   padding: 0 10rem;
 }

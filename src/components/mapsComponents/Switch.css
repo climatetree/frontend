@@ -1,0 +1,40 @@
+.switch-container {
+  padding: 5px 0;
+}
+.switch-label {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  cursor: pointer;
+}
+.switch-label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 1px;
+  left: 80px;
+  width: 40px;
+  height: 20px;
+  background-color: #dddddd;
+  border-radius: 20px;
+}
+.switch-label::after {
+  content: "";
+  position: absolute;
+  top:2px;
+  left: 81px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: all 0.3s;
+}
+.switch:checked + .switch-label::after {
+  left: 101px;
+}
+.switch:checked + .switch-label::before {
+  background-color: rgba(0,60,136,0.5);
+}
+.switch {
+  display: none;
+}

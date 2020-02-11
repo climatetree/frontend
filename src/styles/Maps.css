@@ -1,19 +1,19 @@
 /* Overrides white from Nav.css */
-#MapsPage {
+#maps-page {
   color: black;
 }
-#search {
+/* #search {
   display: inline-block;
   position: absolute;
   left: 50px;
   top: 10px;
   z-index: 1;
-}
-#map {
+} */
+/* #map {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-}
+} */
 .ol-attribution span {
   color: white;
 }
