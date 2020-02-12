@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import AsyncSelect from 'react-select/async';
-import { throttle, debounce } from "throttle-debounce";
 import searchIcon from '../../images/search.svg';
 import './SearchBar.css';
 
@@ -24,7 +22,7 @@ function SearchBar({
         setTerm(inputValue);
         getPlacesForDropdown(inputValue);
         resolve(dropdownPlaces);
-      }, 100)
+      }, 50)
     })
   }
   const handleKeyDown = (event) => {
