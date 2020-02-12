@@ -8,7 +8,9 @@ import Range from './Range';
 import './Filters.css';
 
 function Filters({
-  onSearch,
+  getPlacesForDropdown,
+  getSimilarPlaces,
+  dropdownPlaces
 }) {
   const [values, setValues] = useState({
     checkboxChecked: true,
@@ -27,8 +29,10 @@ function Filters({
   return (
     <>
       <SearchBar
-        onSearch={onSearch}
+        getPlacesForDropdown={getPlacesForDropdown}
+        getSimilarPlaces = {getSimilarPlaces}
         filters={filterFn}
+        dropdownPlaces = {dropdownPlaces}
       />
       <div id='ct-map-controls'>
         <Checkbox
