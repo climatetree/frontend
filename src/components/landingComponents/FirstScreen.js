@@ -8,8 +8,8 @@ function FirstScreen() {
   return (
     <section id="first-screen">
       <div id="animation-first">
-        <h1>Climate Tree</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+        <h1>ClimateTree</h1>
+        <p>Start exploring below or visit our About page to learn more.</p>
         <div id="first-screen-search">
           <input type="text" placeholder="Enter a city or ZIP code" />
           <img src={searchIcon} alt="search" id="search" />

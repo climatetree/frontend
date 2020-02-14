@@ -10,8 +10,8 @@ function Nav() {
       <nav>
         <Link to="/" style={{ textDecoration: "none" }}>
           <div className="logo">
-            <img src={logo} alt="climate tree logo" />
-            <p id="logo-text">Climate Tree</p>
+            <img src={logo} alt="climatetree logo" />
+            <p id="logo-text">ClimateTree</p>
           </div>
         </Link>
         <ul className="nav-links">
