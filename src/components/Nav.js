@@ -1,18 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import logo from "../../images/white-logo.png";
-import "../../styles/Nav.css";
+import logo from '../images/white-logo.png';
+import '../styles/Nav.css';
 
 function Nav() {
   return (
     <header>
       <nav>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <div className="logo">
-            <img src={logo} alt="climatetree logo" />
-            <p id="logo-text">ClimateTree</p>
-          </div>
+        <Link to="/" className="logo">
+          <img src={logo} alt="climatetree logo" />
+          <p id="logo-text">ClimateTree</p>
         </Link>
         <ul className="nav-links">
           <li>

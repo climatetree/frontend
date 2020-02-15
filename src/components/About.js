@@ -1,14 +1,14 @@
 import React from "react";
 
-import Nav from "./landingComponents/Nav";
+import Nav from "./Nav";
 import AboutInfo from "./aboutComponents/AboutInfo";
 
 const About = () => {
   return (
-    <div>
+    <>
       <Nav />
       <AboutInfo />
-    </div>
+    </>
   );
 };
 

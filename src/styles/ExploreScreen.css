@@ -9,7 +9,7 @@
 }
 #explore-header {
   opacity: 0;
-  color: #ffffff;
+  color: #e1e1e1;
   text-transform: capitalize;
   grid-area: 1 / 1 / 1 / 4;
 }

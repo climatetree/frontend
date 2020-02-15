@@ -1,15 +1,12 @@
-/* header */
 header {
   position: fixed;
   width: 100vw;
   height: 5rem;
   z-index: 1;
 }
-
 nav * {
-  color: #ffffff;
+  color: #e1e1e1;
 }
-
 nav {
   height: 100%;
   display: flex;
@@ -47,6 +44,7 @@ nav {
 .logo {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 .logo img {
   height: 4rem;
@@ -61,7 +59,7 @@ nav {
 .burger div {
   width: 25px;
   height: 3px;
-  background-color: #ffffff;
+  background-color: #e1e1e1;
   margin: 5px;
   transition: all 0.3s ease;
 }
@@ -71,7 +69,7 @@ nav {
   width: 0;
   height: 2px;
   transition: width 0.3s;
-  background-color: #ffffff;
+  background-color: #e1e1e1;
 }
 .underline-hover:hover::after {
   width: 100%;
@@ -89,7 +87,7 @@ nav {
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
-  nav{
+  nav {
     padding: 0 6rem;
   }
 }
