@@ -9,7 +9,7 @@
 }
 
 #intro-header {
-  color: #ffffff;
+  color: #e1e1e1;
   text-transform: capitalize;
   width: 75%;
   grid-area: 1 / 1 / 1 / 4;
@@ -19,7 +19,7 @@
   opacity: 0;
 }
 .intro h3 {
-  color: #ffffff;
+  color: #e1e1e1;
   transform: translateY(20px);
 }
 .intro p {

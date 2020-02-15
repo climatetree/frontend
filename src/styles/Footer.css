@@ -5,7 +5,7 @@ footer {
   display: flex;
   justify-content: space-between;
   position: relative;
-  color: #ffffff;
+  color: #e1e1e1;
 }
 footer div {
   flex: 1;
