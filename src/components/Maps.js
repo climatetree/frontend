@@ -14,6 +14,7 @@ class Maps extends Component {
       term: search
     });
 
+    // Later switch to URL no gateaway
     return axios
       .get(`https://places-postgres.azurewebsites.net/api/names/${search}`)
       .then(resp => this.setState({ places: resp.data }));
