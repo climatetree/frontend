@@ -1,0 +1,30 @@
+#ct-map-controls {
+  position: absolute;
+  top: 12rem;
+  left: 0.5rem;
+  width: 24rem;
+  background-color: #fefefe;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 0 #999999;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#ct-map-controls label {
+  color: #333333;
+}
+
+#ct-map-controls button {
+  display: inline;
+  background-color: rgba(0,60,136,0.5);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  padding: 5px 15px;
+  cursor: pointer;
+}

@@ -1,0 +1,18 @@
+.places-container {
+  position: absolute;
+  max-height: 20rem;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  width: 24rem;
+  background-color: #fefefe;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 0 #999999;
+  padding: 1rem;
+  overflow-y: auto;
+}
+.places-container p {
+  width: 100%;
+  overflow: hidden;
+  word-break: break-all;
+}

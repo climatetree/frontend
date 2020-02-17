@@ -1,0 +1,26 @@
+section#about {
+  color: #e1e1e1;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('../../images/nasa-Q1p7bh3SHj8-unsplash.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+section#about h1 {
+  font-size: 2.8rem;
+  margin: 20px 0;
+}
+section#about h2 {
+  font-size: 1.8rem;
+  margin: 20px 0;
+}
+section#about p {
+  margin: 20px 0;
+}
+section#about a {
+  color: #dddddd;
+}

@@ -1,19 +1,29 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-
-import Landing from "./Landing";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+} from "react-router-dom";
+import LandingPage from "./LandingPage";
 import About from "./About";
 import Maps from "./Maps";
+import './App.css';
 
 const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Route exact path="/" component={Landing} />
-        <Route path="/about" component={About} />
-        <Route path="/maps" component={Maps} />
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+        <Route path="/maps">
+          <Maps />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
