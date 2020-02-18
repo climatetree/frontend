@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import logo from '../images/white-logo.png';
-import '../styles/Nav.css';
+import logo from "../images/white-logo.png";
+import "../styles/Nav.css";
 
-function Nav() {
+function Nav(props) {
   return (
-    <header>
+    <header hidden={props.hidden}>
       <nav>
         <Link to="/" className="logo">
           <img src={logo} alt="climatetree logo" />
@@ -38,6 +38,10 @@ function Nav() {
     </header>
   );
 }
+
+Nav.defaultProps = {
+  hidden: false,
+};
 
 function navSlide() {
   document.querySelector(".nav-links").classList.toggle("nav-active");

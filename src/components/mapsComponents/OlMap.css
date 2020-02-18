@@ -3,6 +3,7 @@
   width: 100vw;
   position: relative;
 }
+
 .ol-zoom {
   left: unset;
   right: 0.5em;
