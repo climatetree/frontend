@@ -6,19 +6,21 @@ import ExploreScreen from "./landingComponents/ExploreScreen";
 import Footer from "./landingComponents/Footer";
 import "../styles/Landing.css";
 
-function LandingPage() {
+function LandingPage(props) {
   useEffect(() => {
-    console.log('landing page rendered')
-    window.addEventListener('scroll', fadeInUp);
+    console.log("landing page rendered");
+    window.addEventListener("scroll", fadeInUp);
     return () => {
-      window.removeEventListener('scroll', fadeInUp);
-    }
+      window.removeEventListener("scroll", fadeInUp);
+    };
   }, []);
+
+  console.log(props);
 
   return (
     <>
       <Nav />
-      <FirstScreen />
+      <FirstScreen history={props.history} />
       <IntroScreen />
       <ExploreScreen />
       <Footer />

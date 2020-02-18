@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 import searchIcon from "../../images/search.svg";
 import "../../styles/FirstScreen.css";
 
-function FirstScreen() {
+function FirstScreen({ history }) {
   return (
     <section id="first-screen">
       <div id="animation-first">
         <h1>ClimateTree</h1>
         <p>Start exploring below or visit our About page to learn more.</p>
-        <div id="first-screen-search">
+        <form id="first-screen-search" onSubmit={() => history.push("/stories")}>
           <input type="text" placeholder="Enter a city or ZIP code" />
           <img src={searchIcon} alt="search" id="search" />
-        </div>
+        </form>
         <div>
           <button className="primary-btn">
             <a href="#explore-screen">Get Started</a>
