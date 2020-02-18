@@ -9,8 +9,8 @@ function Footer() {
         <p>All rights reserved</p>
       </div>
       <div>
-        <p>Climate Tree</p>
-        <img src={logo} alt="climate tree logo" className="logo" />
+        <p>ClimateTree</p>
+        <img src={logo} alt="climatetree logo" className="logo" />
       </div>
       <div>
         <p>Contact</p>

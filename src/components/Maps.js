@@ -10,10 +10,25 @@ import './mapsComponents/OlMap.css';
 function Maps() {
   const [mapStates, setMapStates] = useState({
     term: '',
+    placeId: '',
     places: [],
+    dropdownPlaces: []
   });
-  const handleSearch = async (term, filterFn = () => true) => {
-    const response = await axios.get(`https://places-postgres.azurewebsites.net/api/names/${term}`);
+  const getPlacesDropdownAPICall = async (term) => {
+    if (term.length > 2) {
+      const response = await axios.get(`https://places-postgres.azurewebsites.net/api/names/${term}`);
+      setMapStates({...mapStates, dropdownPlaces: filterPlacesForDropdown(response)});
+      return term;
+    }
+  }
+  const filterPlacesForDropdown = (responseObject) => {
+    const arr = responseObject.data.map((place) => {
+      return {label: place.name, value: place.placeId};
+    })
+    return arr;
+  }
+  const getSimilarPlacesAPICall = async (id, filterFn = () => true) => {
+    const response = await axios.get(`https://places-postgres.azurewebsites.net/api/places/${Number(id)}/similar`);
     setMapStates({
       ...mapStates,
       places: response.data.filter(filterFn),
@@ -27,7 +42,10 @@ function Maps() {
       />
       <Filters
         term={mapStates.term}
-        onSearch={handleSearch}
+        placeId={mapStates.placeId}
+        getPlacesForDropdown={getPlacesDropdownAPICall}
+        getSimilarPlaces={getSimilarPlacesAPICall}
+        dropdownPlaces = {mapStates.dropdownPlaces}
       />
       <Places
         places={mapStates.places}
