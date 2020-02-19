@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import authContext from "./context/authContext";
+import logo from "../images/white-logo.png";
+import "../styles/Nav.css";
 
-import logo from '../images/white-logo.png';
-import '../styles/Nav.css';
-
-function Nav() {
+function Nav(props) {
+  const [{ isLoggedIn }, dispatch] = useContext(authContext);
+  const logOut = () => {
+    dispatch({
+      type: "LOGOUT"
+    });
+  };
   return (
-    <header>
+    <header hidden={props.hidden}>
       <nav>
         <Link to="/" className="logo">
           <img src={logo} alt="climatetree logo" />
@@ -28,6 +34,28 @@ function Nav() {
               <span>ABOUT</span>
             </Link>
           </li>
+          <li>
+            {isLoggedIn ? (
+              <Link to="/login" className="underline-hover">
+                <span>PROFILE</span>
+              </Link>
+            ) : (
+              <Link to="/" className="underline-hover">
+                <span></span>
+              </Link>
+            )}
+          </li>
+          <li>
+            {isLoggedIn ? (
+              <Link to="/login" onClick={logOut} className="underline-hover">
+                <span>LOGOUT</span>
+              </Link>
+            ) : (
+              <Link to="/login" className="underline-hover">
+                <span>LOGIN</span>
+              </Link>
+            )}
+          </li>
         </ul>
         <div className="burger" onClick={navSlide}>
           <div className="line1"></div>
@@ -38,6 +66,10 @@ function Nav() {
     </header>
   );
 }
+
+Nav.defaultProps = {
+  hidden: false
+};
 
 function navSlide() {
   document.querySelector(".nav-links").classList.toggle("nav-active");
