@@ -16,9 +16,7 @@ const App = () => {
     <Provider value={useAuthState}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
+          <Route exact path="/" render={props => <LandingPage {...props} />} />
           <Route path="/maps">
             <Maps />
           </Route>
