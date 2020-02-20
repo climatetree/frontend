@@ -52,6 +52,7 @@ function Maps() {
           style={{ top: "0" }}
           onClick={() => setNavHidden(false)}
         >
+          {/* sup tag positions the icon correctly in the button. */}
           <sup className="menu-toggle-icon">▼</sup>
         </button>
       );
