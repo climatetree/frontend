@@ -1,7 +1,24 @@
 /* Overrides white from Nav.css */
+
 #maps-page {
   color: black;
 }
+
+#shownav {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 1;
+  height: 3rem;
+  width: 2.5rem;
+  border: none;
+  background-color: #fefefe;
+}
+
+#shownav:focus {
+  outline: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 /* #search {
   display: inline-block;
   position: absolute;
@@ -9,15 +26,19 @@
   top: 10px;
   z-index: 1;
 } */
+
 /* #map {
   width: 100vw;
   height: 100vh;
   z-index: -1;
 } */
+
 .ol-attribution span {
   color: white;
 }
+
 /* Below styles for popups borrowed from https://openlayers.org/en/latest/examples/popup.html */
+
 .ol-popup {
   position: absolute;
   background-color: white;
@@ -30,8 +51,8 @@
   left: -50px;
   min-width: 280px;
 }
-.ol-popup:after,
-.ol-popup:before {
+
+.ol-popup:after, .ol-popup:before {
   top: 100%;
   border: solid transparent;
   content: " ";
@@ -40,18 +61,21 @@
   position: absolute;
   pointer-events: none;
 }
+
 .ol-popup:after {
   border-top-color: white;
   border-width: 10px;
   left: 48px;
   margin-left: -10px;
 }
+
 .ol-popup:before {
   border-top-color: #cccccc;
   border-width: 11px;
   left: 48px;
   margin-left: -11px;
 }
+
 .ol-popup-closer {
   text-decoration: none;
   position: absolute;
@@ -61,9 +85,11 @@
   border: none;
   padding: 0 !important;
 }
+
 .ol-popup-closer:hover {
   text-decoration: underline;
 }
+
 .ol-popup-closer:after {
   content: "✖";
   color: black;
