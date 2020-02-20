@@ -4,6 +4,7 @@ import LandingPage from "./LandingPage";
 import About from "./About";
 import Maps from "./Maps";
 import "./App.css";
+import Stories from "./Stories";
 import Login from "./Login";
 import { Provider } from "./context/authContext";
 import { authReducer, initialAuthState } from "./reducers/authReducers";
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="/stories" render={props => <Stories {...props} />} />
         </Switch>
       </BrowserRouter>
     </Provider>
