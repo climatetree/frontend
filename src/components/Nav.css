@@ -5,32 +5,31 @@ header {
   z-index: 1;
 }
 nav * {
-  color: #e1e1e1;
+  color: #ededed;
 }
 nav {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10rem;
-  background-color: #0d0d0d;
+  padding: 0 40px;
+  background-color: rgba(10, 10, 10, 0.95);
+  box-shadow: 0 3px 6px rgba(10, 10, 10, 0.5);
 }
 .nav-links {
-  width: 30%;
   margin: 0;
   padding: 0;
   color: rgba(255, 255, 255, 0.9);
-  display: flex;
-  justify-content: space-around;
 }
 .nav-links li {
   list-style: none;
   width: fit-content;
+  display: inline-block;
+  margin-left: 25px;
 }
 .nav-links a {
   text-decoration: none;
   letter-spacing: 1px;
-  font-weight: 600;
 }
 .toggle .line1 {
   transform: rotate(-45deg) translate(-5px, 6px);
@@ -47,10 +46,9 @@ nav {
   text-decoration: none;
 }
 .logo img {
-  height: 4rem;
+  height: 3.6rem;
 }
 #logo-text {
-  font-weight: 600;
   font-size: 1.2rem;
 }
 .burger {
@@ -59,7 +57,7 @@ nav {
 .burger div {
   width: 25px;
   height: 3px;
-  background-color: #e1e1e1;
+  background-color: #ededed;
   margin: 5px;
   transition: all 0.3s ease;
 }
@@ -69,7 +67,7 @@ nav {
   width: 0;
   height: 2px;
   transition: width 0.3s;
-  background-color: #e1e1e1;
+  background-color: #ededed;
 }
 .underline-hover:hover::after {
   width: 100%;
@@ -86,22 +84,13 @@ nav {
   }
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
-  nav {
-    padding: 0 6rem;
-  }
-}
-
 @media (max-width: 767px) {
-  nav {
-    padding: 0 2rem;
-  }
   .nav-links {
     position: absolute;
     right: 0;
     top: 5rem;
     height: calc(100vh - 5rem);
-    background-color: #0d0d0d;
+    background-color: rgba(10, 10, 10, 0.9);
     width: 50%;
     display: flex;
     flex-direction: column;
