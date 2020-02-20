@@ -49,20 +49,21 @@ function Maps() {
       return (
         <button
           id="shownav"
-          style={{ top: "0.5rem" }}
+          style={{ top: "0" }}
           onClick={() => setNavHidden(false)}
         >
-          Show Nav
+          {/* sup tag positions the icon correctly in the button. */}
+          <sup className="menu-toggle-icon">▼</sup>
         </button>
       );
     } else {
       return (
         <button
           id="shownav"
-          style={{ top: "5.5rem" }}
+          style={{ top: "5rem" }}
           onClick={() => setNavHidden(true)}
         >
-          Hide Nav
+          <sup className="menu-toggle-icon">▲</sup>
         </button>
       );
     }

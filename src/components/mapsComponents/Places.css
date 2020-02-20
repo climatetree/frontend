@@ -16,3 +16,8 @@
   overflow: hidden;
   word-break: break-all;
 }
+@media (max-width: 500px) {
+  .places-container {
+    width: 16rem;
+  }
+}

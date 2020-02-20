@@ -1,8 +1,8 @@
 #main-search {
   color: #333333;
   position: absolute;
-  top: 0.5rem;
-  left: 3.5rem;
+  top: 1.5rem;
+  left: 0.5rem;
   height: 3rem;
   width: 24rem;
   display: flex;
@@ -30,8 +30,8 @@
 
 #dropdown-container {
   position: absolute;
-  top: 3.5rem;
-  left: 3.5rem;
+  top: 4.5rem;
+  left: 0.5rem;
   height: 3.5rem;
   width: 24rem;
   display: flex;
@@ -64,5 +64,14 @@
 }
 
 #list-container {
-  position: relative
+  position: relative;
+}
+
+@media (max-width: 500px) {
+  #main-search {
+    width: 16rem;
+  }
+  #dropdown-container {
+    width: 16rem;
+  }
 }
