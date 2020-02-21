@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-import StoryDetail from "./storiesComponents/StoryDetail";
 import Nav from "./Nav";
+import StoryDetail from "./storiesComponents/StoryDetail";
+import StorySearchBar from "./storiesComponents/StorySearchBar";
 import "../styles/Stories.css";
 
 const Stories = props => {
@@ -43,11 +45,19 @@ const Stories = props => {
     }
   ]);
 
+  let useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+
+  let query = useQuery();
+  let term = query.get("storyTitle");
+
   return (
     <>
       <Nav />
       <div id="stories-background"></div>
       <section className="stories-container">
+        <StorySearchBar searchTerm={term} {...props} />
         {stories.map(story => (
           <StoryDetail story={story} />
         ))}

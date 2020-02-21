@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import searchIcon from "../../images/search.svg";
 import "../../styles/FirstScreen.css";
 
 function FirstScreen({ history }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <section id="first-screen">
       <div id="animation-first">
@@ -14,10 +16,18 @@ function FirstScreen({ history }) {
           id="first-screen-search"
           onSubmit={event => {
             event.preventDefault();
-            history.push("/stories");
+            history.push({
+              pathname: "/stories",
+              search: `?storyTitle=${searchTerm}`,
+              state: { searchTerm }
+            });
           }}
         >
-          <input type="text" placeholder="Enter a city or ZIP code" />
+          <input
+            type="text"
+            placeholder="Enter a city or ZIP code"
+            onChange={event => setSearchTerm(event.target.value)}
+          />
           <img src={searchIcon} alt="search" id="search" />
         </form>
         <div>

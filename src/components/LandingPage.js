@@ -15,8 +15,6 @@ function LandingPage(props) {
     };
   }, []);
 
-  console.log(props);
-
   return (
     <>
       <Nav />
