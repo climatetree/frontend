@@ -5,9 +5,6 @@
   padding-right: 10rem;
   padding-bottom: 6rem;
   height: 100%;
-  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../images/nasa-Q1p7bh3SHj8-unsplash.jpg") no-repeat center center fixed;
-  background-size: 100% 100%; */
 }
 
 #stories-background {
@@ -18,8 +15,11 @@
   z-index: -1;
   height: 100%;
   background: url("../images/jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
-  filter: brightness(60%);
+  filter: brightness(50%);
+  /* background-size: cover; */
+  background-position: center;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 /* STORY CARD */

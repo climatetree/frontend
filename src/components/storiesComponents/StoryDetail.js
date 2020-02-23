@@ -11,7 +11,7 @@ const StoryDetail = ({ story }) => {
           rel="noopener noreferrer"
           className="title-hyperlink"
         >
-          <h3>{story.title}</h3>
+          <h3>{story.story_title}</h3>
         </a>
         <div className="created-detail">
           Created:{" "}
