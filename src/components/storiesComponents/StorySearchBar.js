@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const StorySearchBar = ({ searchTerm, history }) => {
+const StorySearchBar = ({ searchTerm, history, loading }) => {
   const [term, setTerm] = useState(searchTerm);
   useEffect(() => console.log("HELLO"), [searchTerm]);
 
@@ -17,13 +17,11 @@ const StorySearchBar = ({ searchTerm, history }) => {
           type="text"
           id="search-for-story"
           value={term}
+          disabled={loading}
           placeholder="Enter Story Title"
           onChange={e => setTerm(e.target.value)}
         />
       </form>
-      <div className="result-term">
-        Results for: <span id="search-term">{searchTerm}</span>
-      </div>
     </div>
   );
 };

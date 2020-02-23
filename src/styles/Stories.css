@@ -7,7 +7,32 @@
   height: 100%;
 }
 
-#stories-background {
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.spinner {
+  border: 16px solid #575757;
+  border-radius: 50%;
+  border-top: 16px solid #dbdbdb;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.stories-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -17,6 +42,20 @@
   background: url("../images/jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
   filter: brightness(50%);
   /* background-size: cover; */
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.darker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  background: url("../images/jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
+  filter: brightness(20%);
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -78,9 +117,9 @@
 }
 
 /* SEARCH BAR IN STORIES PAGE */
-.search-bar-container {
+/* .search-bar-container {
   border-bottom: solid 1px rgba(204, 204, 204, 0.5);
-}
+} */
 
 #search-for-story {
   width: 100%;
@@ -101,6 +140,7 @@
   color: #d9d9d9;
   margin-top: 15px;
   padding-bottom: 20px;
+  border-bottom: solid 1px rgba(204, 204, 204, 0.5);
 }
 
 #search-term {
