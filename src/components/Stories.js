@@ -5,17 +5,24 @@ import axios from "axios";
 import Nav from "./Nav";
 import StoryDetail from "./storiesComponents/StoryDetail";
 import StorySearchBar from "./storiesComponents/StorySearchBar";
+import Spinner from "./storiesComponents/Spinner";
 import ResultsFor from "./storiesComponents/ResultsFor";
 import "../styles/Stories.css";
 
 const Stories = props => {
-  let useQuery = () => {
+  // Initialize state
+  const [stories, setStories] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Retrieve query name from URL with React Router
+  const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
 
   let query = useQuery();
   let term = query.get("storyTitle");
 
+  // State lifecycle
   useEffect(() => {
     (async () => {
       setStories([]);
@@ -33,39 +40,33 @@ const Stories = props => {
     })();
   }, [term]);
 
-  const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // Conditional rendering
+  const renderContent = () => {
+    if (!stories.length) {
+      return <Spinner />;
+    }
 
-  console.log(stories);
+    return (
+      <>
+        <ResultsFor searchTerm={term} />
+        {stories.map(story => (
+          <StoryDetail story={story} />
+        ))}
+      </>
+    );
+  };
 
   return (
     <>
       <Nav />
+      {/* Background image */}
       <div
         className={`stories-background ${!stories.length ? "darker" : ""}`}
       ></div>
 
       <section className="stories-container">
         <StorySearchBar searchTerm={term} {...props} loading={loading} />
-        <div>
-          {
-            <>
-              {!stories.length && (
-                <div className="spinner-container">
-                  <div className="spinner"></div>
-                </div>
-              )}
-              {stories.length && (
-                <>
-                  <ResultsFor searchTerm={term} />
-                  {stories.map(story => (
-                    <StoryDetail story={story} />
-                  ))}
-                </>
-              )}
-            </>
-          }
-        </div>
+        <div>{renderContent()}</div>
       </section>
     </>
   );
