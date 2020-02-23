@@ -1,7 +1,7 @@
 /* Overrides white from Nav.css */
 
 #maps-page {
-  color: black;
+  position: relative;
 }
 
 #shownav {
