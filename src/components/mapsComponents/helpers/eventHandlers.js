@@ -6,10 +6,10 @@
  */
 const popUpHandler = (evt, map, overlay) => {
   let pixel = evt.pixel;
-  let coord = evt.coordinate;
   // Highly nested data! These are the places in an array
   let features = map.getFeaturesAtPixel(pixel);
-
+  // These are the coordinates of the point
+  let coord = features[0].getProperties().geometry.flatCoordinates;
   // Ignore clicks on map that aren't on a feature
   if (features.length === 0) {
     overlay.setPosition(undefined);
@@ -40,8 +40,6 @@ const popUpHandler = (evt, map, overlay) => {
         `;
   }
   content.innerHTML = html;
-  // TODO: Make this the center coordinate of the point, not the click
-  // This should have something to do with a getGeometry call to the place variable
   overlay.setPosition(coord);
 };
 
