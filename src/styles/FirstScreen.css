@@ -1,14 +1,13 @@
-/* frist screen */
 #first-screen {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: #e1e1e1;
+  color: #ededed;
 }
 
 #animation-first {
-  animation: firstScreen 2s ease-in-out 0s forwards;
+  animation: firstScreen 1s ease-in-out 0s forwards;
 }
 
 @keyframes firstScreen {
@@ -25,10 +24,9 @@
 #first-screen h1 {
   text-transform: uppercase;
   margin: 0;
-  font-weight: 600;
 }
 #first-screen p {
-  width: 50%;
+  width: 75%;
   margin: 2rem 0;
   font-weight: 300;
   font-size: 1.35rem;
@@ -84,7 +82,7 @@
   box-shadow: 1vw -50vh 50vh 0 #0d0d0d inset;
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (max-width: 959px) and (min-width: 768px) {
   #first-screen p {
     width: 90%;
     margin: 2rem 0;
@@ -96,8 +94,18 @@
     padding: 0.8rem 1.4rem;
     font-size: 1.1rem;
   }
+  #first-screen-search {
+    width: 90%;
+  }
   #first-screen-search img {
     transform: translateX(-1.4rem);
+  }
+  .primary-btn {
+    width: 8rem;
+    height: 2.7rem;
+    font-size: 0.9rem;
+    margin-right: 0.9rem;
+    cursor: pointer;
   }
 }
 
@@ -119,9 +127,7 @@
   .primary-btn {
     width: 6rem;
     height: 2.4rem;
-    border-radius: 1.5rem;
     font-size: 0.8rem;
-    font-weight: 600;
     margin-right: 0.8rem;
     cursor: pointer;
   }

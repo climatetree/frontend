@@ -6,5 +6,7 @@
 
 .ol-zoom {
   left: unset;
-  right: 0.5em;
+  top: unset;
+  right: 0.5rem;
+  bottom: 2.7rem;
 }

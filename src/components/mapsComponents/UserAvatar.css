@@ -1,0 +1,18 @@
+.avatar-wrapper {
+  position: absolute;
+  top: calc(0.5rem + 3px);
+  right: 70px;;
+}
+.avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: rgba(0,60,136,0.5);
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #ffffff;
+}

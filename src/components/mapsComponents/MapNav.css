@@ -1,0 +1,40 @@
+.map-nav-wrapper {
+  position: absolute;
+  top: calc(0.5rem + 3px);
+  right: 20px;
+  color: #333333;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+.map-nav-links {
+  display: none;
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 0 #999999;
+  padding: 0 20px;
+}
+.map-nav-links li {
+  margin: 10px 0;
+}
+.map-nav-links a {
+  color: #333333;
+  text-decoration: none;
+}
+.map-burger {
+  cursor: pointer;
+}
+.map-burger div {
+  width: 23px;
+  height: 2px;
+  background-color: #666666;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+.map-burger:hover div {
+  background-color: #444444;
+}
