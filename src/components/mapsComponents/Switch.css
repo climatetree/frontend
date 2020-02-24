@@ -3,6 +3,7 @@
   display: inline-block;
   width: max-content;
   cursor: pointer;
+  user-select: none;
 }
 .switch-label::before {
   content: "";

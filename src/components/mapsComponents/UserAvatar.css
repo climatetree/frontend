@@ -1,7 +1,7 @@
 .avatar-wrapper {
   position: absolute;
   top: calc(0.5rem + 3px);
-  right: 20px;
+  right: 70px;;
 }
 .avatar {
   height: 2.5rem;

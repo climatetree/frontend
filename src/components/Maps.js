@@ -5,7 +5,7 @@ import Filters from "./mapsComponents/Filters";
 import Places from "./mapsComponents/Places";
 import MapNav from './mapsComponents/MapNav';
 import UserAvatar from './mapsComponents/UserAvatar';
-import MapLogIn from './mapsComponents/MapLogIn';
+import MapSignIn from './mapsComponents/MapSignIn';
 import "../styles/Maps.css";
 import "./mapsComponents/OlMap.css";
 
@@ -45,9 +45,8 @@ function Maps() {
       {isLoggedIn ? (
         <UserAvatar />
       ) : (
-        <MapLogIn />
+        <MapSignIn />
       )}
-      <UserAvatar />
     </div>
   );
 }
