@@ -8,6 +8,7 @@ function Filters({
   getSimilarPlaces,
   getExactPlaces,
 }) {
+  // eslint-disable-next-line
   const [values, setValues] = useState({
     checkboxChecked: true,
     selectRadioOption: "radio1",
