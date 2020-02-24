@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
-import Checkbox from "./Checkbox";
-import RadioGroup from "./RadioGroup";
+import CheckboxGroup from "./CheckboxGroup";
 import Switch from "./Switch";
-import MinMaxRange from "./MinMaxRange";
-import Range from "./Range";
 import "./Filters.css";
 
 function Filters({
-  getPlacesForDropdown,
   getSimilarPlaces,
-  dropdownPlaces,
-  navHidden,
+  getExactPlaces,
 }) {
   const [values, setValues] = useState({
     checkboxChecked: true,
@@ -20,69 +15,52 @@ function Filters({
     min: "0",
     max: "",
   });
+  const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
+  const [similarPlacesEnabled, setSimilarPlacesEnabled] = useState(false);
   const filterFn = place => {
-    const maxValue =
-      values.max === "" ? Number.MAX_VALUE : parseInt(values.max);
+    const maxValue = values.max === "" ? Number.MAX_VALUE : parseInt(values.max);
     return (
-      values.checkboxChecked &&
-      values.switchOn &&
       place.population >= parseInt(values.min) &&
-      place.population <= maxValue
+      place.population <= maxValue &&
+      !placeTypesDisabled.includes(place.typeName)
     );
   };
+  const openAdvancedFilters = () => {
+    const advancedFilters = document.getElementById('advanced-filters');
+    if (advancedFilters.style.display === 'block') {
+      advancedFilters.style.display = 'none';
+    } else {
+      advancedFilters.style.display = 'block';
+    }
+  };
   return (
-    <>
+    <div className="map-search-wrapper">
       <SearchBar
-        getPlacesForDropdown={getPlacesForDropdown}
+        getExactPlaces={getExactPlaces}
         getSimilarPlaces={getSimilarPlaces}
         filters={filterFn}
-        dropdownPlaces={dropdownPlaces}
-        navHidden={navHidden}
+        similarPlacesEnabled={similarPlacesEnabled}
       />
-      <div id="ct-map-controls">
-        <Checkbox
-          checked={values.checkboxChecked}
-          onChange={value =>
-            setValues({
-              ...values,
-              checkboxChecked: value,
-            })
-          }
-        />
-        <RadioGroup
-          radio={["radio1", "radio2", "radio3"]}
-          name="radio-demo"
-          selectRadioOption={values.selectRadioOption}
-          onChange={value =>
-            setValues({
-              ...values,
-              selectRadioOption: value,
-            })
-          }
-        />
+      <div className="similar-places-filter">
         <Switch
-          on={values.switchOn}
-          onChange={value =>
-            setValues({
-              ...values,
-              switchOn: value,
-            })
-          }
+          label="Enable similar places"
+          name="similar-places"
+          on={similarPlacesEnabled}
+          onChange={(value) => setSimilarPlacesEnabled(value)}
         />
-        <MinMaxRange
-          min={values.min}
-          max={values.max}
-          onChange={({ min, max }) =>
-            setValues({
-              ...values,
-              min,
-              max,
-            })
-          }
-        />
-        <Range />
       </div>
-    </>
+      <div className="advanced-filters-wrapper">
+        <p onClick={openAdvancedFilters}>More</p>
+        <div id="advanced-filters">
+          <CheckboxGroup
+            label="Type Name"
+            name="typeName"
+            placeTypesDisabled={placeTypesDisabled}
+            setPlaceTypesDisabled={setPlaceTypesDisabled}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
 
