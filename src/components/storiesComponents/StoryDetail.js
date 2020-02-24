@@ -1,6 +1,8 @@
 import React from "react";
 import { ReactTinyLink } from "react-tiny-link";
 
+import StoryCommentInput from "./StoryCommentInput";
+
 const StoryDetail = ({ story }) => {
   return (
     <div className="story-card">
@@ -45,6 +47,7 @@ const StoryDetail = ({ story }) => {
           </span>
         </div>
       </div>
+      <StoryCommentInput />
     </div>
   );
 };

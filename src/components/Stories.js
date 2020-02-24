@@ -20,7 +20,7 @@ const Stories = props => {
   };
 
   let query = useQuery();
-  let term = query.get("storyTitle");
+  let generalSearchTerm = query.get("storyTitle");
 
   // State lifecycle
   useEffect(() => {
@@ -29,7 +29,7 @@ const Stories = props => {
       setLoading(true);
 
       let responses = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/title/${term}`
+        `https://backend-mongo-stories.azurewebsites.net/stories/title/${generalSearchTerm}`
       );
       let temp = responses.data.map(story => {
         return { ...story, date: new Date(story.date) };
@@ -38,7 +38,7 @@ const Stories = props => {
 
       setLoading(false);
     })();
-  }, [term]);
+  }, [generalSearchTerm]);
 
   // Conditional rendering
   const renderContent = () => {
@@ -48,7 +48,7 @@ const Stories = props => {
 
     return (
       <>
-        <ResultsFor searchTerm={term} />
+        <ResultsFor searchTerm={generalSearchTerm} />
         {stories.map(story => (
           <StoryDetail story={story} />
         ))}
@@ -65,7 +65,11 @@ const Stories = props => {
       ></div>
 
       <section className="stories-container">
-        <StorySearchBar searchTerm={term} {...props} loading={loading} />
+        <StorySearchBar
+          termForSearchBar={generalSearchTerm}
+          {...props}
+          loading={loading}
+        />
         <div>{renderContent()}</div>
       </section>
     </>

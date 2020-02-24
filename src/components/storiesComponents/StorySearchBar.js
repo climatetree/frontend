@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-const StorySearchBar = ({ searchTerm, history, loading }) => {
-  const [term, setTerm] = useState(searchTerm);
-  useEffect(() => console.log("HELLO"), [searchTerm]);
+const StorySearchBar = ({ termForSearchBar, history, loading }) => {
+  const [searchTermFromSearchBar, setSearchTermFromSearchBar] = useState(
+    termForSearchBar
+  );
+  useEffect(() => console.log("HELLO"), [termForSearchBar]);
 
   const onSubmitForm = event => {
     event.preventDefault();
-    history.push({ pathname: "/stories", search: `?storyTitle=${term}` });
+    history.push({
+      pathname: "/stories",
+      search: `?storyTitle=${searchTermFromSearchBar}`
+    });
   };
 
   return (
@@ -16,10 +21,10 @@ const StorySearchBar = ({ searchTerm, history, loading }) => {
         <input
           type="text"
           id="search-for-story"
-          value={term}
+          value={searchTermFromSearchBar}
           disabled={loading}
           placeholder="Enter Story Title"
-          onChange={e => setTerm(e.target.value)}
+          onChange={e => setSearchTermFromSearchBar(e.target.value)}
         />
       </form>
     </div>
