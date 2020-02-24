@@ -12,7 +12,7 @@ function Nav(props) {
     });
   };
   return (
-    <header hidden={props.hidden}>
+    <header className="nav-header" hidden={props.hidden}>
       <nav>
         <Link to="/" className="logo">
           <img src={logo} alt="climatetree logo" />
