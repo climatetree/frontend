@@ -11,7 +11,7 @@ import { fromLonLat } from "ol/proj";
 
 import { styleFunction as getStyles } from "./helpers/olStyles";
 import { getGeoJson } from "./helpers/data";
-import { popUpHandler } from "./helpers/eventHandlers";
+import { popUpHandler } from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
 
 class OlMap extends Component {
@@ -63,7 +63,19 @@ class OlMap extends Component {
       }),
     });
 
+    // Open popups when a point is clicked on
     map.on("singleclick", evt => popUpHandler(evt, map, overlay));
+
+    // Close popups when features change
+    let numFeatures = clusterSource.getFeatures().length;
+    map.on("moveend", () => {
+      // Feature array length will change when the number of clusters change
+      let newNumFeatures = clusterSource.getFeatures().length;
+      if (numFeatures !== newNumFeatures) {
+        overlay.setPosition(undefined);
+        numFeatures = newNumFeatures;
+      }
+    });
 
     this.setState({
       map: map,

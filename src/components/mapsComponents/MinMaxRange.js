@@ -22,7 +22,7 @@ export default function MinMaxRange({
             max: range.max,
           })}
         />
-        <span style={{margin: '0 5px'}}> - </span>
+        <span style={{ margin: '0 5px' }}> - </span>
         <input
           type="number"
           name={`${name}-max`}

@@ -9,6 +9,7 @@ export default function Filters({
   getSimilarPlaces,
   getExactPlaces,
 }) {
+  // eslint-disable-next-line
   const [populationRange, setPopulationRange] = useState({
     min: 90,
     max: 150,
