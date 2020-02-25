@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import CheckboxGroup from "./CheckboxGroup";
 import Switch from "./Switch";
+import MinMaxRange from './MinMaxRange';
 import "./Filters.css";
 
-function Filters({
+export default function Filters({
   getSimilarPlaces,
   getExactPlaces,
 }) {
-<<<<<<< HEAD
-  const [values] = useState({
-=======
   // eslint-disable-next-line
   const [values, setValues] = useState({
->>>>>>> b8f8d2c732bef94cf4b127197f6edc776d56ba97
     checkboxChecked: true,
     selectRadioOption: "radio1",
     switchOn: true,
@@ -21,12 +18,11 @@ function Filters({
     max: "",
   });
   const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
-  const [similarPlacesEnabled, setSimilarPlacesEnabled] = useState(false);
+  const [similarPlacesEnabled, setSimilarPlacesEnabled] = useState(true);
   const filterFn = place => {
-    const maxValue = values.max === "" ? Number.MAX_VALUE : parseInt(values.max);
     return (
-      place.population >= parseInt(values.min) &&
-      place.population <= maxValue &&
+      // place.population >= populationRange.min * exactMatch.population / 100 &&
+      // place.population <= populationRange.max * exactMatch.population / 100 &&
       !placeTypesDisabled.includes(place.typeName)
     );
   };
@@ -46,27 +42,34 @@ function Filters({
         filters={filterFn}
         similarPlacesEnabled={similarPlacesEnabled}
       />
-      <div className="similar-places-filter">
-        <Switch
-          label="Enable similar places"
-          name="similar-places"
-          on={similarPlacesEnabled}
-          onChange={(value) => setSimilarPlacesEnabled(value)}
-        />
-      </div>
-      <div className="advanced-filters-wrapper">
-        <p onClick={openAdvancedFilters}>More</p>
-        <div id="advanced-filters">
-          <CheckboxGroup
-            label="Type Name"
-            name="typeName"
-            placeTypesDisabled={placeTypesDisabled}
-            setPlaceTypesDisabled={setPlaceTypesDisabled}
+      <div className="filters-wrapper">
+        <div className="similar-places-filter">
+          <Switch
+            label="Enable similar places"
+            name="similar-places"
+            on={similarPlacesEnabled}
+            onChange={(value) => setSimilarPlacesEnabled(value)}
           />
+        </div>
+        <div className="advanced-filters-wrapper">
+          <p onClick={openAdvancedFilters}>More</p>
+          <div id="advanced-filters">
+            <CheckboxGroup
+              label="Type Name"
+              name="typeName"
+              placeTypesDisabled={placeTypesDisabled}
+              setPlaceTypesDisabled={setPlaceTypesDisabled}
+            />
+            <div className="divisor"></div>
+            <MinMaxRange
+              label="Population (%)"
+              name="population"
+              range={populationRange}
+              setRange={setPopulationRange}
+            />
+          </div>
         </div>
       </div>
     </div>
   );
-}
-
-export default Filters;
+};
