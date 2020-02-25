@@ -10,12 +10,9 @@ export default function Filters({
   getExactPlaces,
 }) {
   // eslint-disable-next-line
-  const [values, setValues] = useState({
-    checkboxChecked: true,
-    selectRadioOption: "radio1",
-    switchOn: true,
-    min: "0",
-    max: "",
+  const [populationRange, setPopulationRange] = useState({
+    min: 90,
+    max: 150,
   });
   const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
   const [similarPlacesEnabled, setSimilarPlacesEnabled] = useState(true);
