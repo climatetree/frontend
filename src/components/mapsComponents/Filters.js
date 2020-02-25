@@ -2,26 +2,23 @@ import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import CheckboxGroup from "./CheckboxGroup";
 import Switch from "./Switch";
+import MinMaxRange from './MinMaxRange';
 import "./Filters.css";
 
-function Filters({
+export default function Filters({
   getSimilarPlaces,
   getExactPlaces,
 }) {
-  const [values, setValues] = useState({
-    checkboxChecked: true,
-    selectRadioOption: "radio1",
-    switchOn: true,
-    min: "0",
-    max: "",
+  const [populationRange, setPopulationRange] = useState({
+    min: 90,
+    max: 150,
   });
   const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
-  const [similarPlacesEnabled, setSimilarPlacesEnabled] = useState(false);
+  const [similarPlacesEnabled, setSimilarPlacesEnabled] = useState(true);
   const filterFn = place => {
-    const maxValue = values.max === "" ? Number.MAX_VALUE : parseInt(values.max);
     return (
-      place.population >= parseInt(values.min) &&
-      place.population <= maxValue &&
+      // place.population >= populationRange.min * exactMatch.population / 100 &&
+      // place.population <= populationRange.max * exactMatch.population / 100 &&
       !placeTypesDisabled.includes(place.typeName)
     );
   };
@@ -59,11 +56,16 @@ function Filters({
               placeTypesDisabled={placeTypesDisabled}
               setPlaceTypesDisabled={setPlaceTypesDisabled}
             />
+            <div className="divisor"></div>
+            <MinMaxRange
+              label="Population (%)"
+              name="population"
+              range={populationRange}
+              setRange={setPopulationRange}
+            />
           </div>
         </div>
       </div>
     </div>
   );
-}
-
-export default Filters;
+};
