@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import Nav from "./Nav";
-import LoginData from "./loginComponents/LoginData";
+import Login from "./loginComponents/Login";
 import authContext from "./context/authContext";
 import Profile from "./loginComponents/Profile";
 
-const Login = () => {
+const LoginPage = () => {
   const [{ isLoggedIn }] = useContext(authContext);
   return (
     <div>
       <Nav />
-      {isLoggedIn ? <Profile /> : <LoginData />}
+      {isLoggedIn ? <Profile /> : <Login />}
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

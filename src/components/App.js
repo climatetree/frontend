@@ -5,7 +5,7 @@ import About from "./About";
 import Maps from "./Maps";
 import "./App.css";
 import Stories from "./Stories";
-import Login from "./Login";
+import LoginPage from "./LoginPage";
 import { Provider } from "./context/authContext";
 import { authReducer, initialAuthState } from "./reducers/authReducers";
 
@@ -26,7 +26,7 @@ const App = () => {
             <About />
           </Route>
           <Route path="/login">
-            <Login />
+            <LoginPage />
           </Route>
           <Route path="/stories" render={props => <Stories {...props} />} />
         </Switch>
