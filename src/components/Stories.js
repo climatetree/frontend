@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import StoryDetail from "./storiesComponents/StoryDetail";
 
 const Stories = () => {
-  const [stories, setStories] = useState([
+  const [stories] = useState([
     {
       title: "News Report",
       hyperlink: "https://www.google.com",

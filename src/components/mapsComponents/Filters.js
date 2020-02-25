@@ -8,7 +8,7 @@ function Filters({
   getSimilarPlaces,
   getExactPlaces,
 }) {
-  const [values, setValues] = useState({
+  const [values] = useState({
     checkboxChecked: true,
     selectRadioOption: "radio1",
     switchOn: true,
