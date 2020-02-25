@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import StoryDetail from "./storiesComponents/StoryDetail";
 
 const Stories = () => {
-  const [stories] = useState([
+  // eslint-disable-next-line
+  const [stories, setStories] = useState([
     {
       title: "News Report",
       hyperlink: "https://www.google.com",
