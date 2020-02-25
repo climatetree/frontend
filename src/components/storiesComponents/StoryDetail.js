@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactTinyLink } from "react-tiny-link";
 
 import StoryCommentInput from "./StoryCommentInput";
 
 const StoryDetail = ({ story }) => {
+  let [toggleComment, setToggleComment] = useState(false);
+
+  const onToggleComment = () => {
+    setToggleComment(prevToggleCommentState => !prevToggleCommentState);
+  };
+
   return (
     <div className="story-card">
       <div className="heading-card-section">
@@ -42,12 +48,15 @@ const StoryDetail = ({ story }) => {
             <i className="far fa-heart fa-2x"></i>
           </span>
 
-          <span className="like-comment-button">
+          <span
+            className="like-comment-button"
+            onClick={() => onToggleComment()}
+          >
             <i className="far fa-comment fa-2x"></i>
           </span>
         </div>
       </div>
-      <StoryCommentInput />
+      <StoryCommentInput toggleComment={toggleComment} />
     </div>
   );
 };
