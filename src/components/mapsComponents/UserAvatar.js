@@ -3,7 +3,7 @@ import authContext from "../context/authContext";
 import './UserAvatar.css';
 
 export default function UserAvatar() {
-  const [{ username, email, url, userid }] = useContext(authContext);
+  const [{ username, email, url }] = useContext(authContext);
   const toggleUserInfo = () => {
     const userInfo = document.querySelector('.user-info');
     if (userInfo.style.display === 'flex') {
