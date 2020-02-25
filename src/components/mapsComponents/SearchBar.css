@@ -1,7 +1,12 @@
+#search-bar {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+}
 #main-search {
   color: #333333;
   height: 2.5rem;
-  width: 24rem;
+  width: 100%;
   padding: 5px 20px;
   display: flex;
   align-items: center;
@@ -18,17 +23,17 @@
   line-height: 24px;
   outline: none;
 }
+#main-search input::placeholder {
+  color: #bbbbbb;
+}
 #main-search img {
   cursor: pointer;
 }
 #suggestions {
-  visibility: hidden;
-  position: absolute;
-  top: 2.8rem;
-  left: 0;
   max-height: 175px;
+  min-height: 39px;
   height: fit-content;
-  width: 24rem;
+  width: 100%;
   color: #333333;
   background-color: #fefefe;
   box-shadow: 0 0 5px 0 #999999;
@@ -36,6 +41,8 @@
   border-radius: 4px;
   font-weight: 300;
   overflow-y: auto;
+  margin-top: 5px;
+  display: none;
 }
 #suggestions p {
   padding: 5px 20px;
@@ -45,54 +52,16 @@
 #suggestions p:hover {
   background-color: #eeeeee;
 }
-#suggestions.active {
-  visibility: visible;
-}
 
-#dropdown-container {
-  position: absolute;
-  top: 4.5rem;
-  left: calc(0.5rem + 3px);
-  height: 3.5rem;
-  width: 24rem;
-  display: flex;
-  align-items: center;
-  background-color: #fefefe;
-  /* border-radius: 4px; */
-  /* box-shadow: 0 0 5px 0 #999999; */
-  /* padding: 5px 20px; */
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-#dropdown-container ul {
-  background-color: #fefefe;
-  width: 100%;
-  border: none;
-  height: 3rem;
-  list-style-type: none;
-}
-
-#dropdown-container ul li {
-  border-radius: 4px;
-  box-shadow: 0 0 1px 0 #999999;
-  width: 100%;
-  padding: 5px 20px;
-}
-
-#dropdown-container ul li:hover {
-  cursor: pointer;
-}
-
-#list-container {
-  position: relative;
-}
-
-@media (max-width: 500px) {
-  #main-search {
-    width: 16rem;
+@media (max-width: 959px) and (min-width: 768px) {
+  #search-bar {
+    width: 18rem;
   }
-  #dropdown-container {
-    width: 16rem;
+}
+
+@media (max-width: 767px) {
+  #search-bar {
+    width: calc(100vw - 140px);
+    max-width: 20rem;
   }
 }

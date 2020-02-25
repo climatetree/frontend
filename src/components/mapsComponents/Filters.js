@@ -41,23 +41,25 @@ function Filters({
         filters={filterFn}
         similarPlacesEnabled={similarPlacesEnabled}
       />
-      <div className="similar-places-filter">
-        <Switch
-          label="Enable similar places"
-          name="similar-places"
-          on={similarPlacesEnabled}
-          onChange={(value) => setSimilarPlacesEnabled(value)}
-        />
-      </div>
-      <div className="advanced-filters-wrapper">
-        <p onClick={openAdvancedFilters}>More</p>
-        <div id="advanced-filters">
-          <CheckboxGroup
-            label="Type Name"
-            name="typeName"
-            placeTypesDisabled={placeTypesDisabled}
-            setPlaceTypesDisabled={setPlaceTypesDisabled}
+      <div className="filters-wrapper">
+        <div className="similar-places-filter">
+          <Switch
+            label="Enable similar places"
+            name="similar-places"
+            on={similarPlacesEnabled}
+            onChange={(value) => setSimilarPlacesEnabled(value)}
           />
+        </div>
+        <div className="advanced-filters-wrapper">
+          <p onClick={openAdvancedFilters}>More</p>
+          <div id="advanced-filters">
+            <CheckboxGroup
+              label="Type Name"
+              name="typeName"
+              placeTypesDisabled={placeTypesDisabled}
+              setPlaceTypesDisabled={setPlaceTypesDisabled}
+            />
+          </div>
         </div>
       </div>
     </div>

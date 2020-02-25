@@ -43,24 +43,40 @@ export default function SearchBar({
   };
 
   return (
-    <div id="main-search">
-      <input
-        type="text"
-        placeholder="Search Climate Tree"
-        value={searchTerm}
-        onChange={event => setSearchTerm(event.target.value)}
-        // onKeyDown={event => handleKeyDown(event)}
-        onFocus={() => {
-          document.querySelector('#suggestions').style.visibility = 'visible';
-        }}
-        onBlur={() => {
-          setTimeout(() => {
-            document.querySelector('#suggestions').style.visibility = 'hidden';
-          }, 200);
-        }}
-      />
+    <div id="search-bar">
+      <div id="main-search">
+        <input
+          type="text"
+          placeholder="Search by place name"
+          value={searchTerm}
+          onChange={event => setSearchTerm(event.target.value)}
+          // onKeyDown={event => handleKeyDown(event)}
+          onFocus={() => {
+            document.querySelector('#suggestions').style.display = 'block';
+          }}
+          onBlur={() => {
+            setTimeout(() => {
+              document.querySelector('#suggestions').style.display = 'none';
+            }, 200);
+          }}
+        />
+        <img
+          src={searchIcon}
+          alt="search"
+          id="search"
+          // onClick={() => {
+          //   if (similarPlacesEnabled) {
+          //     getSimilarPlaces(placeId);
+          //   } else {
+          //     getExactPlaces(debouncedSearchTerm);
+          //   }
+          // }}
+        />
+      </div>
       <div id="suggestions">
-        {placeSuggestions.length > 0 ? (
+        {isSearching ? (
+          <p>Searching...</p>
+        ) : placeSuggestions.length > 0 ? (
           <>
             {placeSuggestions.map(({placeId, name}) => (
               <p
@@ -69,28 +85,12 @@ export default function SearchBar({
               >{name}</p>
             ))}
           </>
+        ) : searchTerm.length > 0 ? (
+          <p>No suggestion</p>
         ) : (
-          <>
-            {isSearching ? (
-              <p>Searching...</p>
-            ) : (
-              <p>User Search History</p>
-            )}
-          </>
+          <p>User Search History</p>
         )}
       </div>
-      <img
-        src={searchIcon}
-        alt="search"
-        id="search"
-        // onClick={() => {
-        //   if (similarPlacesEnabled) {
-        //     getSimilarPlaces(placeId);
-        //   } else {
-        //     getExactPlaces(debouncedSearchTerm);
-        //   }
-        // }}
-      />
     </div>
   );
 };

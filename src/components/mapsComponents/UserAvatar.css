@@ -1,18 +1,38 @@
 .avatar-wrapper {
   position: absolute;
   top: calc(0.5rem + 3px);
-  right: 70px;;
-}
-.avatar {
+  right: 70px;
   height: 2.5rem;
   width: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  background-color: rgba(0,60,136,0.5);
-  color: #ffffff;
   cursor: pointer;
   user-select: none;
-  border: 1px solid #ffffff;
+}
+.avatar {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: 1px solid #fefefe;
+}
+.user-info {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #fefefe;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 0 #999999;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.user-info img {
+  border-radius: 50%;
+}
+.user-info p {
+  margin-top: 10px;
 }
