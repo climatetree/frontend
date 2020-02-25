@@ -45,3 +45,9 @@
   height: 1rem;
   margin-right: 20px;
 }
+
+@media (max-width: 767px) {
+  .social-login {
+    max-width: 300px;
+  }
+}

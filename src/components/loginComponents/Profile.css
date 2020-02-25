@@ -18,7 +18,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px 60px;
+  padding: 40px;
   color: #fefefe;
 }
 .greeting {
@@ -44,7 +44,7 @@
 }
 .stories-wrapper div {
   background-color: rgba(255, 255, 255, 0.7);
-  width: 80%;
+  width: 85%;
   margin: 40px 0;
   border-radius: 2px;
   padding: 20px;
@@ -61,4 +61,11 @@
 }
 .posts {
   height: 400px;
+}
+
+@media (max-width: 767px) {
+  .profile-wrapper {
+    display: block;
+    height: fit-content;
+  }
 }
