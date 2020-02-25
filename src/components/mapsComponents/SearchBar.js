@@ -85,7 +85,7 @@ export default function SearchBar({
               >{name}</p>
             ))}
           </>
-        ) : searchTerm.length > 0 ? (
+        ) : debouncedSearchTerm.length > 0 ? (
           <p>No suggestion</p>
         ) : (
           <p>User Search History</p>

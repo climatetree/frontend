@@ -30,9 +30,8 @@
   cursor: pointer;
 }
 #suggestions {
-  max-height: 175px;
+  max-height: 155px;
   min-height: 39px;
-  height: fit-content;
   width: 100%;
   color: #333333;
   background-color: #fefefe;
