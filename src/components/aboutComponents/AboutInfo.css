@@ -3,7 +3,7 @@ section#about {
   padding-top: 80px;
   padding-bottom: 80px;
   background:
-    linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url('../../images/nasa-Q1p7bh3SHj8-unsplash.jpg');
   background-position: center;
   background-size: cover;

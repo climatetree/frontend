@@ -4,7 +4,7 @@ import authContext from "./context/authContext";
 import logo from "../images/white-logo.png";
 import "./Nav.css";
 
-function Nav(props) {
+function Nav() {
   const [{ isLoggedIn }, dispatch] = useContext(authContext);
   const logOut = () => {
     dispatch({
@@ -12,10 +12,10 @@ function Nav(props) {
     });
   };
   return (
-    <header hidden={props.hidden}>
+    <header>
       <nav>
         <Link to="/" className="logo">
-          <img src={logo} alt="climatetree logo" />
+          <img src={logo} alt="climate tree logo" />
           <p id="logo-text">ClimateTree</p>
         </Link>
         <ul className="nav-links">
@@ -36,7 +36,10 @@ function Nav(props) {
           </li>
           {isLoggedIn && (
             <li>
-              <Link to="/login" className="underline-hover">
+              <Link
+                to="/login"
+                className="underline-hover"
+              >
                 <span>PROFILE</span>
               </Link>
             </li>
@@ -51,7 +54,10 @@ function Nav(props) {
                 <span>LOGOUT</span>
               </Link>
             ) : (
-              <Link to="/login" className="underline-hover">
+              <Link
+                to="/login"
+                className="underline-hover"
+              >
                 <span>LOGIN</span>
               </Link>
             )}

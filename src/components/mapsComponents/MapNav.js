@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
+import authContext from "../context/authContext";
 import './MapNav.css';
 
 export default function MapNav() {
+  const [{ isLoggedIn }] = useContext(authContext);
   const toggleMapNav = () => {
     document.querySelector(".map-burger").classList.toggle("toggle");
     document.querySelector(".map-nav-links").classList.toggle("map-nav-active");
@@ -21,6 +23,11 @@ export default function MapNav() {
         <li>
           <Link to="/about">ABOUT</Link>
         </li>
+        {isLoggedIn && (
+          <li>
+            <Link to="/login">PROFILE</Link>
+          </li>
+        )}
       </ul>
     </>
   );
