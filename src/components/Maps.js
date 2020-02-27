@@ -26,7 +26,8 @@ function Maps() {
     //   ...mapStates,
     //   places: response.data.filter(filterFn),
     // });
-    setPlaces(response.data.filter(filterFn));
+    // setPlaces(response.data.filter(filterFn));
+    setPlaces(response.data);
   };
   const getSimilarPlaces = async (placeID, filterFn = () => true) => {
     const response = await axios.get(
@@ -36,7 +37,9 @@ function Maps() {
     //   ...mapStates,
     //   places: response.data.filter(filterFn),
     // });
-    setPlaces(response.data.filter(filterFn));
+    // setPlaces(response.data.filter(filterFn));
+    console.log("MAPS.JS:", response.data);
+    setPlaces(response.data);
   };
   return (
     <div id="maps-page">
@@ -45,7 +48,7 @@ function Maps() {
         getExactPlaces={getExactPlaces}
         getSimilarPlaces={getSimilarPlaces}
       />
-      <Places places={places} />
+      <Places features={places.features} />
       <MapNav />
       {isLoggedIn ? <UserAvatar /> : <MapSignIn />}
     </div>

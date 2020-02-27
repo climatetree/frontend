@@ -1,19 +1,22 @@
-import React from 'react';
-import './Places.css';
+import React from "react";
+import "./Places.css";
 
-export default function Places({places}) {
+export default function Places({ features }) {
+  console.log("PLACES", features);
   return (
     <div className="places-container">
-      <p>Total: {places.length}</p>
-      {places.map((place, index) => (
-        <div key={place.placeId}>
-          <p>{index + 1}</p>
-          <p>Name: {place.name}</p>
-          <p>Type Name: {place.typeName}</p>
-          <p>Population: {place.population}</p>
-          <p>Carbon: {place.carbon}</p>
-        </div>
-      ))}
+      <p>Total: {!features ? 0 : features.length}</p>
+      {!features
+        ? ""
+        : features.map(({ properties }, index) => (
+            <div key={properties.place_id}>
+              <p>{index + 1}</p>
+              <p>Name: {properties.name}</p>
+              <p>Type Name: {properties.typeName}</p>
+              <p>Population: {properties.population}</p>
+              <p>Carbon: {properties.carbon}</p>
+            </div>
+          ))}
     </div>
   );
-};
+}
