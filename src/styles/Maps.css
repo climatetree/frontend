@@ -2,6 +2,7 @@
 
 #maps-page {
   position: relative;
+  overflow-x: hidden;
 }
 
 #shownav {

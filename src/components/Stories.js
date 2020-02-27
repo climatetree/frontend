@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import StoryDetail from "./storiesComponents/StoryDetail";
 
 const Stories = () => {
+  // eslint-disable-next-line
   const [stories, setStories] = useState([
     {
       title: "News Report",

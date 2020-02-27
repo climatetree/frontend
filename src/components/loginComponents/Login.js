@@ -5,8 +5,10 @@ import authContext from "../context/authContext";
 import "../aboutComponents/AboutInfo";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import GoogleLogo from '../../images/google.svg';
+import './Login.css';
 
-const LoginData = () => {
+const Login = () => {
   const [state, dispatch] = useContext(authContext);
   const { isLoggedIn } = state;
   const { username } = state;
@@ -51,28 +53,36 @@ const LoginData = () => {
   };
 
   return (
-    <div justify-content="center">
+    <>
       {!isLoggedIn ? (
-        <div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <FacebookLogin
-            appId="208267926889455"
-            fields="name,email,picture"
-            onClick={componentClicked}
-            callback={responseFacebook}
-            icon="fa-facebook"
-          />
-          <h4>-------------------------</h4>
-
-          <GoogleLogin
-            clientId="17873037182-efko5kkjp7b07dlo5fi7vsrt654rpl0q.apps.googleusercontent.com"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-          />
+        <div className="login-wrapper">
+          <div className="social-login">
+            <FacebookLogin
+              appId="208267926889455"
+              fields="name,email,picture"
+              onClick={componentClicked}
+              callback={responseFacebook}
+              cssClass="facebook-login-button"
+              icon="fa-facebook"
+            />
+            <GoogleLogin
+              clientId="17873037182-efko5kkjp7b07dlo5fi7vsrt654rpl0q.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              icon={true}
+              cookiePolicy={"single_host_origin"}
+              render={renderProps => (
+                <button
+                  className="google-login-button"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <img src={GoogleLogo} alt="google g logo"/>
+                  Login with Google
+                </button>
+              )}
+            />
+          </div>
         </div>
       ) : (
         <div>
@@ -85,8 +95,8 @@ const LoginData = () => {
           <img src={url} alt={name} />
         </div>
       )}
-    </div>
+    </>
   );
 };
 
-export default LoginData;
+export default Login;

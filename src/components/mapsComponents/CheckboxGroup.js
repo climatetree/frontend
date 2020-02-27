@@ -24,7 +24,9 @@ export default function CheckboxGroup({
   };
   return (
     <div className="checkbox-group-wrapper">
-      <label className="group-label">{label}</label>
+      <label className="checkbox-group-label">
+        {label}
+      </label>
       {options.map((option) => (
         <Checkbox
           key={option}

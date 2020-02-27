@@ -1,37 +1,40 @@
 import React from 'react';
 import './MinMaxRange.css';
 
-function MinMaxRange({
-  min,
-  max,
-  onChange,
+export default function MinMaxRange({
+  label,
+  name,
+  range,
+  setRange,
 }) {
   return (
     <div className='min-max-container'>
-      <label htmlFor="min">Min</label>
-      <input
-        type="text"
-        name="min"
-        id="min"
-        value={min}
-        onChange={(event) => onChange({
-          min: event.target.value,
-          max,
-        })}
-      />
-      <label htmlFor="max">Max</label>
-      <input
-        type="text"
-        name="max"
-        id="max"
-        value={max}
-        onChange={(event) => onChange({
-          min,
-          max: event.target.value,
-        })}
-      />
+      <label className="min-max-label">{label}</label>
+      <div className="min-max-inputs">
+        <input
+          type="number"
+          name={`${name}-min`}
+          id={`${name}-min`}
+          placeholder="Min"
+          value={range.min}
+          onChange={(event) => setRange({
+            min: parseInt(event.target.value),
+            max: range.max,
+          })}
+        />
+        <span style={{ margin: '0 5px' }}> - </span>
+        <input
+          type="number"
+          name={`${name}-max`}
+          id={`${name}-max`}
+          placeholder="Max"
+          value={range.max}
+          onChange={(event) => setRange({
+            min: range.min,
+            max: parseInt(event.target.value),
+          })}
+        />
+      </div>
     </div>
   );
-}
-
-export default MinMaxRange;
+};

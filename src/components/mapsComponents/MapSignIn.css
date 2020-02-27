@@ -14,4 +14,11 @@
   padding: 5px 10px;
   font-size: 0.8rem;
   cursor: pointer;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .map-signin-wrapper {
+    right: 50px;
+  }
 }
