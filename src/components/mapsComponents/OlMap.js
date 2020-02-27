@@ -67,13 +67,12 @@ class OlMap extends Component {
     map.on("singleclick", evt => popUpHandler(evt, map, overlay));
 
     // Close popups when features change
-    let numFeatures = clusterSource.getFeatures().length;
-    map.on("moveend", () => {
-      // Feature array length will change when the number of clusters change
-      let newNumFeatures = clusterSource.getFeatures().length;
-      if (numFeatures !== newNumFeatures) {
+    let currZoom = map.getView().getZoom();
+    map.on('moveend', evt => {
+      let newZoom = map.getView().getZoom();
+      if (currZoom != newZoom) {
         overlay.setPosition(undefined);
-        numFeatures = newNumFeatures;
+        currZoom = newZoom;
       }
     });
 
