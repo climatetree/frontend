@@ -10,7 +10,7 @@ function FirstScreen({ history }) {
   return (
     <section id="first-screen">
       <div id="animation-first">
-        <h1>ClimateTree</h1>
+        <h1>Climate Tree</h1>
         <p>Start exploring below or visit our About page to learn more.</p>
         <form
           id="first-screen-search"

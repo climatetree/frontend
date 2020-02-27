@@ -1,26 +1,26 @@
 import React from 'react';
 import './Switch.css';
 
-function Switch({
+export default function Switch({
+  label,
+  name,
   on,
   onChange,
 }) {
   return (
-    <div className="switch-container">
+    <>
       <input
         type="checkbox"
-        name="s1"
-        id="s1"
+        name={name}
+        id={name}
         className="switch"
         checked={on}
         onChange={() => onChange(!on)}
       />
       <label
-        htmlFor="s1"
+        htmlFor={name}
         className="switch-label"
-      >Switch</label>
-    </div>
+      >{label}</label>
+    </>
   );
-}
-
-export default Switch;
+};

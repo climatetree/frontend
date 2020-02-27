@@ -26,16 +26,8 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "testEnvironment": "jsdom",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
-    ],
-    "collectCoverage": true,
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "vue"
     ],
     "transform": {
       "^.+\\.vue$": "vue-jest",
@@ -68,6 +60,16 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-react-app": "^5.2.0",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "jest-transform-stub": "^2.0.0",
     "vue-jest": "^3.0.5"
   }

@@ -1,86 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import OlMap from "./mapsComponents/OlMap";
 import Filters from "./mapsComponents/Filters";
-import Nav from "./Nav";
 import Places from "./mapsComponents/Places";
+import MapNav from "./mapsComponents/MapNav";
+import UserAvatar from "./mapsComponents/UserAvatar";
+import MapSignIn from "./mapsComponents/MapSignIn";
+import authContext from "./context/authContext";
 import "../styles/Maps.css";
 import "./mapsComponents/OlMap.css";
 
 function Maps() {
-  const [mapStates, setMapStates] = useState({
-    term: "",
-    placeId: "",
-    places: [],
-    dropdownPlaces: [],
-  });
-  const [navHidden, setNavHidden] = useState(true);
-  const getPlacesDropdownAPICall = async term => {
-    if (term.length > 2) {
-      const response = await axios.get(
-        `https://places-postgres.azurewebsites.net/api/names/${term}`
-      );
-      setMapStates({
-        ...mapStates,
-        dropdownPlaces: filterPlacesForDropdown(response),
-      });
-      return term;
-    }
-  };
-  const filterPlacesForDropdown = responseObject => {
-    const arr = responseObject.data.map(place => {
-      return { label: place.name, value: place.placeId };
-    });
-    return arr;
-  };
-  const getSimilarPlacesAPICall = async (id, filterFn = () => true) => {
+  // const [mapStates, setMapStates] = useState({
+  //   term: "",
+  //   placeId: "",
+  //   places: [],
+  // });
+  const [places, setPlaces] = useState([]);
+  const [{ isLoggedIn }] = useContext(authContext);
+  const getExactPlaces = async (placeName, filterFn = () => true) => {
     const response = await axios.get(
-      `https://places-postgres.azurewebsites.net/api/places/${Number(
-        id
-      )}/similar`
+      `https://places-postgres2.azurewebsites.net/api/names/${placeName}`
     );
-    setMapStates({
-      ...mapStates,
-      places: response.data.filter(filterFn),
-    });
+    // setMapStates({
+    //   ...mapStates,
+    //   places: response.data.filter(filterFn),
+    // });
+    setPlaces(response.data.filter(filterFn));
   };
-  const button = () => {
-    if (navHidden) {
-      return (
-        <button
-          id="shownav"
-          style={{ top: "0.5rem" }}
-          onClick={() => setNavHidden(false)}
-        >
-          Show Nav
-        </button>
-      );
-    } else {
-      return (
-        <button
-          id="shownav"
-          style={{ top: "5.5rem" }}
-          onClick={() => setNavHidden(true)}
-        >
-          Hide Nav
-        </button>
-      );
-    }
+  const getSimilarPlaces = async (placeID, filterFn = () => true) => {
+    const response = await axios.get(
+      `https://places-postgres2.azurewebsites.net/api/places/${placeID}/similar`
+    );
+    // setMapStates({
+    //   ...mapStates,
+    //   places: response.data.filter(filterFn),
+    // });
+    setPlaces(response.data.filter(filterFn));
   };
   return (
     <div id="maps-page">
-      {button()}
-      <Nav hidden={navHidden} />
-      <OlMap mapId="map" places={mapStates.places} />
+      <OlMap mapId="map" places={places} />
       <Filters
-        term={mapStates.term}
-        placeId={mapStates.placeId}
-        getPlacesForDropdown={getPlacesDropdownAPICall}
-        getSimilarPlaces={getSimilarPlacesAPICall}
-        dropdownPlaces={mapStates.dropdownPlaces}
-        navHidden={navHidden}
+        getExactPlaces={getExactPlaces}
+        getSimilarPlaces={getSimilarPlaces}
       />
-      <Places places={mapStates.places} />
+      <Places places={places} />
+      <MapNav />
+      {isLoggedIn ? <UserAvatar /> : <MapSignIn />}
     </div>
   );
 }

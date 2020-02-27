@@ -1,82 +1,96 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useDebounce from './helpers/useDebounce';
 import searchIcon from "../../images/search.svg";
 import "./SearchBar.css";
 
-function SearchBar({
-  getPlacesForDropdown,
+export default function SearchBar({
+  getExactPlaces,
   getSimilarPlaces,
   filters,
-  dropdownPlaces,
-  navHidden,
+  similarPlacesEnabled,
 }) {
-  const [term, setTerm] = useState("");
-  const [placeId, setPlaceId] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [placeSuggestions, setPlaceSuggestions] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      setIsSearching(true);
+      fetch(`https://places-postgres2.azurewebsites.net/api/names/${debouncedSearchTerm}`)
+        .then(response => response.json())
+        .then(results => {
+          setIsSearching(false);
+          setPlaceSuggestions(results);
+        });
+    } else {
+      setPlaceSuggestions([]);
+    }
+  }, [debouncedSearchTerm]);
 
-  const setSimilarPlaceId = (val, label) => {
-    setPlaceId(String(val));
-    setTerm(label);
-  };
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     getSimilarPlaces(placeId, filters);
+  //   }
+  // };
 
-  const getOptions = inputValue => {
-    new Promise(resolve => {
-      setTimeout(() => {
-        setTerm(inputValue);
-        getPlacesForDropdown(inputValue);
-        resolve(dropdownPlaces);
-      }, 50);
-    });
-  };
-  const handleKeyDown = event => {
-    if (event.key === "Enter") {
+  const handleSuggestionClick = (placeId, name) => {
+    setSearchTerm(name);
+    if (similarPlacesEnabled) {
       getSimilarPlaces(placeId, filters);
+    } else {
+      getExactPlaces(name, filters);
     }
   };
-  const suggestionHtml = () => {
-    if (term.length > 2) {
-      return (
-        <div id="dropdown-container">
-          <ul id="selectMenu">
-            {dropdownPlaces.map((place, index) => {
-              return (
-                <li
-                  key={index}
-                  onClick={() => {
-                    setSimilarPlaceId(place.value, place.label);
-                  }}
-                  value={place.value}
-                >
-                  {place.label}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      );
-    }
-  };
+
   return (
-    <div id="search-bar-container">
-      <div id="main-search" style={navHidden ? { zIndex: 1 } : { zIndex: 0 }}>
+    <div id="search-bar">
+      <div id="main-search">
         <input
           type="text"
-          placeholder="Search Climate Tree"
-          value={term}
-          onChange={event => getOptions(event.target.value)}
-          onKeyDown={event => handleKeyDown(event)}
+          placeholder="Search by place name"
+          value={searchTerm}
+          onChange={event => setSearchTerm(event.target.value)}
+          // onKeyDown={event => handleKeyDown(event)}
+          onFocus={() => {
+            document.querySelector('#suggestions').style.display = 'block';
+          }}
+          onBlur={() => {
+            setTimeout(() => {
+              document.querySelector('#suggestions').style.display = 'none';
+            }, 200);
+          }}
         />
         <img
           src={searchIcon}
           alt="search"
           id="search"
-          onClick={event => {
-            getSimilarPlaces(placeId, filters);
-          }}
+          // onClick={() => {
+          //   if (similarPlacesEnabled) {
+          //     getSimilarPlaces(placeId);
+          //   } else {
+          //     getExactPlaces(debouncedSearchTerm);
+          //   }
+          // }}
         />
-        <br />
       </div>
-      {suggestionHtml()}
+      <div id="suggestions">
+        {isSearching ? (
+          <p>Searching...</p>
+        ) : placeSuggestions.length > 0 ? (
+          <>
+            {placeSuggestions.map(({placeId, name}) => (
+              <p
+                key={placeId}
+                onClick={() => handleSuggestionClick(placeId, name)}
+              >{name}</p>
+            ))}
+          </>
+        ) : debouncedSearchTerm.length > 0 ? (
+          <p>No suggestion</p>
+        ) : (
+          <p>User Search History</p>
+        )}
+      </div>
     </div>
   );
-}
-
-export default SearchBar;
+};

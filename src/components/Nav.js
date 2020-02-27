@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import authContext from "./context/authContext";
 import logo from "../images/white-logo.png";
-import "../styles/Nav.css";
+import "./Nav.css";
 
 function Nav(props) {
   const [{ isLoggedIn }, dispatch] = useContext(authContext);
@@ -15,7 +15,7 @@ function Nav(props) {
     <header className="nav-header" hidden={props.hidden}>
       <nav>
         <Link to="/" className="logo">
-          <img src={logo} alt="climatetree logo" />
+          <img src={logo} alt="climate tree logo" />
           <p id="logo-text">ClimateTree</p>
         </Link>
         <ul className="nav-links">
@@ -34,17 +34,13 @@ function Nav(props) {
               <span>ABOUT</span>
             </Link>
           </li>
-          <li>
-            {isLoggedIn ? (
+          {isLoggedIn && (
+            <li>
               <Link to="/login" className="underline-hover">
                 <span>PROFILE</span>
               </Link>
-            ) : (
-              <Link to="/" className="underline-hover">
-                <span></span>
-              </Link>
-            )}
-          </li>
+            </li>
+          )}
           <li>
             {isLoggedIn ? (
               <Link to="/login" onClick={logOut} className="underline-hover">
