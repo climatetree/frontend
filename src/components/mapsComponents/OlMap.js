@@ -24,7 +24,12 @@ class OlMap extends Component {
       // Data
       source: new VectorSource({
         // Extract features from GeoJSON data
-        features: getGeoJson([]),
+        features: getGeoJson(
+          // GeoJSON starter object
+          {
+            type: "FeatureCollection",
+            features: [],
+          }),
       }),
       // Min point distance to cause clustering
       distance: clusterDist,
@@ -68,7 +73,7 @@ class OlMap extends Component {
 
     // Close popups when features change
     let currZoom = map.getView().getZoom();
-    map.on('moveend', evt => {
+    map.on('moveend', () => {
       let newZoom = map.getView().getZoom();
       if (currZoom != newZoom) {
         overlay.setPosition(undefined);

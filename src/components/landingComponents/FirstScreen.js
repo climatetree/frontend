@@ -25,7 +25,7 @@ function FirstScreen({ history }) {
         >
           <input
             type="text"
-            placeholder="Search for stories"
+            placeholder="Search for ClimateTree stories"
             onChange={event => setSearchTerm(event.target.value)}
           />
           <img src={searchIcon} alt="search" id="search" />
