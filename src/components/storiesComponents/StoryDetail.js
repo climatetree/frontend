@@ -1,69 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
+import { ReactTinyLink } from "react-tiny-link";
+
+import StoryCommentInput from "./StoryCommentInput";
 
 const StoryDetail = ({ story }) => {
+  let [toggleComment, setToggleComment] = useState(false);
+
+  const onToggleComment = () => {
+    setToggleComment(prevToggleCommentState => !prevToggleCommentState);
+  };
+
   return (
-    <div
-      style={{
-        border: "1px solid #e2e2e2",
-        borderRadius: "5px",
-        margin: "15px 0"
-      }}
-    >
-      <div style={{ padding: "5px 25px" }}>
-        <a href={story.hyperlink} target="_blank" rel="noopener noreferrer">
-          <h3>{story.title}</h3>
+    <div className="story-card">
+      <div className="heading-card-section">
+        <a
+          href={story.hyperlink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="title-hyperlink"
+        >
+          <h3>{story.story_title}</h3>
         </a>
-        <div style={{ fontSize: "15px", marginBottom: "5px" }}>
-          Created:{" "}
-          {`${story.date.getUTCMonth() +
-            1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+
+        <div className="link-preview-container">
+          <ReactTinyLink
+            cardSize="small"
+            showGraphic={true}
+            maxLine={3}
+            minLine={1}
+            url={story.hyperlink}
+          />
         </div>
-      </div>
 
-      <div>
         <div>
-          <div style={{ display: "flex", backgroundColor: "#f5f5f5" }}>
-            <div
-              style={{
-                padding: "3px 0",
-                display: "flex",
-                flexGrow: 1,
-                flexDirection: "row",
-                order: 1,
-                borderTop: "1px solid #e2e2e2"
-              }}
-            >
-              <span
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  flex: "1 0 0px",
-                  justifyContent: "center"
-                }}
-              >
-                <i
-                  class="far fa-heart fa-2x"
-                  style={{ color: "black", cursor: "pointer" }}
-                ></i>
-              </span>
-
-              <span
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  flex: "1 0 0px",
-                  justifyContent: "center"
-                }}
-              >
-                <i
-                  class="far fa-comment fa-2x"
-                  style={{ cursor: "pointer" }}
-                ></i>
-              </span>
-            </div>
+          <div className="created-detail">
+            Created:{" "}
+            {`${story.date.getUTCMonth() +
+              1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+          </div>
+          <div className="liked-count">
+            <i className="fa fa-heart"></i> {story.rating} Likes
           </div>
         </div>
       </div>
+
+      <hr></hr>
+
+      <div className="like-comment-section">
+        <div className="button-group">
+          <span className="like-button">
+            <i className="far fa-heart"></i>{" "}
+            <span className="like-comment-font-mobile">Give it a Heart</span>
+          </span>
+
+          <span className="comment-button" onClick={() => onToggleComment()}>
+            <i className="far fa-comment"></i>{" "}
+            <span className="like-comment-font-mobile">Post Comment</span>
+          </span>
+        </div>
+      </div>
+      <StoryCommentInput toggleComment={toggleComment} />
     </div>
   );
 };

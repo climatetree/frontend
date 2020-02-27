@@ -18,24 +18,11 @@ h3 {
   font-size: 1.5rem;
 }
 
-@media (max-width: 1199px) and (min-width: 960px) {
-  section, footer {
-    padding: 0 5rem;
-  }
-  h1 {
-    font-size: 3.2rem;
-  }
-  h2 {
-    font-size: 2.25rem;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 959px) and (min-width: 768px) {
-  section, footer {
-    padding: 0 3rem;
+@media (max-width: 1023px) and (min-width: 768px) {
+  nav,
+  section,
+  .footer-landing {
+    padding: 0 6rem;
   }
   h1 {
     font-size: 3.2rem;
@@ -52,7 +39,9 @@ h3 {
   body {
     overflow-x: hidden;
   }
-  section, footer {
+  nav,
+  section,
+  .footer-landing {
     padding: 0 2rem;
   }
   h1 {

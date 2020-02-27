@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import searchIcon from "../../images/search.svg";
 import "../../styles/FirstScreen.css";
 
 function FirstScreen({ history }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <section id="first-screen">
       <div id="animation-first">
         <h1>Climate Tree</h1>
         <p>Start exploring below or visit our About page to learn more.</p>
-        <form id="first-screen-search" onSubmit={() => history.push("/stories")}>
-          <input type="text" placeholder="Enter a city or ZIP code" />
+        <form
+          id="first-screen-search"
+          onSubmit={event => {
+            event.preventDefault();
+            history.push({
+              pathname: "/stories",
+              search: `?storyTitle=${searchTerm}`,
+              state: { searchTerm }
+            });
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Search for stories"
+            onChange={event => setSearchTerm(event.target.value)}
+          />
           <img src={searchIcon} alt="search" id="search" />
         </form>
         <div>
