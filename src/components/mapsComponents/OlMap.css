@@ -10,3 +10,15 @@
   right: 0.5rem;
   bottom: 2.7rem;
 }
+
+#popup-btn {
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(0, 60, 136, 0.5);
+  color: #ffffff;
+  padding: 5px 10px;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: none;
+}

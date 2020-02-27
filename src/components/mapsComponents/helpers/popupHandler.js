@@ -56,7 +56,9 @@ const popUpHandler = (evt, map, overlay) => {
             <br />
             Carbon: {place.carbon}
           </p>
-          <button onClick={testFunc}>Click</button>
+          <button id="popup-btn" onClick={testFunc}>
+            View Stories
+          </button>
         </>
       );
     }
