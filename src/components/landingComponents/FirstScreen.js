@@ -25,7 +25,7 @@ function FirstScreen({ history }) {
         >
           <input
             type="text"
-            placeholder="Enter a city or ZIP code"
+            placeholder="Search for stories"
             onChange={event => setSearchTerm(event.target.value)}
           />
           <img src={searchIcon} alt="search" id="search" />

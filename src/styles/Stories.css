@@ -62,7 +62,8 @@
 
 /* STORY CARD */
 .story-card {
-  border: 1px solid #e2e2e2;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 0.5px solid rgba(201, 201, 201, 0.4);
   border-radius: 5px;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -71,11 +72,10 @@
 /* HEADING CARD SECTION */
 .heading-card-section {
   padding: 5px 25px;
-  background-color: #f0f0f0;
 }
 
 .title-hyperlink {
-  color: #303030;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -89,48 +89,85 @@
 }
 
 .created-detail {
-  color: #7d7d7d;
+  color: #d4d4d4;
   font-size: 13px;
   margin-bottom: 5px;
+}
+
+.liked-count {
+  color: #ddd;
+}
+
+/* HORIZONTAL LINE */
+hr {
+  visibility: visible;
+  margin: 0px auto;
+  margin-top: 10px;
+  width: 80%;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 /* COMMENT AND LIKE CARD SECTION */
 .like-comment-section {
   height: 60px;
   display: flex;
-  background-color: #f4f4f4;
-  border-top: 1px solid #dfdfdf;
-  border-bottom: 1px solid #dfdfdf;
 }
 
 .button-group {
-  padding: 3px 0;
+  /* padding: 3px 0; */
   display: flex;
-  margin-left: 15px;
-  margin-right: 15px;
+  /* margin-left: 15px;
+  margin-right: 15px; */
   flex-grow: 1;
   flex-direction: row;
   order: 1;
 }
 
-.like-comment-button {
+.like-button {
   display: flex;
   align-items: center;
   flex: 1 0 0px;
   justify-content: center;
   cursor: pointer;
-  margin-left: 5px;
-  margin-right: 5px;
+  color: #ddd;
+  margin-left: 1px;
+  margin-right: 2px;
+  margin-bottom: 1px;
 }
 
-.like-comment-button:hover {
-  background-color: #e8e8e8;
-  border-radius: 5px;
+.comment-button {
+  display: flex;
+  align-items: center;
+  flex: 1 0 0px;
+  justify-content: center;
+  cursor: pointer;
+  color: #ddd;
+  margin-left: 2px;
+  margin-right: 1px;
+  margin-bottom: 1px;
+}
+
+.like-button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 0 5px;
+}
+
+.comment-button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 5px 0;
 }
 
 .far {
-  color: black;
+  color: #ddd;
   cursor: pointer;
+  margin-right: 5px;
 }
 
 /* SEARCH BAR IN STORIES PAGE */
@@ -176,11 +213,10 @@
 
 .comment-input {
   opacity: 0;
-  transition: opacity 0.8s ease-in-out;
+  transition: opacity 0.2s ease-in-out 0.3s;
   margin: 15px 20px;
   width: 100%;
   color: #5a5a5a;
-  background-color: rgba(255, 255, 255, 0.3);
   border: 1px solid #dbdbdb;
   padding: 5px 12px;
   font-size: 15px;
@@ -194,4 +230,44 @@
 
 .comment-input:focus {
   outline: none;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .stories-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .stories-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .created-detail {
+    font-size: 10px;
+  }
+
+  .liked-count {
+    font-size: 12px;
+  }
+
+  hr {
+    margin-top: 2px;
+  }
+
+  .like-comment-font-mobile {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 414px) {
+  .hNTVMq {
+    padding-left: 5px;
+  }
+
+  .hHQVDB {
+    font-size: 10px;
+  }
 }

@@ -32,27 +32,30 @@ const StoryDetail = ({ story }) => {
           />
         </div>
 
-        <div className="created-detail">
-          Created:{" "}
-          {`${story.date.getUTCMonth() +
-            1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
-        </div>
-        <div className="liked-count">
-          <i className="fa fa-heart"></i> {story.rating} Likes
+        <div>
+          <div className="created-detail">
+            Created:{" "}
+            {`${story.date.getUTCMonth() +
+              1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+          </div>
+          <div className="liked-count">
+            <i className="fa fa-heart"></i> {story.rating} Likes
+          </div>
         </div>
       </div>
 
+      <hr></hr>
+
       <div className="like-comment-section">
         <div className="button-group">
-          <span className="like-comment-button">
-            <i className="far fa-heart fa-2x"></i>
+          <span className="like-button">
+            <i className="far fa-heart"></i>{" "}
+            <span className="like-comment-font-mobile">Give it a Heart</span>
           </span>
 
-          <span
-            className="like-comment-button"
-            onClick={() => onToggleComment()}
-          >
-            <i className="far fa-comment fa-2x"></i>
+          <span className="comment-button" onClick={() => onToggleComment()}>
+            <i className="far fa-comment"></i>{" "}
+            <span className="like-comment-font-mobile">Post Comment</span>
           </span>
         </div>
       </div>

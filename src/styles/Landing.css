@@ -19,7 +19,9 @@ h3 {
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
-  nav, section, footer {
+  nav,
+  section,
+  .footer-landing {
     padding: 0 6rem;
   }
   h1 {
@@ -37,7 +39,9 @@ h3 {
   body {
     overflow-x: hidden;
   }
-  nav, section, footer {
+  nav,
+  section,
+  .footer-landing {
     padding: 0 2rem;
   }
   h1 {
