@@ -20,7 +20,7 @@ function Maps() {
   const [{ isLoggedIn }] = useContext(authContext);
   const getExactPlaces = async (placeName, filterFn = () => true) => {
     const response = await axios.get(
-      `https://places-postgres2.azurewebsites.net/api/names/${placeName}`
+      `https://places-postgres2.azurewebsites.net/api/places/${placeName}`
     );
     // setMapStates({
     //   ...mapStates,

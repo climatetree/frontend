@@ -16,11 +16,11 @@ export default function SearchBar({
   useEffect(() => {
     if (debouncedSearchTerm) {
       setIsSearching(true);
-      fetch(`https://places-postgres2.azurewebsites.net/api/names/${debouncedSearchTerm}`)
+      fetch(`https://places-postgres2.azurewebsites.net/api/places/${debouncedSearchTerm}`)
         .then(response => response.json())
         .then(results => {
           setIsSearching(false);
-          setPlaceSuggestions(results);
+          setPlaceSuggestions(results.features);
         });
     } else {
       setPlaceSuggestions([]);
@@ -64,13 +64,13 @@ export default function SearchBar({
           src={searchIcon}
           alt="search"
           id="search"
-          // onClick={() => {
-          //   if (similarPlacesEnabled) {
-          //     getSimilarPlaces(placeId);
-          //   } else {
-          //     getExactPlaces(debouncedSearchTerm);
-          //   }
-          // }}
+        // onClick={() => {
+        //   if (similarPlacesEnabled) {
+        //     getSimilarPlaces(placeId);
+        //   } else {
+        //     getExactPlaces(debouncedSearchTerm);
+        //   }
+        // }}
         />
       </div>
       <div id="suggestions">
@@ -78,18 +78,23 @@ export default function SearchBar({
           <p>Searching...</p>
         ) : placeSuggestions.length > 0 ? (
           <>
-            {placeSuggestions.map(({placeId, name}) => (
-              <p
-                key={placeId}
-                onClick={() => handleSuggestionClick(placeId, name)}
-              >{name}</p>
-            ))}
+            {placeSuggestions.map(({ properties }) => {
+              return (
+                <p
+                  key={properties.place_id}
+                  onClick={() => handleSuggestionClick(properties.place_id, properties.name)}
+                >
+                  {properties.name}
+                </p>
+              )
+            }
+            )}
           </>
         ) : debouncedSearchTerm.length > 0 ? (
           <p>No suggestion</p>
         ) : (
-          <p>User Search History</p>
-        )}
+                <p>User Search History</p>
+              )}
       </div>
     </div>
   );
