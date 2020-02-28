@@ -82,14 +82,22 @@ export default function SearchBar({
         ) : placeSuggestions.length > 0 ? (
           <>
             {placeSuggestions.map(({ properties }) => {
+              const { place_id, name, state_name, nation_name } = properties;
+
               return (
                 <p
-                  key={properties.place_id}
+                  key={place_id}
                   onClick={() => {
-                    handleSuggestionClick(properties.place_id, properties.name);
+                    handleSuggestionClick(place_id, name);
                   }}
                 >
-                  {properties.name}
+                  <span className="place-name-dropdown">{name} </span>
+                  <div className="state-nation-name-dropdown-container">
+                    <span className="state-nation-name-dropdown">
+                      {state_name}
+                      {state_name ? "," : ""} {nation_name}
+                    </span>
+                  </div>
                 </p>
               );
             })}
