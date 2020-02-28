@@ -38,7 +38,6 @@ function Maps() {
     //   places: response.data.filter(filterFn),
     // });
     // setPlaces(response.data.filter(filterFn));
-    console.log("MAPS.JS:", response.data);
     setPlaces(response.data);
   };
   return (

@@ -89,7 +89,7 @@ class OlMap extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.places.length !== prevProps.places.length) {
+    if (this.props.places !== prevProps.places) {
       // Close any open popups
       this.state.overlay.setPosition(undefined);
 
