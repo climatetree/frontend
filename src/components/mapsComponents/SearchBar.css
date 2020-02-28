@@ -52,6 +52,21 @@
   background-color: #eeeeee;
 }
 
+.place-name-dropdown {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.state-nation-name-dropdown-container {
+  float: right;
+  align-content: end;
+}
+
+.state-nation-name-dropdown {
+  font-size: 13px;
+  color: #bdbdbd;
+}
+
 @media (max-width: 959px) and (min-width: 768px) {
   #search-bar {
     width: 18rem;
