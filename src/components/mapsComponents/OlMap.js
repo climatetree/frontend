@@ -28,17 +28,18 @@ class OlMap extends Component {
           // GeoJSON starter object
           {
             type: "FeatureCollection",
-            features: [],
-          }),
+            features: []
+          }
+        )
       }),
       // Min point distance to cause clustering
-      distance: clusterDist,
+      distance: clusterDist
     });
 
     // Create the layer
     let places = new VectorLayer({
       source: clusterSource,
-      style: getStyles,
+      style: getStyles
     });
 
     // Basemap layer, via ESRI API
@@ -49,8 +50,8 @@ class OlMap extends Component {
           'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
         url:
           "https://server.arcgisonline.com/ArcGIS/rest/services/" +
-          "World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-      }),
+          "World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+      })
     });
 
     // An overlay for the map that allows popups on points
@@ -64,8 +65,8 @@ class OlMap extends Component {
       overlays: [overlay],
       view: new View({
         center: fromLonLat([0, 0]),
-        zoom: 1,
-      }),
+        zoom: 1
+      })
     });
 
     // Open popups when a point is clicked on
@@ -73,7 +74,7 @@ class OlMap extends Component {
 
     // Close popups when features change
     let currZoom = map.getView().getZoom();
-    map.on('moveend', () => {
+    map.on("moveend", () => {
       let newZoom = map.getView().getZoom();
       if (currZoom != newZoom) {
         overlay.setPosition(undefined);
@@ -83,7 +84,7 @@ class OlMap extends Component {
 
     this.setState({
       map: map,
-      overlay: overlay,
+      overlay: overlay
     });
   }
 

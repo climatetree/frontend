@@ -54,12 +54,13 @@
 
 .place-name-dropdown {
   font-weight: 500;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .state-nation-name-dropdown-container {
-  float: right;
-  align-content: end;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .state-nation-name-dropdown {
