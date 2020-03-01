@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 /**
@@ -8,7 +9,7 @@ import axios from "axios";
  * @param {Map} map An OpenLayers Map object
  * @param {Overlay} overlay An OpenLayers Overlay object
  */
-const popUpHandler = (evt, map, overlay) => {
+const popUpHandler = (evt, map, overlay, history) => {
   // Get list of features
   let pixel = evt.pixel;
   let features = map.getFeaturesAtPixel(pixel);
@@ -27,12 +28,18 @@ const popUpHandler = (evt, map, overlay) => {
   let content = document.getElementById("popup-content");
   content.innerHTML = `<div id="popup-html"></div>`;
 
-  const testFunc = async place => {
-    const response = await axios.get(
-      `https://backend-mongo-stories.azurewebsites.net/stories/place/${place.place_id}`
-    );
-    console.log("Response type:", typeof response.data);
-    console.log("Story for this placeId:", response.data);
+  const testFunc = place => {
+    // const response = await axios.get(
+    //   `https://backend-mongo-stories.azurewebsites.net/stories/place/${place.place_id}`
+    // );
+    history.push({
+      pathname: "/stories",
+      search: `?place_id=${place.place_id}`
+      // state: { searchTerm }
+    });
+    console.log("REDIRECT TO STORIES");
+    // console.log("Response type:", typeof response.data);
+    // console.log("Story for this placeId:", response.data);
   };
 
   const PopupContent = () => {
@@ -61,9 +68,7 @@ const popUpHandler = (evt, map, overlay) => {
             <br />
             Carbon: {place.carbon}
           </p>
-          <button id="popup-btn" onClick={() => testFunc(place)}>
-            View Stories
-          </button>
+          <button onClick={() => testFunc(place)}>View Stories</button>
         </>
       );
     }
@@ -77,4 +82,4 @@ const popUpHandler = (evt, map, overlay) => {
   overlay.setPosition(coord);
 };
 
-export { popUpHandler };
+export default popUpHandler;

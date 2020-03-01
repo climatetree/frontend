@@ -12,7 +12,7 @@ import "../styles/Stories.css";
 const Stories = props => {
   // Initialize state
   const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(null);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -21,28 +21,44 @@ const Stories = props => {
 
   let query = useQuery();
   let generalSearchTerm = query.get("storyTitle");
+  let placeId = query.get("place_id");
 
   // State lifecycle
   useEffect(() => {
     (async () => {
-      setStories([]);
-      setLoading(true);
+      if (generalSearchTerm) {
+        console.log("HEREEE");
+        setStories([]);
+        setLoading(true);
 
-      let responses = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/title/${generalSearchTerm}`
-      );
-      let temp = responses.data.map(story => {
-        return { ...story, date: new Date(story.date) };
-      });
-      setStories(temp);
+        let responses = await axios.get(
+          `https://backend-mongo-stories.azurewebsites.net/stories/title/${generalSearchTerm}`
+        );
+        let temp = responses.data.map(story => {
+          return { ...story, date: new Date(story.date) };
+        });
+        setStories(temp);
 
-      setLoading(false);
+        setLoading(false);
+      } else if (placeId) {
+        setStories([]);
+        setLoading(true);
+
+        let responses = await axios.get(
+          `https://backend-mongo-stories.azurewebsites.net/stories/place/${placeId}`
+        );
+        let temp = responses.data.map(story => {
+          return { ...story, date: new Date(story.date) };
+        });
+        setStories(temp);
+        setLoading(false);
+      }
     })();
   }, [generalSearchTerm]);
 
   // Conditional rendering
   const renderContent = () => {
-    if (!stories.length) {
+    if (loading) {
       return <Spinner />;
     }
 
@@ -60,9 +76,7 @@ const Stories = props => {
     <>
       <Nav />
       {/* Background image */}
-      <div
-        className={`stories-background ${!stories.length ? "darker" : ""}`}
-      ></div>
+      <div className={`stories-background ${loading ? "darker" : ""}`}></div>
 
       <section className="stories-container">
         <StorySearchBar
@@ -70,7 +84,7 @@ const Stories = props => {
           {...props}
           loading={loading}
         />
-        <div>{renderContent()}</div>
+        {loading !== null && <div>{renderContent()}</div>}
       </section>
     </>
   );

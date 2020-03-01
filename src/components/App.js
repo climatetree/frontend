@@ -18,9 +18,9 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={props => <LandingPage {...props} />} />
-          <Route path="/maps">
-            <Maps />
-          </Route>
+          <Route path="/maps" render={props => <Maps {...props} />} />
+          {/* <Maps />
+          </Route> */}
           <Route path="/about">
             <About />
           </Route>
