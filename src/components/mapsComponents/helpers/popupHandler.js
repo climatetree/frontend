@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 
 /**
  * Handles the location and contents of popups on the map.
@@ -26,8 +27,12 @@ const popUpHandler = (evt, map, overlay) => {
   let content = document.getElementById("popup-content");
   content.innerHTML = `<div id="popup-html"></div>`;
 
-  const testFunc = () => {
-    console.log("The func worked");
+  const testFunc = async place => {
+    const response = await axios.get(
+      `https://backend-mongo-stories.azurewebsites.net/stories/place/${place.place_id}`
+    );
+    console.log("Response type:", typeof response.data);
+    console.log("Story for this placeId:", response.data);
   };
 
   const PopupContent = () => {
@@ -56,7 +61,7 @@ const popUpHandler = (evt, map, overlay) => {
             <br />
             Carbon: {place.carbon}
           </p>
-          <button id="popup-btn" onClick={testFunc}>
+          <button id="popup-btn" onClick={() => testFunc(place)}>
             View Stories
           </button>
         </>
