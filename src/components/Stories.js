@@ -7,6 +7,7 @@ import StoryDetail from "./storiesComponents/StoryDetail";
 import StorySearchBar from "./storiesComponents/StorySearchBar";
 import Spinner from "./storiesComponents/Spinner";
 import ResultsFor from "./storiesComponents/ResultsFor";
+import ResultForPlaceId from "./storiesComponents/ResultForPlaceId";
 import "../styles/Stories.css";
 
 const Stories = props => {
@@ -26,9 +27,9 @@ const Stories = props => {
   // State lifecycle
   useEffect(() => {
     (async () => {
+      setStories([]);
+
       if (generalSearchTerm) {
-        console.log("HEREEE");
-        setStories([]);
         setLoading(true);
 
         let responses = await axios.get(
@@ -41,7 +42,6 @@ const Stories = props => {
 
         setLoading(false);
       } else if (placeId) {
-        setStories([]);
         setLoading(true);
 
         let responses = await axios.get(
@@ -56,6 +56,19 @@ const Stories = props => {
     })();
   }, [generalSearchTerm]);
 
+  // Conditional rendering based on place id and search term
+  const renderResultFor = () => {
+    console.log(placeId);
+    return placeId ? (
+      <ResultForPlaceId
+        placeId={placeId}
+        placeName={props.location.state.placeName}
+      />
+    ) : (
+      <ResultsFor searchTerm={generalSearchTerm} />
+    );
+  };
+
   // Conditional rendering
   const renderContent = () => {
     if (loading) {
@@ -64,7 +77,8 @@ const Stories = props => {
 
     return (
       <>
-        <ResultsFor searchTerm={generalSearchTerm} />
+        {/* <ResultsFor searchTerm={generalSearchTerm} /> */}
+        {renderResultFor()}
         {stories.map(story => (
           <StoryDetail story={story} />
         ))}

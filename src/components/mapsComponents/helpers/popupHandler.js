@@ -29,17 +29,11 @@ const popUpHandler = (evt, map, overlay, history) => {
   content.innerHTML = `<div id="popup-html"></div>`;
 
   const testFunc = place => {
-    // const response = await axios.get(
-    //   `https://backend-mongo-stories.azurewebsites.net/stories/place/${place.place_id}`
-    // );
     history.push({
       pathname: "/stories",
-      search: `?place_id=${place.place_id}`
-      // state: { searchTerm }
+      search: `?place_id=${place.place_id}`,
+      state: { placeName: place.name }
     });
-    console.log("REDIRECT TO STORIES");
-    // console.log("Response type:", typeof response.data);
-    // console.log("Story for this placeId:", response.data);
   };
 
   const PopupContent = () => {
@@ -68,7 +62,9 @@ const popUpHandler = (evt, map, overlay, history) => {
             <br />
             Carbon: {place.carbon}
           </p>
-          <button onClick={() => testFunc(place)}>View Stories</button>
+          <button id="popup-btn" onClick={() => testFunc(place)}>
+            View Stories
+          </button>
         </>
       );
     }
