@@ -29,27 +29,19 @@ const Stories = props => {
     (async () => {
       setStories([]);
 
-      if (generalSearchTerm) {
+      if (generalSearchTerm || placeId) {
         setLoading(true);
 
-        let responses = await axios.get(
-          `https://backend-mongo-stories.azurewebsites.net/stories/title/${generalSearchTerm}`
-        );
+        const BASE_URL = generalSearchTerm
+          ? "https://backend-mongo-stories.azurewebsites.net/stories/title/"
+          : "https://backend-mongo-stories.azurewebsites.net/stories/place/";
+        const PARAMETER = generalSearchTerm || placeId;
+
+        let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
         let temp = responses.data.map(story => {
           return { ...story, date: new Date(story.date) };
         });
-        setStories(temp);
 
-        setLoading(false);
-      } else if (placeId) {
-        setLoading(true);
-
-        let responses = await axios.get(
-          `https://backend-mongo-stories.azurewebsites.net/stories/place/${placeId}`
-        );
-        let temp = responses.data.map(story => {
-          return { ...story, date: new Date(story.date) };
-        });
         setStories(temp);
         setLoading(false);
       }
@@ -77,7 +69,6 @@ const Stories = props => {
 
     return (
       <>
-        {/* <ResultsFor searchTerm={generalSearchTerm} /> */}
         {renderResultFor()}
         {stories.map(story => (
           <StoryDetail story={story} />
