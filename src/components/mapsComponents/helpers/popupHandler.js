@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 /**
  * Handles the location and contents of popups on the map.
@@ -7,7 +9,7 @@ import ReactDOM from "react-dom";
  * @param {Map} map An OpenLayers Map object
  * @param {Overlay} overlay An OpenLayers Overlay object
  */
-const popUpHandler = (evt, map, overlay) => {
+const popUpHandler = (evt, map, overlay, history) => {
   // Get list of features
   let pixel = evt.pixel;
   let features = map.getFeaturesAtPixel(pixel);
@@ -26,8 +28,12 @@ const popUpHandler = (evt, map, overlay) => {
   let content = document.getElementById("popup-content");
   content.innerHTML = `<div id="popup-html"></div>`;
 
-  const testFunc = () => {
-    console.log("The func worked");
+  const testFunc = place => {
+    history.push({
+      pathname: "/stories",
+      search: `?place_id=${place.place_id}`,
+      state: { placeName: place.name }
+    });
   };
 
   const PopupContent = () => {
@@ -56,7 +62,9 @@ const popUpHandler = (evt, map, overlay) => {
             <br />
             Carbon: {place.carbon}
           </p>
-          <button onClick={testFunc}>Click</button>
+          <button id="popup-btn" onClick={() => testFunc(place)}>
+            View Stories
+          </button>
         </>
       );
     }
@@ -70,4 +78,4 @@ const popUpHandler = (evt, map, overlay) => {
   overlay.setPosition(coord);
 };
 
-export { popUpHandler };
+export default popUpHandler;

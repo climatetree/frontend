@@ -4,7 +4,7 @@ import "../../styles/Footer.css";
 
 function Footer() {
   return (
-    <footer>
+    <footer className="footer-landing">
       <div>
         <p>All rights reserved</p>
       </div>

@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import searchIcon from "../../images/search.svg";
+import useStoriesSecond from "../storiesComponents/useStoriesSecond";
 import "../../styles/FirstScreen.css";
 
 function FirstScreen({ history }) {
+  // const BASE_URL =
+  //   "https://backend-mongo-stories.azurewebsites.net/stories/title/";
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <section id="first-screen">
       <div id="animation-first">
         <h1>Climate Tree</h1>
         <p>Start exploring below or visit our About page to learn more.</p>
-        <form id="first-screen-search" onSubmit={() => history.push("/stories")}>
-          <input type="text" placeholder="Enter a city or ZIP code" />
+        <form
+          id="first-screen-search"
+          onSubmit={event => {
+            event.preventDefault();
+            // console.log("HELLO FROM", BASE_URL, searchTerm);
+            // console.log(useStoriesSecond(BASE_URL, searchTerm));
+            history.push({
+              pathname: "/stories",
+              search: `?storyTitle=${searchTerm}`,
+              state: { searchTerm }
+            });
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Search for ClimateTree stories"
+            onChange={event => setSearchTerm(event.target.value)}
+          />
           <img src={searchIcon} alt="search" id="search" />
         </form>
         <div>

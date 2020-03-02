@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 import LandingPage from "./LandingPage";
 import About from "./About";
 import Maps from "./Maps";
@@ -16,12 +17,10 @@ const App = () => {
     <Provider value={useAuthState}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/maps">
-            <Maps />
-          </Route>
+          <Route exact path="/" render={props => <LandingPage {...props} />} />
+          <Route path="/maps" render={props => <Maps {...props} />} />
+          {/* <Maps />
+          </Route> */}
           <Route path="/about">
             <About />
           </Route>

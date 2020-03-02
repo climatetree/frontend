@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useDebounce from './helpers/useDebounce';
+import useDebounce from "./helpers/useDebounce";
 import searchIcon from "../../images/search.svg";
 import "./SearchBar.css";
 
@@ -7,20 +7,22 @@ export default function SearchBar({
   getExactPlaces,
   getSimilarPlaces,
   filters,
-  similarPlacesEnabled,
+  similarPlacesEnabled
 }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   useEffect(() => {
     if (debouncedSearchTerm) {
       setIsSearching(true);
-      fetch(`https://places-postgres2.azurewebsites.net/api/names/${debouncedSearchTerm}`)
+      fetch(
+        `https://places-postgres2.azurewebsites.net/api/places/${debouncedSearchTerm}`
+      )
         .then(response => response.json())
         .then(results => {
           setIsSearching(false);
-          setPlaceSuggestions(results);
+          setPlaceSuggestions(results.features);
         });
     } else {
       setPlaceSuggestions([]);
@@ -52,14 +54,15 @@ export default function SearchBar({
           onChange={event => setSearchTerm(event.target.value)}
           // onKeyDown={event => handleKeyDown(event)}
           onFocus={() => {
-            document.querySelector('#suggestions').style.display = 'block';
+            document.querySelector("#suggestions").style.display = "block";
           }}
           onBlur={() => {
             setTimeout(() => {
-              document.querySelector('#suggestions').style.display = 'none';
+              document.querySelector("#suggestions").style.display = "none";
             }, 200);
           }}
         />
+
         <img
           src={searchIcon}
           alt="search"
@@ -78,12 +81,26 @@ export default function SearchBar({
           <p>Searching...</p>
         ) : placeSuggestions.length > 0 ? (
           <>
-            {placeSuggestions.map(({placeId, name}) => (
-              <p
-                key={placeId}
-                onClick={() => handleSuggestionClick(placeId, name)}
-              >{name}</p>
-            ))}
+            {placeSuggestions.map(({ properties }) => {
+              const { place_id, name, state_name, nation_name } = properties;
+
+              return (
+                <p
+                  key={place_id}
+                  onClick={() => {
+                    handleSuggestionClick(place_id, name);
+                  }}
+                >
+                  <span className="place-name-dropdown">{name} </span>
+                  <div className="state-nation-name-dropdown-container">
+                    <span className="state-nation-name-dropdown">
+                      {state_name}
+                      {state_name ? "," : ""} {nation_name}
+                    </span>
+                  </div>
+                </p>
+              );
+            })}
           </>
         ) : debouncedSearchTerm.length > 0 ? (
           <p>No suggestion</p>
@@ -93,4 +110,4 @@ export default function SearchBar({
       </div>
     </div>
   );
-};
+}

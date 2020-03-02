@@ -10,7 +10,7 @@ import authContext from "./context/authContext";
 import "../styles/Maps.css";
 import "./mapsComponents/OlMap.css";
 
-function Maps() {
+function Maps(props) {
   // const [mapStates, setMapStates] = useState({
   //   term: "",
   //   placeId: "",
@@ -20,13 +20,14 @@ function Maps() {
   const [{ isLoggedIn }] = useContext(authContext);
   const getExactPlaces = async (placeName, filterFn = () => true) => {
     const response = await axios.get(
-      `https://places-postgres2.azurewebsites.net/api/names/${placeName}`
+      `https://places-postgres2.azurewebsites.net/api/places/${placeName}`
     );
     // setMapStates({
     //   ...mapStates,
     //   places: response.data.filter(filterFn),
     // });
-    setPlaces(response.data.filter(filterFn));
+    // setPlaces(response.data.filter(filterFn));
+    setPlaces(response.data);
   };
   const getSimilarPlaces = async (placeID, filterFn = () => true) => {
     const response = await axios.get(
@@ -36,16 +37,17 @@ function Maps() {
     //   ...mapStates,
     //   places: response.data.filter(filterFn),
     // });
-    setPlaces(response.data.filter(filterFn));
+    // setPlaces(response.data.filter(filterFn));
+    setPlaces(response.data);
   };
   return (
     <div id="maps-page">
-      <OlMap mapId="map" places={places} />
+      <OlMap mapId="map" places={places} history={props.history} />
       <Filters
         getExactPlaces={getExactPlaces}
         getSimilarPlaces={getSimilarPlaces}
       />
-      <Places places={places} />
+      <Places features={places.features} />
       <MapNav />
       {isLoggedIn ? <UserAvatar /> : <MapSignIn />}
     </div>

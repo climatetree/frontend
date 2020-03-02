@@ -11,7 +11,7 @@ import { fromLonLat } from "ol/proj";
 
 import { styleFunction as getStyles } from "./helpers/olStyles";
 import { getGeoJson } from "./helpers/data";
-import { popUpHandler } from "./helpers/popupHandler";
+import popUpHandler from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
 
 class OlMap extends Component {
@@ -24,16 +24,22 @@ class OlMap extends Component {
       // Data
       source: new VectorSource({
         // Extract features from GeoJSON data
-        features: getGeoJson([]),
+        features: getGeoJson(
+          // GeoJSON starter object
+          {
+            type: "FeatureCollection",
+            features: []
+          }
+        )
       }),
       // Min point distance to cause clustering
-      distance: clusterDist,
+      distance: clusterDist
     });
 
     // Create the layer
     let places = new VectorLayer({
       source: clusterSource,
-      style: getStyles,
+      style: getStyles
     });
 
     // Basemap layer, via ESRI API
@@ -44,8 +50,8 @@ class OlMap extends Component {
           'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
         url:
           "https://server.arcgisonline.com/ArcGIS/rest/services/" +
-          "World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-      }),
+          "World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+      })
     });
 
     // An overlay for the map that allows popups on points
@@ -59,32 +65,33 @@ class OlMap extends Component {
       overlays: [overlay],
       view: new View({
         center: fromLonLat([0, 0]),
-        zoom: 1,
-      }),
+        zoom: 1
+      })
     });
 
     // Open popups when a point is clicked on
-    map.on("singleclick", evt => popUpHandler(evt, map, overlay));
+    map.on("singleclick", evt =>
+      popUpHandler(evt, map, overlay, this.props.history)
+    );
 
     // Close popups when features change
-    let numFeatures = clusterSource.getFeatures().length;
+    let currZoom = map.getView().getZoom();
     map.on("moveend", () => {
-      // Feature array length will change when the number of clusters change
-      let newNumFeatures = clusterSource.getFeatures().length;
-      if (numFeatures !== newNumFeatures) {
+      let newZoom = map.getView().getZoom();
+      if (currZoom != newZoom) {
         overlay.setPosition(undefined);
-        numFeatures = newNumFeatures;
+        currZoom = newZoom;
       }
     });
 
     this.setState({
       map: map,
-      overlay: overlay,
+      overlay: overlay
     });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.places.length !== prevProps.places.length) {
+    if (this.props.places !== prevProps.places) {
       // Close any open popups
       this.state.overlay.setPosition(undefined);
 
