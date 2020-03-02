@@ -11,7 +11,7 @@ import { fromLonLat } from "ol/proj";
 
 import { styleFunction as getStyles } from "./helpers/olStyles";
 import { getGeoJson } from "./helpers/data";
-import { popUpHandler } from "./helpers/popupHandler";
+import popUpHandler from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
 
 class OlMap extends Component {
@@ -70,7 +70,9 @@ class OlMap extends Component {
     });
 
     // Open popups when a point is clicked on
-    map.on("singleclick", evt => popUpHandler(evt, map, overlay));
+    map.on("singleclick", evt =>
+      popUpHandler(evt, map, overlay, this.props.history)
+    );
 
     // Close popups when features change
     let currZoom = map.getView().getZoom();

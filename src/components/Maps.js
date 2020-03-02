@@ -10,7 +10,7 @@ import authContext from "./context/authContext";
 import "../styles/Maps.css";
 import "./mapsComponents/OlMap.css";
 
-function Maps() {
+function Maps(props) {
   // const [mapStates, setMapStates] = useState({
   //   term: "",
   //   placeId: "",
@@ -42,7 +42,7 @@ function Maps() {
   };
   return (
     <div id="maps-page">
-      <OlMap mapId="map" places={places} />
+      <OlMap mapId="map" places={places} history={props.history} />
       <Filters
         getExactPlaces={getExactPlaces}
         getSimilarPlaces={getSimilarPlaces}

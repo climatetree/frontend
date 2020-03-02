@@ -7,12 +7,13 @@ import StoryDetail from "./storiesComponents/StoryDetail";
 import StorySearchBar from "./storiesComponents/StorySearchBar";
 import Spinner from "./storiesComponents/Spinner";
 import ResultsFor from "./storiesComponents/ResultsFor";
+import ResultForPlaceId from "./storiesComponents/ResultForPlaceId";
 import "../styles/Stories.css";
 
 const Stories = props => {
   // Initialize state
   const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(null);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -21,34 +22,54 @@ const Stories = props => {
 
   let query = useQuery();
   let generalSearchTerm = query.get("storyTitle");
+  let placeId = query.get("place_id");
 
   // State lifecycle
   useEffect(() => {
     (async () => {
       setStories([]);
-      setLoading(true);
 
-      let responses = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/title/${generalSearchTerm}`
-      );
-      let temp = responses.data.map(story => {
-        return { ...story, date: new Date(story.date) };
-      });
-      setStories(temp);
+      if (generalSearchTerm || placeId) {
+        setLoading(true);
 
-      setLoading(false);
+        const BASE_URL = generalSearchTerm
+          ? "https://backend-mongo-stories.azurewebsites.net/stories/title/"
+          : "https://backend-mongo-stories.azurewebsites.net/stories/place/";
+        const PARAMETER = generalSearchTerm || placeId;
+
+        let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
+        let temp = responses.data.map(story => {
+          return { ...story, date: new Date(story.date) };
+        });
+
+        setStories(temp);
+        setLoading(false);
+      }
     })();
   }, [generalSearchTerm]);
 
+  // Conditional rendering based on place id and search term
+  const renderResultFor = () => {
+    console.log(placeId);
+    return placeId ? (
+      <ResultForPlaceId
+        placeId={placeId}
+        placeName={props.location.state.placeName}
+      />
+    ) : (
+      <ResultsFor searchTerm={generalSearchTerm} />
+    );
+  };
+
   // Conditional rendering
   const renderContent = () => {
-    if (!stories.length) {
+    if (loading) {
       return <Spinner />;
     }
 
     return (
       <>
-        <ResultsFor searchTerm={generalSearchTerm} />
+        {renderResultFor()}
         {stories.map(story => (
           <StoryDetail story={story} />
         ))}
@@ -60,9 +81,7 @@ const Stories = props => {
     <>
       <Nav />
       {/* Background image */}
-      <div
-        className={`stories-background ${!stories.length ? "darker" : ""}`}
-      ></div>
+      <div className={`stories-background ${loading ? "darker" : ""}`}></div>
 
       <section className="stories-container">
         <StorySearchBar
@@ -70,7 +89,7 @@ const Stories = props => {
           {...props}
           loading={loading}
         />
-        <div>{renderContent()}</div>
+        {loading !== null && <div>{renderContent()}</div>}
       </section>
     </>
   );
