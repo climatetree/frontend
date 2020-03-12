@@ -33,8 +33,8 @@ const Stories = props => {
         setLoading(true);
 
         const BASE_URL = generalSearchTerm
-          ? "https://backend-mongo-stories.azurewebsites.net/stories/title/"
-          : "https://backend-mongo-stories.azurewebsites.net/stories/place/";
+          ? "http://localhost:3000/stories/title/"
+          : "http://localhost:3000/stories/place/";
         const PARAMETER = generalSearchTerm || placeId;
 
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
@@ -57,8 +57,8 @@ const Stories = props => {
         placeName={props.location.state.placeName}
       />
     ) : (
-      <ResultsFor searchTerm={generalSearchTerm} />
-    );
+        <ResultsFor searchTerm={generalSearchTerm} />
+      );
   };
 
   // Conditional rendering

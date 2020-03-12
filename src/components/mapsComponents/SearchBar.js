@@ -17,7 +17,7 @@ export default function SearchBar({
     if (debouncedSearchTerm) {
       setIsSearching(true);
       fetch(
-        `https://places-postgres2.azurewebsites.net/api/places/${debouncedSearchTerm}`
+        `http://localhost:8080/api/places/${debouncedSearchTerm}`
       )
         .then(response => response.json())
         .then(results => {
@@ -67,13 +67,13 @@ export default function SearchBar({
           src={searchIcon}
           alt="search"
           id="search"
-          // onClick={() => {
-          //   if (similarPlacesEnabled) {
-          //     getSimilarPlaces(placeId);
-          //   } else {
-          //     getExactPlaces(debouncedSearchTerm);
-          //   }
-          // }}
+        // onClick={() => {
+        //   if (similarPlacesEnabled) {
+        //     getSimilarPlaces(placeId);
+        //   } else {
+        //     getExactPlaces(debouncedSearchTerm);
+        //   }
+        // }}
         />
       </div>
       <div id="suggestions">
@@ -105,8 +105,8 @@ export default function SearchBar({
         ) : debouncedSearchTerm.length > 0 ? (
           <p>No suggestion</p>
         ) : (
-          <p>User Search History</p>
-        )}
+                <p>User Search History</p>
+              )}
       </div>
     </div>
   );
