@@ -57,8 +57,8 @@ const Stories = props => {
         placeName={props.location.state.placeName}
       />
     ) : (
-      <ResultsFor searchTerm={generalSearchTerm} />
-    );
+        <ResultsFor searchTerm={generalSearchTerm} />
+      );
   };
 
   // Conditional rendering

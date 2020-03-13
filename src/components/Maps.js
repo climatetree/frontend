@@ -20,7 +20,7 @@ function Maps(props) {
   const [{ isLoggedIn }] = useContext(authContext);
   const getExactPlaces = async (placeName, filterFn = () => true) => {
     const response = await axios.get(
-      `https://places-postgres2.azurewebsites.net/api/places/${placeName}`
+      `http://localhost:8080/api/places/${placeName}`
     );
     // setMapStates({
     //   ...mapStates,
@@ -31,7 +31,7 @@ function Maps(props) {
   };
   const getSimilarPlaces = async (placeID, filterFn = () => true) => {
     const response = await axios.get(
-      `https://places-postgres2.azurewebsites.net/api/places/${placeID}/similar`
+      `http://localhost:8080/api/places/${placeID}/similar`
     );
     // setMapStates({
     //   ...mapStates,
