@@ -13,7 +13,7 @@ import "../styles/Stories.css";
 const Stories = props => {
   // Initialize state
   const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -33,8 +33,8 @@ const Stories = props => {
         setLoading(true);
 
         const BASE_URL = generalSearchTerm
-          ? "https://backend-mongo-stories.azurewebsites.net/stories/title/"
-          : "https://backend-mongo-stories.azurewebsites.net/stories/place/";
+          ? "http://localhost:3000/stories/title/"
+          : "http://localhost:3000/stories/place/";
         const PARAMETER = generalSearchTerm || placeId;
 
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
