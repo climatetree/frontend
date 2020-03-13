@@ -43,29 +43,32 @@ export default function SearchBar({
   const closeConfirmationPanel = () => {
     document.getElementById('confirmation').style.display = 'none';
   }
-  const handleKeyDown = (event) => {
+  const handlePlaceUpdates = () => {
     if (isSearching) {
       return;
     }
+    if (placeSuggestions.length > 1) {
+      openConfirmationPanel();
+    } else if (
+      placeSuggestions.length === 1 &&
+      placeSuggestions[0].properties.place_id !== targetPlaceID
+    ) {
+      setSearchTerm(placeSuggestions[0].properties.name);
+      setSelectedSuggestion([
+        placeSuggestions[0].properties.place_id,
+        0,
+      ]);
+      setTargetPlace(placeSuggestions[0]);
+      getSimilarPlaces(
+        placeSuggestions[0].properties.place_id,
+        filters
+      );
+      document.getElementById('suggestions').style.display = 'none';
+    }
+  }
+  const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      if (placeSuggestions.length > 1) {
-        openConfirmationPanel();
-      } else if (
-        placeSuggestions.length === 1 &&
-        placeSuggestions[0].properties.place_id !== targetPlaceID
-      ) {
-        setSearchTerm(placeSuggestions[0].properties.name);
-        setSelectedSuggestion([
-          placeSuggestions[0].properties.place_id,
-          0,
-        ]);
-        setTargetPlace(placeSuggestions[0]);
-        getSimilarPlaces(
-          placeSuggestions[0].properties.place_id,
-          filters
-        );
-        document.getElementById('suggestions').style.display = 'none';
-      }
+      handlePlaceUpdates();
     }
   };
   const handleSuggestionClick = (placeID, name, index) => {
@@ -99,29 +102,7 @@ export default function SearchBar({
           src={searchIcon}
           alt="search"
           id="search"
-          onClick={() => {
-            if (isSearching) {
-              return;
-            }
-            if (placeSuggestions.length > 1) {
-              openConfirmationPanel();
-            } else if (
-              placeSuggestions.length === 1 &&
-              placeSuggestions[0].properties.place_id !== targetPlaceID
-            ) {
-              setSearchTerm(placeSuggestions[0].properties.name);
-              setSelectedSuggestion([
-                placeSuggestions[0].properties.place_id,
-                0,
-              ]);
-              setTargetPlace(placeSuggestions[0]);
-              getSimilarPlaces(
-                placeSuggestions[0].properties.place_id,
-                filters
-              );
-              document.getElementById('suggestions').style.display = 'none';
-            }
-          }}
+          onClick={() => handlePlaceUpdates()}
         />
       </div>
       <div id="suggestions">
