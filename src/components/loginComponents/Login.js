@@ -66,7 +66,7 @@ const Login = () => {
               icon="fa-facebook"
             />
             <GoogleLogin
-              clientId="17873037182-efko5kkjp7b07dlo5fi7vsrt654rpl0q.apps.googleusercontent.com"
+              clientId="69469445070-29f3osjc154mqn4ccdnt7rp354oge5va.apps.googleusercontent.com"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               icon={true}
@@ -77,7 +77,7 @@ const Login = () => {
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                 >
-                  <img src={GoogleLogo} alt="google g logo"/>
+                  <img src={GoogleLogo} alt="google g logo" />
                   Login with Google
                 </button>
               )}
@@ -85,16 +85,16 @@ const Login = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <h4> Welcome : {username} </h4>
-          <h4> Email : {email} </h4>
-          <img src={url} alt={name} />
-        </div>
-      )}
+          <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <h4> Welcome : {username} </h4>
+            <h4> Email : {email} </h4>
+            <img src={url} alt={name} />
+          </div>
+        )}
     </>
   );
 };
