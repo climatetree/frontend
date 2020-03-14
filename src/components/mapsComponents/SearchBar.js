@@ -16,19 +16,24 @@ export default function SearchBar({
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
   useEffect(() => {
-    if (debouncedSearchTerm) {
+    if (debouncedSearchTerm && debouncedSearchTerm.length > 1) {
       setIsSearching(true);
       fetch(
         `http://localhost:8080/api/places/${debouncedSearchTerm}`
       )
         .then(response => response.json())
         .then(results => {
+          if (results.features) {
+            setPlaceSuggestions(results.features);
+            setSelectedSuggestion([
+              results.features[0].properties.place_id,
+              0,
+            ]);
+          } else {
+            setPlaceSuggestions([]);
+            setSelectedSuggestion([]);
+          }
           setIsSearching(false);
-          setPlaceSuggestions(results.features);
-          setSelectedSuggestion([
-            results.features[0].properties.place_id,
-            0,
-          ]);
         });
     } else {
       setPlaceSuggestions([]);
@@ -125,6 +130,8 @@ export default function SearchBar({
               );
             })}
           </>
+        ) : debouncedSearchTerm.length === 1 ? (
+          <p>Please enter more than 1 letter</p>
         ) : debouncedSearchTerm.length > 0 ? (
           <p>No suggestion</p>
         ) : (
