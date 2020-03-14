@@ -16,7 +16,7 @@ export default function SearchBar({
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
   useEffect(() => {
-    if (debouncedSearchTerm) {
+    if (debouncedSearchTerm && debouncedSearchTerm.length > 1) {
       setIsSearching(true);
       fetch(
         `http://localhost:8080/api/places/${debouncedSearchTerm}`
@@ -130,6 +130,8 @@ export default function SearchBar({
               );
             })}
           </>
+        ) : debouncedSearchTerm.length === 1 ? (
+          <p>Please enter more than 1 letter</p>
         ) : debouncedSearchTerm.length > 0 ? (
           <p>No suggestion</p>
         ) : (
