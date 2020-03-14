@@ -14,10 +14,8 @@ export default function Filters({
     max: 150,
   });
   const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
-  const filterFn = place => {
-    return (
-      !placeTypesDisabled.includes(place.typeName)
-    );
+  const filterFn = ({ properties }) => {
+    return !placeTypesDisabled.includes(properties.type_name);
   };
   const openAdvancedFilters = () => {
     const advancedFilters = document.getElementById('advanced-filters');
@@ -41,7 +39,7 @@ export default function Filters({
           <div id="advanced-filters">
             <CheckboxGroup
               label="Type Name"
-              name="typeName"
+              name="type_name"
               placeTypesDisabled={placeTypesDisabled}
               setPlaceTypesDisabled={setPlaceTypesDisabled}
             />
@@ -52,6 +50,7 @@ export default function Filters({
               range={populationRange}
               setRange={setPopulationRange}
             />
+            {/* <button>Apply</button> */}
           </div>
         </div>
       </div>

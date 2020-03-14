@@ -13,9 +13,9 @@ export default function Places({
           <p className='target-place'>
             Name: {targetPlace.properties.name}
           </p>
-          <p className='target-place'>
-            Type Name: {targetPlace.properties.typeName}
-          </p>
+          {/* <p className='target-place'>
+            Type Name: {targetPlace.properties.type_name}
+          </p> */}
           <p className='target-place'>
             Population: {targetPlace.properties.population}
           </p>
@@ -28,7 +28,7 @@ export default function Places({
             <div key={properties.place_id}>
               <p>{index + 1}</p>
               <p>Name: {properties.name}</p>
-              <p>Type Name: {properties.typeName}</p>
+              <p>Type Name: {properties.type_name}</p>
               <p>Population: {properties.population}</p>
               <p>Carbon: {properties.carbon}</p>
             </div>

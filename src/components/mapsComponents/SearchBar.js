@@ -49,10 +49,7 @@ export default function SearchBar({
     }
     if (placeSuggestions.length > 1) {
       openConfirmationPanel();
-    } else if (
-      placeSuggestions.length === 1 &&
-      placeSuggestions[0].properties.place_id !== targetPlaceID
-    ) {
+    } else if (placeSuggestions.length === 1) {
       setSearchTerm(placeSuggestions[0].properties.name);
       setSelectedSuggestion([
         placeSuggestions[0].properties.place_id,
