@@ -23,12 +23,17 @@ export default function SearchBar({
       )
         .then(response => response.json())
         .then(results => {
+          if (results.features) {
+            setPlaceSuggestions(results.features);
+            setSelectedSuggestion([
+              results.features[0].properties.place_id,
+              0,
+            ]);
+          } else {
+            setPlaceSuggestions([]);
+            setSelectedSuggestion([]);
+          }
           setIsSearching(false);
-          setPlaceSuggestions(results.features);
-          setSelectedSuggestion([
-            results.features[0].properties.place_id,
-            0,
-          ]);
         });
     } else {
       setPlaceSuggestions([]);
