@@ -38,7 +38,7 @@
 #advanced-filters {
   position: absolute;
   top: 2.8rem;
-  right: 0;
+  left: 0;
   background-color: #fefefe;
   z-index: 1;
   border-radius: 4px;

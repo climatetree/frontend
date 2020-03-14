@@ -8,7 +8,6 @@ export default function CheckboxGroup({
   placeTypesDisabled,
   setPlaceTypesDisabled,
 }) {
-  // const options = getOptions(name);
   const options = ['STATE', 'COUNTY', 'URBANEXTENT'];
   const toggleOption = (operation, option) => {
     if (operation) {

@@ -56,7 +56,7 @@ const popUpHandler = (evt, map, overlay, history) => {
           <p>
             Name: <strong>{place.name}</strong>
             <br />
-            Place Type: {place.typeName}
+            Place Type: {place.type_name}
             <br />
             Population: {place.population}
             <br />

@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import CheckboxGroup from "./CheckboxGroup";
-import Switch from "./Switch";
 import MinMaxRange from './MinMaxRange';
 import "./Filters.css";
 
 export default function Filters({
   getSimilarPlaces,
-  getExactPlaces,
+  targetPlaceID,
+  setTargetPlace,
 }) {
-  // eslint-disable-next-line
   const [populationRange, setPopulationRange] = useState({
     min: 90,
     max: 150,
   });
   const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
-  const [similarPlacesEnabled, setSimilarPlacesEnabled] = useState(true);
-  const filterFn = place => {
-    return (
-      // place.population >= populationRange.min * exactMatch.population / 100 &&
-      // place.population <= populationRange.max * exactMatch.population / 100 &&
-      !placeTypesDisabled.includes(place.typeName)
-    );
+  const filterFn = ({ properties }) => {
+    return !placeTypesDisabled.includes(properties.type_name);
   };
   const openAdvancedFilters = () => {
     const advancedFilters = document.getElementById('advanced-filters');
@@ -34,26 +28,18 @@ export default function Filters({
   return (
     <div className="map-search-wrapper">
       <SearchBar
-        getExactPlaces={getExactPlaces}
         getSimilarPlaces={getSimilarPlaces}
         filters={filterFn}
-        similarPlacesEnabled={similarPlacesEnabled}
+        targetPlaceID={targetPlaceID}
+        setTargetPlace={setTargetPlace}
       />
       <div className="filters-wrapper">
-        <div className="similar-places-filter">
-          <Switch
-            label="Enable similar places"
-            name="similar-places"
-            on={similarPlacesEnabled}
-            onChange={(value) => setSimilarPlacesEnabled(value)}
-          />
-        </div>
         <div className="advanced-filters-wrapper">
-          <p onClick={openAdvancedFilters}>More</p>
+          <p onClick={openAdvancedFilters}>Advanced Search</p>
           <div id="advanced-filters">
             <CheckboxGroup
               label="Type Name"
-              name="typeName"
+              name="type_name"
               placeTypesDisabled={placeTypesDisabled}
               setPlaceTypesDisabled={setPlaceTypesDisabled}
             />
@@ -64,6 +50,7 @@ export default function Filters({
               range={populationRange}
               setRange={setPopulationRange}
             />
+            {/* <button>Apply</button> */}
           </div>
         </div>
       </div>
