@@ -44,12 +44,9 @@
   background-color: inherit;
 }
 
-.react_tinylink_card_media {
-  height: 200px;
-}
-
 .react_tinylink_card_content_wrapper {
   padding: 0;
+  padding-top: 10px;
 }
 
 .react_tinylink_card_content_header_description {
@@ -81,6 +78,9 @@
 }
 
 @media (max-width: 767px) {
+  .react_tinylink_card {
+    margin-bottom: 40px;
+  }
   #explore-screen {
     display: flex;
     flex-direction: column;
