@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import searchIcon from "../../images/search.svg";
-import useStoriesSecond from "../storiesComponents/useStoriesSecond";
 import "../../styles/FirstScreen.css";
 
 function FirstScreen({ history }) {
@@ -19,8 +18,6 @@ function FirstScreen({ history }) {
           id="first-screen-search"
           onSubmit={event => {
             event.preventDefault();
-            // console.log("HELLO FROM", BASE_URL, searchTerm);
-            // console.log(useStoriesSecond(BASE_URL, searchTerm));
             history.push({
               pathname: "/stories",
               search: `?storyTitle=${searchTerm}`,
