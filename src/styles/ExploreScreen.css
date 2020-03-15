@@ -56,6 +56,10 @@
   font-size: 20px;
 }
 
+.react_tinylink_card_content_header_description:hover {
+  text-decoration: underline;
+}
+
 .cldxej {
   margin-top: 10px;
   margin-bottom: 10px;
