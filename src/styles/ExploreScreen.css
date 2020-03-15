@@ -33,11 +33,33 @@
 }
 
 .lHTIu {
-  filter: brightness(80%);
+  filter: brightness(75%);
+  color: #adadad;
+  border: none;
+  background-color: inherit;
 }
 
 .lHTIu:hover {
   filter: brightness(100%);
+  background-color: inherit;
+}
+
+.react_tinylink_card_media {
+  width: 300px;
+  height: 200px;
+}
+
+.cCOoAV {
+  padding: 0;
+}
+
+.react_tinylink_card_content_header_description {
+  font-size: 25px;
+}
+
+.cldxej {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 959px) and (min-width: 768px) {
