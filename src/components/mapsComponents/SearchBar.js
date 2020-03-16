@@ -25,7 +25,10 @@ export default function SearchBar({
         }}
         onBlur={() => {
           setTimeout(() => {
-            document.querySelector("#suggestions").style.display = "none";
+            const suggestions = document.querySelector("#suggestions");
+            if (suggestions) {
+              suggestions.style.display = "none";
+            }
           }, 200);
         }}
       />
