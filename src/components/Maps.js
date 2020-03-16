@@ -25,7 +25,7 @@ function Maps(props) {
   };
   return (
     <div id="maps-page">
-      <OlMap mapId="map" places={places} history={props.history} />
+      <OlMap mapId="map" places={places} history={props.history} targetPlace={targetPlace} />
       <Filters
         getSimilarPlaces={getSimilarPlaces}
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
