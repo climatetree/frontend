@@ -6,6 +6,11 @@
   left: calc(0.5rem + 3px);
   display: flex;
 }
+#search-bar {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+}
 .filters-wrapper {
   display: flex;
   margin-left: 0.5rem;
@@ -69,6 +74,12 @@
   margin: 15px 0;
 }
 
+@media (max-width: 959px) and (min-width: 768px) {
+  #search-bar {
+    width: 18rem;
+  }
+}
+
 @media (max-width: 767px) {
   .map-search-wrapper {
     flex-direction: column;
@@ -81,5 +92,9 @@
   }
   #advanced-filters {
     top: 2.5rem;
+  }
+  #search-bar {
+    width: calc(100vw - 140px);
+    max-width: 20rem;
   }
 }
