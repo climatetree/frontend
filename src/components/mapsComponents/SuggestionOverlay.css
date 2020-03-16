@@ -1,0 +1,39 @@
+#confirmation {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(10, 10, 10, 0.2);
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+#confirmation-panel {
+  height: 400px;
+  width: 300px;
+  color: #333333;
+  background-color: #fefefe;
+  box-shadow: 0 0 5px 0 #999999;
+  border-radius: 4px;
+  padding: 20px;
+  overflow-y: auto;
+}
+#confirmation-panel .close-btn {
+  float: right;
+  cursor: pointer;
+}
+#confirmation-panel .confirmation-title {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+#confirmation-panel .confirmation-item {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+#confirmation-panel .confirmation-item:hover {
+  color: #000000;
+  font-weight: 400;
+}
