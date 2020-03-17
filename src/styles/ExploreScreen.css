@@ -66,6 +66,11 @@
   .react_tinylink_card_content_header_description {
     font-size: 17px;
   }
+
+  .react_tinylink_card:hover {
+    filter: brightness(100%);
+    background-color: inherit;
+  }
 }
 
 @media (max-width: 959px) and (min-width: 768px) {
@@ -75,11 +80,20 @@
   .react_tinylink_card_content_header_description {
     font-size: 15px;
   }
+
+  .react_tinylink_card:hover {
+    filter: brightness(100%);
+    background-color: inherit;
+  }
 }
 
 @media (max-width: 767px) {
   .react_tinylink_card {
     margin-bottom: 40px;
+  }
+  .react_tinylink_card:hover {
+    filter: brightness(100%);
+    background-color: inherit;
   }
   #explore-screen {
     display: flex;

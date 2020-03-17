@@ -13,7 +13,7 @@ import "../styles/Stories.css";
 const Stories = props => {
   // Initialize state
   const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loadSpinner, setLoadingSpinner] = useState("false");
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -30,7 +30,7 @@ const Stories = props => {
       setStories([]);
 
       if (generalSearchTerm || placeId) {
-        setLoading(true);
+        setLoadingSpinner("true");
 
         const BASE_URL = generalSearchTerm
           ? "http://localhost:3000/stories/title/"
@@ -43,7 +43,7 @@ const Stories = props => {
         });
 
         setStories(temp);
-        setLoading(false);
+        setLoadingSpinner("false");
       }
     })();
   }, [generalSearchTerm]);
@@ -57,13 +57,13 @@ const Stories = props => {
         placeName={props.location.state.placeName}
       />
     ) : (
-        <ResultsFor searchTerm={generalSearchTerm} />
-      );
+      <ResultsFor searchTerm={generalSearchTerm} />
+    );
   };
 
   // Conditional rendering
   const renderContent = () => {
-    if (loading) {
+    if (loadSpinner === "true") {
       return <Spinner />;
     }
 
@@ -81,15 +81,21 @@ const Stories = props => {
     <>
       <Nav />
       {/* Background image */}
-      <div className={`stories-background ${loading ? "darker" : ""}`}></div>
+      <div
+        className={`stories-background ${
+          loadSpinner === "true" ? "darker" : ""
+        }`}
+      ></div>
 
       <section className="stories-container">
         <StorySearchBar
           termForSearchBar={generalSearchTerm}
           {...props}
-          loading={loading}
+          loadSpinner={loadSpinner}
         />
-        {loading !== null && <div>{renderContent()}</div>}
+        {(!loadSpinner || loadSpinner === "false") && (
+          <div>{renderContent()}</div>
+        )}
       </section>
     </>
   );

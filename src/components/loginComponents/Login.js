@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import uuid from "react-uuid";
 import authContext from "../context/authContext";
+// import { decodeToken } from "jsontokens";
 
 import "../aboutComponents/AboutInfo";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import GoogleLogo from '../../images/google.svg';
-import './Login.css';
+import GoogleLogo from "../../images/google.svg";
+import "./Login.css";
+import axios from "axios";
 
 const Login = () => {
   const [state, dispatch] = useContext(authContext);
@@ -16,19 +18,47 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
+  const [jwt, setJwt] = useState("");
 
   const responseGoogle = response => {
     setName(response.profileObj.name);
     setEmail(response.profileObj.email);
     setUrl(response.profileObj.imageUrl);
 
+    const data = {
+      username: response.profileObj.name,
+      email: response.profileObj.email
+    };
+
+    const options = {
+      headers: {
+        Authorization: response.tokenId,
+        "Content-Type": "application/json"
+      }
+    };
+
+    console.log("Google RESPONSE token==== : ", response.tokenId);
     dispatch({
       type: "LOGIN",
       payload: {
         username: response.profileObj.name,
         email: response.profileObj.email,
         url: response.profileObj.imageUrl,
-        userid: uuid()
+
+        sw: axios
+          .post("http://localhost:8080/login", data, options)
+          .then(res => {
+            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
+            localStorage.setItem("JWT", res.data.jwtToken);
+            // var jwt = require("jsonwebtoken");
+            // const token = decodeToken(res.data.jwtToken);
+            console.log("User is ---" + token.payload.userId);
+            localStorage.setItem("userId", token.payload.userId);
+          })
+          .catch(err => {
+            console.log("ERROR: ====", err);
+          }),
+        userid: localStorage.getItem("userId")
       }
     });
   };
@@ -37,13 +67,39 @@ const Login = () => {
     setName(response.name);
     setEmail(response.email);
     setUrl(response.picture.data.url);
+    const data = {
+      username: response.name,
+      email: response.email
+    };
+
+    const options = {
+      headers: {
+        Authorization: response.signedRequest,
+        "Content-Type": "application/json"
+      }
+    };
+
+    console.log("response faceboookk ", response);
     dispatch({
       type: "LOGIN",
       payload: {
         username: response.name,
         email: response.email,
         url: response.picture.data.url,
-        userid: uuid()
+        sw: axios
+          .post("http://localhost:4000/register", data, options)
+          .then(res => {
+            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
+            localStorage.setItem("JWT", res.data.jwtToken);
+            // var jwt = require("jsonwebtoken");
+            // const token = decodeToken(res.data.jwtToken);
+            console.log("User is ---" + token.payload.userId);
+            localStorage.setItem("userId", token.payload.userId);
+          })
+          .catch(err => {
+            console.log("ERROR: ====", err);
+          }),
+        userid: localStorage.getItem("userId")
       }
     });
   };
@@ -85,16 +141,16 @@ const Login = () => {
           </div>
         </div>
       ) : (
-          <div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <h4> Welcome : {username} </h4>
-            <h4> Email : {email} </h4>
-            <img src={url} alt={name} />
-          </div>
-        )}
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <h4> Welcome : {username} </h4>
+          <h4> Email : {email} </h4>
+          <img src={url} alt={name} />
+        </div>
+      )}
     </>
   );
 };
