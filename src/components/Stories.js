@@ -21,7 +21,7 @@ const Stories = props => {
   };
 
   let query = useQuery();
-  let generalSearchTerm = query.get("storyTitle");
+  let generalSearchTerm = query.get("storyTitle") || '';
   let placeId = query.get("place_id");
 
   // State lifecycle

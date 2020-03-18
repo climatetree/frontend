@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 // import uuid from "react-uuid";
 import authContext from "../context/authContext";
-// import { decodeToken } from "jsontokens";
+import { decodeToken } from "jsontokens";
 
 import "../aboutComponents/AboutInfo";
 import GoogleLogin from "react-google-login";
@@ -46,12 +46,16 @@ const Login = () => {
         url: response.profileObj.imageUrl,
 
         sw: axios
-          .post("http://localhost:8080/login", data, options)
+          .post(
+            "https://user-microservice-demo.herokuapp.com/login",
+            data,
+            options
+          )
           .then(res => {
             console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
             localStorage.setItem("JWT", res.data.jwtToken);
             // var jwt = require("jsonwebtoken");
-            // const token = decodeToken(res.data.jwtToken);
+            const token = decodeToken(res.data.jwtToken);
             console.log("User is ---" + token.payload.userId);
             localStorage.setItem("userId", token.payload.userId);
           })
@@ -87,12 +91,16 @@ const Login = () => {
         email: response.email,
         url: response.picture.data.url,
         sw: axios
-          .post("http://localhost:4000/register", data, options)
+          .post(
+            "https://user-microservice-demo.herokuapp.com/login",
+            data,
+            options
+          )
           .then(res => {
             console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
             localStorage.setItem("JWT", res.data.jwtToken);
             // var jwt = require("jsonwebtoken");
-            // const token = decodeToken(res.data.jwtToken);
+            const token = decodeToken(res.data.jwtToken);
             console.log("User is ---" + token.payload.userId);
             localStorage.setItem("userId", token.payload.userId);
           })
