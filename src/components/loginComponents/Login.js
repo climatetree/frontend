@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import uuid from "react-uuid";
+// import uuid from "react-uuid";
 import authContext from "../context/authContext";
 // import { decodeToken } from "jsontokens";
 
@@ -18,7 +18,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
-  const [jwt, setJwt] = useState("");
+  // const [jwt, setJwt] = useState("");
 
   const responseGoogle = response => {
     setName(response.profileObj.name);
