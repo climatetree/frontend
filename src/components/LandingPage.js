@@ -8,7 +8,6 @@ import "../styles/Landing.css";
 
 function LandingPage(props) {
   useEffect(() => {
-    console.log("landing page rendered");
     window.addEventListener("scroll", fadeInUp);
     return () => {
       window.removeEventListener("scroll", fadeInUp);

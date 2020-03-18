@@ -4,7 +4,6 @@ const StorySearchBar = ({ termForSearchBar, history, loadSpinner }) => {
   const [searchTermFromSearchBar, setSearchTermFromSearchBar] = useState(
     termForSearchBar
   );
-  useEffect(() => console.log("HELLO"), [termForSearchBar]);
 
   const onSubmitForm = event => {
     event.preventDefault();

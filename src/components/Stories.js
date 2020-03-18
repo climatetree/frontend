@@ -21,7 +21,7 @@ const Stories = props => {
   };
 
   let query = useQuery();
-  let generalSearchTerm = query.get("storyTitle") || '';
+  let generalSearchTerm = query.get("storyTitle") || "";
   let placeId = query.get("place_id");
 
   // State lifecycle
@@ -37,14 +37,10 @@ const Stories = props => {
           : "http://localhost:3000/stories/place/";
         const PARAMETER = generalSearchTerm || placeId;
 
-        console.log(loadSpinner);
-
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
         let temp = responses.data.map(story => {
           return { ...story, date: new Date(story.date) };
         });
-
-        console.log(loadSpinner);
 
         setStories(temp);
         setLoadSpinner(false);
@@ -54,7 +50,6 @@ const Stories = props => {
 
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
-    console.log(placeId);
     return placeId ? (
       <ResultForPlaceId
         placeId={placeId}
@@ -67,13 +62,9 @@ const Stories = props => {
 
   // Conditional rendering
   const renderContent = () => {
-    console.log(loadSpinner);
     if (loadSpinner) {
       return <Spinner />;
     }
-
-    console.log("HERE !!!!!");
-    console.log(loadSpinner);
 
     return (
       <>
