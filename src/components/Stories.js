@@ -13,7 +13,7 @@ import "../styles/Stories.css";
 const Stories = props => {
   // Initialize state
   const [stories, setStories] = useState([]);
-  const [loadSpinner, setLoadingSpinner] = useState("false");
+  const [loadSpinner, setLoadSpinner] = useState(false);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -30,20 +30,24 @@ const Stories = props => {
       setStories([]);
 
       if (generalSearchTerm || placeId) {
-        setLoadingSpinner("true");
+        setLoadSpinner(true);
 
         const BASE_URL = generalSearchTerm
           ? "http://localhost:3000/stories/title/"
           : "http://localhost:3000/stories/place/";
         const PARAMETER = generalSearchTerm || placeId;
 
+        console.log(loadSpinner);
+
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
         let temp = responses.data.map(story => {
           return { ...story, date: new Date(story.date) };
         });
 
+        console.log(loadSpinner);
+
         setStories(temp);
-        setLoadingSpinner("false");
+        setLoadSpinner(false);
       }
     })();
   }, [generalSearchTerm]);
@@ -63,9 +67,13 @@ const Stories = props => {
 
   // Conditional rendering
   const renderContent = () => {
-    if (loadSpinner === "true") {
+    console.log(loadSpinner);
+    if (loadSpinner) {
       return <Spinner />;
     }
+
+    console.log("HERE !!!!!");
+    console.log(loadSpinner);
 
     return (
       <>
@@ -82,9 +90,7 @@ const Stories = props => {
       <Nav />
       {/* Background image */}
       <div
-        className={`stories-background ${
-          loadSpinner === "true" ? "darker" : ""
-        }`}
+        className={`stories-background ${loadSpinner ? "darker" : ""}`}
       ></div>
 
       <section className="stories-container">
@@ -93,9 +99,7 @@ const Stories = props => {
           {...props}
           loadSpinner={loadSpinner}
         />
-        {(!loadSpinner || loadSpinner === "false") && (
-          <div>{renderContent()}</div>
-        )}
+        {loadSpinner !== null && <div>{renderContent()}</div>}
       </section>
     </>
   );

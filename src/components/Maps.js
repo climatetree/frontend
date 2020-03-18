@@ -13,31 +13,30 @@ import "./Maps.css";
 function Maps(props) {
   const [places, setPlaces] = useState([]);
   const [targetPlace, setTargetPlace] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
   const [{ isLoggedIn }] = useContext(authContext);
   const getSimilarPlaces = async (placeID, filterFn = () => true) => {
-    setIsLoading(true);
+    setIsLoadingSimilarPlaces(true);
     const response = await axios.get(
       `http://localhost:8080/api/places/${placeID}/similar`
     );
     setPlaces(response.data);
-    setIsLoading(false);
+    setIsLoadingSimilarPlaces(false);
   };
   return (
     <div id="maps-page">
       <OlMap mapId="map" places={places} history={props.history} />
       <Filters
         getSimilarPlaces={getSimilarPlaces}
-        targetPlaceID={targetPlace ? targetPlace.properties.place_id: null}
+        targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
         setTargetPlace={setTargetPlace}
       />
-      <Places
-        features={places.features}
-        targetPlace={targetPlace}
-      />
+      <Places features={places.features} targetPlace={targetPlace} />
       <MapNav />
-      <div className={`loading-overlay${isLoading ? ' loading' : ''}`}>
-        <p>fetching climate actions for you...</p>
+      <div
+        className={`loading-overlay${isLoadingSimilarPlaces ? " loading" : ""}`}
+      >
+        <p>fetching similar places for you...</p>
       </div>
       {isLoggedIn ? <UserAvatar /> : <MapSignIn />}
     </div>

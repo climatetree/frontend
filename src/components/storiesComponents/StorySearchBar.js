@@ -22,7 +22,7 @@ const StorySearchBar = ({ termForSearchBar, history, loadSpinner }) => {
           type="text"
           id="search-for-story"
           value={searchTermFromSearchBar}
-          disabled={loadSpinner === "true"}
+          disabled={loadSpinner}
           placeholder="Enter Story Title"
           onChange={e => setSearchTermFromSearchBar(e.target.value)}
         />
