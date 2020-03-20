@@ -13,7 +13,7 @@ import "../styles/Stories.css";
 const Stories = props => {
   // Initialize state
   const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(null);
+  const [loadSpinner, setLoadSpinner] = useState(false);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -21,7 +21,7 @@ const Stories = props => {
   };
 
   let query = useQuery();
-  let generalSearchTerm = query.get("storyTitle") || '';
+  let generalSearchTerm = query.get("storyTitle") || "";
   let placeId = query.get("place_id");
 
   // State lifecycle
@@ -30,7 +30,7 @@ const Stories = props => {
       setStories([]);
 
       if (generalSearchTerm || placeId) {
-        setLoading(true);
+        setLoadSpinner(true);
 
         const BASE_URL = generalSearchTerm
           ? "http://localhost:3000/stories/title/"
@@ -43,27 +43,26 @@ const Stories = props => {
         });
 
         setStories(temp);
-        setLoading(false);
+        setLoadSpinner(false);
       }
     })();
   }, [generalSearchTerm]);
 
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
-    console.log(placeId);
     return placeId ? (
       <ResultForPlaceId
         placeId={placeId}
         placeName={props.location.state.placeName}
       />
     ) : (
-        <ResultsFor searchTerm={generalSearchTerm} />
-      );
+      <ResultsFor searchTerm={generalSearchTerm} />
+    );
   };
 
   // Conditional rendering
   const renderContent = () => {
-    if (loading) {
+    if (loadSpinner) {
       return <Spinner />;
     }
 
@@ -81,15 +80,17 @@ const Stories = props => {
     <>
       <Nav />
       {/* Background image */}
-      <div className={`stories-background ${loading ? "darker" : ""}`}></div>
+      <div
+        className={`stories-background ${loadSpinner ? "darker" : ""}`}
+      ></div>
 
       <section className="stories-container">
         <StorySearchBar
           termForSearchBar={generalSearchTerm}
           {...props}
-          loading={loading}
+          loadSpinner={loadSpinner}
         />
-        {loading !== null && <div>{renderContent()}</div>}
+        {loadSpinner !== null && <div>{renderContent()}</div>}
       </section>
     </>
   );

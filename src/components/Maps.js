@@ -31,12 +31,11 @@ function Maps(props) {
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
         setTargetPlace={setTargetPlace}
       />
-      <Places
-        features={places.features}
-        targetPlace={targetPlace}
-      />
+      <Places features={places.features} targetPlace={targetPlace} />
       <MapNav />
-      <div className={`loading-overlay${isLoadingSimilarPlaces ? ' loading' : ''}`}>
+      <div
+        className={`loading-overlay${isLoadingSimilarPlaces ? " loading" : ""}`}
+      >
         <p>fetching similar places for you...</p>
       </div>
       {isLoggedIn ? <UserAvatar /> : <MapSignIn />}

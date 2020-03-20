@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-const StorySearchBar = ({ termForSearchBar, history, loading }) => {
+const StorySearchBar = ({ termForSearchBar, history, loadSpinner }) => {
   const [searchTermFromSearchBar, setSearchTermFromSearchBar] = useState(
     termForSearchBar
   );
-  useEffect(() => console.log("HELLO"), [termForSearchBar]);
 
   const onSubmitForm = event => {
     event.preventDefault();
@@ -22,7 +21,7 @@ const StorySearchBar = ({ termForSearchBar, history, loading }) => {
           type="text"
           id="search-for-story"
           value={searchTermFromSearchBar}
-          disabled={loading}
+          disabled={loadSpinner}
           placeholder="Enter Story Title"
           onChange={e => setSearchTermFromSearchBar(e.target.value)}
         />
