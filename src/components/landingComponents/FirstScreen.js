@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import searchIcon from "../../images/search.svg";
-import "../../styles/FirstScreen.css";
+import "./FirstScreen.css";
 
 function FirstScreen({ history }) {
   // const BASE_URL =

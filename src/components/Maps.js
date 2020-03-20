@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import OlMap from "./mapsComponents/OlMap";
 import Filters from "./mapsComponents/Filters";
-import Places from "./mapsComponents/Places";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
 import MapSignIn from "./mapsComponents/MapSignIn";
@@ -25,13 +24,12 @@ function Maps(props) {
   };
   return (
     <div id="maps-page">
-      <OlMap mapId="map" places={places} history={props.history} />
+      <OlMap mapId="map" places={places} history={props.history} targetPlace={targetPlace} />
       <Filters
         getSimilarPlaces={getSimilarPlaces}
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
         setTargetPlace={setTargetPlace}
       />
-      <Places features={places.features} targetPlace={targetPlace} />
       <MapNav />
       <div
         className={`loading-overlay${isLoadingSimilarPlaces ? " loading" : ""}`}

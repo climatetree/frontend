@@ -8,7 +8,7 @@ import StorySearchBar from "./storiesComponents/StorySearchBar";
 import Spinner from "./storiesComponents/Spinner";
 import ResultsFor from "./storiesComponents/ResultsFor";
 import ResultForPlaceId from "./storiesComponents/ResultForPlaceId";
-import "../styles/Stories.css";
+import "./Stories.css";
 
 const Stories = props => {
   // Initialize state
@@ -56,8 +56,8 @@ const Stories = props => {
         placeName={props.location.state.placeName}
       />
     ) : (
-      <ResultsFor searchTerm={generalSearchTerm} />
-    );
+        <ResultsFor searchTerm={generalSearchTerm} />
+      );
   };
 
   // Conditional rendering

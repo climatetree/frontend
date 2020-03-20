@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactTinyLink } from "react-tiny-link";
 
-import "../../styles/ExploreScreen.css";
+import "./ExploreScreen.css";
 
 function ExploreScreen() {
   return (
