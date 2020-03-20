@@ -59,15 +59,23 @@ const popUpHandler = (evt, map, overlay, history, targetPlace) => {
         return (
           <>
             <p>
-              <strong>{placeProps.name}</strong> - {placeProps.type_name}
+              <strong>{placeProps.name}</strong> - <small>{placeProps.type_name}</small>
               <br />
-              Population: {Math.round(placeProps.population)}
+
+              <em>Population</em><br />
+              &nbsp;&nbsp;{Math.round(placeProps.population)}
               <br />
-              Population Density: {Math.round(placeProps.popdensity)}
+
+              <em>Population Density</em> - <small>pop/km</small><br />
+              &nbsp;&nbsp;{Math.round(placeProps.popdensity)}
               <br />
-              Carbon: {placeProps.carbon}
+
+              <em>Carbon</em> - <small>kg/year</small><br />
+              &nbsp;&nbsp;{placeProps.carbon}
               <br />
-              Carbon Per Capita: {placeProps.percapcarb}
+
+              <em>Carbon Per Capita</em> - <small>carbon/person</small><br />
+              &nbsp;&nbsp;{placeProps.percapcarb}
               <br />
             </p>
             <button id="popup-btn" onClick={() => goToStories(placeProps)}>
@@ -80,15 +88,23 @@ const popUpHandler = (evt, map, overlay, history, targetPlace) => {
         return (
           <>
             <p>
-              <strong>{placeProps.name}</strong> - {placeProps.type_name}
+              <strong>{placeProps.name}</strong> - <small>{placeProps.type_name}</small>
               <br />
-              Population: {percentiStringify(targetProps.population, placeProps.population)}
+
+              <em>Population</em><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.population, placeProps.population)}
               <br />
-              Population Density: {percentiStringify(targetProps.popdensity, placeProps.popdensity)}
+
+              <em>Population Density</em> - <small>pop/km</small><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.popdensity, placeProps.popdensity)}
               <br />
-              Carbon: {percentiStringify(targetProps.carbon, placeProps.carbon)}
+
+              <em>Carbon</em> - <small>kg/year</small><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.carbon, placeProps.carbon)}
               <br />
-              Carbon Per Capita: {percentiStringify(targetProps.percapcarb, placeProps.percapcarb)}
+
+              <em>Carbon Per Capita</em> - <small>carbon/person</small><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.percapcarb, placeProps.percapcarb)}
               <br />
             </p>
             <button id="popup-btn" onClick={() => goToStories(placeProps)}>
