@@ -15,7 +15,8 @@ export default function SuggestionDropdown({
       ) : placeSuggestions.length > 0 ? (
         <>
           {placeSuggestions.map(({ properties }, index) => {
-            const { place_id, name, state_name, nation_name } = properties;
+            const { place_id, place_type, name, state_name, nation_name } = properties;
+            console.log(place_type);
             return (
               <p
                 className={`place-name-dropdown${place_id === selectedSuggestion[0] ? ' highlight' : ''}`}
@@ -37,8 +38,8 @@ export default function SuggestionDropdown({
       ) : debouncedSearchTerm.length > 0 ? (
         <p>No suggestion</p>
       ) : (
-        <p>User Search History</p>
-      )}
+                <p>User Search History</p>
+              )}
     </div>
   );
 };

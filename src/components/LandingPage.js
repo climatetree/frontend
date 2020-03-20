@@ -4,7 +4,7 @@ import FirstScreen from "./landingComponents/FirstScreen";
 import IntroScreen from "./landingComponents/IntroScreen";
 import ExploreScreen from "./landingComponents/ExploreScreen";
 import Footer from "./landingComponents/Footer";
-import "../styles/Landing.css";
+import "./Landing.css";
 
 function LandingPage(props) {
   useEffect(() => {
