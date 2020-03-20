@@ -61,9 +61,9 @@ const popUpHandler = (evt, map, overlay, history, targetPlace) => {
             <p>
               <strong>{placeProps.name}</strong> - {placeProps.type_name}
               <br />
-              Population: {Math.floor(placeProps.population)}
+              Population: {Math.round(placeProps.population)}
               <br />
-              Population Density: {placeProps.popdensity}
+              Population Density: {Math.round(placeProps.popdensity)}
               <br />
               Carbon: {placeProps.carbon}
               <br />
