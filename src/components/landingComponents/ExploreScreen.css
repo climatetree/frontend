@@ -1,0 +1,109 @@
+#explore-screen {
+  color: #ededed;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 90px auto;
+  column-gap: 40px;
+  background: linear-gradient(
+    to top,
+    transparent,
+    transparent 250px,
+    #0d0d0d 250px,
+    #0d0d0d
+  );
+  padding-bottom: 250px;
+}
+#explore-header {
+  opacity: 0;
+  text-transform: capitalize;
+  grid-area: 1 / 1 / 1 / 4;
+}
+.explore-tile {
+  opacity: 0;
+}
+.explore-tile img {
+  /* width: 100%; */
+  height: 400px;
+  /* transform: translateY(20px); */
+}
+.explore-tile p {
+  color: #adadad;
+  font-weight: 300;
+  /* transform: translateY(20px); */
+}
+
+.react_tinylink_card {
+  filter: brightness(75%);
+  color: #adadad;
+  border: none;
+  background-color: inherit;
+}
+
+.react_tinylink_card:hover {
+  filter: brightness(100%);
+  background-color: inherit;
+}
+
+.react_tinylink_card_content_wrapper {
+  padding: 0;
+  padding-top: 10px;
+}
+
+.react_tinylink_card_content_header_description {
+  font-size: 20px;
+}
+
+.react_tinylink_card_content_header_description:hover {
+  text-decoration: underline;
+}
+
+.cldxej {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1075px) and (min-width: 960px) {
+  .react_tinylink_card_content_header_description {
+    font-size: 17px;
+  }
+
+  .react_tinylink_card:hover {
+    filter: brightness(100%);
+    background-color: inherit;
+  }
+}
+
+@media (max-width: 959px) and (min-width: 768px) {
+  #explore-screen {
+    column-gap: 25px;
+  }
+  .react_tinylink_card_content_header_description {
+    font-size: 15px;
+  }
+
+  .react_tinylink_card:hover {
+    filter: brightness(100%);
+    background-color: inherit;
+  }
+}
+
+@media (max-width: 767px) {
+  .react_tinylink_card {
+    margin-bottom: 40px;
+  }
+  .react_tinylink_card:hover {
+    filter: brightness(100%);
+    background-color: inherit;
+  }
+  #explore-screen {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 200px;
+  }
+  #explore-header {
+    margin-bottom: 2rem;
+  }
+  .explore-tile {
+    margin-bottom: 20px;
+  }
+}

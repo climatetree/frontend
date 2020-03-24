@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
-import uuid from "react-uuid";
+// import uuid from "react-uuid";
 import authContext from "../context/authContext";
+import { decodeToken } from "jsontokens";
 
 import "../aboutComponents/AboutInfo";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import GoogleLogo from '../../images/google.svg';
-import './Login.css';
+import GoogleLogo from "../../images/google.svg";
+import "./Login.css";
+import axios from "axios";
 
 const Login = () => {
   const [state, dispatch] = useContext(authContext);
@@ -16,19 +18,51 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
+  // const [jwt, setJwt] = useState("");
 
   const responseGoogle = response => {
     setName(response.profileObj.name);
     setEmail(response.profileObj.email);
     setUrl(response.profileObj.imageUrl);
 
+    const data = {
+      username: response.profileObj.name,
+      email: response.profileObj.email
+    };
+
+    const options = {
+      headers: {
+        Authorization: response.tokenId,
+        "Content-Type": "application/json"
+      }
+    };
+
+    console.log("Google RESPONSE token==== : ", response.tokenId);
     dispatch({
       type: "LOGIN",
       payload: {
         username: response.profileObj.name,
         email: response.profileObj.email,
         url: response.profileObj.imageUrl,
-        userid: uuid()
+
+        sw: axios
+          .post(
+            "https://user-microservice-demo.herokuapp.com/login",
+            data,
+            options
+          )
+          .then(res => {
+            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
+            localStorage.setItem("JWT", res.data.jwtToken);
+            // var jwt = require("jsonwebtoken");
+            const token = decodeToken(res.data.jwtToken);
+            console.log("User is ---" + token.payload.userId);
+            localStorage.setItem("userId", token.payload.userId);
+          })
+          .catch(err => {
+            console.log("ERROR: ====", err);
+          }),
+        userid: localStorage.getItem("userId")
       }
     });
   };
@@ -37,13 +71,43 @@ const Login = () => {
     setName(response.name);
     setEmail(response.email);
     setUrl(response.picture.data.url);
+    const data = {
+      username: response.name,
+      email: response.email
+    };
+
+    const options = {
+      headers: {
+        Authorization: response.signedRequest,
+        "Content-Type": "application/json"
+      }
+    };
+
+    console.log("response faceboookk ", response);
     dispatch({
       type: "LOGIN",
       payload: {
         username: response.name,
         email: response.email,
         url: response.picture.data.url,
-        userid: uuid()
+        sw: axios
+          .post(
+            "https://user-microservice-demo.herokuapp.com/login",
+            data,
+            options
+          )
+          .then(res => {
+            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
+            localStorage.setItem("JWT", res.data.jwtToken);
+            // var jwt = require("jsonwebtoken");
+            const token = decodeToken(res.data.jwtToken);
+            console.log("User is ---" + token.payload.userId);
+            localStorage.setItem("userId", token.payload.userId);
+          })
+          .catch(err => {
+            console.log("ERROR: ====", err);
+          }),
+        userid: localStorage.getItem("userId")
       }
     });
   };
@@ -66,7 +130,7 @@ const Login = () => {
               icon="fa-facebook"
             />
             <GoogleLogin
-              clientId="17873037182-efko5kkjp7b07dlo5fi7vsrt654rpl0q.apps.googleusercontent.com"
+              clientId="69469445070-29f3osjc154mqn4ccdnt7rp354oge5va.apps.googleusercontent.com"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               icon={true}
@@ -77,7 +141,7 @@ const Login = () => {
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                 >
-                  <img src={GoogleLogo} alt="google g logo"/>
+                  <img src={GoogleLogo} alt="google g logo" />
                   Login with Google
                 </button>
               )}
