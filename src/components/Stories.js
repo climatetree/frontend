@@ -33,8 +33,8 @@ const Stories = props => {
         setLoadSpinner(true);
 
         const BASE_URL = generalSearchTerm
-          ? "http://localhost:3000/stories/title/"
-          : "http://localhost:3000/stories/place/";
+          ? "https://climatetree-api-gateway.azurewebsites.net/stories/title/"
+          : "https://climatetree-api-gateway.azurewebsites.net/stories/place/";
         const PARAMETER = generalSearchTerm || placeId;
 
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
@@ -80,9 +80,7 @@ const Stories = props => {
     <>
       <Nav />
       {/* Background image */}
-      <div
-        className={`stories-background ${loadSpinner ? "darker" : ""}`}
-      ></div>
+      <div className={`stories-background`}></div>
 
       <section className="stories-container">
         <StorySearchBar
@@ -90,7 +88,7 @@ const Stories = props => {
           {...props}
           loadSpinner={loadSpinner}
         />
-        {loadSpinner !== null && <div>{renderContent()}</div>}
+        {loadSpinner !== null && renderContent()}
       </section>
     </>
   );
