@@ -15,8 +15,7 @@ export default function SuggestionDropdown({
       ) : placeSuggestions.length > 0 ? (
         <>
           {placeSuggestions.map(({ properties }, index) => {
-            const { place_id, place_type, name, state_name, nation_name } = properties;
-            console.log(place_type);
+            const { place_id, name, state_name, nation_name } = properties;
             return (
               <p
                 className={`place-name-dropdown${place_id === selectedSuggestion[0] ? ' highlight' : ''}`}

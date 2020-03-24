@@ -17,7 +17,7 @@ function Maps(props) {
   const getSimilarPlaces = async (placeID, filterFn = () => true) => {
     setIsLoadingSimilarPlaces(true);
     const response = await axios.get(
-      `http://localhost:8080/api/places/${placeID}/similar`
+      `https://climatetree-api-gateway.azurewebsites.net/places/${placeID}/similar`
     );
     setPlaces(response.data);
     setIsLoadingSimilarPlaces(false);
