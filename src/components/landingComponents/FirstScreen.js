@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import searchIcon from "../../images/search.svg";
-import "../../styles/FirstScreen.css";
+import "./FirstScreen.css";
 
 function FirstScreen({ history }) {
   // const BASE_URL =
-  //   "https://backend-mongo-stories.azurewebsites.net/stories/title/";
+  //   "https://climatetree-api-gateway.azurewebsites.net/stories/title/";
   const [searchTerm, setSearchTerm] = useState("");
 
   return (

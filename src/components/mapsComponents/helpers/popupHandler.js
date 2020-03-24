@@ -6,8 +6,10 @@ import ReactDOM from "react-dom";
  * @param {event} evt A single click event
  * @param {Map} map An OpenLayers Map object
  * @param {Overlay} overlay An OpenLayers Overlay object
+ * @param {Object} history Session history
+ * @param {Object} targetPlace Info about the place last searched
  */
-const popUpHandler = (evt, map, overlay, history) => {
+const popUpHandler = (evt, map, overlay, history, targetPlace) => {
   // Get list of features
   let pixel = evt.pixel;
   let features = map.getFeaturesAtPixel(pixel);
@@ -26,7 +28,7 @@ const popUpHandler = (evt, map, overlay, history) => {
   let content = document.getElementById("popup-content");
   content.innerHTML = `<div id="popup-html"></div>`;
 
-  const testFunc = place => {
+  const goToStories = place => {
     history.push({
       pathname: "/stories",
       search: `?place_id=${place.place_id}`,
@@ -48,23 +50,69 @@ const popUpHandler = (evt, map, overlay, history) => {
       );
     } else {
       // Single place popup
-      let place = places[0].getProperties();
-      return (
-        <>
-          <p>
-            Name: <strong>{place.name}</strong>
-            <br />
-            Place Type: {place.type_name}
-            <br />
-            Population: {place.population}
-            <br />
-            Carbon: {place.carbon}
-          </p>
-          <button id="popup-btn" onClick={() => testFunc(place)}>
-            View Stories
+      let placeProps = places[0].getProperties();
+      let targetProps = targetPlace.properties;
+
+      // Is target place?
+      if (targetProps.name === placeProps.name) {
+        // Shows actual statistic numbers
+        return (
+          <>
+            <p>
+              <strong>{placeProps.name}</strong> - <small>{placeProps.type_name}</small>
+              <br />
+
+              <em>Population</em><br />
+              &nbsp;&nbsp;{Math.round(placeProps.population)}
+              <br />
+
+              <em>Population Density</em> - <small>pop/km</small><br />
+              &nbsp;&nbsp;{Math.round(placeProps.popdensity)}
+              <br />
+
+              <em>Carbon</em> - <small>kg/year</small><br />
+              &nbsp;&nbsp;{placeProps.carbon}
+              <br />
+
+              <em>Carbon Per Capita</em> - <small>carbon/person</small><br />
+              &nbsp;&nbsp;{placeProps.percapcarb}
+              <br />
+            </p>
+            <button id="popup-btn" onClick={() => goToStories(placeProps)}>
+              View Stories
           </button>
-        </>
-      );
+          </>
+        );
+      } else {
+        // Is not target place => show relative percentages
+        return (
+          <>
+            <p>
+              <strong>{placeProps.name}</strong> - <small>{placeProps.type_name}</small>
+              <br />
+
+              <em>Population</em><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.population, placeProps.population)}
+              <br />
+
+              <em>Population Density</em> - <small>pop/km</small><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.popdensity, placeProps.popdensity)}
+              <br />
+
+              <em>Carbon</em> - <small>kg/year</small><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.carbon, placeProps.carbon)}
+              <br />
+
+              <em>Carbon Per Capita</em> - <small>carbon/person</small><br />
+              &nbsp;&nbsp;{percentiStringify(targetProps.percapcarb, placeProps.percapcarb)}
+              <br />
+            </p>
+            <button id="popup-btn" onClick={() => goToStories(placeProps)}>
+              View Stories
+          </button>
+          </>
+        );
+      }
     }
   };
 
@@ -75,5 +123,24 @@ const popUpHandler = (evt, map, overlay, history) => {
   let coord = features[0].getProperties().geometry.flatCoordinates;
   overlay.setPosition(coord);
 };
+
+/**
+ * Calculates a relative percentage for places statistics shown
+ * on a popup. For clarity in the above code, returns a string depiction
+ * of the resulting percentage.
+ * @param {Object} targetPlaceNum A number statistic from the place last searched for
+ * @param {Object} currentPlaceNum A number statistic from the place this popup refers to
+ */
+function percentiStringify(targetPlaceNum, currentPlaceNum) {
+  let percent = 100;
+  let ratio = currentPlaceNum / targetPlaceNum;
+  // example: 110% becomes +10%, 90% becomes -10%
+  let relativePercent = Math.floor((ratio * percent) - percent);
+  if (relativePercent >= 0) {
+    return `+${relativePercent}%`;
+  } else {
+    return `${relativePercent}%`;
+  }
+}
 
 export default popUpHandler;

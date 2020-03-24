@@ -75,7 +75,7 @@ export default function Filters({
     if (debouncedSearchTerm && debouncedSearchTerm.length > 1) {
       setIsSearchingSuggestions(true);
       fetch(
-        `http://localhost:8080/api/places/${debouncedSearchTerm}`
+        `https://climatetree-api-gateway.azurewebsites.net/places/${debouncedSearchTerm}`
       )
         .then(response => response.json())
         .then(results => {

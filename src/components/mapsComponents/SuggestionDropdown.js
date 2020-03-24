@@ -37,8 +37,8 @@ export default function SuggestionDropdown({
       ) : debouncedSearchTerm.length > 0 ? (
         <p>No suggestion</p>
       ) : (
-        <p>User Search History</p>
-      )}
+                <p>User Search History</p>
+              )}
     </div>
   );
 };
