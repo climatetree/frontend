@@ -6,7 +6,7 @@ import "./FirstScreen.css";
 
 function FirstScreen({ history }) {
   // const BASE_URL =
-  //   "https://backend-mongo-stories.azurewebsites.net/stories/title/";
+  //   "https://climatetree-api-gateway.azurewebsites.net/stories/title/";
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
