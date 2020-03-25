@@ -31,7 +31,7 @@ const styleFunction = (feature) => {
         const image = new Circle({
             radius: radius,
             fill: new Fill({ color: 'rgba(255, 255, 255, 0.75)' }),
-            stroke: new Stroke({ color: 'black', width: 1.25 }),
+            stroke: new Stroke({ color: 'rgba(0, 0, 0, 0.5)', width: 0.5 }),
         });
 
         // Create Cluster style

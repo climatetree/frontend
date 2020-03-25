@@ -47,10 +47,10 @@ class OlMap extends Component {
       source: new XYZ({
         attributions:
           'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
-          'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
+          'rest/services/Canvas/World_Dark_Gray_Base/MapServer">ArcGIS</a>',
         url:
-          "https://server.arcgisonline.com/ArcGIS/rest/services/" +
-          "World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+          "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/" +
+          "World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
       })
     });
 
