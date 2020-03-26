@@ -70,7 +70,7 @@ const Stories = props => {
       <>
         {renderResultFor()}
         {stories.map(story => (
-          <StoryDetail story={story} />
+          <StoryDetail story={story} key={story.story_id} />
         ))}
       </>
     );
