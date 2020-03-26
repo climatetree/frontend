@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ReactTinyLink } from "react-tiny-link";
-
+import Can from "../loginComponents/Can";
 import StoryCommentInput from "./StoryCommentInput";
 
 const StoryDetail = ({ story }) => {
@@ -9,7 +9,7 @@ const StoryDetail = ({ story }) => {
   const onToggleComment = () => {
     setToggleComment(prevToggleCommentState => !prevToggleCommentState);
   };
-
+  const [role] = window.localStorage.getItem("userRole");
   return (
     <div className="story-card">
       <div className="heading-card-section">
@@ -45,21 +45,33 @@ const StoryDetail = ({ story }) => {
       </div>
 
       <hr></hr>
+      <Can
+        role={role}
+        perform="posts:like"
+        yes={() => (
+          <div>
+            <div className="like-comment-section">
+              <div className="button-group">
+                <span className="like-button">
+                  <i className="far fa-heart"></i>{" "}
+                  <span className="like-comment-font-mobile">
+                    Give it a Heart
+                  </span>
+                </span>
 
-      <div className="like-comment-section">
-        <div className="button-group">
-          <span className="like-button">
-            <i className="far fa-heart"></i>{" "}
-            <span className="like-comment-font-mobile">Give it a Heart</span>
-          </span>
-
-          <span className="comment-button" onClick={() => onToggleComment()}>
-            <i className="far fa-comment"></i>{" "}
-            <span className="like-comment-font-mobile">Post Comment</span>
-          </span>
-        </div>
-      </div>
-      <StoryCommentInput toggleComment={toggleComment} />
+                <span
+                  className="comment-button"
+                  onClick={() => onToggleComment()}
+                >
+                  <i className="far fa-comment"></i>{" "}
+                  <span className="like-comment-font-mobile">Post Comment</span>
+                </span>
+              </div>
+            </div>
+            <StoryCommentInput toggleComment={toggleComment} />
+          </div>
+        )}
+      />
     </div>
   );
 };

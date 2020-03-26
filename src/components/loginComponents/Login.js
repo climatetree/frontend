@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-// import uuid from "react-uuid";
+import uuid from "react-uuid";
 import authContext from "../context/authContext";
 import { decodeToken } from "jsontokens";
 
@@ -18,7 +18,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
-  // const [jwt, setJwt] = useState("");
+  const [jwt, setJwt] = useState("");
 
   const responseGoogle = response => {
     setName(response.profileObj.name);
@@ -37,7 +37,6 @@ const Login = () => {
       }
     };
 
-    console.log("Google RESPONSE token==== : ", response.tokenId);
     dispatch({
       type: "LOGIN",
       payload: {
@@ -47,22 +46,21 @@ const Login = () => {
 
         sw: axios
           .post(
-            "https://user-microservice-demo.herokuapp.com/login",
+            "https://climatetree-api-gateway.azurewebsites.net/user/login",
             data,
             options
           )
           .then(res => {
-            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
-            localStorage.setItem("JWT", res.data.jwtToken);
+            window.localStorage.setItem("JWT", res.data.jwtToken);
             // var jwt = require("jsonwebtoken");
             const token = decodeToken(res.data.jwtToken);
-            console.log("User is ---" + token.payload.userId);
-            localStorage.setItem("userId", token.payload.userId);
+            window.localStorage.setItem("userId", token.payload.userId);
+            window.localStorage.setItem("userRole", token.payload.role);
           })
           .catch(err => {
             console.log("ERROR: ====", err);
           }),
-        userid: localStorage.getItem("userId")
+        userid: window.localStorage.getItem("userId")
       }
     });
   };
@@ -92,22 +90,21 @@ const Login = () => {
         url: response.picture.data.url,
         sw: axios
           .post(
-            "https://user-microservice-demo.herokuapp.com/login",
+            "https://climatetree-api-gateway.azurewebsites.net/user/login",
             data,
             options
           )
           .then(res => {
-            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
-            localStorage.setItem("JWT", res.data.jwtToken);
+            window.localStorage.setItem("JWT", res.data.jwtToken);
             // var jwt = require("jsonwebtoken");
             const token = decodeToken(res.data.jwtToken);
-            console.log("User is ---" + token.payload.userId);
-            localStorage.setItem("userId", token.payload.userId);
+            window.localStorage.setItem("userId", token.payload.userId);
+            window.localStorage.setItem("userRole", token.payload.role);
           })
           .catch(err => {
             console.log("ERROR: ====", err);
           }),
-        userid: localStorage.getItem("userId")
+        userid: window.localStorage.getItem("userId")
       }
     });
   };

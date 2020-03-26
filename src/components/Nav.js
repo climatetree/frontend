@@ -6,9 +6,11 @@ import "./Nav.css";
 
 function Nav(props) {
   const [{ isLoggedIn }, dispatch] = useContext(authContext);
+
   const logOut = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("JWT");
+    localStorage.setItem("userRole", "4");
     dispatch({
       type: "LOGOUT"
     });

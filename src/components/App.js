@@ -12,7 +12,7 @@ import { authReducer, initialAuthState } from "./reducers/authReducers";
 
 const App = () => {
   const useAuthState = useReducer(authReducer, initialAuthState);
-
+  localStorage.setItem("userRole", `4`);
   return (
     <Provider value={useAuthState}>
       <BrowserRouter>
