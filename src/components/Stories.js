@@ -33,8 +33,8 @@ const Stories = props => {
         setLoadSpinner(true);
 
         const BASE_URL = generalSearchTerm
-          ? "https://climatetree-api-gateway.azurewebsites.net/stories/title/"
-          : "https://climatetree-api-gateway.azurewebsites.net/stories/place/";
+          ? "http://localhost:3000/stories/title/"
+          : "http://localhost:3000/stories/place/";
         const PARAMETER = generalSearchTerm || placeId;
 
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
@@ -56,8 +56,8 @@ const Stories = props => {
         placeName={props.location.state.placeName}
       />
     ) : (
-        <ResultsFor searchTerm={generalSearchTerm} />
-      );
+      <ResultsFor searchTerm={generalSearchTerm} />
+    );
   };
 
   // Conditional rendering

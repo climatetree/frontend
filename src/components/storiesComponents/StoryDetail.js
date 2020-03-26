@@ -39,7 +39,7 @@ const StoryDetail = ({ story }) => {
               1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
           <div className="liked-count">
-            <i className="fa fa-heart"></i> {story.rating} Likes
+            <i className="fa fa-heart"></i> {story.liked_by_users.length} Likes
           </div>
         </div>
       </div>
