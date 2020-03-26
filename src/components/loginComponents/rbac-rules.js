@@ -1,30 +1,67 @@
 const rules = {
   "4": {
-    static: ["homepage:view", "posts:view", "home-page:visit"]
+    static: [
+      "homepage:view",
+      "posts:view",
+      "home-page:visit",
+      "about:view",
+      "map-story:view",
+      "login:view"
+    ]
   },
   "3": {
-    static: ["posts:like", "home-page:visit"]
+    static: [
+      "posts:view",
+      "posts:create",
+      "posts:like",
+      "posts:comment",
+      "homepage:view",
+      "posts:view",
+      "posts:delete",
+      "home-page:visit",
+      "about:view",
+      "map-story:view",
+      "login:view"
+    ]
   },
   "2": {
     static: [
-      "posts:like",
+      "posts:view",
       "posts:create",
-      "users:getSelf",
+      "posts:like",
+      "posts:comment",
+      "homepage:view",
+      "posts:view",
       "home-page:visit",
-      "dashboard-page:visit"
+      "about:view",
+      "map-story:view",
+      "login:view",
+      "posts:blacklist",
+      "posts:disapprove",
+      "users:view",
+      "users:blacklist"
     ]
   },
   "1": {
     static: [
-      "posts:like",
+      "posts:view",
       "posts:create",
-      "posts:edit",
       "posts:like",
+      "posts:comment",
+      "homepage:view",
+      "posts:view",
       "posts:delete",
-      "users:get",
-      "users:getSelf",
       "home-page:visit",
-      "dashboard-page:visit"
+      "about:view",
+      "map-story:view",
+      "login:view",
+      "posts:blacklist",
+      "posts:disapprove",
+      "posts:delete",
+      "users:view",
+      "users:update",
+      "users:delete",
+      "users:blacklist"
     ]
   }
 };
