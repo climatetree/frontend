@@ -25,7 +25,7 @@ const trendingStories = [{
 }];
 
 export default function Profile() {
-  const [{ username, url }] = useContext(authContext);
+  const [{ username }] = useContext(authContext);
   const [openPostStoryForm, setOpenPostStoryForm] = useState(false);
   useEffect(() => {
   }, []);

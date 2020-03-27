@@ -1,19 +1,11 @@
 import React from 'react';
-import { useFormik, Formik } from 'formik';
+import { Formik } from 'formik';
 import closeIcon from '../../images/x.svg';
 import './PostStoryForm.css';
 
 export default function PostStoryForm({
   setOpenPostStoryForm,
 }) {
-  const formik = useFormik({
-    initialValues: {
-      storyLink: '',
-    },
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-    },
-  });
   const closeForm = () => {
     setOpenPostStoryForm(false)
   }
