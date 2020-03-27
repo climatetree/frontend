@@ -34,7 +34,7 @@
 .story-form-wrapper form footer {
   margin-top: 1rem;
 }
-.close-btn {
+.story-form-wrapper .close-btn {
   cursor: pointer;
   border-radius: 50%;
   height: 2rem;
@@ -46,7 +46,7 @@
   top: 1rem;
   right: 1rem;
 }
-.close-btn:hover {
+.story-form-wrapper .close-btn:hover {
   background-color: #454545;
 }
 .story-form-wrapper form label {
