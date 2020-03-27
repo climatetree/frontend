@@ -11,6 +11,7 @@ const StoryDetail = ({ story }) => {
     setToggleComment(prevToggleCommentState => !prevToggleCommentState);
   };
   const [role] = window.localStorage.getItem("userRole");
+
   return (
     <div className="story-card">
       <div className="heading-card-section">
@@ -51,6 +52,7 @@ const StoryDetail = ({ story }) => {
         perform="posts:like"
         yes={() => (
           <LikeCommentButtonGroup
+            story={story}
             onToggleComment={onToggleComment}
             toggleComment={toggleComment}
           />

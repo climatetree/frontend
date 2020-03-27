@@ -1,8 +1,6 @@
 import React from "react";
 
 const StoryCommentInput = ({ toggleComment }) => {
-  console.log(toggleComment);
-
   return (
     <div
       className={`comment-input-container ${
