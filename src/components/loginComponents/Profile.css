@@ -107,31 +107,31 @@
   cursor: pointer;
   text-transform: capitalize;
 }
-.react_tinylink_card {
+.stories .react_tinylink_card {
   color: #ededed;
   background-color: transparent;
   border: none;
 }
-.react_tinylink_card:not(:last-child) {
+.stories .react_tinylink_card:not(:last-child) {
   margin-bottom: 1rem;
 }
-.pending .react_tinylink_card {
+.stories.pending .react_tinylink_card {
   margin-bottom: 0;
 }
-.react_tinylink_card:hover {
+.stories .react_tinylink_card:hover {
   color: #ededed;
   background-color: transparent;
 }
-.react_tinylink_card_content_wrapper {
+.stories .react_tinylink_card_content_wrapper {
   padding-top: 0;
   padding-bottom: 0;
   padding-right: 0;
 }
-.react_tinylink_card_content_header {
+.stories .react_tinylink_card_content_header {
   font-weight: 400;
 }
-.react_tinylink_card_content,
-.react_tinylink_footer {
+.stories .react_tinylink_card_content,
+.stories .react_tinylink_footer {
   font-weight: 300;
 }
 
