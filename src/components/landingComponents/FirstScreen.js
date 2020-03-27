@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import searchIcon from "../../images/search.svg";
 import "./FirstScreen.css";
 
-function FirstScreen({ history }) {
-  // const BASE_URL =
-  //   "https://climatetree-api-gateway.azurewebsites.net/stories/title/";
+export default function FirstScreen({ history }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -33,17 +31,13 @@ function FirstScreen({ history }) {
           <img src={searchIcon} alt="search" id="search" />
         </form>
         <div>
-          <button className="primary-btn">
+          {/* <button className="primary-btn">
             <a href="#explore-screen">Get Started</a>
-          </button>
-          <button className="primary-btn">
-            <Link to="/maps">Map</Link>
-          </button>
+          </button> */}
+          <Link className="primary-btn" to="/maps">Map</Link>
         </div>
       </div>
       <div id="background"></div>
     </section>
   );
 }
-
-export default FirstScreen;

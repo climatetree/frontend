@@ -35,3 +35,9 @@
 .user-info p {
   margin-top: 10px;
 }
+
+@media (max-width: 767px) {
+  .avatar-wrapper {
+    right: 55px;
+  }
+}
