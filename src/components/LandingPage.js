@@ -5,7 +5,8 @@ import IntroScreen from "./landingComponents/IntroScreen";
 import ExploreScreen from "./landingComponents/ExploreScreen";
 import Footer from "./landingComponents/Footer";
 import "./Landing.css";
-import authContext from "./context/authContext";
+
+// import StoriesContext from "./context/StoriesContext";
 
 function LandingPage(props) {
   useEffect(() => {
@@ -15,6 +16,10 @@ function LandingPage(props) {
     };
   }, []);
 
+  // const stories = useContext(StoriesContext);
+
+  // console.log(stories);
+
   return (
     <>
       <Nav />
@@ -22,6 +27,7 @@ function LandingPage(props) {
       <IntroScreen />
       <ExploreScreen />
       <Footer />
+      <span style={{ color: "#fff" }}>{stories => stories}</span>
     </>
   );
 }

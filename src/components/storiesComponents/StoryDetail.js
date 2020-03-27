@@ -1,15 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ReactTinyLink } from "react-tiny-link";
 
 import Can from "../loginComponents/Can";
 import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
 
 const StoryDetail = ({ story }) => {
+  let userLikesSet = new Set();
+
+  for (let userId of story.liked_by_users) {
+    userLikesSet.add(userId);
+  }
+
   let [toggleComment, setToggleComment] = useState(false);
+  // let [likedByUsers, setLikedByUsers] = useState(story.liked_by_users);
+
+  let [userLikesSetState, setUserLikesSet] = useState(userLikesSet);
+
+  console.log(userLikesSetState);
 
   const onToggleComment = () => {
     setToggleComment(prevToggleCommentState => !prevToggleCommentState);
   };
+
+  const onChangeUsersLikesSet = (action, userId) => {
+    if (action === "like") {
+      // setLikedByUsers(prevState => [...prevState, parseInt(userId)]);
+      setUserLikesSet(prevUserLikesSetState =>
+        new Set(prevUserLikesSetState).add(parseInt(userId))
+      );
+    } else {
+      // setLikedByUsers(prevState =>
+      //   prevState.filter(uid => uid !== parseInt(userId))
+      // );
+      setUserLikesSet(prevUserLikesSetState => {
+        const newUserLikesSetState = new Set(prevUserLikesSetState);
+        newUserLikesSetState.delete(parseInt(userId));
+
+        return newUserLikesSetState;
+      });
+    }
+  };
+
   const [role] = window.localStorage.getItem("userRole");
 
   return (
@@ -41,7 +72,8 @@ const StoryDetail = ({ story }) => {
               1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
           <div className="liked-count">
-            <i className="fa fa-heart"></i> {story.liked_by_users.length} Likes
+            {/* <i className="fa fa-heart"></i>  */}
+            {userLikesSetState.size} Likes
           </div>
         </div>
       </div>
@@ -54,6 +86,9 @@ const StoryDetail = ({ story }) => {
           <LikeCommentButtonGroup
             story={story}
             onToggleComment={onToggleComment}
+            onChangeUsersLikesSet={onChangeUsersLikesSet}
+            userLikesSetState={userLikesSetState}
+            // likedByUsers={likedByUsers}
             toggleComment={toggleComment}
           />
         )}

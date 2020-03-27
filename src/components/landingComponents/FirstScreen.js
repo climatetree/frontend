@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import searchIcon from "../../images/search.svg";
 import "./FirstScreen.css";
 
+// import useStories from "../useStories";
+
 function FirstScreen({ history }) {
   // const BASE_URL =
   //   "https://climatetree-api-gateway.azurewebsites.net/stories/title/";
@@ -18,6 +20,8 @@ function FirstScreen({ history }) {
           id="first-screen-search"
           onSubmit={event => {
             event.preventDefault();
+            // const stories = useStories("title", event.target.value);
+            // console.log(stories);
             history.push({
               pathname: "/stories",
               search: `?storyTitle=${searchTerm}`,

@@ -7,14 +7,16 @@ import Maps from "./Maps";
 import "./App.css";
 import Stories from "./Stories";
 import LoginPage from "./LoginPage";
-import { Provider } from "./context/authContext";
+
+import { AuthProvider } from "./context/authContext";
 import { authReducer, initialAuthState } from "./reducers/authReducers";
 
 const App = () => {
   const useAuthState = useReducer(authReducer, initialAuthState);
   localStorage.setItem("userRole", `4`);
+
   return (
-    <Provider value={useAuthState}>
+    <AuthProvider value={useAuthState}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={props => <LandingPage {...props} />} />
@@ -30,7 +32,7 @@ const App = () => {
           <Route path="/stories" render={props => <Stories {...props} />} />
         </Switch>
       </BrowserRouter>
-    </Provider>
+    </AuthProvider>
   );
 };
 
