@@ -6,8 +6,16 @@ import './MapNav.css';
 export default function MapNav() {
   const [{ isLoggedIn }] = useContext(authContext);
   const toggleMapNav = () => {
-    document.querySelector(".map-burger").classList.toggle("toggle");
     document.querySelector(".map-nav-links").classList.toggle("map-nav-active");
+    document.querySelectorAll(".map-nav-links li").forEach((link, index) => {
+      if (link.style.animation) {
+        link.style.animation = "";
+      } else {
+        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 +
+          0.2}s`;
+      }
+    });
+    document.querySelector(".map-burger").classList.toggle("toggle");
   };
   return (
     <>
@@ -18,17 +26,17 @@ export default function MapNav() {
       </div>
       <ul className="map-nav-links">
         <li>
-          <Link to="/">HOME</Link>
+          <Link to="/" className="underline-hover">HOME</Link>
         </li>
         <li>
-          <Link to="/about">ABOUT</Link>
+          <Link to="/about" className="underline-hover">ABOUT</Link>
         </li>
         {isLoggedIn && (
           <li>
-            <Link to="/login">PROFILE</Link>
+            <Link to="/login" className="underline-hover">PROFILE</Link>
           </li>
         )}
       </ul>
     </>
   );
-};
+}
