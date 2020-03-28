@@ -5,6 +5,7 @@ import SuggestionOverlay from './SuggestionOverlay';
 import CheckboxGroup from "./CheckboxGroup";
 import MinMaxRange from './MinMaxRange';
 import useDebounce from "./helpers/useDebounce";
+import { factory } from './helpers/data';
 import "./Filters.css";
 
 export default function Filters({
@@ -19,10 +20,12 @@ export default function Filters({
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
 
   const [populationRange, setPopulationRange] = useState({
+    name: 'population',
     min: 90,
     max: 150,
   });
   const [carbonRange, setCarbonRange] = useState({
+    name: 'carbon',
     min: 90,
     max: 110,
   });
@@ -43,7 +46,8 @@ export default function Filters({
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      getSimilarPlaces(placeID, filterFn);
+      let filters = [populationRange, carbonRange];
+      getSimilarPlaces(factory(placeSuggestions[index], filters));
     }
   };
   const openConfirmationPanel = () => {
@@ -63,10 +67,8 @@ export default function Filters({
         0,
       ]);
       setTargetPlace(placeSuggestions[0]);
-      getSimilarPlaces(
-        placeSuggestions[0].properties.place_id,
-        filterFn
-      );
+      let filters = [populationRange, carbonRange];
+      getSimilarPlaces(factory(placeSuggestions[0], filters));
       document.getElementById('suggestions').style.display = 'none';
     }
   }
