@@ -9,6 +9,13 @@
   top: unset;
   right: 0.5rem;
   bottom: 2.7rem;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.ol-attribution {
+  border-radius: 4px;
+  padding: 0;
 }
 
 #popup-btn {

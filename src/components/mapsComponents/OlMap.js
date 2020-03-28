@@ -10,9 +10,10 @@ import XYZ from "ol/source/XYZ";
 import { fromLonLat } from "ol/proj";
 
 import { styleFunction as getStyles } from "./helpers/olStyles";
-import { getGeoJson } from "./helpers/data";
+import { getGeoJson, getGeoServerData } from "./helpers/data";
 import popUpHandler from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
+import Filters from './Filters';
 
 class OlMap extends Component {
   state = { map: null };
@@ -47,10 +48,10 @@ class OlMap extends Component {
       source: new XYZ({
         attributions:
           'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
-          'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
+          'rest/services/Canvas/World_Dark_Gray_Base/MapServer">ArcGIS</a>',
         url:
-          "https://server.arcgisonline.com/ArcGIS/rest/services/" +
-          "World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+          "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/" +
+          "World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
       })
     });
 
@@ -102,7 +103,7 @@ class OlMap extends Component {
         .getSource()
         .getSource();
       dataSource.clear({ fast: true });
-      dataSource.addFeatures(getGeoJson(this.props.places));
+      dataSource.addFeatures(this.props.places);
     }
   }
 
@@ -111,6 +112,11 @@ class OlMap extends Component {
       <div className="OlMap">
         {/* Map */}
         <div id="map"></div>
+        {/* <Filters
+          getSimilarPlaces={getSimilarPlaces}
+          targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
+          setTargetPlace={setTargetPlace}
+        /> */}
         {/* Popup holder */}
         <div id="popup" className="ol-popup">
           <button id="popup-closer" className="ol-popup-closer"></button>

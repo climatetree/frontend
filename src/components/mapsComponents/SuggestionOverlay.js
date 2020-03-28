@@ -12,13 +12,15 @@ export default function SuggestionOverlay({
   return (
     <div id="confirmation">
       <div id="confirmation-panel">
-        <img
-          className="close-btn"
-          src={closeIcon}
-          alt="close suggestion"
-          onClick={closeConfirmationPanel}
-        />
-        <p className="confirmation-title">Did you mean</p>
+        <header>
+          <p className="confirmation-title">Did you mean</p>
+          <img
+            className="close-btn"
+            src={closeIcon}
+            alt="close suggestion"
+            onClick={closeConfirmationPanel}
+          />
+        </header>
         {placeSuggestions.map(({ properties }, index) => {
           const { place_id, name, state_name, nation_name } = properties;
           return (
@@ -40,4 +42,4 @@ export default function SuggestionOverlay({
       </div>
     </div>
   );
-};
+}
