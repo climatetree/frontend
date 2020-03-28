@@ -2,7 +2,6 @@
   position: absolute;
   top: calc(0.5rem + 3px);
   right: 25px;
-  color: #333333;
   height: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -11,19 +10,13 @@
   cursor: pointer;
   z-index: 2;
 }
-
 .map-burger div {
   width: 23px;
   height: 2px;
-  background-color: #666666;
+  background-color: #ededed;
   margin: 2.5px;
   transition: all 0.3s ease;
 }
-
-.map-burger:hover div {
-  background-color: #444444;
-}
-
 .map-nav-links {
   list-style: none;
   position: absolute;
@@ -31,31 +24,28 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(10, 10, 10, 0.95);
+  background-color: rgba(10, 10, 10, 0.9);
   box-shadow: 0 0 5px 0 #111111;
   padding: 40px;
   z-index: 1;
   transform: translateX(100%);
   transition: transform 0.5s ease-out;
 }
-
 .map-nav-links li {
+  opacity: 0;
   margin: 20px 0;
+  width: fit-content;
 }
-
 .map-nav-links a {
   color: #ededed;
   text-decoration: none;
 }
-
 .toggle .map-line1 {
   transform: rotate(-45deg) translate(-4px, 5px);
 }
-
 .toggle .map-line3 {
   transform: rotate(45deg) translate(-4px, -5px);
 }
-
 .map-nav-active {
   transform: translateX(0%);
 }

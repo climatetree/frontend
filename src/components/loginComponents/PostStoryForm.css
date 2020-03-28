@@ -1,0 +1,82 @@
+.story-form-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.story-form-wrapper form {
+  min-height: 300px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #181818;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  box-shadow: 1px 1px 16px 4px rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+.story-form-wrapper .form-body {
+  display: flex;
+  flex-direction: column;
+}
+.story-form-wrapper form header {
+  font-weight: 300;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+.story-form-wrapper form footer {
+  margin-top: 1rem;
+}
+.story-form-wrapper .close-btn {
+  cursor: pointer;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.story-form-wrapper .close-btn:hover {
+  background-color: #454545;
+}
+.story-form-wrapper form label {
+  font-weight: 300;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.story-form-wrapper form input {
+  line-height: 1rem;
+  padding: 12px 20px;
+  border: none;
+  background-color: #454545;
+  color: #ededed;
+  border-radius: 2px;
+  outline: none;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.story-form-wrapper form input::placeholder {
+  color: #888888;
+  font-weight: 300;
+}
+button.post-story {
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #fefefe;
+  background: linear-gradient(to right, #60A2DE, #5274C8);
+  border: none;
+  cursor: pointer;
+  padding: 5px 20px;
+  float: right;
+}

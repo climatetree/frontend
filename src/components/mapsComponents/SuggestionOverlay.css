@@ -20,14 +20,24 @@
   padding: 20px;
   overflow-y: auto;
 }
-#confirmation-panel .close-btn {
-  float: right;
-  cursor: pointer;
+#confirmation-panel header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 #confirmation-panel .confirmation-title {
   font-size: 1.4rem;
   font-weight: 400;
-  margin-bottom: 20px;
+}
+#confirmation-panel .close-btn {
+  height: 28px;
+  width: 28px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+#confirmation-panel .close-btn:hover {
+  background-color: #ededed;
 }
 #confirmation-panel .confirmation-item {
   margin-bottom: 1rem;
