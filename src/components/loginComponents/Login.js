@@ -26,6 +26,7 @@ export default function Login() {
         email: response.profileObj.email,
         url: response.profileObj.imageUrl,
         userId: token.payload.userId,
+        role: token.payload.role,
         jwt,
         error: ""
       });
@@ -66,6 +67,7 @@ export default function Login() {
         email: response.email,
         url: response.picture.data.url,
         userId: token.payload.userId,
+        role: token.payload.role,
         jwt,
         error: ""
       });

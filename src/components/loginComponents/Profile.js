@@ -40,6 +40,7 @@ export default function Profile() {
   const { user } = useContext(UserContext);
   const [openPostStoryForm, setOpenPostStoryForm] = useState(false);
   useEffect(() => {}, []);
+  console.log(user);
   return (
     <div className="profile-wrapper">
       <div className="profile">

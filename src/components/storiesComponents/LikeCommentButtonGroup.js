@@ -2,38 +2,34 @@ import React, { useContext } from "react";
 import axios from "axios";
 
 import StoryCommentInput from "./StoryCommentInput";
-import authContext from "../context/authContext";
+import { UserContext } from "../context/UserContext";
 
 const LikeCommentButtonGroup = ({
   onToggleComment,
   toggleComment,
   story,
   onChangeUsersLikesSet,
-  // likedByUsers,
   userLikesSetState
 }) => {
-  const [{ userid }] = useContext(authContext);
-  const { story_id, liked_by_users } = story;
+  const { user } = useContext(UserContext);
 
-  console.log(userid);
+  const { userId, jwt } = user;
+  const { story_id } = story;
 
-  const likeService = async (storyId, userId, action) => {
+  const likeService = async (storyId, user_id, action) => {
     const options = {
       headers: {
-        Authorization: "Bearer " + window.localStorage.getItem("JWT"),
+        Authorization: "Bearer " + jwt,
         "Content-Type": "application/json"
       }
     };
 
     const response = await axios.put(
-      `https://climatetree-api-gateway.azurewebsites.net/stories/${storyId}/${action}/${userId}`,
-      null,
+      `http://localhost:3000/stories/${storyId}/${action}/${user_id}`,
       options
     );
 
-    // const userIsFound = likedByUsers.find(user => user.toString() === userid);
-
-    const userIsFound = userLikesSetState.has(parseInt(userId));
+    const userIsFound = userLikesSetState.has(parseInt(user_id));
 
     // 1. If users want to like and that user is not found, user can like.
     //    Otherwise, user cannot like anymore.
@@ -49,16 +45,13 @@ const LikeCommentButtonGroup = ({
   };
 
   const renderLikeDislikeButton = () => {
-    // const userIsFound = likedByUsers.find(user => user.toString() === userid);
-    const userIsFound = userLikesSetState.has(parseInt(userid));
+    const userIsFound = userLikesSetState.has(parseInt(userId));
     const action = !userIsFound ? "like" : "unlike";
-
-    console.log("HELLO");
 
     return (
       <span
         className="like-button"
-        onClick={() => likeService(story_id, userid, action)}
+        onClick={async () => await likeService(story_id, userId, action)}
       >
         <i
           className={`${!userIsFound ? "far " : "fas "}fa-heart${
@@ -83,7 +76,7 @@ const LikeCommentButtonGroup = ({
           </span>
         </div>
       </div>
-      <StoryCommentInput toggleComment={toggleComment} />
+      <StoryCommentInput toggleComment={toggleComment} story={story} />
     </div>
   );
 };

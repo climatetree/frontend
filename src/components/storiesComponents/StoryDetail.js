@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ReactTinyLink } from "react-tiny-link";
 
+import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
 import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
 
@@ -12,11 +13,11 @@ const StoryDetail = ({ story }) => {
   }
 
   let [toggleComment, setToggleComment] = useState(false);
-  // let [likedByUsers, setLikedByUsers] = useState(story.liked_by_users);
-
   let [userLikesSetState, setUserLikesSet] = useState(userLikesSet);
 
-  console.log(userLikesSetState);
+  // New updated code to get user and role.
+  const { user } = useContext(UserContext);
+  const { role } = user;
 
   const onToggleComment = () => {
     setToggleComment(prevToggleCommentState => !prevToggleCommentState);
@@ -24,14 +25,10 @@ const StoryDetail = ({ story }) => {
 
   const onChangeUsersLikesSet = (action, userId) => {
     if (action === "like") {
-      // setLikedByUsers(prevState => [...prevState, parseInt(userId)]);
       setUserLikesSet(prevUserLikesSetState =>
         new Set(prevUserLikesSetState).add(parseInt(userId))
       );
     } else {
-      // setLikedByUsers(prevState =>
-      //   prevState.filter(uid => uid !== parseInt(userId))
-      // );
       setUserLikesSet(prevUserLikesSetState => {
         const newUserLikesSetState = new Set(prevUserLikesSetState);
         newUserLikesSetState.delete(parseInt(userId));
@@ -40,8 +37,6 @@ const StoryDetail = ({ story }) => {
       });
     }
   };
-
-  const [role] = window.localStorage.getItem("userRole");
 
   return (
     <div className="story-card">
@@ -71,10 +66,7 @@ const StoryDetail = ({ story }) => {
             {`${story.date.getUTCMonth() +
               1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
-          <div className="liked-count">
-            {/* <i className="fa fa-heart"></i>  */}
-            {userLikesSetState.size} Likes
-          </div>
+          <div className="liked-count">{userLikesSetState.size} Likes</div>
         </div>
       </div>
 
@@ -88,7 +80,6 @@ const StoryDetail = ({ story }) => {
             onToggleComment={onToggleComment}
             onChangeUsersLikesSet={onChangeUsersLikesSet}
             userLikesSetState={userLikesSetState}
-            // likedByUsers={likedByUsers}
             toggleComment={toggleComment}
           />
         )}
