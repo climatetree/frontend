@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
-import authContext from "../context/authContext";
+import React, { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 import './UserAvatar.css';
 
 export default function UserAvatar() {
-  const [{ username, email, url }] = useContext(authContext);
+  const { user } = useContext(UserContext);
   const toggleUserInfo = () => {
     const userInfo = document.querySelector('.user-info');
     if (userInfo.style.display === 'flex') {
@@ -16,15 +16,15 @@ export default function UserAvatar() {
     <div className="avatar-wrapper">
       <img
         className="avatar"
-        src={url}
-        alt={username}
+        src={user.url}
+        alt={user.username}
         onClick={toggleUserInfo}
       />
       <div className="user-info">
-        <img src={url} alt={username} />
-        <p>{username}</p>
-        <p>{email}</p>
+        <img src={user.url} alt={user.username} />
+        <p>{user.username}</p>
+        <p>{user.email}</p>
       </div>
     </div>
   );
-};
+}
