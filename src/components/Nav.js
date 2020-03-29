@@ -4,7 +4,7 @@ import authContext from "./context/authContext";
 import logo from "../images/white-logo.png";
 import "./Nav.css";
 
-function Nav(props) {
+function Nav() {
   const [{ isLoggedIn }, dispatch] = useContext(authContext);
 
   const logOut = () => {
@@ -16,7 +16,7 @@ function Nav(props) {
     });
   };
   return (
-    <header className="nav-header" hidden={props.hidden}>
+    <header className="nav-header">
       <nav>
         <Link to="/" className="logo">
           <img src={logo} alt="climate tree logo" />
@@ -66,10 +66,6 @@ function Nav(props) {
     </header>
   );
 }
-
-Nav.defaultProps = {
-  hidden: false
-};
 
 function navSlide() {
   document.querySelector(".nav-links").classList.toggle("nav-active");

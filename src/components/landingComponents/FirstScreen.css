@@ -5,11 +5,9 @@
   justify-content: center;
   color: #ededed;
 }
-
 #animation-first {
   animation: firstScreen 1s ease-in-out 0s forwards;
 }
-
 @keyframes firstScreen {
   from {
     opacity: 0;
@@ -20,19 +18,16 @@
     transform: translateY(0px);
   }
 }
-
 #first-screen h1 {
   text-transform: uppercase;
   margin: 0;
 }
-
 #first-screen p {
   width: 75%;
   margin: 2rem 0;
   font-weight: 300;
   font-size: 1.35rem;
 }
-
 #first-screen-search {
   display: flex;
   align-items: center;
@@ -40,7 +35,6 @@
   position: relative;
   width: 75%;
 }
-
 #first-screen input {
   width: 100%;
   color: #0d0d0d;
@@ -50,14 +44,12 @@
   font-size: 1.2rem;
   font-weight: 300;
 }
-
 #first-screen-search img {
   cursor: pointer;
   position: absolute;
   right: 0;
   transform: translateX(-1.6rem);
 }
-
 .primary-btn {
   background-color: rgba(255, 255, 255, 0.85);
   width: 10rem;
@@ -65,17 +57,17 @@
   border-radius: 1.5rem;
   font-size: 1rem;
   margin-right: 1rem;
+  line-height: 3rem;
   cursor: pointer;
-}
-
-.primary-btn a {
   text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
-
-.primary-btn a:link, .primary-btn a:active, .primary-btn a:visited {
+.primary-btn:link,
+.primary-btn:active,
+.primary-btn:visited {
   color: #0d0d0d;
 }
-
 #background {
   position: absolute;
   top: 0;
@@ -111,6 +103,7 @@
     height: 2.7rem;
     font-size: 0.9rem;
     margin-right: 0.9rem;
+    line-height: 2.7rem;
     cursor: pointer;
   }
 }
@@ -135,6 +128,7 @@
     height: 2.4rem;
     font-size: 0.8rem;
     margin-right: 0.8rem;
+    line-height: 2.4rem;
     cursor: pointer;
   }
 }

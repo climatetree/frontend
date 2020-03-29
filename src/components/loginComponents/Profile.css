@@ -3,13 +3,14 @@
   width: 100vw;
   padding-top: 80px;
   display: grid;
-  grid-template-columns: 45% auto;
+  grid-template-columns: 35% auto;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url('../../images/actionvance-t7EL2iG3jMc-unsplash.jpg');
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
+  color: #ededed;
 }
 .profile {
   height: fit-content;
@@ -18,13 +19,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
-  color: #fefefe;
+  padding: 40px 0;
 }
 .greeting {
   font-size: 2rem;
   font-weight: 300;
-  margin: 20px 0;
+  margin-bottom: 2rem;
 }
 .profile-image {
   height: 60px;
@@ -40,32 +40,117 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  padding-top: 40px;
+}
+.stories {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 90%;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+.stories-wrapper h2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.story-btn-wrapper {
+  margin-top: 0.5rem;
+}
+.pending-wrapper:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.story-btn {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ededed;
+  font-size: 12px;
+  font-weight: 300;
+  padding: 5px 12px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.6s;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
 }
-.stories-wrapper div {
-  background-color: rgba(255, 255, 255, 0.7);
-  width: 85%;
-  margin: 40px 0;
-  border-radius: 2px;
-  padding: 20px;
-  flex-shrink: 0;
+.story-btn:hover {
+  background-color: #5274C8;
+  border: 1px solid transparent;
 }
-.stories-wrapper div h1 {
-  font-size: 2rem;
+.story-btn:not(:last-child) {
+  margin-right: 5px;
 }
-.recommendations {
-  height: 500px;
+.story-btn:last-child:hover {
+  background-color: #C85274;
 }
-.bookmarks {
-  height: 800px;
+.personal footer {
+  height: 4rem;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
-.posts {
-  height: 400px;
+.post-story {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.stories .react_tinylink_card {
+  color: #ededed;
+  background-color: transparent;
+  border: none;
+}
+.stories .react_tinylink_card:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.stories.pending .react_tinylink_card {
+  margin-bottom: 0;
+}
+.stories .react_tinylink_card:hover {
+  color: #ededed;
+  background-color: transparent;
+}
+.stories .react_tinylink_card_content_wrapper {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.stories .react_tinylink_card_content_header {
+  font-weight: 400;
+}
+.stories .react_tinylink_card_content,
+.stories .react_tinylink_footer {
+  font-weight: 300;
 }
 
 @media (max-width: 767px) {
   .profile-wrapper {
     display: block;
     height: fit-content;
+  }
+  .stories-wrapper {
+    align-items: center;
+    padding-top: 0;
+  }
+  .stories {
+    width: 85%;
+  }
+  .actions {
+    width: 85%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
   }
 }
