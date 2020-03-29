@@ -1,16 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ReactTinyLink } from "react-tiny-link";
-<<<<<<< HEAD
 import PostStoryForm from "./PostStoryForm";
 import plusIcon from "../../images/plus.svg";
-import authContext from "../context/authContext";
-import "./Profile.css";
-=======
-import PostStoryForm from './PostStoryForm';
-import plusIcon from '../../images/plus.svg';
 import { UserContext } from "../context/UserContext";
-import './Profile.css';
->>>>>>> 09ceb6e372714973de39e16b4de0fcc4dd616003
+import "./Profile.css";
 
 const pendingStories = [
   {
