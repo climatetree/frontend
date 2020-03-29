@@ -1,9 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ReactTinyLink } from "react-tiny-link";
+<<<<<<< HEAD
 import PostStoryForm from "./PostStoryForm";
 import plusIcon from "../../images/plus.svg";
 import authContext from "../context/authContext";
 import "./Profile.css";
+=======
+import PostStoryForm from './PostStoryForm';
+import plusIcon from '../../images/plus.svg';
+import { UserContext } from "../context/UserContext";
+import './Profile.css';
+>>>>>>> 09ceb6e372714973de39e16b4de0fcc4dd616003
 
 const pendingStories = [
   {
@@ -37,7 +44,7 @@ const trendingStories = [
 ];
 
 export default function Profile() {
-  const [{ username }] = useContext(authContext);
+  const { user } = useContext(UserContext);
   const [openPostStoryForm, setOpenPostStoryForm] = useState(false);
   useEffect(() => {}, []);
   return (
@@ -45,7 +52,7 @@ export default function Profile() {
       <div className="profile">
         <div className="greeting">
           <p>Welcome</p>
-          <p>{username}</p>
+          <p>{user.username}</p>
         </div>
       </div>
       <div className="stories-wrapper">
