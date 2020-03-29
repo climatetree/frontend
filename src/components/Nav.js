@@ -1,16 +1,21 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import authContext from "./context/authContext";
+import { UserContext } from "./context/UserContext";
 import logo from "../images/white-logo.png";
 import "./Nav.css";
 
 function Nav() {
-  const [{ isLoggedIn }, dispatch] = useContext(authContext);
+  const { user, setUser } = useContext(UserContext);
   const logOut = () => {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("JWT");
-    dispatch({
-      type: "LOGOUT"
+    setUser({
+      ...user,
+      isLoggedIn: false,
+      username: 'Loggedout',
+      email: 'NA',
+      url: 'NA',
+      userId: 'NA',
+      error: '',
+      jwt: '',
     });
   };
   return (
@@ -36,7 +41,7 @@ function Nav() {
               <span>ABOUT</span>
             </Link>
           </li>
-          {isLoggedIn && (
+          {user.isLoggedIn && (
             <li>
               <Link to="/login" className="underline-hover">
                 <span>PROFILE</span>
@@ -44,7 +49,7 @@ function Nav() {
             </li>
           )}
           <li>
-            {isLoggedIn ? (
+            {user.isLoggedIn ? (
               <Link to="/login" onClick={logOut} className="underline-hover">
                 <span>LOGOUT</span>
               </Link>
@@ -71,8 +76,7 @@ function navSlide() {
     if (link.style.animation) {
       link.style.animation = "";
     } else {
-      link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 +
-        0.2}s`;
+      link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.2}s`;
     }
   });
   document.querySelector(".burger").classList.toggle("toggle");
