@@ -17,9 +17,6 @@ function Maps(props) {
   const getSimilarPlaces = async (queryParams) => {
     setIsLoadingSimilarPlaces(true);
     let features = await getGeoServerData(queryParams);
-    // const response = await axios.get(
-    //   `https://climatetree-api-gateway.azurewebsites.net/places/${placeID}/similar`
-    // );
     if (features !== undefined) {
       setPlaces(features);
     }

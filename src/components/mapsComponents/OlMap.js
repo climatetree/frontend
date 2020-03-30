@@ -10,10 +10,9 @@ import XYZ from "ol/source/XYZ";
 import { fromLonLat } from "ol/proj";
 
 import { styleFunction as getStyles } from "./helpers/olStyles";
-import { getGeoJson, getGeoServerData } from "./helpers/data";
+import { getGeoJson } from "./helpers/data";
 import popUpHandler from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
-import Filters from './Filters';
 
 class OlMap extends Component {
   state = { map: null };
@@ -112,11 +111,6 @@ class OlMap extends Component {
       <div className="OlMap">
         {/* Map */}
         <div id="map"></div>
-        {/* <Filters
-          getSimilarPlaces={getSimilarPlaces}
-          targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
-          setTargetPlace={setTargetPlace}
-        /> */}
         {/* Popup holder */}
         <div id="popup" className="ol-popup">
           <button id="popup-closer" className="ol-popup-closer"></button>

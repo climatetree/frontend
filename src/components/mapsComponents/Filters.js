@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SuggestionDropdown from './SuggestionDropdown';
 import SuggestionOverlay from './SuggestionOverlay';
-import CheckboxGroup from "./CheckboxGroup";
 import MinMaxRange from './MinMaxRange';
 import useDebounce from "./helpers/useDebounce";
 import { factory } from './helpers/data';
@@ -23,16 +22,16 @@ export default function Filters({
     name: 'population',
     min: 90,
     max: 150,
+    apply: true,  // Only population filter is applied by default
   });
   const [carbonRange, setCarbonRange] = useState({
     name: 'carbon',
     min: 90,
     max: 110,
+    apply: false,
   });
-  const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
-  const filterFn = ({ properties }) => {
-    return !placeTypesDisabled.includes(properties.type_name);
-  };
+
+  const filterArray = [populationRange, carbonRange];
   const openAdvancedFilters = () => {
     const advancedFilters = document.getElementById('advanced-filters');
     if (advancedFilters.style.display === 'block') {
@@ -46,8 +45,7 @@ export default function Filters({
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      let filters = [populationRange, carbonRange];
-      getSimilarPlaces(factory(placeSuggestions[index], filters));
+      getSimilarPlaces(factory(placeSuggestions[index], filterArray));
     }
   };
   const openConfirmationPanel = () => {
@@ -67,8 +65,7 @@ export default function Filters({
         0,
       ]);
       setTargetPlace(placeSuggestions[0]);
-      let filters = [populationRange, carbonRange];
-      getSimilarPlaces(factory(placeSuggestions[0], filters));
+      getSimilarPlaces(factory(placeSuggestions[0], filterArray));
       document.getElementById('suggestions').style.display = 'none';
     }
   }
@@ -123,13 +120,6 @@ export default function Filters({
         <div className="advanced-filters-wrapper">
           <p onClick={openAdvancedFilters}>Advanced Search</p>
           <div id="advanced-filters">
-            <CheckboxGroup
-              label="Type Name"
-              name="type_name"
-              placeTypesDisabled={placeTypesDisabled}
-              setPlaceTypesDisabled={setPlaceTypesDisabled}
-            />
-            <div className="divisor"></div>
             <MinMaxRange
               label="Population (%)"
               name="population"

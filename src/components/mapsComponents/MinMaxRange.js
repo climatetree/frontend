@@ -1,4 +1,5 @@
 import React from 'react';
+import Checkbox from './Checkbox';
 import './MinMaxRange.css';
 
 export default function MinMaxRange({
@@ -9,7 +10,14 @@ export default function MinMaxRange({
 }) {
   return (
     <div className='min-max-container'>
-      <label className="min-max-label">{label}</label>
+      <Checkbox
+        label={label}
+        checked={range.apply}
+        onChange={() => setRange(prevRange => {
+          prevRange.apply = !prevRange.apply;
+          return { ...prevRange };
+        })}
+      />
       <div className="min-max-inputs">
         <input
           type="number"
@@ -18,8 +26,13 @@ export default function MinMaxRange({
           placeholder="Min"
           value={range.min}
           onChange={(event) => setRange({
+            // Not sure that this is async safe, but if I use the
+            // prevState => ... pattern, I cannot use the event
+            // target value, even if I try event.persist()
+            name: range.name,
             min: parseInt(event.target.value),
             max: range.max,
+            apply: range.apply,
           })}
         />
         <span style={{ margin: '0 5px' }}> - </span>
@@ -30,8 +43,10 @@ export default function MinMaxRange({
           placeholder="Max"
           value={range.max}
           onChange={(event) => setRange({
+            name: range.name,
             min: range.min,
             max: parseInt(event.target.value),
+            apply: range.apply,
           })}
         />
       </div>
