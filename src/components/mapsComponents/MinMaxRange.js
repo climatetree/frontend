@@ -1,4 +1,5 @@
 import React from 'react';
+import Checkbox from './Checkbox';
 import './MinMaxRange.css';
 
 export default function MinMaxRange({
@@ -9,7 +10,14 @@ export default function MinMaxRange({
 }) {
   return (
     <div className='min-max-container'>
-      <label className="min-max-label">{label}</label>
+      <Checkbox
+        label={label}
+        checked={range.apply}
+        onChange={() => setRange({
+          ...range,
+          apply: !range.apply,
+        })}
+      />
       <div className="min-max-inputs">
         <input
           type="number"
@@ -18,11 +26,12 @@ export default function MinMaxRange({
           placeholder="Min"
           value={range.min}
           onChange={(event) => setRange({
+            ...range,
             min: parseInt(event.target.value),
-            max: range.max,
           })}
+          disabled={!range.apply}
         />
-        <span style={{ margin: '0 5px' }}> - </span>
+        <span className={`hyphen${!range.apply ? ' disabled' : ''}`}> - </span>
         <input
           type="number"
           name={`${name}-max`}
@@ -30,11 +39,12 @@ export default function MinMaxRange({
           placeholder="Max"
           value={range.max}
           onChange={(event) => setRange({
-            min: range.min,
+            ...range,
             max: parseInt(event.target.value),
           })}
+          disabled={!range.apply}
         />
       </div>
     </div>
   );
-};
+}

@@ -9,7 +9,7 @@ import ReactDOM from "react-dom";
  * @param {Object} history Session history
  * @param {Object} targetPlace Info about the place last searched
  */
-const popUpHandler = (evt, map, overlay, history, targetPlace) => {
+const popUpHandler = (evt, map, overlay, history, targetPlace, setComparePlaceProps) => {
   // Get list of features
   let pixel = evt.pixel;
   let features = map.getFeaturesAtPixel(pixel);
@@ -52,7 +52,7 @@ const popUpHandler = (evt, map, overlay, history, targetPlace) => {
       // Single place popup
       let placeProps = places[0].getProperties();
       let targetProps = targetPlace.properties;
-
+      setComparePlaceProps(placeProps);
       // Is target place?
       if (targetProps.name === placeProps.name) {
         // Shows actual statistic numbers
@@ -131,7 +131,7 @@ const popUpHandler = (evt, map, overlay, history, targetPlace) => {
  * @param {Object} targetPlaceNum A number statistic from the place last searched for
  * @param {Object} currentPlaceNum A number statistic from the place this popup refers to
  */
-function percentiStringify(targetPlaceNum, currentPlaceNum) {
+export function percentiStringify(targetPlaceNum, currentPlaceNum) {
   let percent = 100;
   let ratio = currentPlaceNum / targetPlaceNum;
   // example: 110% becomes +10%, 90% becomes -10%

@@ -79,4 +79,22 @@ button.post-story {
   cursor: pointer;
   padding: 5px 20px;
   float: right;
+  outline: none;
+}
+#place-suggestions {
+  max-height: 200px;
+  overflow-y: auto;
+  transform: translateY(-1rem);
+  display: none;
+}
+#place-suggestions .place-name-dropdown {
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 8px 20px;
+}
+#place-suggestions .place-name-dropdown:hover {
+  background-color: #333333;
+}
+.hint {
+  padding: 8px 20px;
 }
