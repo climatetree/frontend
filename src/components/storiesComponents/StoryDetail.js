@@ -17,8 +17,6 @@ const StoryDetail = ({ story }) => {
   let [toggleComment, setToggleComment] = useState(false);
   let [toggleViewComment, setToggleViewComment] = useState(false);
   let [userLikesSetState, setUserLikesSet] = useState(userLikesSet);
-
-  // NEED REFACTOR!!!!
   let [comments, setComments] = useState(story.comments);
 
   // New updated code to get user and role.

@@ -40,9 +40,11 @@ const StoryCommentInput = ({
     const response = await axios.post(
       "http://localhost:3000/stories/story/comment",
       newComment
+      // options
     );
 
     // const lastCommentIndex = response.data.comments.length - 1;
+    console.log(response);
 
     onChangeAddComment(response.data);
     setCommentContent("");
@@ -50,17 +52,20 @@ const StoryCommentInput = ({
 
   return (
     <form
-      className={`comment-input-container ${
-        !toggleComment ? "" : "active-comment-input-container"
-      }`}
-      id={toggleViewComment && toggleComment ? "comment-input" : ""}
+      // className={`comment-input-container ${
+      //   !toggleComment ? "" : "active-comment-input-container"
+      // }`}
+      className="comment-input-container active-comment-input-container"
+      id={story_id}
       onSubmit={e => onSubmitComment(e)}
     >
       <input
         type="text"
-        className={`comment-input ${
-          !toggleComment ? "" : "active-comment-input"
-        }`}
+        // className={`comment-input ${
+        //   !toggleComment ? "" : "active-comment-input"
+        // }`}
+        className="comment-input active-comment-input"
+        style={{ backgroundColor: "#e0e0e0" }}
         onChange={e => onChangeCommentContent(e)}
         placeholder="Enter a new comment..."
         value={content}

@@ -28,6 +28,7 @@ const LikeCommentButtonGroup = ({
 
     const response = await axios.put(
       `http://localhost:3000/stories/${storyId}/${action}/${user_id}`,
+      // null,
       options
     );
 
@@ -73,7 +74,7 @@ const LikeCommentButtonGroup = ({
         <div className="button-group">
           {renderLikeDislikeButton()}
           <a
-            href="#comment-input"
+            href={`#${story_id}`}
             className="comment-button"
             onClick={() => onToggleComment()}
           >

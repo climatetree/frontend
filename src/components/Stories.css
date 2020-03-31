@@ -271,7 +271,8 @@ hr {
 /* COMMENT DETAIL COMPONENT */
 .comment-detail {
   height: 50px;
-  border-bottom: 0.7px solid rgba(201, 201, 201, 0.5);
+  border-bottom: 0.4px solid rgba(201, 201, 201, 0.5);
+  /* margin-bottom: 16px; */
 }
 
 .comment-detail:last-child {
@@ -281,19 +282,20 @@ hr {
 /* COMMENT COMPONENT */
 .comment-input-container {
   display: flex;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   height: 0px;
-  transition: height 0.2s ease-in-out;
+  /* transition: height 0.2s ease-in-out; */
   overflow: hidden;
 }
 
 .active-comment-input-container {
   height: 70px;
+  border-top: 0.4px solid rgba(201, 201, 201, 0.5);
 }
 
 .comment-input {
   opacity: 0;
-  transition: opacity 0.2s ease-in-out 0.3s;
+  /* transition: opacity 0.2s ease-in-out 0.3s; */
   margin: 15px 20px;
   width: 100%;
   color: #5a5a5a;
