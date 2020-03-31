@@ -135,7 +135,7 @@ hr {
   visibility: visible;
   margin: 0px auto;
   margin-top: 10px;
-  width: 80%;
+  width: 100%;
   border: 0;
   height: 1px;
   background-image: linear-gradient(
@@ -210,6 +210,13 @@ hr {
   color: #fc0037;
 }
 
+.liked-count {
+  display: inline;
+  font-size: 13px;
+  padding-right: 10px;
+  font-weight: bolder;
+}
+
 /* SEARCH BAR IN STORIES PAGE */
 #search-for-story {
   width: 100%;
@@ -236,6 +243,38 @@ hr {
 #search-term {
   font-style: italic;
   font-size: 20px;
+}
+
+.like-comments-view {
+  margin-bottom: 30px;
+}
+
+/* COMMENT LIST COMPONENT */
+.view-comments-btn {
+  display: inline;
+  border-left: 0.7px solid rgba(201, 201, 201, 0.5);
+  padding-left: 10px;
+  font-size: 14px;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.view-comments-btn:hover {
+  text-decoration: underline;
+}
+
+.comments-list {
+  border-top: 0.7px solid rgba(201, 201, 201, 0.5);
+}
+
+/* COMMENT DETAIL COMPONENT */
+.comment-detail {
+  height: 50px;
+  border-bottom: 0.7px solid rgba(201, 201, 201, 0.5);
+}
+
+.comment-detail:last-child {
+  border-bottom: none;
 }
 
 /* COMMENT COMPONENT */
@@ -291,6 +330,10 @@ hr {
 
   .liked-count {
     font-size: 12px;
+  }
+
+  .view-comments-btn {
+    font-size: 13px;
   }
 
   hr {

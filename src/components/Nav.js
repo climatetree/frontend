@@ -15,7 +15,8 @@ function Nav() {
       url: "NA",
       userId: "NA",
       error: "",
-      jwt: ""
+      jwt: "",
+      role: 4
     });
   };
   return (

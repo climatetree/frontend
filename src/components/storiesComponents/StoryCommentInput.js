@@ -3,11 +3,16 @@ import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 
-const StoryCommentInput = ({ toggleComment, story }) => {
+const StoryCommentInput = ({
+  toggleComment,
+  story,
+  onChangeAddComment,
+  comments
+}) => {
   const [content, setCommentContent] = useState("");
 
   const { user } = useContext(UserContext);
-  const { userId, jwt } = user;
+  const { userId, jwt, username } = user;
   const { story_id } = story;
 
   const onChangeCommentContent = e => {
@@ -26,6 +31,7 @@ const StoryCommentInput = ({ toggleComment, story }) => {
     const newComment = {
       storyId: story_id,
       userId,
+      username,
       content,
       date: "2011-05-26T07:56:00.123Z"
     };
@@ -35,7 +41,12 @@ const StoryCommentInput = ({ toggleComment, story }) => {
       newComment
     );
 
-    console.log(response);
+    console.log(response.data);
+
+    const lastCommentIndex = response.data.comments.length - 1;
+    console.log(lastCommentIndex);
+
+    onChangeAddComment(response.data.comments[lastCommentIndex]);
     setCommentContent("");
   };
 

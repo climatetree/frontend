@@ -8,7 +8,9 @@ const LikeCommentButtonGroup = ({
   onToggleComment,
   toggleComment,
   story,
+  comments,
   onChangeUsersLikesSet,
+  onChangeAddComment,
   userLikesSetState
 }) => {
   const { user } = useContext(UserContext);
@@ -76,7 +78,12 @@ const LikeCommentButtonGroup = ({
           </span>
         </div>
       </div>
-      <StoryCommentInput toggleComment={toggleComment} story={story} />
+      <StoryCommentInput
+        toggleComment={toggleComment}
+        story={story}
+        comments={comments}
+        onChangeAddComment={onChangeAddComment}
+      />
     </div>
   );
 };

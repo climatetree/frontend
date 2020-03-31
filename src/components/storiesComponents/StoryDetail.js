@@ -4,6 +4,7 @@ import { ReactTinyLink } from "react-tiny-link";
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
 import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
+import StoryCommentsList from "./StoryCommentsList";
 
 const StoryDetail = ({ story }) => {
   let userLikesSet = new Set();
@@ -13,14 +14,26 @@ const StoryDetail = ({ story }) => {
   }
 
   let [toggleComment, setToggleComment] = useState(false);
+  let [toggleViewComment, setToggleViewComment] = useState(false);
   let [userLikesSetState, setUserLikesSet] = useState(userLikesSet);
+
+  // NEED REFACTOR!!!!
+  let [comments, setComments] = useState(story.comments);
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
   const { role } = user;
 
+  console.log(user);
+
   const onToggleComment = () => {
     setToggleComment(prevToggleCommentState => !prevToggleCommentState);
+  };
+
+  const onToggleViewComment = () => {
+    setToggleViewComment(
+      prevToggleViewCommentState => !prevToggleViewCommentState
+    );
   };
 
   const onChangeUsersLikesSet = (action, userId) => {
@@ -36,6 +49,16 @@ const StoryDetail = ({ story }) => {
         return newUserLikesSetState;
       });
     }
+  };
+
+  const onChangeAddComment = newComment => {
+    setComments(prevComments => [...prevComments, newComment]);
+  };
+
+  const onChangeDeleteComment = commentId => {
+    setComments(prevComments => [
+      ...prevComments.filter(c => c.comment_id !== commentId)
+    ]);
   };
 
   return (
@@ -66,7 +89,13 @@ const StoryDetail = ({ story }) => {
             {`${story.date.getUTCMonth() +
               1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
+        </div>
+
+        <div className="likes-comments-view">
           <div className="liked-count">{userLikesSetState.size} Likes</div>
+          <div className="view-comments-btn" onClick={onToggleViewComment}>
+            <span>{comments.length} Comments</span>
+          </div>
         </div>
       </div>
 
@@ -79,11 +108,20 @@ const StoryDetail = ({ story }) => {
             story={story}
             onToggleComment={onToggleComment}
             onChangeUsersLikesSet={onChangeUsersLikesSet}
+            onChangeAddComment={onChangeAddComment}
             userLikesSetState={userLikesSetState}
             toggleComment={toggleComment}
+            comments={comments}
           />
         )}
       />
+      {toggleViewComment && (
+        <StoryCommentsList
+          comments={comments}
+          storyId={story.story_id}
+          onChangeDeleteComment={onChangeDeleteComment}
+        />
+      )}
     </div>
   );
 };
