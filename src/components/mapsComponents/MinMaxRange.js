@@ -13,9 +13,9 @@ export default function MinMaxRange({
       <Checkbox
         label={label}
         checked={range.apply}
-        onChange={() => setRange(prevRange => {
-          prevRange.apply = !prevRange.apply;
-          return { ...prevRange };
+        onChange={() => setRange({
+          ...range,
+          apply: !range.apply,
         })}
       />
       <div className="min-max-inputs">
@@ -26,16 +26,12 @@ export default function MinMaxRange({
           placeholder="Min"
           value={range.min}
           onChange={(event) => setRange({
-            // Not sure that this is async safe, but if I use the
-            // prevState => ... pattern, I cannot use the event
-            // target value, even if I try event.persist()
-            name: range.name,
+            ...range,
             min: parseInt(event.target.value),
-            max: range.max,
-            apply: range.apply,
           })}
+          disabled={!range.apply}
         />
-        <span style={{ margin: '0 5px' }}> - </span>
+        <span className={`hyphen${!range.apply ? ' disabled' : ''}`}> - </span>
         <input
           type="number"
           name={`${name}-max`}
@@ -43,13 +39,12 @@ export default function MinMaxRange({
           placeholder="Max"
           value={range.max}
           onChange={(event) => setRange({
-            name: range.name,
-            min: range.min,
+            ...range,
             max: parseInt(event.target.value),
-            apply: range.apply,
           })}
+          disabled={!range.apply}
         />
       </div>
     </div>
   );
-};
+}

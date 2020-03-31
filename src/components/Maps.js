@@ -9,7 +9,7 @@ import { getGeoServerData } from './mapsComponents/helpers/data';
 import "./mapsComponents/OlMap.css";
 import "./Maps.css";
 
-function Maps(props) {
+export default function Maps(props) {
   const [places, setPlaces] = useState([]);
   const [targetPlace, setTargetPlace] = useState(null);
   const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
@@ -45,5 +45,3 @@ function Maps(props) {
     </div>
   );
 }
-
-export default Maps;
