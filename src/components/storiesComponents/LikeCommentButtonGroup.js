@@ -6,11 +6,12 @@ import { UserContext } from "../context/UserContext";
 
 const LikeCommentButtonGroup = ({
   onToggleComment,
-  toggleComment,
+  // toggleComment,
+  // toggleViewComment,
   story,
-  comments,
+  // comments,
   onChangeUsersLikesSet,
-  onChangeAddComment,
+  // onChangeAddComment,
   userLikesSetState
 }) => {
   const { user } = useContext(UserContext);
@@ -73,14 +74,10 @@ const LikeCommentButtonGroup = ({
       <div className="like-comment-section">
         <div className="button-group">
           {renderLikeDislikeButton()}
-          <a
-            href={`#${story_id}`}
-            className="comment-button"
-            onClick={() => onToggleComment()}
-          >
+          <span className="comment-button" onClick={() => onToggleComment()}>
             <i className="far fa-comment"></i>{" "}
             <span className="like-comment-font-mobile">Post Comment</span>
-          </a>
+          </span>
         </div>
       </div>
     </div>

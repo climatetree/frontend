@@ -108,6 +108,7 @@ const StoryDetail = ({ story }) => {
             onChangeAddComment={onChangeAddComment}
             userLikesSetState={userLikesSetState}
             toggleComment={toggleComment}
+            toggleViewComment={toggleViewComment}
             comments={comments}
           />
         )}
@@ -119,12 +120,18 @@ const StoryDetail = ({ story }) => {
           onChangeDeleteComment={onChangeDeleteComment}
         />
       )}
-      <StoryCommentInput
-        toggleComment={toggleComment}
-        story={story}
-        comments={comments}
-        toggleViewComment={toggleViewComment}
-        onChangeAddComment={onChangeAddComment}
+      <Can
+        role={role}
+        perform="posts:like"
+        yes={() => (
+          <StoryCommentInput
+            toggleComment={toggleComment}
+            story={story}
+            comments={comments}
+            toggleViewComment={toggleViewComment}
+            onChangeAddComment={onChangeAddComment}
+          />
+        )}
       />
     </div>
   );
