@@ -32,19 +32,27 @@ export default function Filters({
     apply: false,
   });
 
+  const openMapDashboard = () => {
+    const mapDashboard = document.querySelector('.story-dashboard');
+    if (mapDashboard) {
+      mapDashboard.style.display = 'block';
+      mapDashboard.style.opacity = 1;
+    }
+  }
   const filterArray = [populationRange, carbonRange];
-  const handleSuggestionClick = (placeID, name, index) => {
+  const handleSuggestionClick = async (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      getSimilarPlaces(
+      await getSimilarPlaces(
         factory(
           placeSuggestions[index],
           filterArray
         )
       );
     }
+    openMapDashboard();
   };
   const handlePlaceUpdates = () => {
     if (isSearchingSuggestions) {
@@ -80,6 +88,13 @@ export default function Filters({
     document.getElementById('suggestions').style.display = 'none';
     document.getElementById('confirmation').style.display = 'flex';
   }
+  const closeMapDashboard = () => {
+    const mapDashboard = document.querySelector('.story-dashboard');
+    if (mapDashboard) {
+      mapDashboard.style.display = 'none';
+      mapDashboard.style.opacity = 0;
+    }
+  }
 
   useEffect(() => {
     if (debouncedSearchTerm && debouncedSearchTerm.length > 1) {
@@ -102,6 +117,7 @@ export default function Filters({
           setIsSearchingSuggestions(false);
         });
     } else {
+      closeMapDashboard();
       setPlaceSuggestions([]);
       setSelectedSuggestion([]);
     }

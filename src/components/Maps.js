@@ -4,6 +4,7 @@ import Filters from "./mapsComponents/Filters";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
 import MapSignIn from "./mapsComponents/MapSignIn";
+import StoryDashboard from './mapsComponents/StoryDashboard';
 import { UserContext } from "./context/UserContext";
 import { getGeoServerData } from './mapsComponents/helpers/data';
 import "./mapsComponents/OlMap.css";
@@ -13,6 +14,7 @@ export default function Maps(props) {
   const [places, setPlaces] = useState([]);
   const [targetPlace, setTargetPlace] = useState(null);
   const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
+  const [comparePlaceProps, setComparePlaceProps] = useState(null);
   const { user } = useContext(UserContext);
   const getSimilarPlaces = async (queryParams) => {
     setIsLoadingSimilarPlaces(true);
@@ -28,6 +30,7 @@ export default function Maps(props) {
         places={places}
         history={props.history}
         targetPlace={targetPlace}
+        setComparePlaceProps={setComparePlaceProps}
       />
       <Filters
         getSimilarPlaces={getSimilarPlaces}
@@ -36,6 +39,10 @@ export default function Maps(props) {
         setTargetPlace={setTargetPlace}
       />
       <MapNav />
+      <StoryDashboard
+        targetPlaceProps={targetPlace ? targetPlace.properties : null}
+        comparePlaceProps={comparePlaceProps}
+      />
       <div
         className={`loading-overlay${isLoadingSimilarPlaces ? " loading" : ""}`}
       >
