@@ -3,8 +3,8 @@
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0 4px 0 #eeeeee;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 4px 0 #333333;
   width: 21rem;
   padding: 4rem 0.5rem;
   overflow-y: auto;
@@ -13,13 +13,13 @@
   display: none;
 }
 .card {
-  background-color: rgba(17, 17, 17, 0.7);
-  color: #ededed;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333333;
   border-radius: 4px;
   padding: 8px 16px;
   margin-bottom: 1rem;
   font-size: 14px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
 }
 .card .title {
   font-size: 16px;
@@ -34,11 +34,9 @@
 }
 .positive {
   color: #38c8ff;
-  text-shadow: 0 0 2px #38c8ff;
 }
 .negative {
   color: #ff3862;
-  text-shadow: 0 0 2px #ff3862;
 }
 
 @media (max-width: 959px) and (min-width: 768px) {
@@ -48,4 +46,7 @@
 }
 
 @media (max-width: 767px) {
+  .story-dashboard {
+    display: none !important;
+  }
 }

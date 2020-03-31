@@ -51,7 +51,7 @@ export default function Profile() {
         </div>
         <h2>Trending</h2>
         <div className="trending stories">
-          <div>
+          <div style={{ maxWidth: "100%" }}>
             {trendingStories.map(({ description, hyperlink }, index) => (
               <ReactTinyLink
                 key={index}
