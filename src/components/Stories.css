@@ -91,20 +91,6 @@
   background-attachment: fixed;
 }
 
-/* .darker {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  height: 100%;
-  background: url("../images/jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
-  filter: brightness(20%);
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-} */
-
 /* STORY CARD */
 .story-card {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
@@ -149,7 +135,7 @@ hr {
   visibility: visible;
   margin: 0px auto;
   margin-top: 10px;
-  width: 80%;
+  width: 100%;
   border: 0;
   height: 1px;
   background-image: linear-gradient(
@@ -193,6 +179,7 @@ hr {
   align-items: center;
   flex: 1 0 0px;
   justify-content: center;
+  text-decoration: none;
   cursor: pointer;
   color: #ddd;
   margin-left: 2px;
@@ -214,6 +201,21 @@ hr {
   color: #ddd;
   cursor: pointer;
   margin-right: 5px;
+}
+
+.fas {
+  margin-right: 5px;
+}
+
+.liked {
+  color: #fc0037;
+}
+
+.liked-count {
+  display: inline;
+  font-size: 13px;
+  padding-right: 10px;
+  font-weight: bolder;
 }
 
 /* SEARCH BAR IN STORIES PAGE */
@@ -244,26 +246,106 @@ hr {
   font-size: 20px;
 }
 
+.like-comments-view {
+  margin-bottom: 30px;
+}
+
+/* COMMENT LIST COMPONENT */
+.view-comments-btn {
+  display: inline;
+  border-left: 0.7px solid rgba(201, 201, 201, 0.5);
+  padding-left: 10px;
+  font-size: 14px;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.view-comments-btn:hover {
+  text-decoration: underline;
+}
+
+.comments-list {
+  border-top: 0.7px solid rgba(201, 201, 201, 0.5);
+}
+
+/* COMMENT DETAIL COMPONENT */
+.comment-detail {
+  /* height: 50px; */
+  border-bottom: 0.4px solid rgba(201, 201, 201, 0.5);
+  padding: 5px 10px;
+  min-height: 70px;
+  height: auto;
+  /* margin-bottom: 16px; */
+}
+
+.comment-detail:last-child {
+  border-bottom: none;
+}
+
+.user-name {
+  color: rgb(181, 214, 255);
+  margin-right: 5px;
+  font-size: 17px;
+}
+
+.comment-content {
+  color: white;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.comment-footer {
+  color: #d6d6d6;
+  font-size: 14px;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+.comment-hours-ago {
+  font-weight: lighter;
+}
+
+.comment-likes-count {
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.delete-comment-btn {
+  font-weight: bolder;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #d6d6d6;
+  font-size: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
 /* COMMENT COMPONENT */
 .comment-input-container {
   display: flex;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   height: 0px;
-  transition: height 0.2s ease-in-out;
+  /* transition: height 0.2s ease-in-out; */
   overflow: hidden;
 }
 
 .active-comment-input-container {
   height: 70px;
+  border-top: 0.4px solid rgba(201, 201, 201, 0.5);
 }
 
 .comment-input {
   opacity: 0;
-  transition: opacity 0.2s ease-in-out 0.3s;
+  /* transition: opacity 0.2s ease-in-out 0.3s; */
   margin: 15px 20px;
   width: 100%;
   color: #5a5a5a;
   border: 1px solid #dbdbdb;
+  background-color: "#e0e0e0";
   padding: 5px 12px;
   font-size: 15px;
   font-weight: 300;
@@ -297,6 +379,10 @@ hr {
 
   .liked-count {
     font-size: 12px;
+  }
+
+  .view-comments-btn {
+    font-size: 13px;
   }
 
   hr {

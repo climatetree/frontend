@@ -10,12 +10,13 @@ function Nav() {
     setUser({
       ...user,
       isLoggedIn: false,
-      username: 'Loggedout',
-      email: 'NA',
-      url: 'NA',
-      userId: 'NA',
-      error: '',
-      jwt: '',
+      username: "Loggedout",
+      email: "NA",
+      url: "NA",
+      userId: "NA",
+      error: "",
+      jwt: "",
+      role: 4
     });
   };
   return (
@@ -76,7 +77,8 @@ function navSlide() {
     if (link.style.animation) {
       link.style.animation = "";
     } else {
-      link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.2}s`;
+      link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 +
+        0.2}s`;
     }
   });
   document.querySelector(".burger").classList.toggle("toggle");

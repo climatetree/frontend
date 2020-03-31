@@ -6,7 +6,7 @@ import About from "./About";
 import Maps from "./Maps";
 import Stories from "./Stories";
 import LoginPage from "./LoginPage";
-import { UserProvider } from './context/UserContext';
+import { UserProvider } from "./context/UserContext";
 import "./App.css";
 
 const App = () => (

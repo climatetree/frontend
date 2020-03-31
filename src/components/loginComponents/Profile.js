@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ReactTinyLink } from "react-tiny-link";
-import PostStoryForm from './PostStoryForm';
-import plusIcon from '../../images/plus.svg';
+import PostStoryForm from "./PostStoryForm";
+import plusIcon from "../../images/plus.svg";
 import { UserContext } from "../context/UserContext";
-import './Profile.css';
+import "./Profile.css";
 
 export default function Profile() {
   const { user } = useContext(UserContext);
@@ -12,7 +12,9 @@ export default function Profile() {
   const [trendingStories, setTrendingStories] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch(`https://backend-mongo-stories.azurewebsites.net/stories/topStories/3`);
+      const res = await fetch(
+        `https://backend-mongo-stories.azurewebsites.net/stories/topStories/3`
+      );
       const topStories = await res.json();
       setTrendingStories(topStories);
     })();
@@ -43,14 +45,14 @@ export default function Profile() {
             className="post-story"
             onClick={() => setOpenPostStoryForm(true)}
           >
-            <img src={plusIcon} alt="post story icon"/>
+            <img src={plusIcon} alt="post story icon" />
             <p>post a story</p>
           </div>
         </div>
         <h2>Trending</h2>
         <div className="trending stories">
-          <div style={{ maxWidth: '100%' }}>
-            {trendingStories.map(({description, hyperlink}, index) => (
+          <div style={{ maxWidth: "100%" }}>
+            {trendingStories.map(({ description, hyperlink }, index) => (
               <ReactTinyLink
                 key={index}
                 cardSize="small"
@@ -64,13 +66,13 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      {openPostStoryForm &&
+      {openPostStoryForm && (
         <PostStoryForm
           setOpenPostStoryForm={setOpenPostStoryForm}
           myStories={myStories}
           setMyStories={setMyStories}
         />
-      }
+      )}
     </div>
   );
 }
