@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
 import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
 import StoryCommentsList from "./StoryCommentsList";
+import StoryCommentInput from "./StoryCommentInput";
 
 const StoryDetail = ({ story }) => {
   let userLikesSet = new Set();
@@ -122,6 +123,13 @@ const StoryDetail = ({ story }) => {
           onChangeDeleteComment={onChangeDeleteComment}
         />
       )}
+      <StoryCommentInput
+        toggleComment={toggleComment}
+        story={story}
+        comments={comments}
+        toggleViewComment={toggleViewComment}
+        onChangeAddComment={onChangeAddComment}
+      />
     </div>
   );
 };

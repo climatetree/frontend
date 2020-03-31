@@ -72,18 +72,16 @@ const LikeCommentButtonGroup = ({
       <div className="like-comment-section">
         <div className="button-group">
           {renderLikeDislikeButton()}
-          <span className="comment-button" onClick={() => onToggleComment()}>
+          <a
+            href="#comment-input"
+            className="comment-button"
+            onClick={() => onToggleComment()}
+          >
             <i className="far fa-comment"></i>{" "}
             <span className="like-comment-font-mobile">Post Comment</span>
-          </span>
+          </a>
         </div>
       </div>
-      <StoryCommentInput
-        toggleComment={toggleComment}
-        story={story}
-        comments={comments}
-        onChangeAddComment={onChangeAddComment}
-      />
     </div>
   );
 };

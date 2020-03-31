@@ -179,6 +179,7 @@ hr {
   align-items: center;
   flex: 1 0 0px;
   justify-content: center;
+  text-decoration: none;
   cursor: pointer;
   color: #ddd;
   margin-left: 2px;

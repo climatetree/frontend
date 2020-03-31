@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 
 const StoryCommentInput = ({
   toggleComment,
+  toggleViewComment,
   story,
   onChangeAddComment,
   comments
@@ -41,10 +42,7 @@ const StoryCommentInput = ({
       newComment
     );
 
-    console.log(response.data);
-
     const lastCommentIndex = response.data.comments.length - 1;
-    console.log(lastCommentIndex);
 
     onChangeAddComment(response.data.comments[lastCommentIndex]);
     setCommentContent("");
@@ -55,6 +53,7 @@ const StoryCommentInput = ({
       className={`comment-input-container ${
         !toggleComment ? "" : "active-comment-input-container"
       }`}
+      id={toggleViewComment && toggleComment ? "comment-input" : ""}
       onSubmit={e => onSubmitComment(e)}
     >
       <input
