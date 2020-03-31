@@ -1,5 +1,5 @@
 import GeoJSON from "ol/format/GeoJSON";
-// TODO: Delete
+
 /**
  * Creates an OpenLayers GeoJSON formatter object then uses it
  * to create an array of Feature objects.
@@ -11,31 +11,30 @@ const getGeoJson = json => {
   }).readFeatures(json);
 };
 
-const getGeoServerData = (params) => {
-  let url = 'https://climatetree-geoserver.azurewebsites.net/geoserver/wfs?service=wfs&version=2.0.0&request=GetFeature&typeNames=ClimateTree:Similar_Places&outputFormat=application/json&viewparams=' + params;
-  console.log(url);
-  fetch(url, {
+const getGeoServerData = async (params) => {
+  let url = 'https://climatetree-api-gateway.azurewebsites.net/geoserver/wfs?service=wfs&version=2.0.0&request=GetFeature&typeNames=ClimateTree:Similar_Places&outputFormat=application/json&viewparams=' + params;
+  let feats = await fetch(url, {
     method: 'GET',
-    // body: new XMLSerializer().serializeToString(featureRequest)
   }).then(function (response) {
     return response.json();
   }).then(function (json) {
-    console.log(json);
-    var features = new ol.format.GeoJSON().readFeatures(json, {
+    var features = new GeoJSON({
       featureProjection: 'EPSG:3857'
-    });
+    }).readFeatures(json);
     return features;
   }).catch(function (err) {
     console.error(err);
   });
+  return feats;
 }
 
 const factory = (place, filters) => {
   let filter_vars = [];
-  //console.log(place);
   filters.forEach((filter) => {
-    filter_vars.push(`${filter.name.toUpperCase()}_LOW:${place.properties[filter.name] * (filter.min * 0.01)}`);
-    filter_vars.push(`${filter.name.toUpperCase()}_HIGH:${place.properties[filter.name] * (filter.max * 0.01)}`);
+    if (filter.apply) {
+      filter_vars.push(`${filter.name.toUpperCase()}_LOW:${place.properties[filter.name] * (filter.min * 0.01)}`);
+      filter_vars.push(`${filter.name.toUpperCase()}_HIGH:${place.properties[filter.name] * (filter.max * 0.01)}`);
+    }
   });
   return filter_vars.join(';');
 }

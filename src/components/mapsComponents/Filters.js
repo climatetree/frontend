@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SuggestionDropdown from './SuggestionDropdown';
 import SuggestionOverlay from './SuggestionOverlay';
-import CheckboxGroup from "./CheckboxGroup";
 import MinMaxRange from './MinMaxRange';
 import useDebounce from "./helpers/useDebounce";
 import { factory } from './helpers/data';
@@ -11,6 +10,7 @@ import "./Filters.css";
 export default function Filters({
   getSimilarPlaces,
   targetPlaceID,
+  targetPlace,
   setTargetPlace,
 }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,37 +23,37 @@ export default function Filters({
     name: 'population',
     min: 90,
     max: 150,
+    apply: true,  // Only population filter is applied by default
   });
   const [carbonRange, setCarbonRange] = useState({
     name: 'carbon',
     min: 90,
     max: 110,
+    apply: false,
   });
-  const [placeTypesDisabled, setPlaceTypesDisabled] = useState([]);
-  const filterFn = ({ properties }) => {
-    return !placeTypesDisabled.includes(properties.type_name);
-  };
-  const openAdvancedFilters = () => {
-    const advancedFilters = document.getElementById('advanced-filters');
-    if (advancedFilters.style.display === 'block') {
-      advancedFilters.style.display = 'none';
-    } else {
-      advancedFilters.style.display = 'block';
+
+  const openMapDashboard = () => {
+    const mapDashboard = document.querySelector('.story-dashboard');
+    if (mapDashboard) {
+      mapDashboard.style.display = 'block';
+      mapDashboard.style.opacity = 1;
     }
-  };
-  const handleSuggestionClick = (placeID, name, index) => {
+  }
+  const filterArray = [populationRange, carbonRange];
+  const handleSuggestionClick = async (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      let filters = [populationRange, carbonRange];
-      getSimilarPlaces(factory(placeSuggestions[index], filters));
+      await getSimilarPlaces(
+        factory(
+          placeSuggestions[index],
+          filterArray
+        )
+      );
     }
+    openMapDashboard();
   };
-  const openConfirmationPanel = () => {
-    document.getElementById('suggestions').style.display = 'none';
-    document.getElementById('confirmation').style.display = 'flex';
-  }
   const handlePlaceUpdates = () => {
     if (isSearchingSuggestions) {
       return;
@@ -67,9 +67,32 @@ export default function Filters({
         0,
       ]);
       setTargetPlace(placeSuggestions[0]);
-      let filters = [populationRange, carbonRange];
-      getSimilarPlaces(factory(placeSuggestions[0], filters));
+      getSimilarPlaces(
+        factory(
+          placeSuggestions[0],
+          filterArray
+        )
+      );
       document.getElementById('suggestions').style.display = 'none';
+    }
+  }
+  const openAdvancedFilters = () => {
+    const advancedFilters = document.getElementById('advanced-filters');
+    if (advancedFilters.style.display === 'block') {
+      advancedFilters.style.display = 'none';
+    } else {
+      advancedFilters.style.display = 'block';
+    }
+  };
+  const openConfirmationPanel = () => {
+    document.getElementById('suggestions').style.display = 'none';
+    document.getElementById('confirmation').style.display = 'flex';
+  }
+  const closeMapDashboard = () => {
+    const mapDashboard = document.querySelector('.story-dashboard');
+    if (mapDashboard) {
+      mapDashboard.style.display = 'none';
+      mapDashboard.style.opacity = 0;
     }
   }
 
@@ -94,6 +117,7 @@ export default function Filters({
           setIsSearchingSuggestions(false);
         });
     } else {
+      closeMapDashboard();
       setPlaceSuggestions([]);
       setSelectedSuggestion([]);
     }
@@ -123,13 +147,6 @@ export default function Filters({
         <div className="advanced-filters-wrapper">
           <p onClick={openAdvancedFilters}>Advanced Search</p>
           <div id="advanced-filters">
-            <CheckboxGroup
-              label="Type Name"
-              name="type_name"
-              placeTypesDisabled={placeTypesDisabled}
-              setPlaceTypesDisabled={setPlaceTypesDisabled}
-            />
-            <div className="divisor"></div>
             <MinMaxRange
               label="Population (%)"
               name="population"
@@ -146,11 +163,18 @@ export default function Filters({
             <div className="divisor"></div>
             <button onClick={() => {
               document.getElementById('advanced-filters').style.display = 'none';
-              handlePlaceUpdates();
+              if (targetPlace) {
+                getSimilarPlaces(
+                  factory(
+                    targetPlace,
+                    filterArray
+                  )
+                );
+              }
             }}>Apply</button>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}

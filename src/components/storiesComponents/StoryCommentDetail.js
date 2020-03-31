@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 
@@ -32,66 +31,24 @@ const StoryCommentDetail = ({
       }
     );
 
-    console.log(response);
-    console.log(jwt);
     if (response.status === 200) {
       onChangeDeleteComment(commentId);
     }
   };
 
   return (
-    <div
-      className="comment-detail"
-      style={{ padding: "5px 10px", minHeight: "70px", height: "auto" }}
-    >
+    <div className="comment-detail">
       <div>
-        <span
-          style={{
-            color: "rgb(181, 214, 255)",
-            marginRight: "5px",
-            fontSize: "17px"
-          }}
-        >
-          <strong>{comment.user_name || comment.user_id} </strong>
+        <span className="user-name">
+          <strong>{comment.user_name} </strong>
         </span>
-        <span style={{ color: "white", fontSize: "15px", fontWeight: "300" }}>
-          {comment.content}
-        </span>
+        <span className="comment-content">{comment.content}</span>
       </div>
-      <div
-        style={{
-          color: "#d6d6d6",
-          fontSize: "14px",
-          marginTop: "16px",
-          marginBottom: "4px"
-        }}
-      >
-        <span style={{ fontWeight: "lighter" }}>16h</span>
-        <span
-          style={{
-            marginLeft: "10px",
-            marginRight: "10px",
-            cursor: "pointer",
-            fontWeight: "bolder"
-          }}
-        >
-          6 likes
-        </span>
+      <div className="comment-footer">
+        <span className="comment-hours-ago">16h</span>
+        <span className="comment-likes-count">6 likes</span>
         {userId === comment.user_id && (
-          <button
-            onClick={deleteComment}
-            style={{
-              fontWeight: "bolder",
-              background: "transparent",
-              border: "none",
-              outline: "none",
-              color: "#d6d6d6",
-              fontSize: "14px",
-              cursor: "pointer",
-              overflow: "hidden",
-              backgroundRepeat: "no-repeat"
-            }}
-          >
+          <button onClick={deleteComment} className="delete-comment-btn">
             Delete
           </button>
         )}

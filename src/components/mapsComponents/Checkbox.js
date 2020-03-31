@@ -18,12 +18,12 @@ function Checkbox({
       />
       <span
         className="checkbox-custom"
-        onClick={() => onChange(!checked, label)}
+        onClick={onChange}
       ></span>
       <label
         htmlFor={label}
         className="checkbox-label"
-        onClick={() => onChange(!checked, label)}
+        onClick={onChange}
       >{label}</label>
     </div>
   );

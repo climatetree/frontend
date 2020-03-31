@@ -43,9 +43,6 @@ const StoryCommentInput = ({
       options
     );
 
-    // const lastCommentIndex = response.data.comments.length - 1;
-    console.log(response);
-
     onChangeAddComment(response.data);
     setCommentContent("");
   };
@@ -65,7 +62,6 @@ const StoryCommentInput = ({
         //   !toggleComment ? "" : "active-comment-input"
         // }`}
         className="comment-input active-comment-input"
-        style={{ backgroundColor: "#e0e0e0" }}
         onChange={e => onChangeCommentContent(e)}
         placeholder="Enter a new comment..."
         value={content}

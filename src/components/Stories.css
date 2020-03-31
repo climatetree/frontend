@@ -270,13 +270,58 @@ hr {
 
 /* COMMENT DETAIL COMPONENT */
 .comment-detail {
-  height: 50px;
+  /* height: 50px; */
   border-bottom: 0.4px solid rgba(201, 201, 201, 0.5);
+  padding: 5px 10px;
+  min-height: 70px;
+  height: auto;
   /* margin-bottom: 16px; */
 }
 
 .comment-detail:last-child {
   border-bottom: none;
+}
+
+.user-name {
+  color: rgb(181, 214, 255);
+  margin-right: 5px;
+  font-size: 17px;
+}
+
+.comment-content {
+  color: white;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.comment-footer {
+  color: #d6d6d6;
+  font-size: 14px;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+.comment-hours-ago {
+  font-weight: lighter;
+}
+
+.comment-likes-count {
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.delete-comment-btn {
+  font-weight: bolder;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #d6d6d6;
+  font-size: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  background-repeat: no-repeat;
 }
 
 /* COMMENT COMPONENT */
@@ -300,6 +345,7 @@ hr {
   width: 100%;
   color: #5a5a5a;
   border: 1px solid #dbdbdb;
+  background-color: "#e0e0e0";
   padding: 5px 12px;
   font-size: 15px;
   font-weight: 300;
