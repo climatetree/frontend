@@ -31,8 +31,9 @@ const StoryCommentDetail = ({
       }
     );
 
-    const result = await response.json();
-    onChangeDeleteComment(commentId);
+    if (response.status === 200) {
+      onChangeDeleteComment(commentId);
+    }
   };
 
   return (

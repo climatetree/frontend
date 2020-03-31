@@ -42,9 +42,9 @@ const StoryCommentInput = ({
       newComment
     );
 
-    const lastCommentIndex = response.data.comments.length - 1;
+    // const lastCommentIndex = response.data.comments.length - 1;
 
-    onChangeAddComment(response.data.comments[lastCommentIndex]);
+    onChangeAddComment(response.data);
     setCommentContent("");
   };
 

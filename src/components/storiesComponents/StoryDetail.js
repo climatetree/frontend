@@ -25,8 +25,6 @@ const StoryDetail = ({ story }) => {
   const { user } = useContext(UserContext);
   const { role } = user;
 
-  console.log(user);
-
   const onToggleComment = () => {
     setToggleComment(prevToggleCommentState => !prevToggleCommentState);
   };
