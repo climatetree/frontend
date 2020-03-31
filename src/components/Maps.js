@@ -32,6 +32,7 @@ function Maps(props) {
       <Filters
         getSimilarPlaces={getSimilarPlaces}
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
+        targetPlace={targetPlace}
         setTargetPlace={setTargetPlace}
       />
       <MapNav />

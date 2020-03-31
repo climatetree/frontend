@@ -10,6 +10,7 @@ import "./Filters.css";
 export default function Filters({
   getSimilarPlaces,
   targetPlaceID,
+  targetPlace,
   setTargetPlace,
 }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,26 +33,19 @@ export default function Filters({
   });
 
   const filterArray = [populationRange, carbonRange];
-  const openAdvancedFilters = () => {
-    const advancedFilters = document.getElementById('advanced-filters');
-    if (advancedFilters.style.display === 'block') {
-      advancedFilters.style.display = 'none';
-    } else {
-      advancedFilters.style.display = 'block';
-    }
-  };
   const handleSuggestionClick = (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      getSimilarPlaces(factory(placeSuggestions[index], filterArray));
+      getSimilarPlaces(
+        factory(
+          placeSuggestions[index],
+          filterArray
+        )
+      );
     }
   };
-  const openConfirmationPanel = () => {
-    document.getElementById('suggestions').style.display = 'none';
-    document.getElementById('confirmation').style.display = 'flex';
-  }
   const handlePlaceUpdates = () => {
     if (isSearchingSuggestions) {
       return;
@@ -65,9 +59,26 @@ export default function Filters({
         0,
       ]);
       setTargetPlace(placeSuggestions[0]);
-      getSimilarPlaces(factory(placeSuggestions[0], filterArray));
+      getSimilarPlaces(
+        factory(
+          placeSuggestions[0],
+          filterArray
+        )
+      );
       document.getElementById('suggestions').style.display = 'none';
     }
+  }
+  const openAdvancedFilters = () => {
+    const advancedFilters = document.getElementById('advanced-filters');
+    if (advancedFilters.style.display === 'block') {
+      advancedFilters.style.display = 'none';
+    } else {
+      advancedFilters.style.display = 'block';
+    }
+  };
+  const openConfirmationPanel = () => {
+    document.getElementById('suggestions').style.display = 'none';
+    document.getElementById('confirmation').style.display = 'flex';
   }
 
   useEffect(() => {
@@ -136,11 +147,18 @@ export default function Filters({
             <div className="divisor"></div>
             <button onClick={() => {
               document.getElementById('advanced-filters').style.display = 'none';
-              handlePlaceUpdates();
+              if (targetPlace) {
+                getSimilarPlaces(
+                  factory(
+                    targetPlace,
+                    filterArray
+                  )
+                );
+              }
             }}>Apply</button>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
