@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ReactTinyLink } from "react-tiny-link";
 import PostStoryForm from './PostStoryForm';
 import plusIcon from '../../images/plus.svg';
@@ -20,6 +20,14 @@ export default function Profile() {
   const { user } = useContext(UserContext);
   const [openPostStoryForm, setOpenPostStoryForm] = useState(false);
   const [myStories, setMyStories] = useState([]);
+  const [tStories, setTStories] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`https://backend-mongo-stories.azurewebsites.net/stories/topStories/3`);
+      const topStories = await res.json();
+      setTStories(topStories);
+    })();
+  }, []);
   return (
     <div className="profile-wrapper">
       <div className="profile">
@@ -52,7 +60,7 @@ export default function Profile() {
         </div>
         <h2>Trending</h2>
         <div className="trending stories">
-          {trendingStories.map(({description, url}, index) => (
+          {tStories.map(({description, hyperlink}, index) => (
             <ReactTinyLink
               key={index}
               cardSize="small"
@@ -60,7 +68,7 @@ export default function Profile() {
               description={description}
               maxLine={3}
               minLine={3}
-              url={url}
+              url={hyperlink}
             />
           ))}
         </div>

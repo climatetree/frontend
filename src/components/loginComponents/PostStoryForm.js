@@ -21,19 +21,19 @@ export default function PostStoryForm({
       place_ids: [place_id],
       date: Date().toString(),
     });
-    // fetch('localhost:3000/stories/create', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     user_id: user.userId,
-    //     hyperlink,
-    //     story_title,
-    //     place_ids: [place_id],
-    //     date: Date().toString(),
-    //   }),
-    // }).then(() => {
+    fetch('https://backend-mongo-stories.azurewebsites.net/stories/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: user.userId,
+        hyperlink,
+        story_title,
+        place_ids: [place_id],
+        date: Date().toString(),
+      }),
+    }).then(() => {
       setMyStories([
         ...myStories,
         {
@@ -43,9 +43,9 @@ export default function PostStoryForm({
           date: Date().toString(),
         }
       ]);
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
+    }).catch((error) => {
+      console.log(error);
+    });
     closeForm();
   }
   const [hyperlink, setHyperlink] = useState('');
@@ -163,7 +163,7 @@ export default function PostStoryForm({
             type="button"
             onClick={async () => {
               if (selectedPlaceID) {
-                const response = await fetch(`http://localhost:3000/stories/getPreview?hyperlink=${encodeURIComponent(hyperlink)}`);
+                const response = await fetch(`https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(hyperlink)}`);
                 const preview = await response.json();
                 handleSubmit(hyperlink, preview.title, selectedPlaceID);
               }
