@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import OlMap from "./mapsComponents/OlMap";
 import Filters from "./mapsComponents/Filters";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
 import MapSignIn from "./mapsComponents/MapSignIn";
-import authContext from "./context/authContext";
+import { UserContext } from "./context/UserContext";
 import { getGeoServerData } from './mapsComponents/helpers/data';
 import "./mapsComponents/OlMap.css";
 import "./Maps.css";
@@ -14,7 +13,7 @@ function Maps(props) {
   const [places, setPlaces] = useState([]);
   const [targetPlace, setTargetPlace] = useState(null);
   const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
-  const [{ isLoggedIn }] = useContext(authContext);
+  const { user } = useContext(UserContext);
   const getSimilarPlaces = async (queryParams) => {
     setIsLoadingSimilarPlaces(true);
     let features = await getGeoServerData(queryParams);
@@ -44,7 +43,7 @@ function Maps(props) {
       >
         <p>fetching similar places for you...</p>
       </div>
-      {isLoggedIn ? <UserAvatar /> : <MapSignIn />}
+      {user.isLoggedIn ? <UserAvatar /> : <MapSignIn />}
     </div>
   );
 }

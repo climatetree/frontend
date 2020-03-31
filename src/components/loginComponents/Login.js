@@ -1,115 +1,94 @@
-import React, { useState, useContext } from "react";
-// import uuid from "react-uuid";
-import authContext from "../context/authContext";
-import { decodeToken } from "jsontokens";
-
-import "../aboutComponents/AboutInfo";
+import React, { useContext } from "react";
+import axios from "axios";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import { decodeToken } from "jsontokens";
+import { UserContext } from "../context/UserContext";
 import GoogleLogo from "../../images/google.svg";
 import "./Login.css";
-import axios from "axios";
 
-const Login = () => {
-  const [state, dispatch] = useContext(authContext);
-  const { isLoggedIn } = state;
-  const { username } = state;
+export default function Login() {
+  const { user, setUser } = useContext(UserContext);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [url, setUrl] = useState("");
-  // const [jwt, setJwt] = useState("");
-
-  const responseGoogle = response => {
-    setName(response.profileObj.name);
-    setEmail(response.profileObj.email);
-    setUrl(response.profileObj.imageUrl);
-
-    const data = {
-      username: response.profileObj.name,
-      email: response.profileObj.email
-    };
-
-    const options = {
-      headers: {
-        Authorization: response.tokenId,
-        "Content-Type": "application/json"
-      }
-    };
-
-    console.log("Google RESPONSE token==== : ", response.tokenId);
-    dispatch({
-      type: "LOGIN",
-      payload: {
+  async function setGoogleUser(response, data, options) {
+    try {
+      const res = await axios.post(
+        'https://climatetree-api-gateway.azurewebsites.net/user/login',
+        data,
+        options
+      );
+      const jwt = res.data.jwtToken;
+      const token = decodeToken(jwt);
+      setUser({
+        ...user,
+        isLoggedIn: true,
         username: response.profileObj.name,
         email: response.profileObj.email,
         url: response.profileObj.imageUrl,
-
-        sw: axios
-          .post(
-            "https://user-microservice-demo.herokuapp.com/login",
-            data,
-            options
-          )
-          .then(res => {
-            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
-            localStorage.setItem("JWT", res.data.jwtToken);
-            // var jwt = require("jsonwebtoken");
-            const token = decodeToken(res.data.jwtToken);
-            console.log("User is ---" + token.payload.userId);
-            localStorage.setItem("userId", token.payload.userId);
-          })
-          .catch(err => {
-            console.log("ERROR: ====", err);
-          }),
-        userid: localStorage.getItem("userId")
-      }
-    });
-  };
-
-  const responseFacebook = response => {
-    setName(response.name);
-    setEmail(response.email);
-    setUrl(response.picture.data.url);
+        userId: token.payload.userId,
+        jwt,
+        error: '',
+      });
+    } catch (error) {
+      setUser({
+        ...user,
+        error,
+      });
+    }
+  }
+  const responseGoogle = (response) => {
     const data = {
-      username: response.name,
-      email: response.email
+      username: response.profileObj.name,
+      email: response.profileObj.email,
     };
-
     const options = {
       headers: {
-        Authorization: response.signedRequest,
-        "Content-Type": "application/json"
-      }
+        Authorization: response.tokenId,
+        "Content-Type": "application/json",
+      },
     };
-
-    console.log("response faceboookk ", response);
-    dispatch({
-      type: "LOGIN",
-      payload: {
+    console.log("Google RESPONSE token==== : ", response.tokenId);
+    setGoogleUser(response, data, options);
+  };
+  async function setFacebookUser(response, data, options) {
+    try {
+      const res = await axios.post(
+        'https://climatetree-api-gateway.azurewebsites.net/user/login',
+        data,
+        options
+      );
+      const jwt = res.data.jwtToken;
+      const token = decodeToken(jwt);
+      setUser({
+        ...user,
+        isLoggedIn: true,
         username: response.name,
         email: response.email,
         url: response.picture.data.url,
-        sw: axios
-          .post(
-            "https://user-microservice-demo.herokuapp.com/login",
-            data,
-            options
-          )
-          .then(res => {
-            console.log("Cliamte TreeRESPONSE ==== : ", res.data.jwtToken);
-            localStorage.setItem("JWT", res.data.jwtToken);
-            // var jwt = require("jsonwebtoken");
-            const token = decodeToken(res.data.jwtToken);
-            console.log("User is ---" + token.payload.userId);
-            localStorage.setItem("userId", token.payload.userId);
-          })
-          .catch(err => {
-            console.log("ERROR: ====", err);
-          }),
-        userid: localStorage.getItem("userId")
-      }
-    });
+        userId: token.payload.userId,
+        jwt,
+        error: '',
+      });
+    } catch (error) {
+      setUser({
+        ...user,
+        error,
+      });
+    }
+  }
+  const responseFacebook = (response) => {
+    const data = {
+      username: response.name,
+      email: response.email,
+    };
+    const options = {
+      headers: {
+        Authorization: response.signedRequest,
+        "Content-Type": "application/json",
+      },
+    };
+    console.log("response facebook ", response);
+    setFacebookUser(response, data, options);
   };
 
   const componentClicked = () => {
@@ -117,50 +96,34 @@ const Login = () => {
   };
 
   return (
-    <>
-      {!isLoggedIn ? (
-        <div className="login-wrapper">
-          <div className="social-login">
-            <FacebookLogin
-              appId="208267926889455"
-              fields="name,email,picture"
-              onClick={componentClicked}
-              callback={responseFacebook}
-              cssClass="facebook-login-button"
-              icon="fa-facebook"
-            />
-            <GoogleLogin
-              clientId="69469445070-29f3osjc154mqn4ccdnt7rp354oge5va.apps.googleusercontent.com"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              icon={true}
-              cookiePolicy={"single_host_origin"}
-              render={renderProps => (
-                <button
-                  className="google-login-button"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  <img src={GoogleLogo} alt="google g logo" />
-                  Login with Google
-                </button>
-              )}
-            />
-          </div>
-        </div>
-      ) : (
-        <div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <h4> Welcome : {username} </h4>
-          <h4> Email : {email} </h4>
-          <img src={url} alt={name} />
-        </div>
-      )}
-    </>
+    <div className="login-wrapper">
+      <div className="social-login">
+        <FacebookLogin
+          appId="208267926889455"
+          fields="name,email,picture"
+          onClick={componentClicked}
+          callback={responseFacebook}
+          cssClass="facebook-login-button"
+          icon="fa-facebook"
+        />
+        <GoogleLogin
+          clientId="69469445070-29f3osjc154mqn4ccdnt7rp354oge5va.apps.googleusercontent.com"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          icon={true}
+          cookiePolicy={"single_host_origin"}
+          render={renderProps => (
+            <button
+              className="google-login-button"
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+            >
+              <img src={GoogleLogo} alt="google g logo" />
+              Login with Google
+            </button>
+          )}
+        />
+      </div>
+    </div>
   );
-};
-
-export default Login;
+}

@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import Nav from "./Nav";
 import Login from "./loginComponents/Login";
-import authContext from "./context/authContext";
 import Profile from "./loginComponents/Profile";
+import { UserContext } from "./context/UserContext";
 
 const LoginPage = () => {
-  const [{ isLoggedIn }] = useContext(authContext);
+  const { user } = useContext(UserContext);
   return (
     <div>
       <Nav />
-      {isLoggedIn ? <Profile /> : <Login />}
+      {user.isLoggedIn ? <Profile /> : <Login />}
     </div>
   );
 };
