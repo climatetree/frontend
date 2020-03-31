@@ -16,7 +16,7 @@ COPY . /app
 RUN npm run build
 
 # production environment
-FROM nginx:1.16.0
+FROM nginx:1.16.0-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
