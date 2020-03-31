@@ -13,7 +13,7 @@ export default function Login() {
   async function setGoogleUser(response, data, options) {
     try {
       const res = await axios.post(
-        'https://climatetree-api-gateway.azurewebsites.net/user/login',
+        "https://climatetree-api-gateway.azurewebsites.net/user/login",
         data,
         options
       );
@@ -26,26 +26,27 @@ export default function Login() {
         email: response.profileObj.email,
         url: response.profileObj.imageUrl,
         userId: token.payload.userId,
+        role: token.payload.role,
         jwt,
-        error: '',
+        error: ""
       });
     } catch (error) {
       setUser({
         ...user,
-        error,
+        error
       });
     }
   }
-  const responseGoogle = (response) => {
+  const responseGoogle = response => {
     const data = {
       username: response.profileObj.name,
-      email: response.profileObj.email,
+      email: response.profileObj.email
     };
     const options = {
       headers: {
         Authorization: response.tokenId,
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     };
     console.log("Google RESPONSE token==== : ", response.tokenId);
     setGoogleUser(response, data, options);
@@ -53,7 +54,7 @@ export default function Login() {
   async function setFacebookUser(response, data, options) {
     try {
       const res = await axios.post(
-        'https://climatetree-api-gateway.azurewebsites.net/user/login',
+        "https://climatetree-api-gateway.azurewebsites.net/user/login",
         data,
         options
       );
@@ -66,26 +67,27 @@ export default function Login() {
         email: response.email,
         url: response.picture.data.url,
         userId: token.payload.userId,
+        role: token.payload.role,
         jwt,
-        error: '',
+        error: ""
       });
     } catch (error) {
       setUser({
         ...user,
-        error,
+        error
       });
     }
   }
-  const responseFacebook = (response) => {
+  const responseFacebook = response => {
     const data = {
       username: response.name,
-      email: response.email,
+      email: response.email
     };
     const options = {
       headers: {
         Authorization: response.signedRequest,
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     };
     console.log("response facebook ", response);
     setFacebookUser(response, data, options);
@@ -99,7 +101,7 @@ export default function Login() {
     <div className="login-wrapper">
       <div className="social-login">
         <FacebookLogin
-          appId="208267926889455"
+          appId="149701679676715"
           fields="name,email,picture"
           onClick={componentClicked}
           callback={responseFacebook}
@@ -107,7 +109,7 @@ export default function Login() {
           icon="fa-facebook"
         />
         <GoogleLogin
-          clientId="69469445070-29f3osjc154mqn4ccdnt7rp354oge5va.apps.googleusercontent.com"
+          clientId="373284097627-clfol175dg7a585n7i9jpif4ggjquhef.apps.googleusercontent.com"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           icon={true}

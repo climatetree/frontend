@@ -1,13 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ReactTinyLink } from "react-tiny-link";
 
+import { UserContext } from "../context/UserContext";
+import Can from "../loginComponents/Can";
+import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
+import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
 
 const StoryDetail = ({ story }) => {
+  let userLikesSet = new Set();
+
+  for (let userId of story.liked_by_users) {
+    userLikesSet.add(userId);
+  }
+
   let [toggleComment, setToggleComment] = useState(false);
+  let [toggleViewComment, setToggleViewComment] = useState(false);
+  let [userLikesSetState, setUserLikesSet] = useState(userLikesSet);
+  let [comments, setComments] = useState(story.comments);
+
+  // New updated code to get user and role.
+  const { user } = useContext(UserContext);
+  const { role } = user;
 
   const onToggleComment = () => {
     setToggleComment(prevToggleCommentState => !prevToggleCommentState);
+  };
+
+  const onToggleViewComment = () => {
+    setToggleViewComment(
+      prevToggleViewCommentState => !prevToggleViewCommentState
+    );
+  };
+
+  const onChangeUsersLikesSet = (action, userId) => {
+    if (action === "like") {
+      setUserLikesSet(prevUserLikesSetState =>
+        new Set(prevUserLikesSetState).add(parseInt(userId))
+      );
+    } else {
+      setUserLikesSet(prevUserLikesSetState => {
+        const newUserLikesSetState = new Set(prevUserLikesSetState);
+        newUserLikesSetState.delete(parseInt(userId));
+
+        return newUserLikesSetState;
+      });
+    }
+  };
+
+  const onChangeAddComment = newComment => {
+    setComments(prevComments => [...prevComments, newComment]);
+  };
+
+  const onChangeDeleteComment = commentId => {
+    setComments(prevComments => [
+      ...prevComments.filter(c => c.comment_id !== commentId)
+    ]);
   };
 
   return (
@@ -38,28 +86,53 @@ const StoryDetail = ({ story }) => {
             {`${story.date.getUTCMonth() +
               1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
-          <div className="liked-count">
-            <i className="fa fa-heart"></i> {story.rating} Likes
+        </div>
+
+        <div className="likes-comments-view">
+          <div className="liked-count">{userLikesSetState.size} Likes</div>
+          <div className="view-comments-btn" onClick={onToggleViewComment}>
+            <span>{comments.length} Comments</span>
           </div>
         </div>
       </div>
 
       <hr></hr>
-
-      <div className="like-comment-section">
-        <div className="button-group">
-          <span className="like-button">
-            <i className="far fa-heart"></i>{" "}
-            <span className="like-comment-font-mobile">Give it a Heart</span>
-          </span>
-
-          <span className="comment-button" onClick={() => onToggleComment()}>
-            <i className="far fa-comment"></i>{" "}
-            <span className="like-comment-font-mobile">Post Comment</span>
-          </span>
-        </div>
-      </div>
-      <StoryCommentInput toggleComment={toggleComment} />
+      <Can
+        role={role}
+        perform="posts:like"
+        yes={() => (
+          <LikeCommentButtonGroup
+            story={story}
+            onToggleComment={onToggleComment}
+            onChangeUsersLikesSet={onChangeUsersLikesSet}
+            onChangeAddComment={onChangeAddComment}
+            userLikesSetState={userLikesSetState}
+            toggleComment={toggleComment}
+            toggleViewComment={toggleViewComment}
+            comments={comments}
+          />
+        )}
+      />
+      {toggleViewComment && (
+        <StoryCommentsList
+          comments={comments}
+          storyId={story.story_id}
+          onChangeDeleteComment={onChangeDeleteComment}
+        />
+      )}
+      <Can
+        role={role}
+        perform="posts:like"
+        yes={() => (
+          <StoryCommentInput
+            toggleComment={toggleComment}
+            story={story}
+            comments={comments}
+            toggleViewComment={toggleViewComment}
+            onChangeAddComment={onChangeAddComment}
+          />
+        )}
+      />
     </div>
   );
 };

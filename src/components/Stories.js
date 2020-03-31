@@ -8,6 +8,9 @@ import StorySearchBar from "./storiesComponents/StorySearchBar";
 import Spinner from "./storiesComponents/Spinner";
 import ResultsFor from "./storiesComponents/ResultsFor";
 import ResultForPlaceId from "./storiesComponents/ResultForPlaceId";
+
+import { fetchStories } from "../services/fetchStories";
+
 import "./Stories.css";
 
 const Stories = props => {
@@ -38,6 +41,9 @@ const Stories = props => {
         const PARAMETER = generalSearchTerm || placeId;
 
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
+
+        // let responsesSecond = await fetchStories("title", generalSearchTerm);
+
         let temp = responses.data.map(story => {
           return { ...story, date: new Date(story.date) };
         });
@@ -56,8 +62,8 @@ const Stories = props => {
         placeName={props.location.state.placeName}
       />
     ) : (
-        <ResultsFor searchTerm={generalSearchTerm} />
-      );
+      <ResultsFor searchTerm={generalSearchTerm} />
+    );
   };
 
   // Conditional rendering
@@ -70,7 +76,7 @@ const Stories = props => {
       <>
         {renderResultFor()}
         {stories.map(story => (
-          <StoryDetail story={story} />
+          <StoryDetail story={story} key={story.story_id} />
         ))}
       </>
     );

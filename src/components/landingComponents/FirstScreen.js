@@ -16,6 +16,8 @@ export default function FirstScreen({ history }) {
           id="first-screen-search"
           onSubmit={event => {
             event.preventDefault();
+            // const stories = useStories("title", event.target.value);
+            // console.log(stories);
             history.push({
               pathname: "/stories",
               search: `?storyTitle=${searchTerm}`,
@@ -28,13 +30,28 @@ export default function FirstScreen({ history }) {
             placeholder="Search for ClimateTree stories"
             onChange={event => setSearchTerm(event.target.value)}
           />
-          <img src={searchIcon} alt="search" id="search" />
+          <img
+            src={searchIcon}
+            alt="search"
+            id="search"
+            onClick={() => {
+              if (searchTerm) {
+                history.push({
+                  pathname: "/stories",
+                  search: `?storyTitle=${searchTerm}`,
+                  state: { searchTerm }
+                });
+              }
+            }}
+          />
         </form>
         <div>
           {/* <button className="primary-btn">
             <a href="#explore-screen">Get Started</a>
           </button> */}
-          <Link className="primary-btn" to="/maps">Map</Link>
+          <Link className="primary-btn" to="/maps">
+            Map
+          </Link>
         </div>
       </div>
       <div id="background"></div>

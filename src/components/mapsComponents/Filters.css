@@ -2,9 +2,10 @@
   color: #333333;
   font-weight: 300;
   position: absolute;
-  top: calc(0.5rem + 3px);
-  left: calc(0.5rem + 3px);
+  top: 0.5rem;
+  left: 0.5rem;
   display: flex;
+  z-index: 1;
 }
 #search-bar {
   display: flex;
@@ -13,7 +14,8 @@
 }
 .filters-wrapper {
   display: flex;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
+  margin-left: 1rem;
   height: 2.5rem;
 }
 .similar-places-filter {

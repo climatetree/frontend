@@ -1,0 +1,52 @@
+.story-dashboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 4px 0 #333333;
+  width: 21rem;
+  padding: 4rem 0.5rem;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.4s;
+  display: none;
+}
+.card {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333333;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-bottom: 1rem;
+  font-size: 14px;
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
+}
+.card .title {
+  font-size: 16px;
+  font-weight: 400;
+}
+.card .item-name {
+  font-weight: 400;
+}
+.card .item-name + p {
+  font-weight: 100;
+  padding-left: 1rem;
+}
+.positive {
+  color: #38c8ff;
+}
+.negative {
+  color: #ff3862;
+}
+
+@media (max-width: 959px) and (min-width: 768px) {
+  .story-dashboard {
+    width: 19rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .story-dashboard {
+    display: none !important;
+  }
+}

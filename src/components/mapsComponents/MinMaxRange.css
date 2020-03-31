@@ -13,3 +13,13 @@
   padding: 0 5px;
   border: 1px solid #bbbbbb;
 }
+.min-max-inputs input:disabled {
+  color: #dddddd;
+  border-color: #dddddd;
+}
+.hyphen {
+  margin: 0 5px;
+}
+.hyphen.disabled {
+  color: #dddddd;
+}

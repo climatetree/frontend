@@ -4,22 +4,21 @@ import Filters from "./mapsComponents/Filters";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
 import MapSignIn from "./mapsComponents/MapSignIn";
+import StoryDashboard from './mapsComponents/StoryDashboard';
 import { UserContext } from "./context/UserContext";
 import { getGeoServerData } from './mapsComponents/helpers/data';
 import "./mapsComponents/OlMap.css";
 import "./Maps.css";
 
-function Maps(props) {
+export default function Maps(props) {
   const [places, setPlaces] = useState([]);
   const [targetPlace, setTargetPlace] = useState(null);
   const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
+  const [comparePlaceProps, setComparePlaceProps] = useState(null);
   const { user } = useContext(UserContext);
   const getSimilarPlaces = async (queryParams) => {
     setIsLoadingSimilarPlaces(true);
     let features = await getGeoServerData(queryParams);
-    // const response = await axios.get(
-    //   `https://climatetree-api-gateway.azurewebsites.net/places/${placeID}/similar`
-    // );
     if (features !== undefined) {
       setPlaces(features);
     }
@@ -31,13 +30,19 @@ function Maps(props) {
         places={places}
         history={props.history}
         targetPlace={targetPlace}
+        setComparePlaceProps={setComparePlaceProps}
       />
       <Filters
         getSimilarPlaces={getSimilarPlaces}
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
+        targetPlace={targetPlace}
         setTargetPlace={setTargetPlace}
       />
       <MapNav />
+      <StoryDashboard
+        targetPlaceProps={targetPlace ? targetPlace.properties : null}
+        comparePlaceProps={comparePlaceProps}
+      />
       <div
         className={`loading-overlay${isLoadingSimilarPlaces ? " loading" : ""}`}
       >
@@ -47,5 +52,3 @@ function Maps(props) {
     </div>
   );
 }
-
-export default Maps;
