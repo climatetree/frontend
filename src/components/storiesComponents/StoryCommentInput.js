@@ -4,11 +4,11 @@ import axios from "axios";
 import { UserContext } from "../context/UserContext";
 
 const StoryCommentInput = ({
-  toggleComment,
-  toggleViewComment,
+  // toggleComment,
+  // toggleViewComment,
   story,
-  onChangeAddComment,
-  comments
+  onChangeAddComment
+  // comments
 }) => {
   const [content, setCommentContent] = useState("");
 
@@ -38,9 +38,9 @@ const StoryCommentInput = ({
     };
 
     const response = await axios.post(
-      "http://localhost:3000/stories/story/comment",
-      newComment
-      // options
+      "https://climatetree-api-gateway.azurewebsites.net/stories/story/comment",
+      newComment,
+      options
     );
 
     // const lastCommentIndex = response.data.comments.length - 1;

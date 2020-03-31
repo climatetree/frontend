@@ -21,22 +21,24 @@ const StoryCommentDetail = ({
     };
 
     const response = await fetch(
-      "http://localhost:3000/stories/story/comment",
+      "https://climatetree-api-gateway.azurewebsites.net/stories/story/comment",
       {
         method: "DELETE",
         headers: {
-          // Authentication: "Bearer " + jwt,
+          Authorization: "Bearer " + jwt,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(comment)
       }
     );
 
+    console.log(response);
+    console.log(jwt);
     if (response.status === 200) {
       onChangeDeleteComment(commentId);
     }
   };
-  console.log(comment.user_name);
+
   return (
     <div
       className="comment-detail"

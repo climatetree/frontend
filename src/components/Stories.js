@@ -36,8 +36,8 @@ const Stories = props => {
         setLoadSpinner(true);
 
         const BASE_URL = generalSearchTerm
-          ? "http://localhost:3000/stories/title/"
-          : "http://localhost:3000/stories/place/";
+          ? "https://climatetree-api-gateway.azurewebsites.net/stories/title/"
+          : "https://climatetree-api-gateway.azurewebsites.net/stories/place/";
         const PARAMETER = generalSearchTerm || placeId;
 
         let responses = await axios.get(`${BASE_URL}${PARAMETER}`);

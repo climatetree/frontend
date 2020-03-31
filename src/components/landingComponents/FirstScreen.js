@@ -30,7 +30,20 @@ export default function FirstScreen({ history }) {
             placeholder="Search for ClimateTree stories"
             onChange={event => setSearchTerm(event.target.value)}
           />
-          <img src={searchIcon} alt="search" id="search" />
+          <img
+            src={searchIcon}
+            alt="search"
+            id="search"
+            onClick={() => {
+              if (searchTerm) {
+                history.push({
+                  pathname: "/stories",
+                  search: `?storyTitle=${searchTerm}`,
+                  state: { searchTerm }
+                });
+              }
+            }}
+          />
         </form>
         <div>
           {/* <button className="primary-btn">

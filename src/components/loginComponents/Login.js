@@ -101,7 +101,7 @@ export default function Login() {
     <div className="login-wrapper">
       <div className="social-login">
         <FacebookLogin
-          appId="208267926889455"
+          appId="149701679676715"
           fields="name,email,picture"
           onClick={componentClicked}
           callback={responseFacebook}
@@ -109,7 +109,7 @@ export default function Login() {
           icon="fa-facebook"
         />
         <GoogleLogin
-          clientId="69469445070-29f3osjc154mqn4ccdnt7rp354oge5va.apps.googleusercontent.com"
+          clientId="373284097627-clfol175dg7a585n7i9jpif4ggjquhef.apps.googleusercontent.com"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           icon={true}

@@ -27,8 +27,8 @@ const LikeCommentButtonGroup = ({
     };
 
     const response = await axios.put(
-      `http://localhost:3000/stories/${storyId}/${action}/${user_id}`,
-      // null,
+      `https://climatetree-api-gateway.azurewebsites.net/stories/${storyId}/${action}/${user_id}`,
+      null,
       options
     );
 
