@@ -7,7 +7,8 @@ const StoryCommentInput = ({
   // toggleComment,
   // toggleViewComment,
   story,
-  onChangeAddComment
+  onChangeAddComment,
+  openViewComment
   // comments
 }) => {
   const [content, setCommentContent] = useState("");
@@ -34,7 +35,7 @@ const StoryCommentInput = ({
       userId,
       username,
       content,
-      date: "2011-05-26T07:56:00.123Z"
+      date: Date.now()
     };
 
     const response = await axios.post(
@@ -44,6 +45,7 @@ const StoryCommentInput = ({
     );
 
     onChangeAddComment(response.data);
+    openViewComment();
     setCommentContent("");
   };
 

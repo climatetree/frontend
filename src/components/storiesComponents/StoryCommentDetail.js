@@ -1,6 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import { UserContext } from "../context/UserContext";
+import {
+  doesConvertToYear,
+  doesConvertToMonth,
+  doesConvertToDay,
+  doesConvertToHour,
+  doesConvertToMinutes
+} from "./helper/timeConversion";
 
 const StoryCommentDetail = ({
   comment,
@@ -45,33 +52,8 @@ const StoryCommentDetail = ({
     }
   };
 
-  const doesConvertToYear = seconds => {
-    return seconds > 31536000;
-  };
-
-  const doesConvertToMonth = seconds => {
-    return seconds > 2592000;
-  };
-
-  const doesConvertToDay = seconds => {
-    return seconds > 86400;
-  };
-
-  const doesConvertToHour = seconds => {
-    return seconds > 3600;
-  };
-
-  const doesConvertToMinutes = seconds => {
-    return seconds > 60;
-  };
-
-  const doesConvertToSeconds = seconds => {
-    return seconds;
-  };
-
   const onChangeTimeSince = () => {
     const seconds = Math.floor((Date.now() - new Date(comment.date)) / 1000);
-    // const interval = Math.floor(seconds / 31536000);
 
     if (doesConvertToYear(seconds)) {
       setTimeSince(Math.floor(seconds / 31536000));
@@ -93,8 +75,6 @@ const StoryCommentDetail = ({
       setTimeSinceAlphabet("s");
     }
   };
-
-  console.log(timeSince + timeSinceAlphabet);
 
   return (
     <div className="comment-detail">

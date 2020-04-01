@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { ReactTinyLink } from "react-tiny-link";
 
 import "./ExploreScreen.css";
 
 function ExploreScreen() {
+  useEffect(() => {
+    (async () => {
+      const numberOfStories = 3;
+      const response = await axios.get(
+        `https://backend-mongo-stories.azurewebsites.net/stories/topStories/${numberOfStories}`
+      );
+
+      setPopularStories(response.data);
+    })();
+  });
+
+  const [popularStories, setPopularStories] = useState([]);
+
   return (
     <section id="explore-screen">
       <h2 id="explore-header">Explore Top Popular Stories</h2>
+      {/* {popularStories.map(ps => (
+        <div className="explore-tile">
+          <ReactTinyLink
+            cardSize="large"
+            showGraphic={true}
+            // description={ps.description}
+            maxLine={3}
+            minLine={3}
+            url={ps.hyperlink}
+          />
+        </div>
+      ))} */}
       <div className="explore-tile">
         <ReactTinyLink
           cardSize="large"
