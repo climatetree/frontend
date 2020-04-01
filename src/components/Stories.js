@@ -75,9 +75,23 @@ const Stories = props => {
     return (
       <>
         {renderResultFor()}
-        {stories.map(story => (
-          <StoryDetail story={story} key={story.story_id} />
-        ))}
+        {stories.length &&
+          stories.map(story => (
+            <StoryDetail story={story} key={story.story_id} />
+          ))}
+        {!stories.length && (
+          <div className="no-found-msg">
+            No stories were found.
+            <a
+              href={`https://www.google.com/search?q=${generalSearchTerm}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="direct-to-google-search"
+            >
+              Would you like to help look for one?
+            </a>
+          </div>
+        )}
       </>
     );
   };

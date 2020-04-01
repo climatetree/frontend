@@ -38,15 +38,17 @@ const StoryCommentInput = ({
       date: Date.now()
     };
 
-    const response = await axios.post(
-      "https://climatetree-api-gateway.azurewebsites.net/stories/story/comment",
-      newComment,
-      options
-    );
+    if (newComment.content) {
+      const response = await axios.post(
+        "https://climatetree-api-gateway.azurewebsites.net/stories/story/comment",
+        newComment,
+        options
+      );
 
-    onChangeAddComment(response.data);
-    openViewComment();
-    setCommentContent("");
+      onChangeAddComment(response.data);
+      openViewComment();
+      setCommentContent("");
+    }
   };
 
   return (
