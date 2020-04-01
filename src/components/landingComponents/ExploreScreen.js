@@ -5,16 +5,16 @@ import { ReactTinyLink } from "react-tiny-link";
 import "./ExploreScreen.css";
 
 function ExploreScreen() {
-  useEffect(() => {
-    (async () => {
-      const numberOfStories = 3;
-      const response = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/topStories/${numberOfStories}`
-      );
+  // useEffect(() => {
+  //   (async () => {
+  //     const numberOfStories = 3;
+  //     const response = await axios.get(
+  //       `https://backend-mongo-stories.azurewebsites.net/stories/topStories/${numberOfStories}`
+  //     );
 
-      setPopularStories(response.data);
-    })();
-  });
+  //     setPopularStories(response.data);
+  //   })();
+  // });
 
   const [popularStories, setPopularStories] = useState([]);
 

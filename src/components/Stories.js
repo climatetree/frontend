@@ -9,13 +9,12 @@ import Spinner from "./storiesComponents/Spinner";
 import ResultsFor from "./storiesComponents/ResultsFor";
 import ResultForPlaceId from "./storiesComponents/ResultForPlaceId";
 
-import { fetchStories } from "../services/fetchStories";
-
 import "./Stories.css";
 
 const Stories = props => {
   // Initialize state
   const [stories, setStories] = useState([]);
+  const [generalSearchTerm, setGeneralSearchTerm] = useState("");
   const [loadSpinner, setLoadSpinner] = useState(false);
 
   // Retrieve query name from URL with React Router
@@ -24,45 +23,54 @@ const Stories = props => {
   };
 
   let query = useQuery();
-  let generalSearchTerm = query.get("storyTitle") || "";
   let placeId = query.get("place_id");
+  let placeName = query.get("place_name");
 
   // State lifecycle
   useEffect(() => {
-    (async () => {
-      setStories([]);
+    (() => {
+      let { history } = props;
+      setGeneralSearchTerm(query.get("storyTitle") || placeName);
 
-      if (generalSearchTerm || placeId) {
-        setLoadSpinner(true);
-
-        const BASE_URL = generalSearchTerm
-          ? "https://climatetree-api-gateway.azurewebsites.net/stories/title/"
-          : "https://climatetree-api-gateway.azurewebsites.net/stories/place/";
-        const PARAMETER = generalSearchTerm || placeId;
-
-        let responses = await axios.get(`${BASE_URL}${PARAMETER}`);
-
-        // let responsesSecond = await fetchStories("title", generalSearchTerm);
-
-        let temp = responses.data.map(story => {
-          return { ...story, date: new Date(story.date) };
-        });
-
-        setStories(temp);
-        setLoadSpinner(false);
+      if (history.location.state !== undefined) {
+        setStories(
+          history.location.state.storiesResult.map(story => {
+            return { ...story, date: new Date(story.date) };
+          })
+        );
       }
     })();
-  }, [generalSearchTerm]);
+  }, [query.get("storyTitle")]);
+
+  const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
+    if (searchTerm) {
+      setLoadSpinner(true);
+
+      const response = await axios.get(
+        `https://climatetree-api-gateway.azurewebsites.net/stories/title/${searchTerm}`
+      );
+
+      setStories(
+        response.data.map(story => {
+          return { ...story, date: new Date(story.date) };
+        })
+      );
+
+      history.push({
+        pathname: "/stories",
+        search: `?storyTitle=${searchTerm}`,
+        state: { storiesResult: response.data }
+      });
+      setLoadSpinner(false);
+    }
+  };
 
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
     return placeId ? (
-      <ResultForPlaceId
-        placeId={placeId}
-        placeName={props.location.state.placeName}
-      />
+      <ResultForPlaceId placeId={placeId} placeName={placeName} />
     ) : (
-      <ResultsFor searchTerm={generalSearchTerm} />
+      <ResultsFor searchTerm={query.get("storyTitle")} />
     );
   };
 
@@ -99,7 +107,6 @@ const Stories = props => {
   return (
     <>
       <Nav />
-      {/* Background image */}
       <div className={`stories-background`}></div>
 
       <section className="stories-container">
@@ -107,6 +114,7 @@ const Stories = props => {
           termForSearchBar={generalSearchTerm}
           {...props}
           loadSpinner={loadSpinner}
+          searchForStoriesBasedOnSearchTerm={searchForStoriesBasedOnSearchTerm}
         />
         {loadSpinner !== null && renderContent()}
       </section>
