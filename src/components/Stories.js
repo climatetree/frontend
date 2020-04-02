@@ -13,7 +13,11 @@ import "./Stories.css";
 
 const Stories = props => {
   // Initialize state
-  const [stories, setStories] = useState([]);
+  const [stories, setStories] = useState(
+    props.history.location.state.storiesResult.map(story => {
+      return { ...story, date: new Date(story.date) };
+    })
+  );
   const [generalSearchTerm, setGeneralSearchTerm] = useState("");
   const [loadSpinner, setLoadSpinner] = useState(false);
 
@@ -39,6 +43,25 @@ const Stories = props => {
           })
         );
       }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      setLoadSpinner(true);
+      const response = await axios.get(
+        `https://climatetree-api-gateway.azurewebsites.net/stories/title/${query.get(
+          "storyTitle"
+        ) || placeId}`
+      );
+
+      setStories(
+        response.data.map(story => {
+          return { ...story, date: new Date(story.date) };
+        })
+      );
+
+      setLoadSpinner(false);
     })();
   }, [query.get("storyTitle")]);
 
