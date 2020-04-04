@@ -24,22 +24,22 @@ const StoryDetail = ({ story }) => {
   const { role } = user;
 
   const onToggleComment = () => {
-    setToggleComment(prevToggleCommentState => !prevToggleCommentState);
+    setToggleComment((prevToggleCommentState) => !prevToggleCommentState);
   };
 
   const onToggleViewComment = () => {
     setToggleViewComment(
-      prevToggleViewCommentState => !prevToggleViewCommentState
+      (prevToggleViewCommentState) => !prevToggleViewCommentState
     );
   };
 
   const onChangeUsersLikesSet = (action, userId) => {
     if (action === "like") {
-      setUserLikesSet(prevUserLikesSetState =>
+      setUserLikesSet((prevUserLikesSetState) =>
         new Set(prevUserLikesSetState).add(parseInt(userId))
       );
     } else {
-      setUserLikesSet(prevUserLikesSetState => {
+      setUserLikesSet((prevUserLikesSetState) => {
         const newUserLikesSetState = new Set(prevUserLikesSetState);
         newUserLikesSetState.delete(parseInt(userId));
 
@@ -52,13 +52,13 @@ const StoryDetail = ({ story }) => {
     setToggleViewComment(true);
   };
 
-  const onChangeAddComment = newComment => {
-    setComments(prevComments => [...prevComments, newComment]);
+  const onChangeAddComment = (newComment) => {
+    setComments((prevComments) => [...prevComments, newComment]);
   };
 
-  const onChangeDeleteComment = commentId => {
-    setComments(prevComments => [
-      ...prevComments.filter(c => c.comment_id !== commentId)
+  const onChangeDeleteComment = (commentId) => {
+    setComments((prevComments) => [
+      ...prevComments.filter((c) => c.comment_id !== commentId),
     ]);
   };
 
@@ -87,8 +87,9 @@ const StoryDetail = ({ story }) => {
         <div>
           <div className="created-detail">
             Created:{" "}
-            {`${story.date.getUTCMonth() +
-              1}/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+            {`${
+              story.date.getUTCMonth() + 1
+            }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
         </div>
 

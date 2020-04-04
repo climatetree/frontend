@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import Nav from "./Nav";
@@ -31,25 +31,28 @@ const Stories = (props) => {
   let placeId = query.get("place_id");
   let placeName = query.get("place_name");
 
-  // State lifecycle
-  useEffect(() => {
-    (() => {
-      let { history } = props;
-      setGeneralSearchTerm(query.get("storyTitle") || placeName);
+  let history = useHistory();
 
-      if (history.location.state !== undefined) {
-        setStories(
-          history.location.state.storiesResult.map((story) => {
-            return { ...story, date: new Date(story.date) };
-          })
-        );
-      }
-    })();
-  }, []);
+  // State lifecycle
+  // useEffect(() => {
+  //   (() => {
+  //     let { history } = props;
+  //     setStories([]);
+  //     setGeneralSearchTerm(query.get("storyTitle") || placeName);
+
+  //     setStories(
+  //       history.location.state.storiesResult.map((story) => {
+  //         return { ...story, date: new Date(story.date) };
+  //       })
+  //     );
+  //   })();
+  // }, []);
 
   useEffect(() => {
     (async () => {
+      setStories([]);
       setLoadSpinner(true);
+
       const response = await axios.get(
         `https://climatetree-api-gateway.azurewebsites.net/stories/title/${
           query.get("storyTitle") || placeId
@@ -62,6 +65,7 @@ const Stories = (props) => {
         })
       );
 
+      setGeneralSearchTerm(query.get("storyTitle") || placeName);
       setLoadSpinner(false);
     })();
   }, [query.get("storyTitle")]);
@@ -105,9 +109,13 @@ const Stories = (props) => {
         {renderResultFor()}
         {stories.length &&
           stories.map((story) => (
-            <StoryDetail story={story} key={story.story_id} />
+            <StoryDetail
+              story={story}
+              key={story.story_id}
+              generalSearchTerm={generalSearchTerm}
+            />
           ))}
-        {!stories.length && (
+        {!stories.length && !loadSpinner && (
           <div className="no-found-msg">
             No stories were found.
             <a

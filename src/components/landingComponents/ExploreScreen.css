@@ -13,17 +13,25 @@
   );
   padding-bottom: 250px;
 }
+
 #explore-header {
   opacity: 0;
   color: #ffffff;
   text-transform: capitalize;
   grid-area: 1 / 1 / span 1 / span 3;
 }
+
 .explore-tile {
   opacity: 0;
   width: 100%;
+  filter: brightness(75%);
   text-decoration: none;
   color: #ededed;
+}
+
+.explore-tile:hover {
+  filter: brightness(100%);
+  background-color: inherit;
 }
 
 .explore-tile img {
@@ -76,77 +84,13 @@
   animation: spin 0.5s linear infinite;
 }
 
-.explore-tile .react_tinylink_card {
-  filter: brightness(75%);
-  color: #adadad;
-  border: none;
-  background-color: inherit;
-}
-
-.explore-tile .react_tinylink_card:hover {
-  filter: brightness(100%);
-  background-color: inherit;
-}
-
-.explore-tile .react_tinylink_card .react_tinylink_card_content_wrapper {
-  padding: 0;
-  padding-top: 10px;
-}
-
-.explore-tile
-  .react_tinylink_card
-  .react_tinylink_card_content_header_description {
-  font-size: 20px;
-}
-
-.explore-tile
-  .react_tinylink_card
-  .react_tinylink_card_content_header_description:hover {
-  text-decoration: underline;
-}
-
-.cldxej {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 1075px) and (min-width: 960px) {
-  .explore-tile
-    .react_tinylink_card
-    .react_tinylink_card_content_header_description {
-    font-size: 17px;
-  }
-
-  .explore-tile .react_tinylink_card .react_tinylink_card:hover {
-    filter: brightness(100%);
-    background-color: inherit;
-  }
-}
-
 @media (max-width: 959px) and (min-width: 768px) {
   #explore-screen {
     column-gap: 25px;
   }
-  .explore-tile
-    .react_tinylink_card
-    .react_tinylink_card_content_header_description {
-    font-size: 15px;
-  }
-
-  .explore-tile .react_tinylink_card .react_tinylink_card:hover {
-    filter: brightness(100%);
-    background-color: inherit;
-  }
 }
 
 @media (max-width: 767px) {
-  .explore-tile .react_tinylink_card {
-    margin-bottom: 40px;
-  }
-  .explore-tile .react_tinylink_card:hover {
-    filter: brightness(100%);
-    background-color: inherit;
-  }
   #explore-screen {
     display: flex;
     flex-direction: column;
