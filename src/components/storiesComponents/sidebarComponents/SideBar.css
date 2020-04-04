@@ -1,0 +1,13 @@
+#side-bar-container {
+  margin-top: 1rem;
+  margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+
+#side-bar-container #side-bar-absolute {
+  min-width: 28%;
+  z-index: 0;
+  position: fixed;
+}

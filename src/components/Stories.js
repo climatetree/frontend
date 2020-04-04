@@ -8,13 +8,14 @@ import StorySearchBar from "./storiesComponents/StorySearchBar";
 import Spinner from "./storiesComponents/Spinner";
 import ResultsFor from "./storiesComponents/ResultsFor";
 import ResultForPlaceId from "./storiesComponents/ResultForPlaceId";
+import SideBar from "./storiesComponents/sidebarComponents/SideBar";
 
 import "./Stories.css";
 
-const Stories = props => {
+const Stories = (props) => {
   // Initialize state
   const [stories, setStories] = useState(
-    props.history.location.state.storiesResult.map(story => {
+    props.history.location.state.storiesResult.map((story) => {
       return { ...story, date: new Date(story.date) };
     })
   );
@@ -38,7 +39,7 @@ const Stories = props => {
 
       if (history.location.state !== undefined) {
         setStories(
-          history.location.state.storiesResult.map(story => {
+          history.location.state.storiesResult.map((story) => {
             return { ...story, date: new Date(story.date) };
           })
         );
@@ -50,13 +51,13 @@ const Stories = props => {
     (async () => {
       setLoadSpinner(true);
       const response = await axios.get(
-        `https://climatetree-api-gateway.azurewebsites.net/stories/title/${query.get(
-          "storyTitle"
-        ) || placeId}`
+        `https://climatetree-api-gateway.azurewebsites.net/stories/title/${
+          query.get("storyTitle") || placeId
+        }`
       );
 
       setStories(
-        response.data.map(story => {
+        response.data.map((story) => {
           return { ...story, date: new Date(story.date) };
         })
       );
@@ -74,7 +75,7 @@ const Stories = props => {
       );
 
       setStories(
-        response.data.map(story => {
+        response.data.map((story) => {
           return { ...story, date: new Date(story.date) };
         })
       );
@@ -82,7 +83,7 @@ const Stories = props => {
       history.push({
         pathname: "/stories",
         search: `?storyTitle=${searchTerm}`,
-        state: { storiesResult: response.data }
+        state: { storiesResult: response.data },
       });
       setLoadSpinner(false);
     }
@@ -99,15 +100,11 @@ const Stories = props => {
 
   // Conditional rendering
   const renderContent = () => {
-    if (loadSpinner) {
-      return <Spinner />;
-    }
-
     return (
       <>
         {renderResultFor()}
         {stories.length &&
-          stories.map(story => (
+          stories.map((story) => (
             <StoryDetail story={story} key={story.story_id} />
           ))}
         {!stories.length && (
@@ -132,15 +129,22 @@ const Stories = props => {
       <Nav />
       <div className={`stories-background`}></div>
 
-      <section className="stories-container">
-        <StorySearchBar
-          termForSearchBar={generalSearchTerm}
-          {...props}
-          loadSpinner={loadSpinner}
-          searchForStoriesBasedOnSearchTerm={searchForStoriesBasedOnSearchTerm}
-        />
-        {loadSpinner !== null && renderContent()}
-      </section>
+      {loadSpinner && <Spinner />}
+
+      <div className="stories-container">
+        <div className="main-stories">
+          <StorySearchBar
+            termForSearchBar={generalSearchTerm}
+            {...props}
+            loadSpinner={loadSpinner}
+            searchForStoriesBasedOnSearchTerm={
+              searchForStoriesBasedOnSearchTerm
+            }
+          />
+          {renderContent()}
+        </div>
+        <SideBar />
+      </div>
     </>
   );
 };

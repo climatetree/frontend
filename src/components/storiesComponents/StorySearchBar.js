@@ -6,7 +6,7 @@ const StorySearchBar = ({
   termForSearchBar,
   history,
   loadSpinner,
-  searchForStoriesBasedOnSearchTerm
+  searchForStoriesBasedOnSearchTerm,
 }) => {
   const [searchTerm, setSearchTerm] = useState(termForSearchBar);
 
@@ -14,7 +14,7 @@ const StorySearchBar = ({
     setSearchTerm(termForSearchBar);
   }, [termForSearchBar]);
 
-  const onSubmitForm = event => {
+  const onSubmitForm = (event) => {
     event.preventDefault();
     searchForStoriesBasedOnSearchTerm(searchTerm, history);
   };
@@ -26,27 +26,21 @@ const StorySearchBar = ({
   return (
     <div className="search-bar-container">
       <h2 id="search-for-stories-title">Search For Stories</h2>
-      <form onSubmit={e => onSubmitForm(e)} style={{ position: "relative" }}>
+      <form onSubmit={(e) => onSubmitForm(e)} style={{ position: "relative" }}>
         <input
           type="text"
           id="search-for-story"
           value={searchTerm}
           disabled={loadSpinner}
           placeholder="Enter Story Title"
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
 
         <img
           src={searchIcon}
           alt="search"
           onClick={onClickSearch}
-          style={{
-            position: "absolute",
-            right: 0,
-            top: "30%",
-            transform: "translateX(-1.6rem)",
-            cursor: "pointer"
-          }}
+          id="search-story-icon"
         />
       </form>
     </div>
