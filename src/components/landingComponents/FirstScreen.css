@@ -1,3 +1,16 @@
+#spinner-landing {
+  border: 3px solid #575757;
+  border-radius: 50%;
+  /* border-top: 3px solid #dbdbdb; */
+  border-bottom: 3px solid #dbdbdb;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  right: 20px;
+  transform: translateX(-1.6rem);
+  width: 30px;
+  height: 30px;
+}
+
 #first-screen {
   height: 100vh;
   display: flex;

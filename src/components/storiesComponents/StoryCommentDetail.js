@@ -1,6 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import { UserContext } from "../context/UserContext";
+import {
+  doesConvertToYear,
+  doesConvertToMonth,
+  doesConvertToDay,
+  doesConvertToHour,
+  doesConvertToMinutes
+} from "./helper/timeConversion";
 
 const StoryCommentDetail = ({
   comment,
@@ -8,8 +15,17 @@ const StoryCommentDetail = ({
   commentId,
   onChangeDeleteComment
 }) => {
+  useEffect(() => {
+    (() => {
+      onChangeTimeSince();
+    })();
+  }, []);
+
   const { user } = useContext(UserContext);
   const { role, userId, jwt } = user;
+
+  const [timeSince, setTimeSince] = useState(0);
+  const [timeSinceAlphabet, setTimeSinceAlphabet] = useState("s");
 
   const deleteComment = async () => {
     const comment = {
@@ -36,6 +52,30 @@ const StoryCommentDetail = ({
     }
   };
 
+  const onChangeTimeSince = () => {
+    const seconds = Math.floor((Date.now() - new Date(comment.date)) / 1000);
+
+    if (doesConvertToYear(seconds)) {
+      setTimeSince(Math.floor(seconds / 31536000));
+      setTimeSinceAlphabet("y");
+    } else if (doesConvertToMonth(seconds)) {
+      setTimeSince(Math.floor(seconds / 2592000));
+      setTimeSinceAlphabet("m");
+    } else if (doesConvertToDay(seconds)) {
+      setTimeSince(Math.floor(seconds / 86400));
+      setTimeSinceAlphabet("d");
+    } else if (doesConvertToHour(seconds)) {
+      setTimeSince(Math.floor(seconds / 3600));
+      setTimeSinceAlphabet("h");
+    } else if (doesConvertToMinutes(seconds)) {
+      setTimeSince(Math.floor(seconds / 60));
+      setTimeSinceAlphabet("m");
+    } else {
+      setTimeSince(seconds);
+      setTimeSinceAlphabet("s");
+    }
+  };
+
   return (
     <div className="comment-detail">
       <div>
@@ -45,7 +85,9 @@ const StoryCommentDetail = ({
         <span className="comment-content">{comment.content}</span>
       </div>
       <div className="comment-footer">
-        <span className="comment-hours-ago">16h</span>
+        <span className="comment-hours-ago">
+          {timeSince + timeSinceAlphabet}
+        </span>
         <span className="comment-likes-count">6 likes</span>
         {userId === comment.user_id && (
           <button onClick={deleteComment} className="delete-comment-btn">

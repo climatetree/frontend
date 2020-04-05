@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 
 /**
  * Handles the location and contents of popups on the map.
@@ -9,7 +10,14 @@ import ReactDOM from "react-dom";
  * @param {Object} history Session history
  * @param {Object} targetPlace Info about the place last searched
  */
-const popUpHandler = (evt, map, overlay, history, targetPlace, setComparePlaceProps) => {
+const popUpHandler = (
+  evt,
+  map,
+  overlay,
+  history,
+  targetPlace,
+  setComparePlaceProps
+) => {
   // Get list of features
   let pixel = evt.pixel;
   let features = map.getFeaturesAtPixel(pixel);
@@ -28,11 +36,15 @@ const popUpHandler = (evt, map, overlay, history, targetPlace, setComparePlacePr
   let content = document.getElementById("popup-content");
   content.innerHTML = `<div id="popup-html"></div>`;
 
-  const goToStories = place => {
+  const goToStories = async place => {
+    const response = await axios.get(
+      `https://climatetree-api-gateway.azurewebsites.net/stories/place/${place.place_id}`
+    );
+
     history.push({
       pathname: "/stories",
-      search: `?place_id=${place.place_id}`,
-      state: { placeName: place.name }
+      search: `?place_id=${place.place_id}&place_name=${place.name}`,
+      state: { storiesResult: response.data, placeName: place.name }
     });
   };
 
@@ -59,28 +71,29 @@ const popUpHandler = (evt, map, overlay, history, targetPlace, setComparePlacePr
         return (
           <>
             <p>
-              <strong>{placeProps.name}</strong> - <small>{placeProps.type_name}</small>
+              <strong>{placeProps.name}</strong> -{" "}
+              <small>{placeProps.type_name}</small>
               <br />
-
-              <em>Population</em><br />
+              <em>Population</em>
+              <br />
               &nbsp;&nbsp;{Math.round(placeProps.population)}
               <br />
-
-              <em>Population Density</em> - <small>pop/km</small><br />
+              <em>Population Density</em> - <small>pop/km</small>
+              <br />
               &nbsp;&nbsp;{Math.round(placeProps.popdensity)}
               <br />
-
-              <em>Carbon</em> - <small>kg/year</small><br />
+              <em>Carbon</em> - <small>kg/year</small>
+              <br />
               &nbsp;&nbsp;{placeProps.carbon}
               <br />
-
-              <em>Carbon Per Capita</em> - <small>carbon/person</small><br />
+              <em>Carbon Per Capita</em> - <small>carbon/person</small>
+              <br />
               &nbsp;&nbsp;{placeProps.percapcarb}
               <br />
             </p>
             <button id="popup-btn" onClick={() => goToStories(placeProps)}>
               View Stories
-          </button>
+            </button>
           </>
         );
       } else {
@@ -88,28 +101,33 @@ const popUpHandler = (evt, map, overlay, history, targetPlace, setComparePlacePr
         return (
           <>
             <p>
-              <strong>{placeProps.name}</strong> - <small>{placeProps.type_name}</small>
+              <strong>{placeProps.name}</strong> -{" "}
+              <small>{placeProps.type_name}</small>
               <br />
-
-              <em>Population</em><br />
-              &nbsp;&nbsp;{percentiStringify(targetProps.population, placeProps.population)}
+              <em>Population</em>
               <br />
-
-              <em>Population Density</em> - <small>pop/km</small><br />
-              &nbsp;&nbsp;{percentiStringify(targetProps.popdensity, placeProps.popdensity)}
+              &nbsp;&nbsp;
+              {percentiStringify(targetProps.population, placeProps.population)}
               <br />
-
-              <em>Carbon</em> - <small>kg/year</small><br />
-              &nbsp;&nbsp;{percentiStringify(targetProps.carbon, placeProps.carbon)}
+              <em>Population Density</em> - <small>pop/km</small>
               <br />
-
-              <em>Carbon Per Capita</em> - <small>carbon/person</small><br />
-              &nbsp;&nbsp;{percentiStringify(targetProps.percapcarb, placeProps.percapcarb)}
+              &nbsp;&nbsp;
+              {percentiStringify(targetProps.popdensity, placeProps.popdensity)}
+              <br />
+              <em>Carbon</em> - <small>kg/year</small>
+              <br />
+              &nbsp;&nbsp;
+              {percentiStringify(targetProps.carbon, placeProps.carbon)}
+              <br />
+              <em>Carbon Per Capita</em> - <small>carbon/person</small>
+              <br />
+              &nbsp;&nbsp;
+              {percentiStringify(targetProps.percapcarb, placeProps.percapcarb)}
               <br />
             </p>
             <button id="popup-btn" onClick={() => goToStories(placeProps)}>
               View Stories
-          </button>
+            </button>
           </>
         );
       }
@@ -135,7 +153,7 @@ export function percentiStringify(targetPlaceNum, currentPlaceNum) {
   let percent = 100;
   let ratio = currentPlaceNum / targetPlaceNum;
   // example: 110% becomes +10%, 90% becomes -10%
-  let relativePercent = Math.floor((ratio * percent) - percent);
+  let relativePercent = Math.floor(ratio * percent - percent);
   if (relativePercent >= 0) {
     return `+${relativePercent}%`;
   } else {

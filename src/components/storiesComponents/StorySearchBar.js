@@ -2,24 +2,25 @@ import React, { useState, useEffect } from "react";
 
 import searchIcon from "../../images/search.svg";
 
-const StorySearchBar = ({ termForSearchBar, history, loadSpinner }) => {
-  const [searchTermFromSearchBar, setSearchTermFromSearchBar] = useState(
-    termForSearchBar
-  );
+const StorySearchBar = ({
+  termForSearchBar,
+  history,
+  loadSpinner,
+  searchForStoriesBasedOnSearchTerm
+}) => {
+  const [searchTerm, setSearchTerm] = useState(termForSearchBar);
+
+  useEffect(() => {
+    setSearchTerm(termForSearchBar);
+  }, [termForSearchBar]);
 
   const onSubmitForm = event => {
     event.preventDefault();
-    history.push({
-      pathname: "/stories",
-      search: `?storyTitle=${searchTermFromSearchBar}`
-    });
+    searchForStoriesBasedOnSearchTerm(searchTerm, history);
   };
 
   const onClickSearch = () => {
-    history.push({
-      pathname: "/stories",
-      search: `?storyTitle=${searchTermFromSearchBar}`
-    });
+    searchForStoriesBasedOnSearchTerm(searchTerm, history);
   };
 
   return (
@@ -29,10 +30,10 @@ const StorySearchBar = ({ termForSearchBar, history, loadSpinner }) => {
         <input
           type="text"
           id="search-for-story"
-          value={searchTermFromSearchBar}
+          value={searchTerm}
           disabled={loadSpinner}
           placeholder="Enter Story Title"
-          onChange={e => setSearchTermFromSearchBar(e.target.value)}
+          onChange={e => setSearchTerm(e.target.value)}
         />
 
         <img

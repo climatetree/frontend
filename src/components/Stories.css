@@ -21,6 +21,22 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.no-found-msg {
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+#direct-to-google-search {
+  color: white;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+#direct-to-google-search:hover {
+  text-decoration: underline;
+}
+
 .spinner {
   border: 3px solid #575757;
   border-radius: 50%;
@@ -86,9 +102,7 @@
   height: 100%;
   background: url("../images/jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
   filter: brightness(50%);
-  background-position: center;
   background-size: cover;
-  background-attachment: fixed;
 }
 
 /* STORY CARD */

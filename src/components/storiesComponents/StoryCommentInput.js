@@ -7,7 +7,8 @@ const StoryCommentInput = ({
   // toggleComment,
   // toggleViewComment,
   story,
-  onChangeAddComment
+  onChangeAddComment,
+  openViewComment
   // comments
 }) => {
   const [content, setCommentContent] = useState("");
@@ -34,17 +35,22 @@ const StoryCommentInput = ({
       userId,
       username,
       content,
-      date: "2011-05-26T07:56:00.123Z"
+      date: Date.now()
     };
 
-    const response = await axios.post(
-      "https://climatetree-api-gateway.azurewebsites.net/stories/story/comment",
-      newComment,
-      options
-    );
+    if (newComment.content) {
+      const response = await axios.post(
+        "https://climatetree-api-gateway.azurewebsites.net/stories/story/comment",
+        newComment,
+        options
+      );
 
-    onChangeAddComment(response.data);
-    setCommentContent("");
+      console.log(response);
+
+      onChangeAddComment(response.data);
+      openViewComment();
+      setCommentContent("");
+    }
   };
 
   return (

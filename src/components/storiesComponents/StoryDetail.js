@@ -48,6 +48,10 @@ const StoryDetail = ({ story }) => {
     }
   };
 
+  const openViewComment = () => {
+    setToggleViewComment(true);
+  };
+
   const onChangeAddComment = newComment => {
     setComments(prevComments => [...prevComments, newComment]);
   };
@@ -90,9 +94,11 @@ const StoryDetail = ({ story }) => {
 
         <div className="likes-comments-view">
           <div className="liked-count">{userLikesSetState.size} Likes</div>
-          <div className="view-comments-btn" onClick={onToggleViewComment}>
-            <span>{comments.length} Comments</span>
-          </div>
+          {comments.length > 0 && (
+            <div className="view-comments-btn" onClick={onToggleViewComment}>
+              <span>{comments.length} Comments</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -129,6 +135,7 @@ const StoryDetail = ({ story }) => {
             story={story}
             comments={comments}
             toggleViewComment={toggleViewComment}
+            openViewComment={openViewComment}
             onChangeAddComment={onChangeAddComment}
           />
         )}

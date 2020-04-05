@@ -1,11 +1,31 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import searchIcon from "../../images/search.svg";
 import "./FirstScreen.css";
 
 export default function FirstScreen({ history }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const searchForStories = async () => {
+    if (searchTerm) {
+      setIsLoading(true);
+      const response = await axios.get(
+        `https://climatetree-api-gateway.azurewebsites.net/stories/title/${searchTerm}`
+      );
+
+      if (response.data.length) {
+        history.push({
+          pathname: "/stories",
+          search: `?storyTitle=${searchTerm}`,
+          state: { storiesResult: response.data }
+        });
+      }
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section id="first-screen">
@@ -16,13 +36,7 @@ export default function FirstScreen({ history }) {
           id="first-screen-search"
           onSubmit={event => {
             event.preventDefault();
-            // const stories = useStories("title", event.target.value);
-            // console.log(stories);
-            history.push({
-              pathname: "/stories",
-              search: `?storyTitle=${searchTerm}`,
-              state: { searchTerm }
-            });
+            searchForStories();
           }}
         >
           <input
@@ -30,20 +44,15 @@ export default function FirstScreen({ history }) {
             placeholder="Search for ClimateTree stories"
             onChange={event => setSearchTerm(event.target.value)}
           />
-          <img
-            src={searchIcon}
-            alt="search"
-            id="search"
-            onClick={() => {
-              if (searchTerm) {
-                history.push({
-                  pathname: "/stories",
-                  search: `?storyTitle=${searchTerm}`,
-                  state: { searchTerm }
-                });
-              }
-            }}
-          />
+          {!isLoading && (
+            <img
+              src={searchIcon}
+              alt="search"
+              id="search"
+              onClick={searchForStories}
+            />
+          )}
+          {isLoading && <div id="spinner-landing"></div>}
         </form>
         <div>
           {/* <button className="primary-btn">
