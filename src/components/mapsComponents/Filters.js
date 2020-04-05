@@ -12,34 +12,20 @@ export default function Filters({
   targetPlaceID,
   targetPlace,
   setTargetPlace,
+  filterArray,
+  populationRange,
+  setPopulationRange,
+  carbonRange,
+  setCarbonRange,
+  searchTerm,
+  setSearchTerm,
+  openMapDashboard,
 }) {
-  const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [isSearchingSuggestions, setIsSearchingSuggestions] = useState(false);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
 
-  const [populationRange, setPopulationRange] = useState({
-    name: 'population',
-    min: 90,
-    max: 150,
-    apply: true,  // Only population filter is applied by default
-  });
-  const [carbonRange, setCarbonRange] = useState({
-    name: 'carbon',
-    min: 90,
-    max: 110,
-    apply: false,
-  });
-
-  const openMapDashboard = () => {
-    const mapDashboard = document.querySelector('.story-dashboard');
-    if (mapDashboard) {
-      mapDashboard.style.display = 'block';
-      mapDashboard.style.opacity = 1;
-    }
-  }
-  const filterArray = [populationRange, carbonRange];
   const handleSuggestionClick = async (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {
