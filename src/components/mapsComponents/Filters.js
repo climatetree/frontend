@@ -19,12 +19,17 @@ export default function Filters({
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
 
+  //population filter (enabled by default) with a initial range from 90% to 150% relative to the current place ////population level (100%)  
+
   const [populationRange, setPopulationRange] = useState({
     name: 'population',
     min: 90,
     max: 150,
     apply: true,  // Only population filter is applied by default
   });
+
+  // carbon filter (disabled by default) with a initial range from 90% to 110% relative to the current place carbonlevel (100%)
+
   const [carbonRange, setCarbonRange] = useState({
     name: 'carbon',
     min: 90,

@@ -1,3 +1,11 @@
+/**
+ * A story has the following properties:
+ * - Author (user_id)
+ * - Title
+ * - Date
+ * - Location (place_id)
+ * - HYperlink
+*/
 import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from "../context/UserContext";
 import useDebounce from '../mapsComponents/helpers/useDebounce';
