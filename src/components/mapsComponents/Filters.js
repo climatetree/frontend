@@ -1,3 +1,6 @@
+/**
+ * Filters components for the map
+ */
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SuggestionDropdown from './SuggestionDropdown';
@@ -28,7 +31,7 @@ export default function Filters({
     apply: true,  // Only population filter is applied by default
   });
 
-  // carbon filter (disabled by default) with a initial range from 90% to 110% relative to the current place carbonlevel (100%)
+  // carbon filter (disabled by default) with a initial range from 90% to 110% relative to the current place carbon level (100%)
 
   const [carbonRange, setCarbonRange] = useState({
     name: 'carbon',
@@ -45,6 +48,8 @@ export default function Filters({
     }
   }
   const filterArray = [populationRange, carbonRange];
+
+  //From a given location (selected by the user), search for similar places 
   const handleSuggestionClick = async (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {

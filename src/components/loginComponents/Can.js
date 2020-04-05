@@ -1,5 +1,11 @@
+/**
+ * Component takes the rules (wrote in the RBAC) and decides whether or not users can perform the desired action or see some part of the UI.
+ */
+
 import rules from "./rbac-rules";
 
+
+// Role Based Access Control (RBAC) based on Auth0 rules. If the user has the right permissions, return false. Otherwise return true
 const check = (rules, role, action, data) => {
   const permissions = rules[role];
   console.log("Permissions for role: " + role);
@@ -11,6 +17,7 @@ const check = (rules, role, action, data) => {
     return false;
   }
 
+  // static permissions are permissions which don't need any data apart from the user role
   const staticPermissions = permissions.static;
 
   if (staticPermissions && staticPermissions.includes(action)) {
@@ -18,6 +25,7 @@ const check = (rules, role, action, data) => {
     return true;
   }
 
+  // dynamic permissions need additional data to determine user access
   const dynamicPermissions = permissions.dynamic;
 
   if (dynamicPermissions) {

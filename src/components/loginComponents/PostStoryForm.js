@@ -29,11 +29,13 @@ export default function PostStoryForm({
       place_ids: [place_id],
       date: Date().toString(),
     });
+    // the new story is stored on the backend-mongo-stories db
     fetch('https://backend-mongo-stories.azurewebsites.net/stories/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      // convert the data to json
       body: JSON.stringify({
         user_id: user.userId,
         hyperlink,
@@ -42,6 +44,7 @@ export default function PostStoryForm({
         date: Date().toString(),
       }),
     }).then(() => {
+      // Add that new story to the user profile
       setMyStories([
         ...myStories,
         {

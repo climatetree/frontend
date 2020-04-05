@@ -18,6 +18,7 @@ const Stories = props => {
       return { ...story, date: new Date(story.date) };
     })
   );
+  
   const [generalSearchTerm, setGeneralSearchTerm] = useState("");
   const [loadSpinner, setLoadSpinner] = useState(false);
 

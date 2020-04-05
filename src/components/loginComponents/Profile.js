@@ -1,3 +1,6 @@
+/**
+ * User personnal page 
+ */
 import React, { useContext, useState, useEffect } from "react";
 import { ReactTinyLink } from "react-tiny-link";
 import PostStoryForm from "./PostStoryForm";

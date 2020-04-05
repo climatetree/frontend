@@ -1,3 +1,6 @@
+/**
+ * Main component of the landing page 
+ */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -27,6 +30,7 @@ export default function FirstScreen({ history }) {
     }
   };
 
+  // return the search bar for ClimateTree stories based on stories title.
   return (
     <section id="first-screen">
       <div id="animation-first">
