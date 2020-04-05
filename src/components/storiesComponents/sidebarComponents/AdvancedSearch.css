@@ -1,4 +1,39 @@
 #advanced-search-container {
   color: #d9d9d9;
-  margin-top: 25px;
+  margin-top: 19px;
+  border: 0.5px solid rgba(201, 201, 201, 0.5);
+  height: 100%;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#title-as {
+  margin: 0.5rem 1.5rem;
+  font-size: 30px;
+  font-weight: 500;
+  /* margin-top: 0.5rem; */
+}
+
+#btn-filter-container {
+  margin-bottom: 20px;
+}
+
+#apply-filters {
+  display: block;
+  margin: 0 auto;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 102, 255, 0.9),
+    rgb(142, 185, 255)
+  );
+  padding: 0.6rem 1rem;
+  background-color: #fff;
+  font-size: 15px;
+  border: none;
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.filter-btn:focus {
+  outline: none;
 }

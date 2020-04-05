@@ -34,19 +34,19 @@ const Stories = (props) => {
   let history = useHistory();
 
   // State lifecycle
-  // useEffect(() => {
-  //   (() => {
-  //     let { history } = props;
-  //     setStories([]);
-  //     setGeneralSearchTerm(query.get("storyTitle") || placeName);
+  useEffect(() => {
+    (() => {
+      let { history } = props;
+      setStories([]);
+      setGeneralSearchTerm(query.get("storyTitle") || placeName);
 
-  //     setStories(
-  //       history.location.state.storiesResult.map((story) => {
-  //         return { ...story, date: new Date(story.date) };
-  //       })
-  //     );
-  //   })();
-  // }, []);
+      setStories(
+        history.location.state.storiesResult.map((story) => {
+          return { ...story, date: new Date(story.date) };
+        })
+      );
+    })();
+  }, [query.get("storyTitle")]);
 
   useEffect(() => {
     (async () => {
@@ -68,7 +68,7 @@ const Stories = (props) => {
       setGeneralSearchTerm(query.get("storyTitle") || placeName);
       setLoadSpinner(false);
     })();
-  }, [query.get("storyTitle")]);
+  }, []);
 
   const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
     if (searchTerm) {
@@ -106,7 +106,7 @@ const Stories = (props) => {
   const renderContent = () => {
     return (
       <>
-        {renderResultFor()}
+        {/* {renderResultFor()} */}
         {stories.length &&
           stories.map((story) => (
             <StoryDetail
@@ -133,14 +133,14 @@ const Stories = (props) => {
   };
 
   return (
-    <>
+    <div className={`${loadSpinner ? "unscrollable " : ""}stories-sontainer`}>
       <Nav />
       <div className={`stories-background`}></div>
 
       {loadSpinner && <Spinner />}
 
-      <div className="stories-container">
-        <div className="main-stories">
+      <div className={`stories-grid`}>
+        <div className={`${loadSpinner ? "hide" : ""} main-stories`}>
           <StorySearchBar
             termForSearchBar={generalSearchTerm}
             {...props}
@@ -149,11 +149,12 @@ const Stories = (props) => {
               searchForStoriesBasedOnSearchTerm
             }
           />
-          {renderContent()}
+          {renderResultFor()}
+          {!loadSpinner && renderContent()}
         </div>
         <SideBar />
       </div>
-    </>
+    </div>
   );
 };
 

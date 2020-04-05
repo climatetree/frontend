@@ -6,7 +6,7 @@ import "./StorySignIn.css";
 const StorySignIn = () => {
   return (
     <div id="sign-in-container">
-      Want to share thoughts on our stories?
+      <span id="login-question">Want to share thoughts on our stories?</span>
       <div id="sign-in-btn-container">
         <Link id="sign-in-btn" to="/login">
           Please sign in
