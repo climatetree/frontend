@@ -13,9 +13,11 @@ const AdvancedSearch = () => {
         <button id="apply-filters">Apply Filters</button>
       </div>
 
-      <SolutionFilter />
-      <SectorFilter />
-      <StrategyFilter />
+      <div id="filters">
+        <SolutionFilter />
+        <SectorFilter />
+        <StrategyFilter />
+      </div>
     </div>
   );
 };

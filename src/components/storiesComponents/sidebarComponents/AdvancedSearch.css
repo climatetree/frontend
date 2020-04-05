@@ -1,8 +1,8 @@
 #advanced-search-container {
   color: #d9d9d9;
+  padding-top: 1rem;
   margin-top: 19px;
   border: 0.5px solid rgba(201, 201, 201, 0.5);
-  height: 100%;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.3);
   height: 63vh;
@@ -38,4 +38,8 @@
 
 #apply-filters:focus {
   outline: none;
+}
+
+#filters {
+  margin-top: 20px;
 }
