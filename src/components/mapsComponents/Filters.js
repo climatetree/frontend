@@ -15,13 +15,21 @@ export default function Filters({
   targetPlaceID,
   targetPlace,
   setTargetPlace,
+  filterArray,
+  populationRange,
+  setPopulationRange,
+  carbonRange,
+  setCarbonRange,
+  searchTerm,
+  setSearchTerm,
+  openMapDashboard,
 }) {
-  const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [isSearchingSuggestions, setIsSearchingSuggestions] = useState(false);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
 
+<<<<<<< HEAD
   //population filter (enabled by default) with a initial range from 90% to 150% relative to the current place ////population level (100%)  
 
   const [populationRange, setPopulationRange] = useState({
@@ -50,6 +58,8 @@ export default function Filters({
   const filterArray = [populationRange, carbonRange];
 
   //From a given location (selected by the user), search for similar places 
+=======
+>>>>>>> c54fde121c99ea8d10fddcc030fc848ef4ac9610
   const handleSuggestionClick = async (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {
