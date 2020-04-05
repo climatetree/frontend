@@ -5,6 +5,7 @@
   justify-content: center;
   width: 90%;
   height: 100vh;
+  overflow-y: auto;
 }
 
 #side-bar-container #side-bar-absolute {

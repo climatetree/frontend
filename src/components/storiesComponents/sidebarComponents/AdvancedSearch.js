@@ -8,13 +8,14 @@ import "./AdvancedSearch.css";
 const AdvancedSearch = () => {
   return (
     <div id="advanced-search-container">
-      <h3 id="title-as">Filters</h3>
+      <div id="btn-filter-container">
+        <span id="title-as">Filters</span>
+        <button id="apply-filters">Apply Filters</button>
+      </div>
+
       <SolutionFilter />
       <SectorFilter />
       <StrategyFilter />
-      <div id="btn-filter-container">
-        <button id="apply-filters">Apply Filters</button>
-      </div>
     </div>
   );
 };

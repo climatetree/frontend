@@ -1,0 +1,44 @@
+#sector-dropdown-container {
+  color: #d9d9d9;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(201, 201, 201, 0.2);
+  border-radius: 5px;
+  position: relative;
+  min-height: 40px;
+  max-height: 150px;
+  margin-top: 5px;
+  overflow-y: scroll;
+  display: none;
+}
+
+.per-entry {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.per-entry:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.per-entry:last-child {
+  border-bottom: none;
+}
+
+#initial-search {
+  padding: 10px;
+  text-align: center;
+  color: #d9d9d98c;
+}
+
+#initial-search:hover {
+  background-color: none;
+}
+
+.no-solution {
+  margin-bottom: 5px;
+}
+
+.enter-input-msg {
+  font-size: 15px;
+}

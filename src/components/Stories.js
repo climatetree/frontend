@@ -35,17 +35,17 @@ const Stories = (props) => {
 
   // State lifecycle
   useEffect(() => {
-    (() => {
-      let { history } = props;
-      setStories([]);
-      setGeneralSearchTerm(query.get("storyTitle") || placeName);
+    // (() => {
+    let { history } = props;
+    setStories([]);
+    setGeneralSearchTerm(query.get("storyTitle") || placeName);
 
-      setStories(
-        history.location.state.storiesResult.map((story) => {
-          return { ...story, date: new Date(story.date) };
-        })
-      );
-    })();
+    setStories(
+      history.location.state.storiesResult.map((story) => {
+        return { ...story, date: new Date(story.date) };
+      })
+    );
+    // })();
   }, [query.get("storyTitle")]);
 
   useEffect(() => {

@@ -5,35 +5,37 @@
   height: 100%;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.3);
+  height: 63vh;
+  overflow-y: auto;
 }
 
 #title-as {
-  margin: 0.5rem 1.5rem;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 500;
-  /* margin-top: 0.5rem; */
 }
 
 #btn-filter-container {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 1.5rem;
 }
 
 #apply-filters {
-  display: block;
-  margin: 0 auto;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     rgba(8, 102, 255, 0.9),
     rgb(142, 185, 255)
-  );
-  padding: 0.6rem 1rem;
-  background-color: #fff;
+  ); */
+  background-color: rgba(103, 161, 255, 0.9);
+  padding: 0 10px;
+  /* background-color: #fff; */
   font-size: 15px;
   border: none;
   border-radius: 3px;
   color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
 }
 
-.filter-btn:focus {
+#apply-filters:focus {
   outline: none;
 }
