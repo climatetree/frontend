@@ -42,7 +42,7 @@
 }
 
 @media (max-width: 950px) {
-  #avatar-stories-container {
+  #sign-in-container {
     display: none;
   }
 }

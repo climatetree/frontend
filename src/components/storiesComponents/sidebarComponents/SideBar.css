@@ -26,6 +26,25 @@
   z-index: -1;
 }
 
+#close-filters-container {
+  position: fixed;
+  right: 30px;
+  top: 20px;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.close-icon {
+  width: 40px;
+  height: 40px;
+}
+
+#close-filters-container:hover {
+  background: #575757;
+  color: #ffffff;
+  /* border-radius: 100%; */
+}
+
 @media (max-width: 950px) {
   #side-bar-container {
     /* height: 70vh; */

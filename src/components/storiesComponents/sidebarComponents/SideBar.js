@@ -22,9 +22,11 @@ const SideBar = ({ sideBarVisible, windowWidth, closeSideBar }) => {
       onClick={closeSideBar}
     >
       <div id="side-bar-absolute" onClick={(event) => event.stopPropagation()}>
-        {/* <div>
-          <img src={CloseIcon} alt="close filters" />
-        </div> */}
+        <div id="close-filters-container" onClick={closeSideBar}>
+          {sideBarVisible && (
+            <img src={CloseIcon} className="close-icon" alt="close filters" />
+          )}
+        </div>
         {!isLoggedIn && <StorySignIn />}
         {isLoggedIn && <AvatarStories />}
         <AdvancedSearch

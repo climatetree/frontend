@@ -117,7 +117,7 @@ const Stories = (props) => {
           <ResultsFor searchTerm={query.get("storyTitle")} />
         )}
         <div className="click-filter" onClick={openSideBar}>
-          Click here for advanced search
+          Advanced search
         </div>
       </div>
     );

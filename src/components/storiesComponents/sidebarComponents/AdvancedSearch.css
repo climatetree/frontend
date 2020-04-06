@@ -53,7 +53,9 @@
   #advanced-search-container {
     /* display: none; */
     background-color: rgba(0, 0, 0, 0.8);
-    width: 50vw;
+    /* width: 50vw; */
+    width: 350px;
+    height: 450px;
     box-shadow: 1px 1px 16px 4px rgba(255, 255, 255, 0.5);
     margin: 0;
   }

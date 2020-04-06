@@ -1,22 +1,47 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import useDebounceFilter from "../helper/useDebounceFilter";
 import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
-import SectorDropdown from "./SectorDropdown";
+// import SectorDropdown from "./SectorDropdown";
+import FiltersDropdown from "./FiltersDropdown";
 
 import "./SectorFilter.css";
 
 const SectorFilter = () => {
+  const [sectors, setSectors] = useState([]);
   const [sectorTerm, setSectorTerm] = useState("");
-  const debouncedSolutionTerm = useDebounceFilter(sectorTerm, 1000);
+  const [isSectorSearching, setIsSectorSearching] = useState(false);
+
+  const debouncedSectorTerm = useDebounceFilter(sectorTerm, 500);
 
   useEffect(() => {
-    if (debouncedSolutionTerm) {
-    } else {
-      // console.log("Hello!!!");
+    (async () => {
+      if (debouncedSectorTerm) {
+        // API call
+        setIsSectorSearching(true);
+        const response = await axios.get(
+          `https://backend-mongo-stories.azurewebsites.net/stories/all/sector/${debouncedSectorTerm}`
+        );
+
+        setSectors(response.data);
+        setIsSectorSearching(false);
+      } else {
+        setSectors([]);
+      }
+    })();
+  }, [debouncedSectorTerm]);
+
+  const setSectorTermOnClick = (sol) => {
+    setSectorTerm(sol);
+  };
+
+  const setSectorTermOnEnter = (sol, event) => {
+    if (event.keyCode === 13) {
+      setSectorTerm(sol);
     }
-  }, [debouncedSolutionTerm]);
+  };
 
   return (
     <FilterFieldContainer>
@@ -28,15 +53,24 @@ const SectorFilter = () => {
         value={sectorTerm}
         onChange={(e) => setSectorTerm(e.target.value)}
         onFocus={() => {
-          document.getElementById("sector-dropdown-container").style.display =
+          document.querySelector(".sector-dropdown-container").style.display =
             "block";
         }}
         onBlur={() => {
-          document.getElementById("sector-dropdown-container").style.display =
-            "none";
+          setTimeout(() => {
+            document.querySelector(".sector-dropdown-container").style.display =
+              "none";
+          }, 100);
         }}
       />
-      <SectorDropdown debouncedFilterTerm={debouncedSolutionTerm} />
+      <FiltersDropdown
+        debouncedFilterTerm={debouncedSectorTerm}
+        results={sectors}
+        isSearching={isSectorSearching}
+        setTermOnClick={setSectorTermOnClick}
+        setTermOnEnter={setSectorTermOnEnter}
+        status="sector"
+      />
     </FilterFieldContainer>
   );
 };

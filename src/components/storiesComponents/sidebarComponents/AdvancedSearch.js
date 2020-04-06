@@ -1,12 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
+import useDebounceFilter from "../helper/useDebounceFilter";
 import "./AdvancedSearch.css";
 
 const AdvancedSearch = ({ sideBarVisible, closeSideBar, windowWidth }) => {
-  useEffect(() => document.addEventListener("keydown", closeSideBar), []);
+  const [solutionTerm, setSolutionTerm] = useState("");
+  const [sectorTerm, setSectorTerm] = useState("");
+
+  const debouncedSolutionTerm = useDebounceFilter(solutionTerm, 500);
+  const debouncedSectorTerm = useDebounceFilter(sectorTerm, 500);
+
+  console.log("Sector", debouncedSectorTerm);
+  console.log("Solution", debouncedSolutionTerm);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escapeButtonPress);
+  }, []);
+
+  const escapeButtonPress = (event) => {
+    if (event.keyCode === 27) {
+      closeSideBar();
+    }
+  };
+
   return (
     <div
       id="advanced-search-container"
