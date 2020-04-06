@@ -21,6 +21,22 @@
   grid-column: 1 / span 2;
 }
 
+.result-for-and-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.click-filter {
+  display: none;
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
+.click-filter:hover {
+  text-decoration: underline;
+}
+
 .spinner-container {
   position: fixed;
   top: 0;
@@ -398,7 +414,21 @@ hr {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 950px) {
+  .stories-grid {
+    display: block;
+  }
+
+  .main-stories {
+    z-index: 99;
+  }
+
+  .click-filter {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
   .stories-container {
     padding-left: 1rem;
     padding-right: 1rem;

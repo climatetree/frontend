@@ -49,3 +49,9 @@
   border: none;
   cursor: pointer;
 }
+
+@media (max-width: 950px) {
+  #avatar-stories-container {
+    display: none;
+  }
+}

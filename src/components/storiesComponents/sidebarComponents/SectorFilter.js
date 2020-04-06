@@ -14,7 +14,7 @@ const SectorFilter = () => {
   useEffect(() => {
     if (debouncedSolutionTerm) {
     } else {
-      console.log("Hello!!!");
+      // console.log("Hello!!!");
     }
   }, [debouncedSolutionTerm]);
 

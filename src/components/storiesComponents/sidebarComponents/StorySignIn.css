@@ -40,3 +40,9 @@
     rgba(255, 255, 255, 0)
   );
 }
+
+@media (max-width: 950px) {
+  #avatar-stories-container {
+    display: none;
+  }
+}

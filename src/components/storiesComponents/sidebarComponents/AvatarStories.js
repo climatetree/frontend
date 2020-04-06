@@ -8,7 +8,7 @@ const AvatarStories = () => {
   const { user } = useContext(UserContext);
   const { url, username, email } = user;
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div id="avatar-stories-container">

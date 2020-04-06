@@ -10,6 +10,33 @@
 
 #side-bar-container #side-bar-absolute {
   min-width: 28%;
-  z-index: 0;
+  /* z-index: 2; */
   position: fixed;
+}
+
+.when-filter-is-clicked {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.make-z-index-one {
+  z-index: 1;
+}
+
+.not-apparent {
+  z-index: -1;
+}
+
+@media (max-width: 950px) {
+  #side-bar-container {
+    /* height: 70vh; */
+    /* height: 0; */
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    align-items: center;
+  }
+
+  #side-bar-container #side-bar-absolute {
+    position: relative;
+  }
 }

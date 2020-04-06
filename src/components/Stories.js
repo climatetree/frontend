@@ -21,6 +21,8 @@ const Stories = (props) => {
   );
   const [generalSearchTerm, setGeneralSearchTerm] = useState("");
   const [loadSpinner, setLoadSpinner] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [sideBarVisible, setSideBarVisible] = useState(false);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -70,6 +72,12 @@ const Stories = (props) => {
     })();
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWindowWidth(window.innerWidth);
+    });
+  }, []);
+
   const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
     if (searchTerm) {
       setLoadSpinner(true);
@@ -95,10 +103,17 @@ const Stories = (props) => {
 
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
-    return placeId ? (
-      <ResultForPlaceId placeId={placeId} placeName={placeName} />
-    ) : (
-      <ResultsFor searchTerm={query.get("storyTitle")} />
+    return (
+      <div className="result-for-and-filter">
+        {placeId ? (
+          <ResultForPlaceId placeId={placeId} placeName={placeName} />
+        ) : (
+          <ResultsFor searchTerm={query.get("storyTitle")} />
+        )}
+        <div className="click-filter" onClick={openSideBar}>
+          Click here for advanced search
+        </div>
+      </div>
     );
   };
 
@@ -132,12 +147,27 @@ const Stories = (props) => {
     );
   };
 
+  const openSideBar = () => {
+    setSideBarVisible(true);
+  };
+
+  const closeSideBar = () => {
+    setSideBarVisible(false);
+  };
+
   return (
     <div className={`${loadSpinner ? "unscrollable " : ""}stories-sontainer`}>
       <Nav />
       <div className={`stories-background`}></div>
 
       {loadSpinner && <Spinner />}
+      {windowWidth < 951 && (
+        <SideBar
+          sideBarVisible={sideBarVisible}
+          windowWidth={windowWidth}
+          closeSideBar={closeSideBar}
+        />
+      )}
 
       <div className={`stories-grid`}>
         <div className={`${loadSpinner ? "hide" : ""} main-stories`}>
@@ -152,7 +182,13 @@ const Stories = (props) => {
           {renderResultFor()}
           {!loadSpinner && renderContent()}
         </div>
-        <SideBar />
+        {windowWidth > 950 && (
+          <SideBar
+            sideBarVisible={sideBarVisible}
+            windowWidth={windowWidth}
+            closeSideBar={closeSideBar}
+          />
+        )}
       </div>
     </div>
   );
