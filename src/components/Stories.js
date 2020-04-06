@@ -78,6 +78,12 @@ const Stories = (props) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (windowWidth > 950) {
+      setSideBarVisible(false);
+    }
+  }, [windowWidth]);
+
   const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
     if (searchTerm) {
       setLoadSpinner(true);
