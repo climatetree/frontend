@@ -1,0 +1,61 @@
+#side-bar-container {
+  margin-top: 1rem;
+  margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+#side-bar-container #side-bar-absolute {
+  min-width: 28%;
+  /* z-index: 2; */
+  position: fixed;
+}
+
+.when-filter-is-clicked {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.make-z-index-one {
+  z-index: 1;
+}
+
+.not-apparent {
+  z-index: -1;
+}
+
+#close-filters-container {
+  position: fixed;
+  right: 30px;
+  top: 20px;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.close-icon {
+  width: 40px;
+  height: 40px;
+}
+
+#close-filters-container:hover {
+  background: #575757;
+  color: #ffffff;
+  /* border-radius: 100%; */
+}
+
+@media (max-width: 950px) {
+  #side-bar-container {
+    /* height: 70vh; */
+    /* height: 0; */
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    align-items: center;
+  }
+
+  #side-bar-container #side-bar-absolute {
+    position: relative;
+  }
+}
