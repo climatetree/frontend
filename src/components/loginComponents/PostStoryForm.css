@@ -18,7 +18,7 @@
   justify-content: space-between;
   background-color: #181818;
   border-radius: 4px;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 1.5rem;
   box-shadow: 1px 1px 16px 4px rgba(255, 255, 255, 0.5);
   position: relative;
 }
@@ -52,7 +52,11 @@
 .story-form-wrapper form label {
   font-weight: 300;
   font-size: 1rem;
-  margin-bottom: 8px;
+}
+.optional-label {
+  font-size: 14px;
+  font-style: italic;
+  color: #888888;
 }
 .story-form-wrapper form input {
   line-height: 1rem;
@@ -63,6 +67,7 @@
   border-radius: 2px;
   outline: none;
   font-size: 1rem;
+  margin-top: 8px;
   margin-bottom: 1rem;
 }
 .story-form-wrapper form input::placeholder {
@@ -81,11 +86,24 @@ button.post-story {
   float: right;
   outline: none;
 }
+.dropdown-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 #place-suggestions {
   max-height: 200px;
   overflow-y: auto;
-  transform: translateY(-1rem);
   display: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  top: 75px;
+  background-color: rgba(0, 0, 0, 0.85);
+  font-weight: 300;
+  z-index: 1;
+  /* display: block !important; */
 }
 #place-suggestions .place-name-dropdown {
   cursor: pointer;
@@ -93,8 +111,42 @@ button.post-story {
   padding: 8px 20px;
 }
 #place-suggestions .place-name-dropdown:hover {
-  background-color: #333333;
+  background-color: rgba(51, 51, 51, 0.85);
 }
 .hint {
   padding: 8px 20px;
+}
+.strategy-checkbox-group {
+  margin: 8px 0 1rem;
+}
+.strategy-checkbox-group div:not(:last-child) {
+  margin-right: 1rem;
+}
+input#sector::-webkit-calendar-picker-indicator {
+  background-color: inherit;
+  cursor: pointer;
+}
+#sector-list,
+#solution-list {
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  top: 75px;
+  background-color: rgba(0, 0, 0, 0.85);
+  font-weight: 300;
+  z-index: 1;
+}
+#sector-list p,
+#solution-list p {
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 8px 20px;
+}
+#sector-list p:hover,
+#solution-list p:hover {
+  background-color: rgba(51, 51, 51, 0.85);
 }
