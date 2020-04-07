@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from "../context/UserContext";
 import useDebounce from '../mapsComponents/helpers/useDebounce';
-import CloseIcon from '../../images/x.svg';
 import Checkbox from '../mapsComponents/Checkbox';
+import DropdownInput from './DropdownInput';
+import CloseIcon from '../../images/x.svg';
 import './PostStoryForm.css';
 
 export default function PostStoryForm({
@@ -68,8 +69,8 @@ export default function PostStoryForm({
     }
   }
   const [sector, setSector] = useState('');
-  const [solution, setSolution] = useState('');
   const [allSectors, setAllSectors] = useState([]);
+  const [solution, setSolution] = useState('');
   const [allSolutions, setAllSolutions] = useState([]);
   useEffect(() => {
     (async () => {
@@ -207,46 +208,24 @@ export default function PostStoryForm({
               onChange={() => toggleStrategy('Adaptation')}
             />
           </div>
-          <label htmlFor="sector">
-            Sector
-            <small className="optional-label"> - Optional</small>
-          </label>
-          <input
-            id="sector"
+          <DropdownInput
             name="sector"
             type="text"
-            value={sector}
-            onChange={event => {
-              setSector(event.target.value);
-            }}
             placeholder="Story Sector"
-            list="sector-list"
+            label="Sector"
+            allOptions={allSectors}
+            searchTerm={sector}
+            setSearchTerm={setSector}
           />
-          <datalist id="sector-list">
-            {allSectors.map((sector, index) => (
-              <option key={index} value={sector} />
-            ))}
-          </datalist>
-          <label htmlFor="solution">
-            Solution
-            <small className="optional-label"> - Optional</small>
-          </label>
-          <input
-            id="solution"
+          <DropdownInput
             name="solution"
             type="text"
-            value={solution}
-            onChange={event => {
-              setSolution(event.target.value);
-            }}
-            placeholder="Story Sector"
-            list="solution-list"
+            placeholder="Story Solution"
+            label="Solution"
+            allOptions={allSolutions}
+            searchTerm={solution}
+            setSearchTerm={setSolution}
           />
-          <datalist id="solution-list">
-            {allSolutions.map((solution, index) => (
-              <option key={index} value={solution} />
-            ))}
-          </datalist>
         </div>
         <footer>
           <button
