@@ -46,18 +46,6 @@ const Stories = (props) => {
   }, [windowWidth]);
 
   useEffect(() => {
-    let { history } = props;
-    setStories([]);
-
-    setGeneralSearchTerm(query.get("storyTitle") || placeName || "");
-    setStories(
-      history.location.state.storiesResult.map((story) => {
-        return { ...story, date: new Date(story.date) };
-      })
-    );
-  }, [query.get("storyTitle")]);
-
-  useEffect(() => {
     if (query.get("storyTitle")) {
       (async () => {
         setStories([]);
@@ -84,6 +72,20 @@ const Stories = (props) => {
       })();
     }
   }, []);
+
+  useEffect(() => {
+    let { history } = props;
+    setStories([]);
+
+    setGeneralSearchTerm(query.get("storyTitle") || placeName || "");
+    if (generalSearchTerm) {
+      setStories(
+        history.location.state.storiesResult.map((story) => {
+          return { ...story, date: new Date(story.date) };
+        })
+      );
+    }
+  }, [query.get("storyTitle")]);
 
   const fetchAllStories = async () => {
     setLoadSpinner(true);
@@ -142,7 +144,6 @@ const Stories = (props) => {
 
     history.push({
       pathname: "/stories",
-      search: "",
       state: {
         storiesResult: filteredStories.map((story) => {
           return { ...story, date: new Date(story.date) };
