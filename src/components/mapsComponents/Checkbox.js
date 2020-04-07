@@ -1,7 +1,7 @@
 import React from 'react';
 import './Checkbox.css';
 
-function Checkbox({
+export default function Checkbox({
   label,
   checked,
   onChange,
@@ -29,5 +29,3 @@ function Checkbox({
     </div>
   );
 }
-
-export default Checkbox;
