@@ -19,6 +19,8 @@
   color: #ffffff;
   text-transform: capitalize;
   grid-area: 1 / 1 / span 1 / span 3;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .explore-tile {
@@ -39,9 +41,8 @@
   object-fit: cover;
   height: 190px;
 }
-
 .popular-stories-title {
-  font-weight: 800;
+  font-weight: 400;
   overflow: hidden;
   width: 25vw;
   font-size: 20px;
@@ -49,22 +50,18 @@
   text-overflow: ellipsis;
   cursor: pointer;
 }
-
 .ps-title-link {
   color: #ededed;
   text-decoration: none;
 }
-
 .ps-title-link:hover {
   text-decoration: underline;
 }
-
 .ps-description {
   color: #adadad;
   font-weight: 300;
   transform: translateY(5px);
 }
-
 .spinner-explore-container {
   display: flex;
   flex-direction: column;
@@ -74,7 +71,6 @@
   margin-top: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .spinner-explore {
   border: 3px solid #575757;
   border-radius: 50%;
@@ -102,7 +98,6 @@
   .explore-tile {
     margin-bottom: 60px;
   }
-
   .popular-stories-title {
     width: 100%;
   }

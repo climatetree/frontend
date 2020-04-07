@@ -29,6 +29,7 @@ const getGeoServerData = async (params) => {
 }
 
 const factory = (place, filters) => {
+  console.log(place)
   let filter_vars = [];
   filters.forEach((filter) => {
     if (filter.apply) {
