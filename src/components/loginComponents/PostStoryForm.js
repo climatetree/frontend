@@ -74,11 +74,10 @@ export default function PostStoryForm({
   const [allSolutions, setAllSolutions] = useState([]);
   useEffect(() => {
     (async () => {
-      // const response = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/all/solution');
-      const solutionResponse = await fetch('https://backend-mongo-stories.azurewebsites.net/stories/all/solution');
+      const solutionResponse = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/all/solution');
       const solutions = await solutionResponse.json();
       setAllSolutions(solutions);
-      const sectorResponse = await fetch('https://backend-mongo-stories.azurewebsites.net/stories/all/sector');
+      const sectorResponse = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/all/sector');
       const sectors = await sectorResponse.json();
       setAllSectors(sectors);
     })();
