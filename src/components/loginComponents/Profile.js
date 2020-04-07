@@ -22,8 +22,8 @@ export default function Profile() {
   }
   useEffect(() => {
     (async () => {
-      const res = await fetch('https://backend-mongo-stories.azurewebsites.net/stories/topStories/3'); // for development
-      // const res = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3');
+      // const res = await fetch('https://backend-mongo-stories.azurewebsites.net/stories/topStories/3'); // for development
+      const res = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3');
       const topStories = await res.json();
       const results = [];
       const storyImageGenerator = generateStoryImage(topStories);
