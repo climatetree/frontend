@@ -13,7 +13,7 @@ const AdvancedSearch = ({
   windowWidth,
   setStoriesBasedOnFilter,
 }) => {
-  const [solutions, setSolutions] = useState([]);
+  const [allSolutions, setAllSolutions] = useState([]);
   const [solutionTerm, setSolutionTerm] = useState("");
   const [isSearchingSolution, setIsSearchingSolution] = useState(false);
 
@@ -21,21 +21,24 @@ const AdvancedSearch = ({
 
   useEffect(() => {
     (async () => {
-      if (debouncedSolutionTerm) {
-        // API call
-        // setSolutions([]);
-        setIsSearchingSolution(true);
-        const response = await axios.get(
-          `https://backend-mongo-stories.azurewebsites.net/stories/all/solution/${debouncedSolutionTerm}`
-        );
+      // if (debouncedSolutionTerm) {
+      //   // API call
+      //   // setSolutions([]);
+      //   setIsSearchingSolution(true);
+      //   const response = await axios.get(
+      //     `https://backend-mongo-stories.azurewebsites.net/stories/all/solution/${debouncedSolutionTerm}`
+      //   );
 
-        setSolutions(response.data);
-        setIsSearchingSolution(false);
-      } else {
-        setSolutions([]);
-      }
+      //   setAllSolutions(response.data);
+      //   setIsSearchingSolution(false);
+      // } else {
+      const response = await axios.get(
+        `https://backend-mongo-stories.azurewebsites.net/stories/all/solution`
+      );
+      setAllSolutions(response.data);
+      // }
     })();
-  }, [debouncedSolutionTerm]);
+  }, []);
 
   useEffect(() => {
     document.addEventListener("keydown", escapeButtonPress);
@@ -87,9 +90,10 @@ const AdvancedSearch = ({
         <SolutionFilter
           solutionTerm={solutionTerm}
           onChangeSolutionTerm={onChangeSolutionTerm}
-          debouncedSolutionTerm={debouncedSolutionTerm}
+          // debouncedSolutionTerm={debouncedSolutionTerm}
           isSearchingSolution={isSearchingSolution}
-          solutions={solutions}
+          // solutions={solutions}
+          allSolutions={allSolutions}
         />
         <SectorFilter />
         <StrategyFilter />
