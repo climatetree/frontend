@@ -32,6 +32,7 @@ export default function CheckboxGroup({
           label={option}
           checked={!placeTypesDisabled.includes(option)}
           onChange={toggleOption}
+          filled
         />
       ))}
     </div>
