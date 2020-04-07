@@ -14,11 +14,10 @@ import "./Stories.css";
 
 const Stories = (props) => {
   // Initialize state
-  const [stories, setStories] = useState(
-    props.history.location.state.storiesResult.map((story) => {
-      return { ...story, date: new Date(story.date) };
-    })
-  );
+  const [stories, setStories] = useState([]);
+  // props.history.location.state.storiesResult.map((story) => {
+  //   return { ...story, date: new Date(story.date) };
+  // })[]
   const [generalSearchTerm, setGeneralSearchTerm] = useState("");
   const [loadSpinner, setLoadSpinner] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -33,45 +32,7 @@ const Stories = (props) => {
   let placeId = query.get("place_id");
   let placeName = query.get("place_name");
 
-  let history = useHistory();
-
   // State lifecycle
-  useEffect(() => {
-    // (() => {
-    let { history } = props;
-    setStories([]);
-    setGeneralSearchTerm(query.get("storyTitle") || placeName);
-
-    setStories(
-      history.location.state.storiesResult.map((story) => {
-        return { ...story, date: new Date(story.date) };
-      })
-    );
-    // })();
-  }, [query.get("storyTitle")]);
-
-  useEffect(() => {
-    (async () => {
-      setStories([]);
-      setLoadSpinner(true);
-
-      const response = await axios.get(
-        `https://climatetree-api-gateway.azurewebsites.net/stories/title/${
-          query.get("storyTitle") || placeId
-        }`
-      );
-
-      setStories(
-        response.data.map((story) => {
-          return { ...story, date: new Date(story.date) };
-        })
-      );
-
-      setGeneralSearchTerm(query.get("storyTitle") || placeName);
-      setLoadSpinner(false);
-    })();
-  }, []);
-
   useEffect(() => {
     window.addEventListener("resize", () => {
       setWindowWidth(window.innerWidth);
@@ -84,9 +45,65 @@ const Stories = (props) => {
     }
   }, [windowWidth]);
 
+  useEffect(() => {
+    let { history } = props;
+    setStories([]);
+
+    setGeneralSearchTerm(query.get("storyTitle") || placeName || "");
+    setStories(
+      history.location.state.storiesResult.map((story) => {
+        return { ...story, date: new Date(story.date) };
+      })
+    );
+  }, [query.get("storyTitle")]);
+
+  useEffect(() => {
+    // setGeneralSearchTerm(query.get("storyTitle") || placeName);
+    if (query.get("storyTitle")) {
+      (async () => {
+        setStories([]);
+        setLoadSpinner(true);
+
+        const response = await axios.get(
+          `https://climatetree-api-gateway.azurewebsites.net/stories/title/${
+            query.get("storyTitle") || placeId
+          }`
+        );
+
+        setStories(
+          response.data.map((story) => {
+            return { ...story, date: new Date(story.date) };
+          })
+        );
+
+        setGeneralSearchTerm(query.get("storyTitle") || placeName);
+        setLoadSpinner(false);
+      })();
+    } else {
+      (async () => {
+        await fetchAllStories();
+      })();
+    }
+  }, []);
+
+  const fetchAllStories = async () => {
+    setLoadSpinner(true);
+    const response = await axios.get(
+      "https://backend-mongo-stories.azurewebsites.net/stories"
+    );
+
+    setStories(
+      response.data.map((story) => {
+        return { ...story, date: new Date(story.date) };
+      })
+    );
+    setLoadSpinner(false);
+  };
+
   const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
     if (searchTerm) {
       setLoadSpinner(true);
+      setGeneralSearchTerm(searchTerm);
 
       const response = await axios.get(
         `https://climatetree-api-gateway.azurewebsites.net/stories/title/${searchTerm}`
@@ -113,8 +130,10 @@ const Stories = (props) => {
       <div className="result-for-and-filter">
         {placeId ? (
           <ResultForPlaceId placeId={placeId} placeName={placeName} />
-        ) : (
+        ) : generalSearchTerm ? (
           <ResultsFor searchTerm={query.get("storyTitle")} />
+        ) : (
+          ""
         )}
         <div className="click-filter" onClick={openSideBar}>
           Advanced search
@@ -139,14 +158,16 @@ const Stories = (props) => {
         {!stories.length && !loadSpinner && (
           <div className="no-found-msg">
             No stories were found.
-            <a
-              href={`https://www.google.com/search?q=${generalSearchTerm}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              id="direct-to-google-search"
-            >
-              Would you like to help look for one?
-            </a>
+            {generalSearchTerm.length && (
+              <a
+                href={`https://www.google.com/search?q=${generalSearchTerm}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="direct-to-google-search"
+              >
+                Would you like to help look for one?
+              </a>
+            )}
           </div>
         )}
       </>
@@ -159,6 +180,26 @@ const Stories = (props) => {
 
   const closeSideBar = () => {
     setSideBarVisible(false);
+  };
+
+  const setStoriesBasedOnFilter = (filteredStories) => {
+    let { history } = props;
+
+    setStories(
+      filteredStories.map((story) => {
+        return { ...story, date: new Date(story.date) };
+      })
+    );
+
+    history.push({
+      pathname: "/stories",
+      search: "",
+      state: {
+        storiesResult: filteredStories.map((story) => {
+          return { ...story, date: new Date(story.date) };
+        }),
+      },
+    });
   };
 
   return (
@@ -193,6 +234,7 @@ const Stories = (props) => {
             sideBarVisible={sideBarVisible}
             windowWidth={windowWidth}
             closeSideBar={closeSideBar}
+            setStoriesBasedOnFilter={setStoriesBasedOnFilter}
           />
         )}
       </div>

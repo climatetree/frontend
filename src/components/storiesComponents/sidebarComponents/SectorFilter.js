@@ -50,6 +50,8 @@ const SectorFilter = () => {
         id="sector-filter"
         className="filter-btn"
         placeholder="Enter a sector"
+        disabled
+        style={{ backgroundColor: "#ababab" }}
         value={sectorTerm}
         onChange={(e) => setSectorTerm(e.target.value)}
         onFocus={() => {

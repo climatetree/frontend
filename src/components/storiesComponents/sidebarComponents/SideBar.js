@@ -7,7 +7,12 @@ import { UserContext } from "../../context/UserContext";
 import CloseIcon from "../../../images/x.svg";
 import "./SideBar.css";
 
-const SideBar = ({ sideBarVisible, windowWidth, closeSideBar }) => {
+const SideBar = ({
+  sideBarVisible,
+  windowWidth,
+  closeSideBar,
+  setStoriesBasedOnFilter,
+}) => {
   const { user } = useContext(UserContext);
   const { isLoggedIn } = user;
 
@@ -33,6 +38,7 @@ const SideBar = ({ sideBarVisible, windowWidth, closeSideBar }) => {
           sideBarVisible={sideBarVisible}
           windowWidth={windowWidth}
           closeSideBar={closeSideBar}
+          setStoriesBasedOnFilter={setStoriesBasedOnFilter}
         />
       </div>
     </div>

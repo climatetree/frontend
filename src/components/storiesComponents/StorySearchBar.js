@@ -28,6 +28,7 @@ const StorySearchBar = ({
       <h2 id="search-for-stories-title">Search For Stories</h2>
       <form onSubmit={(e) => onSubmitForm(e)} style={{ position: "relative" }}>
         <input
+          autoComplete="off"
           type="text"
           id="search-for-story"
           value={searchTerm}

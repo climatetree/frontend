@@ -7,7 +7,7 @@ const FiltersDropdown = ({
   results,
   isSearching,
   setTermOnClick,
-  // setTermOnEnter,
+  setTermOnEnter,
   status,
   cursor,
 }) => {
@@ -51,7 +51,7 @@ const FiltersDropdown = ({
               className={`filter-entry ${cursor === index ? "active" : ""}`}
               key={index}
               onClick={() => setTermOnClick(solution)}
-              // onKeyPress={(event) => setTermOnEnter(solution, event)}
+              onKeyPress={(event) => setTermOnEnter(solution, event)}
             >
               <span>{solution}</span>
             </div>
