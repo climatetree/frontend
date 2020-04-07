@@ -5,6 +5,7 @@ function Checkbox({
   label,
   checked,
   onChange,
+  filled,
 }) {
   return (
     <div className="checkbox-container">
@@ -17,7 +18,7 @@ function Checkbox({
         readOnly
       />
       <span
-        className="checkbox-custom"
+        className={`checkbox-custom${filled ? ' filled' : ''}`}
         onClick={onChange}
       ></span>
       <label

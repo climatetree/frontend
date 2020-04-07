@@ -17,6 +17,7 @@ export default function MinMaxRange({
           ...range,
           apply: !range.apply,
         })}
+        filled
       />
       <div className="min-max-inputs">
         <input

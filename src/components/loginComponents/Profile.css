@@ -36,60 +36,30 @@
   font-size: 1rem;
   font-weight: 300;
 }
-.stories-wrapper {
+.story-lists-wrapper {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding-top: 40px;
 }
-.stories {
-  background-color: rgba(0, 0, 0, 0.2);
+.story-lists-wrapper h2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.story-list {
+  background-color: rgba(0, 0, 0, 0.1);
   width: 90%;
   margin-top: 1rem;
   margin-bottom: 3rem;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 8px;
   position: relative;
-}
-.stories-wrapper h2 {
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-.story-btn-wrapper {
-  margin-top: 0.5rem;
 }
 .pending-wrapper:not(:last-child) {
   margin-bottom: 1rem;
-}
-.story-btn {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #ededed;
-  font-size: 12px;
-  font-weight: 300;
-  padding: 5px 12px;
-  border-radius: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.6s;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-.story-btn:hover {
-  background-color: #5274C8;
-  border: 1px solid transparent;
-}
-.story-btn:not(:last-child) {
-  margin-right: 5px;
-}
-.story-btn:last-child:hover {
-  background-color: #C85274;
 }
 .personal footer {
   height: 4rem;
@@ -106,37 +76,19 @@
   align-items: center;
   cursor: pointer;
   text-transform: capitalize;
-  border: 1px dashed;
-  /* width: 100%; */
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  width: 100%;
   border-radius: 4px;
   padding: 1rem 5rem;
 }
-.stories .react_tinylink_card {
-  color: #ededed;
-  background-color: transparent;
-  border: none;
-}
-.stories .react_tinylink_card:not(:last-child) {
-  margin-bottom: 1rem;
-}
-.stories.pending .react_tinylink_card {
-  margin-bottom: 0;
-}
-.stories .react_tinylink_card:hover {
-  color: #ededed;
-  background-color: transparent;
-}
-.stories .react_tinylink_card_content_wrapper {
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-}
-.stories .react_tinylink_card_content_header {
-  font-weight: 400;
-}
-.stories .react_tinylink_card_content,
-.stories .react_tinylink_footer {
-  font-weight: 300;
+.loading {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
 }
 
 @media (max-width: 767px) {
@@ -144,11 +96,11 @@
     display: block;
     height: fit-content;
   }
-  .stories-wrapper {
+  .story-lists-wrapper {
     align-items: center;
     padding-top: 0;
   }
-  .stories {
+  .story-list {
     width: 85%;
   }
   .actions {
