@@ -58,7 +58,6 @@ const Stories = (props) => {
   }, [query.get("storyTitle")]);
 
   useEffect(() => {
-    // setGeneralSearchTerm(query.get("storyTitle") || placeName);
     if (query.get("storyTitle")) {
       (async () => {
         setStories([]);
@@ -124,6 +123,34 @@ const Stories = (props) => {
     }
   };
 
+  const openSideBar = () => {
+    setSideBarVisible(true);
+  };
+
+  const closeSideBar = () => {
+    setSideBarVisible(false);
+  };
+
+  const setStoriesBasedOnFilter = (filteredStories) => {
+    let { history } = props;
+
+    setStories(
+      filteredStories.map((story) => {
+        return { ...story, date: new Date(story.date) };
+      })
+    );
+
+    history.push({
+      pathname: "/stories",
+      search: "",
+      state: {
+        storiesResult: filteredStories.map((story) => {
+          return { ...story, date: new Date(story.date) };
+        }),
+      },
+    });
+  };
+
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
     return (
@@ -172,34 +199,6 @@ const Stories = (props) => {
         )}
       </>
     );
-  };
-
-  const openSideBar = () => {
-    setSideBarVisible(true);
-  };
-
-  const closeSideBar = () => {
-    setSideBarVisible(false);
-  };
-
-  const setStoriesBasedOnFilter = (filteredStories) => {
-    let { history } = props;
-
-    setStories(
-      filteredStories.map((story) => {
-        return { ...story, date: new Date(story.date) };
-      })
-    );
-
-    history.push({
-      pathname: "/stories",
-      search: "",
-      state: {
-        storiesResult: filteredStories.map((story) => {
-          return { ...story, date: new Date(story.date) };
-        }),
-      },
-    });
   };
 
   return (
