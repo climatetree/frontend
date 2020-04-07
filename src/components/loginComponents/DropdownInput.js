@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import useDebounce from '../mapsComponents/helpers/useDebounce';
-import './DropdownInput.css';
+import React, { useState, useEffect } from "react";
+import useDebounce from "../customHooks/useDebounce";
+import "./DropdownInput.css";
 
 export default function DropdownInput({
   name,
@@ -16,7 +16,9 @@ export default function DropdownInput({
   useEffect(() => {
     if (debouncedSearchTerm) {
       setOptions(
-        allOptions.filter(s => s.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
+        allOptions.filter((s) =>
+          s.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+        )
       );
     }
   }, [debouncedSearchTerm]);
@@ -31,16 +33,16 @@ export default function DropdownInput({
         name={`${name}`}
         type={`${type}`}
         value={searchTerm}
-        onChange={event => setSearchTerm(event.target.value)}
+        onChange={(event) => setSearchTerm(event.target.value)}
         placeholder={`${placeholder}`}
         onFocus={() => {
-          document.querySelector(`#${name}-list`).style.display = 'block';
+          document.querySelector(`#${name}-list`).style.display = "block";
         }}
         onBlur={() => {
           setTimeout(() => {
             const options = document.querySelector(`#${name}-list`);
             if (options) {
-              options.style.display = 'none';
+              options.style.display = "none";
             }
           }, 200);
         }}
@@ -48,20 +50,18 @@ export default function DropdownInput({
       <div id={`${name}-list`}>
         {debouncedSearchTerm.length === 0 ? (
           <>
-            {allOptions.map(option => (
-              <p
-                key={option}
-                onClick={() => setSearchTerm(option)}
-              >{option}</p>
+            {allOptions.map((option) => (
+              <p key={option} onClick={() => setSearchTerm(option)}>
+                {option}
+              </p>
             ))}
           </>
         ) : options.length > 0 ? (
           <>
-            {options.map(option => (
-              <p
-                key={option}
-                onClick={() => setSearchTerm(option)}
-              >{option}</p>
+            {options.map((option) => (
+              <p key={option} onClick={() => setSearchTerm(option)}>
+                {option}
+              </p>
             ))}
           </>
         ) : (
