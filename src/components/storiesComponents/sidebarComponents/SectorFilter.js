@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import useDebounceFilter from "../helper/useDebounceFilter";
+import useDebounce from "../../customHooks/useDebounce";
 import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
 // import SectorDropdown from "./SectorDropdown";
@@ -14,8 +14,9 @@ const SectorFilter = () => {
   const [sectorTerm, setSectorTerm] = useState("");
   const [isSectorSearching, setIsSectorSearching] = useState(false);
 
-  const debouncedSectorTerm = useDebounceFilter(sectorTerm, 500);
+  const debouncedSectorTerm = useDebounce(sectorTerm, 500);
 
+  // NOTES FOR THEO: THIS WILL (HAS TO) BE REFACTORED !!!!!
   useEffect(() => {
     (async () => {
       if (debouncedSectorTerm) {

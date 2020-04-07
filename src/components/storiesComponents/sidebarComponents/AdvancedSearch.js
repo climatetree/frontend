@@ -4,7 +4,7 @@ import axios from "axios";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
-import useDebounceFilter from "../helper/useDebounceFilter";
+import useDebounce from "../../customHooks/useDebounce";
 import "./AdvancedSearch.css";
 
 const AdvancedSearch = ({
@@ -17,7 +17,7 @@ const AdvancedSearch = ({
   const [solutionTerm, setSolutionTerm] = useState("");
   const [isSearchingSolution, setIsSearchingSolution] = useState(false);
 
-  const debouncedSolutionTerm = useDebounceFilter(solutionTerm, 500);
+  const debouncedSolutionTerm = useDebounce(solutionTerm, 500);
 
   useEffect(() => {
     (async () => {
@@ -57,7 +57,7 @@ const AdvancedSearch = ({
 
   const applyFilterOnClick = async (solTerm) => {
     const response = await axios.get(
-      `https://backend-mongo-stories.azurewebsites.net/stories/solution/${solTerm}`
+      `https://climatetree-api-gateway.azurewebsites.net/stories/solution/${solTerm}`
     );
 
     setStoriesBasedOnFilter(response.data);

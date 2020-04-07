@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 import Nav from "./Nav";
@@ -79,18 +79,24 @@ const Stories = (props) => {
 
     setGeneralSearchTerm(query.get("storyTitle") || placeName || "");
     if (generalSearchTerm) {
-      setStories(
-        history.location.state.storiesResult.map((story) => {
-          return { ...story, date: new Date(story.date) };
-        })
-      );
+      if (history.location.state) {
+        setStories(
+          history.location.state.storiesResult.map((story) => {
+            return { ...story, date: new Date(story.date) };
+          })
+        );
+      } else {
+        (async () => {
+          await fetchAllStories();
+        })();
+      }
     }
   }, [query.get("storyTitle")]);
 
   const fetchAllStories = async () => {
     setLoadSpinner(true);
     const response = await axios.get(
-      "https://backend-mongo-stories.azurewebsites.net/stories"
+      "https://climatetree-api-gateway.azurewebsites.net/stories"
     );
 
     setStories(
@@ -213,6 +219,7 @@ const Stories = (props) => {
           sideBarVisible={sideBarVisible}
           windowWidth={windowWidth}
           closeSideBar={closeSideBar}
+          setStoriesBasedOnFilter={setStoriesBasedOnFilter}
         />
       )}
 

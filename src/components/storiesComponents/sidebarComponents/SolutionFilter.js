@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
-import useDebounceFilter from "../helper/useDebounceFilter";
 import FiltersDropdown from "./FiltersDropdown";
 
 import "./SolutionFilter.css";

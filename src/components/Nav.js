@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "./context/UserContext";
 import logo from "../images/white-logo.png";
 import "./Nav.css";
 
 function Nav() {
   const { user, setUser } = useContext(UserContext);
+  const {} = useHistory();
   const logOut = () => {
     setUser({
       ...user,

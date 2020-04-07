@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
-import SuggestionDropdown from './SuggestionDropdown';
-import SuggestionOverlay from './SuggestionOverlay';
-import MinMaxRange from './MinMaxRange';
-import useDebounce from "./helpers/useDebounce";
-import { factory } from './helpers/data';
+import SuggestionDropdown from "./SuggestionDropdown";
+import SuggestionOverlay from "./SuggestionOverlay";
+import MinMaxRange from "./MinMaxRange";
+import useDebounce from "../customHooks/useDebounce";
+import { factory } from "./helpers/data";
 import "./Filters.css";
 
 export default function Filters({
@@ -31,12 +31,7 @@ export default function Filters({
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      await getSimilarPlaces(
-        factory(
-          placeSuggestions[index],
-          filterArray
-        )
-      );
+      await getSimilarPlaces(factory(placeSuggestions[index], filterArray));
     }
     openMapDashboard();
   };
@@ -48,39 +43,31 @@ export default function Filters({
       openConfirmationPanel();
     } else if (placeSuggestions.length === 1) {
       setSearchTerm(placeSuggestions[0].properties.name);
-      setSelectedSuggestion([
-        placeSuggestions[0].properties.place_id,
-        0,
-      ]);
+      setSelectedSuggestion([placeSuggestions[0].properties.place_id, 0]);
       setTargetPlace(placeSuggestions[0]);
-      getSimilarPlaces(
-        factory(
-          placeSuggestions[0],
-          filterArray
-        )
-      );
-      document.getElementById('suggestions').style.display = 'none';
+      getSimilarPlaces(factory(placeSuggestions[0], filterArray));
+      document.getElementById("suggestions").style.display = "none";
     }
-  }
+  };
   const openAdvancedFilters = () => {
-    const advancedFilters = document.getElementById('advanced-filters');
-    if (advancedFilters.style.display === 'block') {
-      advancedFilters.style.display = 'none';
+    const advancedFilters = document.getElementById("advanced-filters");
+    if (advancedFilters.style.display === "block") {
+      advancedFilters.style.display = "none";
     } else {
-      advancedFilters.style.display = 'block';
+      advancedFilters.style.display = "block";
     }
   };
   const openConfirmationPanel = () => {
-    document.getElementById('suggestions').style.display = 'none';
-    document.getElementById('confirmation').style.display = 'flex';
-  }
+    document.getElementById("suggestions").style.display = "none";
+    document.getElementById("confirmation").style.display = "flex";
+  };
   const closeMapDashboard = () => {
-    const mapDashboard = document.querySelector('.story-dashboard');
+    const mapDashboard = document.querySelector(".story-dashboard");
     if (mapDashboard) {
-      mapDashboard.style.display = 'none';
+      mapDashboard.style.display = "none";
       mapDashboard.style.opacity = 0;
     }
-  }
+  };
 
   useEffect(() => {
     if (debouncedSearchTerm && debouncedSearchTerm.length > 1) {
@@ -88,14 +75,11 @@ export default function Filters({
       fetch(
         `https://climatetree-api-gateway.azurewebsites.net/places/${debouncedSearchTerm}`
       )
-        .then(response => response.json())
-        .then(results => {
+        .then((response) => response.json())
+        .then((results) => {
           if (results.features) {
             setPlaceSuggestions(results.features);
-            setSelectedSuggestion([
-              results.features[0].properties.place_id,
-              0,
-            ]);
+            setSelectedSuggestion([results.features[0].properties.place_id, 0]);
           } else {
             setPlaceSuggestions([]);
             setSelectedSuggestion([]);
@@ -147,17 +131,17 @@ export default function Filters({
               setRange={setCarbonRange}
             />
             <div className="divisor"></div>
-            <button onClick={() => {
-              document.getElementById('advanced-filters').style.display = 'none';
-              if (targetPlace) {
-                getSimilarPlaces(
-                  factory(
-                    targetPlace,
-                    filterArray
-                  )
-                );
-              }
-            }}>Apply</button>
+            <button
+              onClick={() => {
+                document.getElementById("advanced-filters").style.display =
+                  "none";
+                if (targetPlace) {
+                  getSimilarPlaces(factory(targetPlace, filterArray));
+                }
+              }}
+            >
+              Apply
+            </button>
           </div>
         </div>
       </div>
