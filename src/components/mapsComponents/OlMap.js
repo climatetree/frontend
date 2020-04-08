@@ -87,7 +87,7 @@ class OlMap extends Component {
 
     // Open popups when a point is clicked on
     map.on("singleclick", evt =>
-      popUpHandler(evt, map, overlay, this.props.history, this.props.targetPlace, this.props.setComparePlaceProps)
+      popUpHandler(evt, map, overlay, this.props.history, this.props.setComparePlaceProps)
     );
 
     // Close popups when features change

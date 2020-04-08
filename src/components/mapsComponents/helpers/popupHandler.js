@@ -8,14 +8,12 @@ import axios from "axios";
  * @param {Map} map An OpenLayers Map object
  * @param {Overlay} overlay An OpenLayers Overlay object
  * @param {Object} history Session history
- * @param {Object} targetPlace Info about the place last searched
  */
 export const popUpHandler = (
   evt,
   map,
   overlay,
   history,
-  targetPlace,
   setComparePlaceProps
 ) => {
   // Get list of features
@@ -50,27 +48,16 @@ export const popUpHandler = (
   let content = document.getElementById("popup-content");
   content.innerHTML = `<div id="popup-html"></div>`;
 
-  const goToStories = async place => {
-    const response = await axios.get(
-      `https://climatetree-api-gateway.azurewebsites.net/stories/place/${place.place_id}`
-    );
-
-    history.push({
-      pathname: "/stories",
-      search: `?place_id=${place.place_id}&place_name=${place.name}`,
-      state: { storiesResult: response.data, placeName: place.name }
-    });
-  };
-
   const PopupContent = () => {
     if (places.length > 1) {
       // Cluster popup
       return (
         <>
           <p>
-            There are {places.length} places in this area.
+            {/* Non-breaking spaces are to ensure popups are appropriate width */}
+            {places.length}&nbsp;places&nbsp;here.
             <br />
-            Zoom in to see details.
+            Zoom&nbsp;for&nbsp;details.
           </p>
         </>
       );
@@ -82,12 +69,9 @@ export const popUpHandler = (
       return (
         <>
           <p>
-            <strong>{placeProps.name}</strong> -{" "}
+            <strong>{placeProps.name}</strong>&nbsp;-&nbsp;
             <small>{placeProps.type_name}</small>
           </p>
-          <button id="popup-btn" onClick={() => goToStories(placeProps)}>
-            View Stories
-          </button>
         </>
       );
     }
@@ -119,3 +103,20 @@ export function percentiStringify(targetPlaceNum, currentPlaceNum) {
     return `${relativePercent}%`;
   }
 }
+
+/**
+ * Redirect user to view stories from this place.
+ * @param {Object} place The place to view stories from
+ * @param {Object} history Session history
+ */
+export async function goToStories(place, history) {
+  const response = await axios.get(
+    `https://climatetree-api-gateway.azurewebsites.net/stories/place/${place.place_id}`
+  );
+
+  history.push({
+    pathname: "/stories",
+    search: `?place_id=${place.place_id}&place_name=${place.name}`,
+    state: { storiesResult: response.data, placeName: place.name }
+  });
+};
