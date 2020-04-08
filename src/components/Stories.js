@@ -32,6 +32,12 @@ const Stories = (props) => {
   let placeId = query.get("place_id");
   let placeName = query.get("place_name");
 
+  const BASED_URL_FOR_STORY_TITLE = `https://climatetree-api-gateway.azurewebsites.net/stories/title/${query.get(
+    "storyTitle"
+  )}`;
+
+  const BASED_URL_FOR_PLACE_ID = `https://climatetree-api-gateway.azurewebsites.net/stories/place/${placeId}`;
+
   // State lifecycle
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -46,15 +52,15 @@ const Stories = (props) => {
   }, [windowWidth]);
 
   useEffect(() => {
-    if (query.get("storyTitle")) {
+    if (query.get("storyTitle") || query.get("place_id")) {
       (async () => {
         setStories([]);
         setLoadSpinner(true);
 
         const response = await axios.get(
-          `https://climatetree-api-gateway.azurewebsites.net/stories/title/${
-            query.get("storyTitle") || placeId
-          }`
+          query.get("storyTitle")
+            ? BASED_URL_FOR_STORY_TITLE
+            : BASED_URL_FOR_PLACE_ID
         );
 
         setStories(
@@ -63,7 +69,9 @@ const Stories = (props) => {
           })
         );
 
-        setGeneralSearchTerm(query.get("storyTitle") || placeName);
+        setGeneralSearchTerm(
+          query.get("storyTitle") || query.get("place_name")
+        );
         setLoadSpinner(false);
       })();
     } else {
