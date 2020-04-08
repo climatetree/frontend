@@ -43,11 +43,11 @@
 }
 
 .positive {
-  color: #38c8ff;
+  color: #ff3862;
 }
 
 .negative {
-  color: #ff3862;
+  color: #38c8ff;
 }
 
 @media (max-width: 959px) and (min-width: 768px) {
