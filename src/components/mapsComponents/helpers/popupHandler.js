@@ -77,74 +77,19 @@ export const popUpHandler = (
     } else {
       // Single place popup
       let placeProps = places[0].getProperties();
-      let targetProps = targetPlace.properties;
       setComparePlaceProps(placeProps);
-      // Is target place?
-      if (targetProps.name === placeProps.name) {
-        // Shows actual statistic numbers
-        return (
-          <>
-            <p>
-              <strong>{placeProps.name}</strong> -{" "}
-              <small>{placeProps.type_name}</small>
-              <br />
-              <em>Population</em>
-              <br />
-              &nbsp;&nbsp;{Math.round(placeProps.population)}
-              <br />
-              <em>Population Density</em> - <small>pop/km</small>
-              <br />
-              &nbsp;&nbsp;{Math.round(placeProps.popdensity)}
-              <br />
-              <em>Carbon</em> - <small>kg/year</small>
-              <br />
-              &nbsp;&nbsp;{placeProps.carbon}
-              <br />
-              <em>Carbon Per Capita</em> - <small>carbon/person</small>
-              <br />
-              &nbsp;&nbsp;{placeProps.percapcarb}
-              <br />
-            </p>
-            <button id="popup-btn" onClick={() => goToStories(placeProps)}>
-              View Stories
-            </button>
-          </>
-        );
-      } else {
-        // Is not target place => show relative percentages
-        return (
-          <>
-            <p>
-              <strong>{placeProps.name}</strong> -{" "}
-              <small>{placeProps.type_name}</small>
-              <br />
-              <em>Population</em>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.population, placeProps.population)}
-              <br />
-              <em>Population Density</em> - <small>pop/km</small>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.popdensity, placeProps.popdensity)}
-              <br />
-              <em>Carbon</em> - <small>kg/year</small>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.carbon, placeProps.carbon)}
-              <br />
-              <em>Carbon Per Capita</em> - <small>carbon/person</small>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.percapcarb, placeProps.percapcarb)}
-              <br />
-            </p>
-            <button id="popup-btn" onClick={() => goToStories(placeProps)}>
-              View Stories
-            </button>
-          </>
-        );
-      }
+
+      return (
+        <>
+          <p>
+            <strong>{placeProps.name}</strong> -{" "}
+            <small>{placeProps.type_name}</small>
+          </p>
+          <button id="popup-btn" onClick={() => goToStories(placeProps)}>
+            View Stories
+          </button>
+        </>
+      );
     }
   };
 

@@ -1,8 +1,10 @@
 /* Overrides white from Nav.css */
+
 #maps-page {
   position: relative;
   overflow-x: hidden;
 }
+
 #shownav {
   position: absolute;
   left: 0;
@@ -15,12 +17,15 @@
   color: white;
   text-align: top;
 }
+
 #shownav:focus {
   outline: 1px solid rgba(0, 0, 0, 0.5);
 }
+
 .ol-attribution span {
   color: white;
 }
+
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -34,16 +39,19 @@
   align-items: center;
   display: none;
 }
+
 .loading-overlay p {
   text-transform: capitalize;
   font-size: 1.2rem;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
 }
+
 .loading-overlay.loading {
   display: flex;
 }
 
 /* Below styles for popups borrowed from https://openlayers.org/en/latest/examples/popup.html */
+
 .ol-popup {
   position: absolute;
   background-color: white;
@@ -56,8 +64,8 @@
   left: -50px;
   min-width: 280px;
 }
-.ol-popup:after,
-.ol-popup:before {
+
+.ol-popup:after, .ol-popup:before {
   top: 100%;
   border: solid transparent;
   content: " ";
@@ -66,18 +74,21 @@
   position: absolute;
   pointer-events: none;
 }
+
 .ol-popup:after {
   border-top-color: white;
   border-width: 10px;
   left: 48px;
   margin-left: -10px;
 }
+
 .ol-popup:before {
   border-top-color: #cccccc;
   border-width: 11px;
   left: 48px;
   margin-left: -11px;
 }
+
 .ol-popup-closer {
   text-decoration: none;
   position: absolute;
@@ -87,12 +98,18 @@
   border: none;
   padding: 0 !important;
 }
+
 .ol-popup-closer:hover {
   text-decoration: underline;
 }
+
 .ol-popup-closer:after {
   content: "✖";
   color: black;
+}
+
+.ol-popup ul {
+  list-style-type: none;
 }
 
 @media (max-width: 767px) {
