@@ -4,7 +4,7 @@ import "./FilterLabel.css";
 
 const FilterLabel = (props) => {
   return (
-    <label for={props.forInput} id="filter-label">
+    <label htmlFor={props.forInput} id="filter-label">
       {props.children}
     </label>
   );
