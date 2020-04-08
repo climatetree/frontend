@@ -1,3 +1,6 @@
+/**
+ * Filters components for the map
+ */
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SuggestionDropdown from './SuggestionDropdown';
@@ -157,7 +160,7 @@ export default function Filters({
             <CheckboxGroup
               label='Type'
               name='type'
-              options={['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']}placeTypesEnabled={placeTypesEnabled}
+              options={['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']} placeTypesEnabled={placeTypesEnabled}
               setPlaceTypesEnabled={setPlaceTypesEnabled}
             />
             <div className="divisor"></div>

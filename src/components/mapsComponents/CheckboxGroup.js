@@ -1,3 +1,6 @@
+/**
+ * Checkbox filter options for the map based such as state, country or urbanextent
+ */
 import React from 'react';
 import Checkbox from './Checkbox';
 import './CheckboxGroup.css';

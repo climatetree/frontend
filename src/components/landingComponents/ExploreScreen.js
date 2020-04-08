@@ -1,3 +1,6 @@
+/**
+ * The function ExporeScreen() is displaying the HTML that highlights the most popular stories of the application
+ */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ReactTinyLink } from "react-tiny-link";

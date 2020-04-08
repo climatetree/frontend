@@ -1,3 +1,6 @@
+/**
+ * User personnal page 
+ */
 import React, { useContext, useState, useEffect } from "react";
 import PostStoryForm from "./PostStoryForm";
 import plusIcon from "../../images/plus.svg";

@@ -10,7 +10,7 @@ import axios from "axios";
  * @param {Object} history Session history
  * @param {Object} targetPlace Info about the place last searched
  */
-const popUpHandler = (
+export const popUpHandler = (
   evt,
   map,
   overlay,
@@ -160,5 +160,3 @@ export function percentiStringify(targetPlaceNum, currentPlaceNum) {
     return `${relativePercent}%`;
   }
 }
-
-export default popUpHandler;
