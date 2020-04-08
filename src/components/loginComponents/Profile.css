@@ -81,7 +81,7 @@
   border-radius: 4px;
   padding: 1rem 5rem;
 }
-.loading {
+.story-list .loading {
   height: 200px;
   width: 100%;
   display: flex;

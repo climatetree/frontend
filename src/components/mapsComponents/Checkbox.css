@@ -1,6 +1,6 @@
 .checkbox-container {
   padding: 5px 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
 .checkbox-label {

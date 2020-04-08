@@ -8,14 +8,12 @@ import axios from "axios";
  * @param {Map} map An OpenLayers Map object
  * @param {Overlay} overlay An OpenLayers Overlay object
  * @param {Object} history Session history
- * @param {Object} targetPlace Info about the place last searched
  */
-const popUpHandler = (
+export const popUpHandler = (
   evt,
   map,
   overlay,
   history,
-  targetPlace,
   setComparePlaceProps
 ) => {
   // Get list of features
@@ -29,24 +27,26 @@ const popUpHandler = (
   }
 
   // Get places contained in the feature list
-  let places = map.getFeaturesAtPixel(pixel)[0].getProperties().features;
+  let featureList = map.getFeaturesAtPixel(pixel);
+  let places = [];
+  if (featureList.length === 1) {
+    // Use the first element in the list if the place is not
+    // the targetPlace.
+    places = featureList[0].getProperties().features;
+  } else {
+    // If the place is the target place, there will be more than
+    // one element due to the combination of the main places layer
+    // and the target place layer. The feature from the target
+    // place layer will be the first element in the featuresList
+    // and will cause an error if clicked on because it is not
+    // a clustered layer and has no features property.
+    places = featureList[1].getProperties().features;
+  }
 
   // Set a div for popup content
   // Due to OL library, this needs to be done on the actual DOM
   let content = document.getElementById("popup-content");
   content.innerHTML = `<div id="popup-html"></div>`;
-
-  const goToStories = async place => {
-    const response = await axios.get(
-      `https://climatetree-api-gateway.azurewebsites.net/stories/place/${place.place_id}`
-    );
-
-    history.push({
-      pathname: "/stories",
-      search: `?place_id=${place.place_id}&place_name=${place.name}`,
-      state: { storiesResult: response.data, placeName: place.name }
-    });
-  };
 
   const PopupContent = () => {
     if (places.length > 1) {
@@ -54,83 +54,26 @@ const popUpHandler = (
       return (
         <>
           <p>
-            There are {places.length} places in this area.
+            {/* Non-breaking spaces are to ensure popups are appropriate width */}
+            {places.length}&nbsp;places&nbsp;here.
             <br />
-            Zoom in to see details.
+            Zoom&nbsp;for&nbsp;details.
           </p>
         </>
       );
     } else {
       // Single place popup
       let placeProps = places[0].getProperties();
-      let targetProps = targetPlace.properties;
       setComparePlaceProps(placeProps);
-      // Is target place?
-      if (targetProps.name === placeProps.name) {
-        // Shows actual statistic numbers
-        return (
-          <>
-            <p>
-              <strong>{placeProps.name}</strong> -{" "}
-              <small>{placeProps.type_name}</small>
-              <br />
-              <em>Population</em>
-              <br />
-              &nbsp;&nbsp;{Math.round(placeProps.population)}
-              <br />
-              <em>Population Density</em> - <small>pop/km</small>
-              <br />
-              &nbsp;&nbsp;{Math.round(placeProps.popdensity)}
-              <br />
-              <em>Carbon</em> - <small>kg/year</small>
-              <br />
-              &nbsp;&nbsp;{placeProps.carbon}
-              <br />
-              <em>Carbon Per Capita</em> - <small>carbon/person</small>
-              <br />
-              &nbsp;&nbsp;{placeProps.percapcarb}
-              <br />
-            </p>
-            <button id="popup-btn" onClick={() => goToStories(placeProps)}>
-              View Stories
-            </button>
-          </>
-        );
-      } else {
-        // Is not target place => show relative percentages
-        return (
-          <>
-            <p>
-              <strong>{placeProps.name}</strong> -{" "}
-              <small>{placeProps.type_name}</small>
-              <br />
-              <em>Population</em>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.population, placeProps.population)}
-              <br />
-              <em>Population Density</em> - <small>pop/km</small>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.popdensity, placeProps.popdensity)}
-              <br />
-              <em>Carbon</em> - <small>kg/year</small>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.carbon, placeProps.carbon)}
-              <br />
-              <em>Carbon Per Capita</em> - <small>carbon/person</small>
-              <br />
-              &nbsp;&nbsp;
-              {percentiStringify(targetProps.percapcarb, placeProps.percapcarb)}
-              <br />
-            </p>
-            <button id="popup-btn" onClick={() => goToStories(placeProps)}>
-              View Stories
-            </button>
-          </>
-        );
-      }
+
+      return (
+        <>
+          <p>
+            <strong>{placeProps.name}</strong>&nbsp;-&nbsp;
+            <small>{placeProps.type_name}</small>
+          </p>
+        </>
+      );
     }
   };
 
@@ -161,4 +104,19 @@ export function percentiStringify(targetPlaceNum, currentPlaceNum) {
   }
 }
 
-export default popUpHandler;
+/**
+ * Redirect user to view stories from this place.
+ * @param {Object} place The place to view stories from
+ * @param {Object} history Session history
+ */
+export async function goToStories(place, history) {
+  const response = await axios.get(
+    `https://climatetree-api-gateway.azurewebsites.net/stories/place/${place.place_id}`
+  );
+
+  history.push({
+    pathname: "/stories",
+    search: `?place_id=${place.place_id}&place_name=${place.name}`,
+    state: { storiesResult: response.data, placeName: place.name }
+  });
+};

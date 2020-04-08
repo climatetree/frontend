@@ -1,3 +1,11 @@
+/**
+ * Comment components:
+ * storyId (the story to comment)
+ * userId (the user who wrote the comment)
+ * likes-count (numbers of likes on that given comment)
+ * additional option regarding the type of user -> delete comment
+ * 
+ */
 import React, { useContext, useState, useEffect } from "react";
 
 import { UserContext } from "../context/UserContext";

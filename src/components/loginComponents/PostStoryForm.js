@@ -1,4 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+/**
+ * A story has the following properties:
+ * - Author (user_id)
+ * - Title
+ * - Date
+ * - Location (place_id)
+ * - HYperlink
+*/
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from "../context/UserContext";
 import useDebounce from "../customHooks/useDebounce";
 import CloseIcon from "../../images/x.svg";
@@ -16,12 +24,14 @@ export default function PostStoryForm({
     setOpenPostStoryForm(false);
   };
   async function handleSubmit(hyperlink, preview, place_id) {
+    // the new story is stored on the backend-mongo-stories db
     fetch("https://climatetree-api-gateway.azurewebsites.net/stories/create", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + user.jwt,
         "Content-Type": "application/json",
       },
+      // convert the data to json
       body: JSON.stringify({
         user_id: user.userId,
         posted_by: user.username,
@@ -37,6 +47,7 @@ export default function PostStoryForm({
       }),
     })
       .then(() => {
+        // Add that new story to the user profile
         setMyStories([
           ...myStories,
           {

@@ -1,14 +1,18 @@
+/**
+ * Filters components for the map
+ */
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SuggestionDropdown from "./SuggestionDropdown";
 import SuggestionOverlay from "./SuggestionOverlay";
 import MinMaxRange from "./MinMaxRange";
+import CheckboxGroup from "./CheckboxGroup";
 import useDebounce from "../customHooks/useDebounce";
 import { factory } from "./helpers/data";
 import "./Filters.css";
 
 export default function Filters({
-  getPlaces,
+  getSimilarPlaces,
   targetPlaceID,
   targetPlace,
   setTargetPlace,
@@ -20,6 +24,9 @@ export default function Filters({
   searchTerm,
   setSearchTerm,
   openMapDashboard,
+  placeTypesEnabled,
+  setPlaceTypesEnabled,
+  appendPlaceTypeQuery,
 }) {
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [isSearchingSuggestions, setIsSearchingSuggestions] = useState(false);
@@ -31,7 +38,12 @@ export default function Filters({
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      await getPlaces(factory(placeSuggestions[index], filterArray));
+      await getSimilarPlaces(
+        appendPlaceTypeQuery(
+          factory(placeSuggestions[index], filterArray),
+          placeTypesEnabled
+        )
+      );
     }
     openMapDashboard();
   };
@@ -45,7 +57,7 @@ export default function Filters({
       setSearchTerm(placeSuggestions[0].properties.name);
       setSelectedSuggestion([placeSuggestions[0].properties.place_id, 0]);
       setTargetPlace(placeSuggestions[0]);
-      getPlaces(factory(placeSuggestions[0], filterArray));
+      getSimilarPlaces(factory(placeSuggestions[0], filterArray));
       document.getElementById("suggestions").style.display = "none";
     }
   };
@@ -131,12 +143,25 @@ export default function Filters({
               setRange={setCarbonRange}
             />
             <div className="divisor"></div>
+            <CheckboxGroup
+              label="Type"
+              name="type"
+              options={["STATE", "NATION", "COUNTY", "URBANEXTENT"]}
+              placeTypesEnabled={placeTypesEnabled}
+              setPlaceTypesEnabled={setPlaceTypesEnabled}
+            />
+            <div className="divisor"></div>
             <button
               onClick={() => {
                 document.getElementById("advanced-filters").style.display =
                   "none";
                 if (targetPlace) {
-                  getPlaces(factory(targetPlace, filterArray));
+                  getSimilarPlaces(
+                    appendPlaceTypeQuery(
+                      factory(targetPlace, filterArray),
+                      placeTypesEnabled
+                    )
+                  );
                 }
               }}
             >

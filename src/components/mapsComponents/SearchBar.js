@@ -1,3 +1,9 @@
+/**
+ * Search bar for places:
+ * By country
+ * By state
+ * By city
+ */
 import React from "react";
 import searchIcon from "../../images/search.svg";
 import "./SearchBar.css";

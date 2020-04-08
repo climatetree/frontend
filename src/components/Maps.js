@@ -50,14 +50,33 @@ export default function Maps() {
     apply: false,
   });
   const filterArray = [populationRange, carbonRange];
+  const [placeTypesEnabled, setPlaceTypesEnabled] = useState(['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']);
+  const appendPlaceTypeQuery = (query, placeTypesEnabled) => {
+    let result = [query];
+    for (const placeType of placeTypesEnabled) {
+      if (placeType === 'STATE') {
+        result.push('TYPE_ID_1:1');
+      } else if (placeType === 'NATION') {
+        result.push('TYPE_ID_2:2');
+      } else if (placeType === 'COUNTY') {
+        result.push('TYPE_ID_3:3');
+      } else if (placeType === 'URBANEXTENT') {
+        result.push('TYPE_ID_4:4');
+      }
+    }
+    return result.join(';');
+  }
   useEffect(() => {
     if (location.state && location.state.place) {
       (async () => {
         setTargetPlace(location.state.place);
         await getSimilarPlaces(
-          factory(
-            location.state.place,
-            filterArray
+          appendPlaceTypeQuery(
+            factory(
+              location.state.place,
+              filterArray
+            ),
+            placeTypesEnabled
           )
         );
         openMapDashboard();
@@ -85,11 +104,15 @@ export default function Maps() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         openMapDashboard={openMapDashboard}
+        placeTypesEnabled={placeTypesEnabled}
+        setPlaceTypesEnabled={setPlaceTypesEnabled}
+        appendPlaceTypeQuery={appendPlaceTypeQuery}
       />
       <MapNav />
       <StoryDashboard
         targetPlaceProps={targetPlace ? targetPlace.properties : null}
         comparePlaceProps={comparePlaceProps}
+        history={history}
       />
       <div
         className={`loading-overlay${isLoadingSimilarPlaces ? " loading" : ""}`}

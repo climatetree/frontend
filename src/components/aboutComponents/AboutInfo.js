@@ -1,6 +1,12 @@
 import React from "react";
-
 import "./AboutInfo.css";
+/**
+ * AboutInfo is handling the html code for the About section. 
+ * The about section is composed of three sections: 
+ * 1) General Overview of ClimateTree
+ * 2) History of ClimateTree 
+ * 3) Project vision (from Greg Schundler, project lead) 
+ */
 
 const AboutInfo = () => {
   return (

@@ -38,6 +38,7 @@ const StoryCommentInput = ({
       date: Date.now()
     };
 
+    // send new comment to back end
     if (newComment.content) {
       const response = await axios.post(
         "https://climatetree-api-gateway.azurewebsites.net/stories/story/comment",

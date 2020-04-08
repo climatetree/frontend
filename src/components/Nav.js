@@ -1,9 +1,14 @@
+/**
+ * Navbar util 
+ */
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./context/UserContext";
 import logo from "../images/white-logo.png";
 import "./Nav.css";
 
+
+// navbar for large screens 
 function Nav() {
   const { user, setUser } = useContext(UserContext);
 
@@ -77,6 +82,7 @@ function Nav() {
   );
 }
 
+// navbar for small screens 
 function navSlide() {
   document.querySelector(".nav-links").classList.toggle("nav-active");
   document.querySelectorAll(".nav-links li").forEach((link, index) => {

@@ -1,22 +1,24 @@
+/**
+ * Checkbox filter options for the map based such as state, country or urbanextent
+ */
 import React from 'react';
 import Checkbox from './Checkbox';
 import './CheckboxGroup.css';
 
 export default function CheckboxGroup({
   label,
-  name,
-  placeTypesDisabled,
-  setPlaceTypesDisabled,
+  options,
+  placeTypesEnabled,
+  setPlaceTypesEnabled,
 }) {
-  const options = ['STATE', 'COUNTY', 'URBANEXTENT'];
-  const toggleOption = (operation, option) => {
-    if (operation) {
-      setPlaceTypesDisabled(
-        placeTypesDisabled.filter(type => type !== option)
+  const toggleOption = (option) => {
+    if (placeTypesEnabled.includes(option)) {
+      setPlaceTypesEnabled(
+        placeTypesEnabled.filter(type => type !== option)
       );
     } else {
-      setPlaceTypesDisabled([
-        ...placeTypesDisabled,
+      setPlaceTypesEnabled([
+        ...placeTypesEnabled,
         option,
       ]);
     }
@@ -30,11 +32,11 @@ export default function CheckboxGroup({
         <Checkbox
           key={option}
           label={option}
-          checked={!placeTypesDisabled.includes(option)}
-          onChange={toggleOption}
+          checked={placeTypesEnabled.includes(option)}
+          onChange={() => toggleOption(option)}
           filled
         />
       ))}
     </div>
   );
-};
+}
