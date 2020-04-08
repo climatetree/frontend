@@ -2,11 +2,7 @@
 /**
  * Main component of the landing page 
  */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-=======
 import React, { useState, useEffect } from "react";
->>>>>>> c54fde121c99ea8d10fddcc030fc848ef4ac9610
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import useDebounce from "../mapsComponents/helpers/useDebounce";
