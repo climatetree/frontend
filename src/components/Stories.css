@@ -1,10 +1,41 @@
 /* STORY CONTAINER*/
+.unscrollable {
+  height: 500px;
+  overflow: hidden;
+}
+
 .stories-container {
-  padding-top: 8rem;
-  padding-left: 10rem;
-  padding-right: 10rem;
+  position: relative;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-top: 5.3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   padding-bottom: 6rem;
-  height: 100%;
+}
+
+.main-stories {
+  grid-column: 1 / span 2;
+}
+
+.result-for-and-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.click-filter {
+  display: none;
+  color: #d9d9d9;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.click-filter:hover {
+  text-decoration: underline;
 }
 
 .spinner-container {
@@ -13,12 +44,13 @@
   left: 0;
   bottom: 0;
   right: 0;
+  z-index: 99;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .no-found-msg {
@@ -48,7 +80,6 @@
 }
 
 .loading-text {
-  /* animation: loadingAppear 1s step-end; */
   position: relative;
 }
 
@@ -98,7 +129,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: -1;
+  z-index: -100000;
   height: 100%;
   background: url("../images/jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
   filter: brightness(50%);
@@ -111,8 +142,12 @@
   background-color: rgba(0, 0, 0, 0.2);
   border: 0.5px solid rgba(201, 201, 201, 0.4);
   border-radius: 5px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+
+.story-card:last-child {
+  margin-bottom: 21px;
 }
 
 /* HEADING CARD SECTION */
@@ -167,10 +202,7 @@ hr {
 }
 
 .button-group {
-  /* padding: 3px 0; */
   display: flex;
-  /* margin-left: 15px;
-  margin-right: 15px; */
   flex-grow: 1;
   flex-direction: row;
   order: 1;
@@ -238,21 +270,28 @@ hr {
   color: #0d0d0d;
   background-color: rgba(255, 255, 255, 0.85);
   border: none;
-  padding: 1rem 1.6rem;
+  padding: 0.5rem 1rem;
   font-size: 1.2rem;
   font-weight: 300;
 }
 
+#search-story-icon {
+  position: absolute;
+  right: 0;
+  top: 23%;
+  transform: translateX(-1rem);
+  cursor: pointer;
+}
+
 #search-for-stories-title {
-  color: #d9d9d9;
+  color: #d4d4d4;
   margin-bottom: 10px;
+  font-weight: 200;
 }
 
 .result-term {
   color: #d9d9d9;
-  margin-top: 15px;
-  padding-bottom: 20px;
-  border-bottom: solid 1px rgba(204, 204, 204, 0.5);
+  margin-top: 10px;
 }
 
 #search-term {
@@ -284,12 +323,10 @@ hr {
 
 /* COMMENT DETAIL COMPONENT */
 .comment-detail {
-  /* height: 50px; */
   border-bottom: 0.4px solid rgba(201, 201, 201, 0.5);
   padding: 5px 10px;
   min-height: 70px;
   height: auto;
-  /* margin-bottom: 16px; */
 }
 
 .comment-detail:last-child {
@@ -341,9 +378,7 @@ hr {
 /* COMMENT COMPONENT */
 .comment-input-container {
   display: flex;
-  /* background-color: #f7f7f7; */
   height: 0px;
-  /* transition: height 0.2s ease-in-out; */
   overflow: hidden;
 }
 
@@ -354,7 +389,6 @@ hr {
 
 .comment-input {
   opacity: 0;
-  /* transition: opacity 0.2s ease-in-out 0.3s; */
   margin: 15px 20px;
   width: 100%;
   color: #5a5a5a;
@@ -381,7 +415,21 @@ hr {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 950px) {
+  .stories-grid {
+    display: block;
+  }
+
+  .main-stories {
+    z-index: 99;
+  }
+
+  .click-filter {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
   .stories-container {
     padding-left: 1rem;
     padding-right: 1rem;

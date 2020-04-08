@@ -1,3 +1,6 @@
+/**
+ * Filter range for the advanced filter (in %)
+ */
 import React from 'react';
 import Checkbox from './Checkbox';
 import './MinMaxRange.css';
@@ -17,6 +20,7 @@ export default function MinMaxRange({
           ...range,
           apply: !range.apply,
         })}
+        filled
       />
       <div className="min-max-inputs">
         <input

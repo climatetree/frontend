@@ -13,9 +13,6 @@
 
 #first-screen {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   color: #ededed;
 }
 #animation-first {
@@ -31,24 +28,26 @@
     transform: translateY(0px);
   }
 }
-#first-screen h1 {
+/* #first-screen h1 {
   text-transform: uppercase;
   margin: 0;
-}
-#first-screen p {
+} */
+/* #first-screen p {
   width: 75%;
   margin: 2rem 0;
   font-weight: 300;
   font-size: 1.35rem;
-}
-#first-screen-search {
+} */
+/* #first-screen-search { */
+.tab-input {
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
   position: relative;
-  width: 75%;
+  width: 80%;
+  max-width: 700px;
 }
-#first-screen input {
+.tab-input input {
   width: 100%;
   color: #0d0d0d;
   background-color: rgba(255, 255, 255, 0.85);
@@ -57,14 +56,15 @@
   font-size: 1.2rem;
   font-weight: 300;
 }
-#first-screen-search img {
+/* #first-screen-search img { */
+.tab-input img {
   cursor: pointer;
   position: absolute;
   right: 0;
   transform: translateX(-1.6rem);
 }
 .primary-btn {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.9);
   width: 10rem;
   height: 3rem;
   border-radius: 1.5rem;
@@ -92,23 +92,109 @@
   z-index: -1;
   box-shadow: 1vw -50vh 50vh 0 #0d0d0d inset;
 }
+.tabs {
+  padding-top: 35vh;
+}
+.tab-btn {
+  display: inline-block;
+  position: relative;
+  font-weight: 300;
+}
+.tab-btn.active {
+  font-weight: 400;
+}
+.tab-btn::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 2px;
+  transition: width 0.3s;
+  background-color: #ededed;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+}
+.tab-btn.active::after {
+  width: 100%;
+}
+.tab-btn:not(:last-child) {
+  margin-right: 2rem;
+}
+.tab-container {
+  display: none;
+  position: relative;
+  margin-top: 1rem;
+}
+.tab-container.active {
+  display: block;
+}
+.tab-title {
+  /* position: absolute; */
+  /* top: -9rem; */
+  font-size: 2.2rem;
+  font-weight: 400;
+  display: none;
+  margin-bottom: 1rem;
+}
+.tab-title.active {
+  display: block;
+}
+.tab-description {
+  max-width: 400px;
+}
+.tab-description p:first-child {
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.tab-description p {
+  font-weight: 300;
+}
+.place-suggestions {
+  position: absolute;
+  top: 100%;
+  color: #0d0d0d;
+  background-color: rgba(221, 221, 221, 0.99);
+  width: 100%;
+  padding: 1rem 1.6rem;
+  border-top: 1px solid #0d0d0d;
+  font-weight: 300;
+  z-index: 1;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+}
+.place-suggestions p {
+  cursor: pointer;
+  font-weight: 400;
+}
+.place-suggestions p:not(:last-child) {
+  margin-bottom: 0.8rem;
+}
+.place-suggestions p span {
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+}
 
 @media (max-width: 959px) and (min-width: 768px) {
-  #first-screen p {
+  /* #first-screen p {
     width: 90%;
     margin: 2rem 0;
     font-weight: 300;
     font-size: 1.1rem;
-  }
-  #first-screen input {
+  } */
+  /* #first-screen input { */
+  .tab-input input {
     width: 100%;
     padding: 0.8rem 1.4rem;
     font-size: 1.1rem;
   }
-  #first-screen-search {
+  /* #first-screen-search { */
+  .tab-input {
     width: 90%;
   }
-  #first-screen-search img {
+  /* #first-screen-search img { */
+  .tab-input img {
     transform: translateX(-1.4rem);
   }
   .primary-btn {
@@ -119,21 +205,28 @@
     line-height: 2.7rem;
     cursor: pointer;
   }
+  .tab-title {
+    /* top: -9rem; */
+    font-size: 1.8rem;
+  }
 }
 
 @media (max-width: 767px) {
-  #first-screen p {
+  /* #first-screen p {
     width: 100%;
     font-size: 1rem;
-  }
-  #first-screen-search {
+  } */
+  /* #first-screen-search { */
+  .tab-input {
     width: 100%;
   }
-  #first-screen input {
+  /* #first-screen input { */
+  .tab-input input {
     padding: 0.5rem 1.2rem;
     font-size: 1rem;
   }
-  #first-screen-search img {
+  /* #first-screen-search img { */
+  .tab-input img {
     transform: translateX(-1.2rem);
   }
   .primary-btn {
@@ -143,5 +236,11 @@
     margin-right: 0.8rem;
     line-height: 2.4rem;
     cursor: pointer;
+  }
+  .tab-title {
+    font-size: 1.2rem;
+  }
+  .tab-description {
+    font-size: 14px;
   }
 }

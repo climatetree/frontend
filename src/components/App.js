@@ -13,15 +13,15 @@ const App = () => (
   <UserProvider>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" render={props => <LandingPage {...props} />} />
-        <Route path="/maps" render={props => <Maps {...props} />} />
+        <Route exact path="/" render={(props) => <LandingPage {...props} />} />
+        <Route path="/maps" render={(props) => <Maps {...props} />} />
         <Route path="/about">
           <About />
         </Route>
         <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="/stories" render={props => <Stories {...props} />} />
+        <Route path="/stories" render={(props) => <Stories {...props} />} />
       </Switch>
     </BrowserRouter>
   </UserProvider>

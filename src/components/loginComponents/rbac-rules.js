@@ -1,3 +1,6 @@
+/**
+ * Definition of each user rules
+ */
 const basicUserRule = [
   "homepage:view",
   "posts:view",

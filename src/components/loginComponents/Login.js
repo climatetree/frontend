@@ -1,3 +1,10 @@
+/**
+ * Login module. 
+ * A user can only login with Facebook or Google. 
+ * There is no 'register' button, only a 'login' button.
+ * If the user does not exits (based on the Facebook or Google email) then create a new account. 
+ * Else, retrieve the user informations.
+ */
 import React, { useContext } from "react";
 import axios from "axios";
 import GoogleLogin from "react-google-login";

@@ -9,9 +9,9 @@ import VectorSource from "ol/source/Vector";
 import XYZ from "ol/source/XYZ";
 import { fromLonLat } from "ol/proj";
 
-import { styleFunction as getStyles } from "./helpers/olStyles";
+import { styleFunction as getStyles, targetStyle } from "./helpers/olStyles";
 import { getGeoJson } from "./helpers/data";
-import popUpHandler from "./helpers/popupHandler";
+import { popUpHandler } from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
 
 class OlMap extends Component {
@@ -39,7 +39,7 @@ class OlMap extends Component {
     // Create the layer
     let places = new VectorLayer({
       source: clusterSource,
-      style: getStyles
+      style: getStyles,
     });
 
     // Basemap layer, via ESRI API
@@ -103,6 +103,23 @@ class OlMap extends Component {
         .getSource();
       dataSource.clear({ fast: true });
       dataSource.addFeatures(this.props.places);
+
+      // Find target place to highlight on map
+      // Get the target place search ID
+      let targetId = this.props.targetPlace.properties.place_id;
+      this.props.places.forEach(feature => {
+        // Look for the feature that represents the searched place
+        if (feature.values_.place_id === targetId) {
+          let targetCoordinates = feature.values_.geometry.flatCoordinates;
+          let view = this.state.map.getView();
+
+          // Center map on searched for place and zoom in
+          view.setCenter(targetCoordinates);
+          view.setZoom(5);
+
+          // TODO: Try adding a new layer (or adding data to a layer) and update with new target
+        }
+      });
     }
   }
 

@@ -84,7 +84,7 @@ nav {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 870px) {
   nav {
     padding: 0 2rem;
   }

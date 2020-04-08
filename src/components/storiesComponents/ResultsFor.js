@@ -1,3 +1,6 @@
+/**
+ * List of stories results given a query
+ */
 import React from "react";
 
 const ResultsFor = ({ searchTerm }) => {

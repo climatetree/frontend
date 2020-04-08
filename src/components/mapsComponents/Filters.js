@@ -1,9 +1,13 @@
+/**
+ * Filters components for the map
+ */
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SuggestionDropdown from './SuggestionDropdown';
 import SuggestionOverlay from './SuggestionOverlay';
 import MinMaxRange from './MinMaxRange';
-import useDebounce from "./helpers/useDebounce";
+import CheckboxGroup from './CheckboxGroup';
+import useDebounce from "../customHooks/useDebounce";
 import { factory } from './helpers/data';
 import "./Filters.css";
 
@@ -12,43 +16,35 @@ export default function Filters({
   targetPlaceID,
   targetPlace,
   setTargetPlace,
+  filterArray,
+  populationRange,
+  setPopulationRange,
+  carbonRange,
+  setCarbonRange,
+  searchTerm,
+  setSearchTerm,
+  openMapDashboard,
+  placeTypesEnabled,
+  setPlaceTypesEnabled,
+  appendPlaceTypeQuery,
 }) {
-  const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [isSearchingSuggestions, setIsSearchingSuggestions] = useState(false);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
 
-  const [populationRange, setPopulationRange] = useState({
-    name: 'population',
-    min: 90,
-    max: 150,
-    apply: true,  // Only population filter is applied by default
-  });
-  const [carbonRange, setCarbonRange] = useState({
-    name: 'carbon',
-    min: 90,
-    max: 110,
-    apply: false,
-  });
-
-  const openMapDashboard = () => {
-    const mapDashboard = document.querySelector('.story-dashboard');
-    if (mapDashboard) {
-      mapDashboard.style.display = 'block';
-      mapDashboard.style.opacity = 1;
-    }
-  }
-  const filterArray = [populationRange, carbonRange];
   const handleSuggestionClick = async (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
       await getSimilarPlaces(
-        factory(
-          placeSuggestions[index],
-          filterArray
+        appendPlaceTypeQuery(
+          factory(
+            placeSuggestions[index],
+            filterArray
+          ),
+          placeTypesEnabled
         )
       );
     }
@@ -161,13 +157,23 @@ export default function Filters({
               setRange={setCarbonRange}
             />
             <div className="divisor"></div>
+            <CheckboxGroup
+              label='Type'
+              name='type'
+              options={['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']} placeTypesEnabled={placeTypesEnabled}
+              setPlaceTypesEnabled={setPlaceTypesEnabled}
+            />
+            <div className="divisor"></div>
             <button onClick={() => {
               document.getElementById('advanced-filters').style.display = 'none';
               if (targetPlace) {
                 getSimilarPlaces(
-                  factory(
-                    targetPlace,
-                    filterArray
+                  appendPlaceTypeQuery(
+                    factory(
+                      targetPlace,
+                      filterArray
+                    ),
+                    placeTypesEnabled
                   )
                 );
               }

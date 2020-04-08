@@ -1,3 +1,6 @@
+/**
+ * The function ExporeScreen() is displaying the HTML that highlights the most popular stories of the application
+ */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ReactTinyLink } from "react-tiny-link";
@@ -49,19 +52,23 @@ function ExploreScreen() {
             <div className="spinner-explore"></div>
           </div>
         )}
-        {popularStories.map(ps => (
-          <a href={ps.hyperlink} className="explore-tile">
+        {popularStories.map((ps, index) => (
+          <a
+            key={index}
+            href={ps.hyperlink}
+            target="_blank"
+            className="explore-tile"
+          >
             <img src={ps.image} alt={ps.title} />
             <p className="popular-stories-title">
-              <a
-                href={ps.hyperlink}
-                className="popular-stories-title ps-title-link"
-              >
+              <span className="popular-stories-title ps-title-link">
                 {ps.title}
-              </a>
+              </span>
             </p>
-            {ps.description && (
+            {ps.description ? (
               <p className="ps-description">{ps.description}</p>
+            ) : (
+              <p className="ps-description">{ps.hyperlink}</p>
             )}
           </a>
         ))}

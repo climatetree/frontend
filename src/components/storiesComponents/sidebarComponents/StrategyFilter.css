@@ -1,0 +1,29 @@
+#strategy-choices {
+  display: flex;
+  justify-content: space-around;
+}
+
+.choices-inline {
+  vertical-align: middle;
+  position: relative;
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+.choices-inline input[type="radio"] {
+  position: absolute;
+  margin: 4px 0 0;
+  margin-left: -20px;
+  line-height: normal;
+}
+
+@media (max-width: 950px) {
+  #strategy-choices {
+    display: block;
+  }
+
+  .choices-inline {
+    display: block;
+  }
+}

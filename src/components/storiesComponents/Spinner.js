@@ -1,3 +1,6 @@
+/**
+ * Visual element to indicate loading for stories
+ */
 import React from "react";
 
 const Spinner = () => {
