@@ -12,6 +12,7 @@
   transition: opacity 0.4s;
   display: none;
 }
+
 .card {
   background-color: rgba(255, 255, 255, 0.95);
   color: #333333;
@@ -21,22 +22,32 @@
   font-size: 14px;
   box-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
 }
+
 .card .title {
   font-size: 16px;
   font-weight: 400;
 }
+
+.target-title {
+  /* If this is changed it should also be changed in  olStyles.js */
+  color: rgb(66, 173, 16);
+}
+
 .card .item-name {
   font-weight: 400;
 }
-.card .item-name + p {
+
+.card .item-name+p {
   font-weight: 100;
   padding-left: 1rem;
 }
+
 .positive {
-  color: #38c8ff;
-}
-.negative {
   color: #ff3862;
+}
+
+.negative {
+  color: #38c8ff;
 }
 
 @media (max-width: 959px) and (min-width: 768px) {

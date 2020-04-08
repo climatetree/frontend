@@ -112,6 +112,7 @@ export default function Maps() {
       <StoryDashboard
         targetPlaceProps={targetPlace ? targetPlace.properties : null}
         comparePlaceProps={comparePlaceProps}
+        history={history}
       />
       <div
         className={`loading-overlay${isLoadingSimilarPlaces ? " loading" : ""}`}
