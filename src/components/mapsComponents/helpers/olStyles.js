@@ -4,7 +4,7 @@ import { Fill, Stroke, Circle, Style, Text } from 'ol/style';
 
 // Allows for dynamic style choice based on type and cluster size
 let styleCache = {};
-const styleFunction = (feature) => {
+const styleFunction = feature => {
     // below may be useful if incorporating polygons
     //const featureType = feature.getGeometry().getType();
 
@@ -51,4 +51,14 @@ const styleFunction = (feature) => {
     return style;
 }
 
-export { styleFunction };
+const targetStyle = feature => {
+    return new Style({
+        image: new Circle({
+            radius: 6,
+            fill: new Fill({ color: 'rgb(56, 199, 255)' }),
+            stroke: new Stroke({ color: 'rgba(0, 0, 0, 0.5)', width: 0.5 }),
+        }),
+    });
+}
+
+export { styleFunction, targetStyle };

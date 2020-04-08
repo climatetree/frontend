@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Main component of the landing page 
  */
@@ -36,9 +35,6 @@ export default function FirstScreen() {
     }
   };
 
-<<<<<<< HEAD
-  // return the search bar for ClimateTree stories based on stories title.
-=======
   useEffect(() => {
     if (debouncedSearchTerm && debouncedSearchTerm.length > 1) {
       setIsLoading(true);
@@ -59,14 +55,14 @@ export default function FirstScreen() {
     }
   }, [debouncedSearchTerm]);
 
->>>>>>> c54fde121c99ea8d10fddcc030fc848ef4ac9610
+  // return the search bar for ClimateTree stories based on stories title.
   return (
     <section id="first-screen">
       <div className="tabs">
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "stories" ? "active" : ""
-          }`}
+            }`}
         >
           Explore climate stories
           <br />
@@ -75,7 +71,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "map" ? "active" : ""
-          }`}
+            }`}
         >
           Discover similar places
           <br />
@@ -84,7 +80,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "research" ? "active" : ""
-          }`}
+            }`}
         >
           Find climate actions
           <br />
@@ -117,7 +113,7 @@ export default function FirstScreen() {
           id="stories-tab"
           className={`tab-container animate-opacity ${
             activeTab === "stories" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <input
@@ -153,7 +149,7 @@ export default function FirstScreen() {
           id="map-tab"
           className={`tab-container animate-opacity ${
             activeTab === "map" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <input
@@ -224,8 +220,8 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                <p>No suggestion</p>
-              )}
+                      <p>No suggestion</p>
+                    )}
             </div>
           </div>
           <div className="tab-description">
@@ -240,7 +236,7 @@ export default function FirstScreen() {
           id="research-tab"
           className={`tab-container animate-opacity ${
             activeTab === "research" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <input

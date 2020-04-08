@@ -33,37 +33,6 @@ export default function Filters({
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState([]);
 
-<<<<<<< HEAD
-  //population filter (enabled by default) with a initial range from 90% to 150% relative to the current place ////population level (100%)  
-
-  const [populationRange, setPopulationRange] = useState({
-    name: 'population',
-    min: 90,
-    max: 150,
-    apply: true,  // Only population filter is applied by default
-  });
-
-  // carbon filter (disabled by default) with a initial range from 90% to 110% relative to the current place carbon level (100%)
-
-  const [carbonRange, setCarbonRange] = useState({
-    name: 'carbon',
-    min: 90,
-    max: 110,
-    apply: false,
-  });
-
-  const openMapDashboard = () => {
-    const mapDashboard = document.querySelector('.story-dashboard');
-    if (mapDashboard) {
-      mapDashboard.style.display = 'block';
-      mapDashboard.style.opacity = 1;
-    }
-  }
-  const filterArray = [populationRange, carbonRange];
-
-  //From a given location (selected by the user), search for similar places 
-=======
->>>>>>> c54fde121c99ea8d10fddcc030fc848ef4ac9610
   const handleSuggestionClick = async (placeID, name, index) => {
     setSearchTerm(name);
     if (placeID !== targetPlaceID) {
@@ -191,7 +160,7 @@ export default function Filters({
             <CheckboxGroup
               label='Type'
               name='type'
-              options={['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']}placeTypesEnabled={placeTypesEnabled}
+              options={['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']} placeTypesEnabled={placeTypesEnabled}
               setPlaceTypesEnabled={setPlaceTypesEnabled}
             />
             <div className="divisor"></div>
