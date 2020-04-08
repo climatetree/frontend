@@ -29,7 +29,21 @@ export const popUpHandler = (
   }
 
   // Get places contained in the feature list
-  let places = map.getFeaturesAtPixel(pixel)[0].getProperties().features;
+  let featureList = map.getFeaturesAtPixel(pixel);
+  let places = [];
+  if (featureList.length === 1) {
+    // Use the first element in the list if the place is not
+    // the targetPlace.
+    places = featureList[0].getProperties().features;
+  } else {
+    // If the place is the target place, there will be more than
+    // one element due to the combination of the main places layer
+    // and the target place layer. The feature from the target
+    // place layer will be the first element in the featuresList
+    // and will cause an error if clicked on because it is not
+    // a clustered layer and has no features property.
+    places = featureList[1].getProperties().features;
+  }
 
   // Set a div for popup content
   // Due to OL library, this needs to be done on the actual DOM

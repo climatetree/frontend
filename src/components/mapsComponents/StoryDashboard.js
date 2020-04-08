@@ -10,7 +10,7 @@ export default function StoryDashboard({
     <section className="story-dashboard">
       {targetPlaceProps && (
         <div className="card">
-          <p className="title">
+          <p className="title target-title">
             {targetPlaceProps.name}
           </p>
           <p className="item-name">Population</p>

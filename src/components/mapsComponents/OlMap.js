@@ -9,7 +9,7 @@ import VectorSource from "ol/source/Vector";
 import XYZ from "ol/source/XYZ";
 import { fromLonLat } from "ol/proj";
 
-import { styleFunction as getStyles, targetStyle } from "./helpers/olStyles";
+import { primaryStyle, targetStyle } from "./helpers/olStyles";
 import { getGeoJson } from "./helpers/data";
 import { popUpHandler } from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
@@ -36,10 +36,26 @@ class OlMap extends Component {
       distance: clusterDist
     });
 
-    // Create the layer
-    let places = new VectorLayer({
+    // Create the primary layer for places
+    let placesLayer = new VectorLayer({
       source: clusterSource,
-      style: getStyles,
+      style: primaryStyle,
+    });
+
+    // Create a layer to display just the searched for place
+    // Helps users easily reference their original searched place
+    let targetPlaceLayer = new VectorLayer({
+      source: new VectorSource({
+        // Extract features from GeoJSON data
+        features: getGeoJson(
+          // GeoJSON starter object
+          {
+            type: "FeatureCollection",
+            features: []
+          }
+        )
+      }),
+      style: targetStyle,
     });
 
     // Basemap layer, via ESRI API
@@ -61,7 +77,7 @@ class OlMap extends Component {
     let map = new Map({
       // Div id to put map in
       target: this.props.mapId,
-      layers: [basemap, places],
+      layers: [basemap, placesLayer, targetPlaceLayer],
       overlays: [overlay],
       view: new View({
         center: fromLonLat([0, 0]),
@@ -95,14 +111,26 @@ class OlMap extends Component {
       // Close any open popups
       this.state.overlay.setPosition(undefined);
 
-      // Swap out data points with new search results
+      // Swap out places data points with new search results
       let collection = this.state.map.getLayers();
-      let dataSource = collection
-        .getArray()[1]
-        .getSource()
-        .getSource();
-      dataSource.clear({ fast: true });
-      dataSource.addFeatures(this.props.places);
+      let placesSource = collection
+        .getArray()[1]  // placesLayer
+        .getSource()    // cluster source
+        .getSource();   // vector source
+      placesSource.clear({ fast: true });
+      placesSource.addFeatures(this.props.places);
+
+      // Swap out target place data point
+      let targetSource = collection
+        .getArray()[2]  // targetPlaceLayer
+        .getSource();   // vector source (no cluster for this layer)
+      targetSource.clear({ fast: true });
+      targetSource.addFeatures(getGeoJson(
+        {
+          type: "FeatureCollection",
+          features: [this.props.targetPlace]
+        }
+      ));
 
       // Find target place to highlight on map
       // Get the target place search ID
@@ -115,9 +143,7 @@ class OlMap extends Component {
 
           // Center map on searched for place and zoom in
           view.setCenter(targetCoordinates);
-          view.setZoom(5);
-
-          // TODO: Try adding a new layer (or adding data to a layer) and update with new target
+          view.setZoom(5.5);
         }
       });
     }
