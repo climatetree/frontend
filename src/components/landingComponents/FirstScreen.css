@@ -30,8 +30,6 @@
 }
 .tab-input {
   display: flex;
-  align-items: center;
-  /* margin-bottom: 2rem; */
   position: relative;
   width: 80%;
   max-width: 700px;
@@ -243,5 +241,14 @@
   }
   .tab-description {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-input {
+    flex-direction: column;
+  }
+  .research-input-wrapper {
+    width: 100%;
   }
 }
