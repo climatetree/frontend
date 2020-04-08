@@ -8,7 +8,7 @@ import { factory } from "./helpers/data";
 import "./Filters.css";
 
 export default function Filters({
-  getSimilarPlaces,
+  getPlaces,
   targetPlaceID,
   targetPlace,
   setTargetPlace,
@@ -31,7 +31,7 @@ export default function Filters({
     if (placeID !== targetPlaceID) {
       setSelectedSuggestion([placeID, index]);
       setTargetPlace(placeSuggestions[index]);
-      await getSimilarPlaces(factory(placeSuggestions[index], filterArray));
+      await getPlaces(factory(placeSuggestions[index], filterArray));
     }
     openMapDashboard();
   };
@@ -45,7 +45,7 @@ export default function Filters({
       setSearchTerm(placeSuggestions[0].properties.name);
       setSelectedSuggestion([placeSuggestions[0].properties.place_id, 0]);
       setTargetPlace(placeSuggestions[0]);
-      getSimilarPlaces(factory(placeSuggestions[0], filterArray));
+      getPlaces(factory(placeSuggestions[0], filterArray));
       document.getElementById("suggestions").style.display = "none";
     }
   };
@@ -136,7 +136,7 @@ export default function Filters({
                 document.getElementById("advanced-filters").style.display =
                   "none";
                 if (targetPlace) {
-                  getSimilarPlaces(factory(targetPlace, filterArray));
+                  getPlaces(factory(targetPlace, filterArray));
                 }
               }}
             >
