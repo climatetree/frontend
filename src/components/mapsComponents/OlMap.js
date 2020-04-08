@@ -143,7 +143,7 @@ class OlMap extends Component {
 
           // Center map on searched for place and zoom in
           view.setCenter(targetCoordinates);
-          view.setZoom(5.5);
+          view.setZoom(4.5);
         }
       });
     }
