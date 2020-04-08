@@ -15,6 +15,7 @@ export default function FirstScreen() {
   const [activeTab, setActiveTab] = useState("stories");
   const [mapSearchTerm, setMapSearchTerm] = useState("");
   const [researchSearchTerm, setResearchSearchTerm] = useState("");
+  const [researchPlaceTerm, setResearchPlaceTerm] = useState('');
   const debouncedSearchTerm = useDebounce(mapSearchTerm, 500);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
 
@@ -220,8 +221,8 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                      <p>No suggestion</p>
-                    )}
+                <p>No suggestion</p>
+              )}
             </div>
           </div>
           <div className="tab-description">
@@ -239,32 +240,44 @@ export default function FirstScreen() {
             }`}
         >
           <div className="tab-input">
-            <input
-              type="text"
-              placeholder="Research term combination example"
-              value={researchSearchTerm}
-              onChange={(event) => setResearchSearchTerm(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  window.open(
-                    `https://www.google.com/search?q=${researchSearchTerm}`
-                  );
-                }
-              }}
-            />
-            {!isLoading && (
-              <img
-                src={searchIcon}
-                alt="search stories"
-                id="search-stories"
-                onClick={() => {
-                  window.open(
-                    `https://www.google.com/search?q=${researchSearchTerm}`
-                  );
-                }}
+            <div className="research-input-wrapper">
+              <input
+                className="research-input"
+                id="research-search-term"
+                type="text"
+                placeholder="E.g. Solar, Electric bikes, etc."
+                value={researchSearchTerm}
+                onChange={event => setResearchSearchTerm(event.target.value)}
               />
-            )}
-            {isLoading && <div id="spinner-landing"></div>}
+              <label htmlFor="research-search-term">
+                Search solution
+                <span>Type in climate solutions OR choose from dropdown</span>
+              </label>
+            </div>
+            <div className="research-input-wrapper">
+              <input
+                className="research-input"
+                id="research-place-term"
+                type="text"
+                placeholder="E.g. Seattle, Washington, etc."
+                value={researchPlaceTerm}
+                onChange={event => setResearchPlaceTerm(event.target.value)}
+              />
+              <label htmlFor="research-place-term">
+                Search place
+                <span>Type in the City, County, State, or Country AND choose from dropdown</span>
+              </label>
+            </div>
+          </div>
+          <div className="research-btn-wrapper">
+            <button onClick={() => {
+              window.open(
+                `https://www.google.com/search?q=${researchSearchTerm}+${researchPlaceTerm}`
+              );
+            }}>Research</button>
+            <button onClick={() => {
+              history.push({ pathname: '/login' });
+            }}>Upload Your Research</button>
           </div>
           <div className="tab-description">
             <p>Discover and share climate solutions</p>
