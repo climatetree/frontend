@@ -14,7 +14,7 @@ export default function SearchBar({
   handlePlaceUpdates,
 }) {
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handlePlaceUpdates();
     }
   };
@@ -24,8 +24,8 @@ export default function SearchBar({
         type="text"
         placeholder="Search by place name"
         value={searchTerm}
-        onChange={event => setSearchTerm(event.target.value)}
-        onKeyDown={event => handleKeyDown(event)}
+        onChange={(event) => setSearchTerm(event.target.value)}
+        onKeyDown={(event) => handleKeyDown(event)}
         onFocus={() => {
           document.querySelector("#suggestions").style.display = "block";
         }}
@@ -46,4 +46,4 @@ export default function SearchBar({
       />
     </div>
   );
-};
+}

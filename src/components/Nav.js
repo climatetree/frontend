@@ -11,6 +11,7 @@ import "./Nav.css";
 // navbar for large screens 
 function Nav() {
   const { user, setUser } = useContext(UserContext);
+
   const logOut = () => {
     setUser({
       ...user,
@@ -21,7 +22,7 @@ function Nav() {
       userId: "NA",
       error: "",
       jwt: "",
-      role: 4
+      role: 4,
     });
   };
   return (
@@ -40,6 +41,11 @@ function Nav() {
           <li>
             <Link to="/maps" className="underline-hover">
               MAP
+            </Link>
+          </li>
+          <li>
+            <Link to="/stories" className="underline-hover">
+              STORIES
             </Link>
           </li>
           <li>
@@ -83,8 +89,9 @@ function navSlide() {
     if (link.style.animation) {
       link.style.animation = "";
     } else {
-      link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 +
-        0.2}s`;
+      link.style.animation = `navLinkFade 0.5s ease forwards ${
+        index / 7 + 0.2
+      }s`;
     }
   });
   document.querySelector(".burger").classList.toggle("toggle");
