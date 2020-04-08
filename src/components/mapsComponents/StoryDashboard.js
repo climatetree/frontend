@@ -5,6 +5,7 @@ import './StoryDashboard.css';
 export default function StoryDashboard({
   targetPlaceProps,
   comparePlaceProps,
+  history,
 }) {
   return (
     <section className="story-dashboard">
@@ -25,7 +26,7 @@ export default function StoryDashboard({
             Carbon Per Capita - <small>carbon/person</small>
           </p>
           <p>{targetPlaceProps.percapcarb}</p>
-          <button id="popup-btn" onClick={() => goToStories(placeProps, history)}>
+          <button id="popup-btn" onClick={() => goToStories(targetPlaceProps, history)}>
             View Stories
           </button>
         </div>
@@ -59,7 +60,7 @@ export default function StoryDashboard({
           <p className={`${getSign(targetPlaceProps.percapcarb, comparePlaceProps.percapcarb)}`}>
             {percentiStringify(targetPlaceProps.percapcarb, comparePlaceProps.percapcarb)}
           </p>
-          <button id="popup-btn" onClick={() => goToStories(placeProps, history)}>
+          <button id="popup-btn" onClick={() => goToStories(comparePlaceProps, history)}>
             View Stories
           </button>
         </div>
