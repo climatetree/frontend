@@ -1,16 +1,17 @@
 import React from 'react';
-import { percentiStringify } from '../mapsComponents/helpers/popupHandler';
+import { percentiStringify, goToStories } from '../mapsComponents/helpers/popupHandler';
 import './StoryDashboard.css';
 
 export default function StoryDashboard({
   targetPlaceProps,
   comparePlaceProps,
+  history,
 }) {
   return (
     <section className="story-dashboard">
       {targetPlaceProps && (
         <div className="card">
-          <p className="title">
+          <p className="title target-title">
             {targetPlaceProps.name}
           </p>
           <p className="item-name">Population</p>
@@ -25,6 +26,9 @@ export default function StoryDashboard({
             Carbon Per Capita - <small>carbon/person</small>
           </p>
           <p>{targetPlaceProps.percapcarb}</p>
+          <button id="popup-btn" onClick={() => goToStories(targetPlaceProps, history)}>
+            View Stories
+          </button>
         </div>
       )}
       {comparePlaceProps && (
@@ -56,6 +60,9 @@ export default function StoryDashboard({
           <p className={`${getSign(targetPlaceProps.percapcarb, comparePlaceProps.percapcarb)}`}>
             {percentiStringify(targetPlaceProps.percapcarb, comparePlaceProps.percapcarb)}
           </p>
+          <button id="popup-btn" onClick={() => goToStories(comparePlaceProps, history)}>
+            View Stories
+          </button>
         </div>
       )}
     </section>

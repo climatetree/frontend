@@ -4,7 +4,7 @@ import { Fill, Stroke, Circle, Style, Text } from 'ol/style';
 
 // Allows for dynamic style choice based on type and cluster size
 let styleCache = {};
-const styleFunction = feature => {
+const primaryStyle = feature => {
     // below may be useful if incorporating polygons
     //const featureType = feature.getGeometry().getType();
 
@@ -55,10 +55,11 @@ const targetStyle = feature => {
     return new Style({
         image: new Circle({
             radius: 6,
-            fill: new Fill({ color: 'rgb(56, 199, 255)' }),
+            // If this is changed, it should also be changed in StoryDashboard.css
+            fill: new Fill({ color: 'rgb(66, 173, 16)' }),
             stroke: new Stroke({ color: 'rgba(0, 0, 0, 0.5)', width: 0.5 }),
         }),
     });
 }
 
-export { styleFunction, targetStyle };
+export { primaryStyle, targetStyle };
