@@ -24,7 +24,7 @@ export default function SuggestionDropdown({
                   handleSuggestionClick(place_id, name, index);
                 }}
               >
-                {name} - <small>{type.toLowerCase()}</small>
+                {name} - <small>{type}</small>
                 <span className="state-nation-name-dropdown">
                   {(type === "NATION" || type === "STATE") ? "" : state_name}
                   {(type === "NATION" || type === "STATE") ? "" : ', '}
