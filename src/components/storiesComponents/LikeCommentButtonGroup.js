@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 
-const LikeCommentButtonGroup = ({
+const LikeFlagButtonGroup = ({
   story,
   onChangeUsersLikesGroup,
   onChangeUsersFlagGroup,
@@ -127,4 +127,4 @@ const LikeCommentButtonGroup = ({
   );
 };
 
-export default LikeCommentButtonGroup;
+export default LikeFlagButtonGroup;

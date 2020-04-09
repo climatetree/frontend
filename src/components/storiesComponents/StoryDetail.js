@@ -3,7 +3,7 @@ import { ReactTinyLink } from "react-tiny-link";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
-import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
+import LikeFlagButtonGroup from "./LikeCommentButtonGroup";
 import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
 
@@ -127,7 +127,7 @@ const StoryDetail = ({ story }) => {
         role={role}
         perform="posts:like"
         yes={() => (
-          <LikeCommentButtonGroup
+          <LikeFlagButtonGroup
             story={story}
             onChangeUsersLikesGroup={onChangeUsersLikesGroup}
             onChangeUsersFlagGroup={onChangeUsersFlagGroup}
