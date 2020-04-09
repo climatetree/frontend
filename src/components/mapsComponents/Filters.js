@@ -76,8 +76,7 @@ export default function Filters({
   const closeMapDashboard = () => {
     const mapDashboard = document.querySelector(".story-dashboard");
     if (mapDashboard) {
-      mapDashboard.style.display = "none";
-      mapDashboard.style.opacity = 0;
+      mapDashboard.classList.remove('active');
     }
   };
 

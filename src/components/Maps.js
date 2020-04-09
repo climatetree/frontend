@@ -52,8 +52,7 @@ export default function Maps() {
   const openMapDashboard = () => {
     const mapDashboard = document.querySelector('.story-dashboard');
     if (mapDashboard) {
-      mapDashboard.style.display = 'block';
-      mapDashboard.style.opacity = 1;
+      mapDashboard.classList.add('active');
     }
   }
 
