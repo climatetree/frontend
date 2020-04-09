@@ -28,7 +28,7 @@ export default function StoryDashboard({
       {targetPlaceProps && (
         <div className="card target">
           <p className="title target-title">
-            {targetPlaceProps.name}
+            {targetPlaceProps.name} - <small>{targetPlaceProps.type}</small>
           </p>
           <p className="item-name">Population</p>
           <p>{Math.round(targetPlaceProps.population)}</p>
