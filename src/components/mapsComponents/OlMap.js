@@ -102,7 +102,7 @@ class OlMap extends Component {
 
     this.setState({
       map: map,
-      overlay: overlay
+      overlay: overlay,
     });
   }
 

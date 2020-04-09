@@ -15,12 +15,31 @@ import "./Maps.css";
 export default function Maps() {
   const history = useHistory();
   const location = useLocation();
-  const [searchTerm, setSearchTerm] = useState(location.state && location.state.place ? location.state.place.properties.name : '');
-  const [places, setPlaces] = useState([]);
-  const [targetPlace, setTargetPlace] = useState(null);
-  const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
-  const [comparePlaceProps, setComparePlaceProps] = useState(null);
   const { user } = useContext(UserContext);
+
+  // General State
+  const [comparePlaceProps, setComparePlaceProps] = useState(null);
+  const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
+  const [places, setPlaces] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(location.state && location.state.place ? location.state.place.properties.name : '');
+  const [targetPlace, setTargetPlace] = useState(null);
+
+  // Filter State
+  const [populationRange, setPopulationRange] = useState({
+    name: 'population',
+    min: 90,
+    max: 150,
+    apply: true,  // Only population filter is applied by default
+  });
+  const [carbonRange, setCarbonRange] = useState({
+    name: 'carbon',
+    min: 90,
+    max: 110,
+    apply: false,
+  });
+  const [placeTypesEnabled, setPlaceTypesEnabled] = useState(['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']);
+  const filterArray = [populationRange, carbonRange];
+
   const getSimilarPlaces = async (queryParams) => {
     setIsLoadingSimilarPlaces(true);
     let features = await getGeoServerData(queryParams);
@@ -37,20 +56,7 @@ export default function Maps() {
       mapDashboard.style.opacity = 1;
     }
   }
-  const [populationRange, setPopulationRange] = useState({
-    name: 'population',
-    min: 90,
-    max: 150,
-    apply: true,  // Only population filter is applied by default
-  });
-  const [carbonRange, setCarbonRange] = useState({
-    name: 'carbon',
-    min: 90,
-    max: 110,
-    apply: false,
-  });
-  const filterArray = [populationRange, carbonRange];
-  const [placeTypesEnabled, setPlaceTypesEnabled] = useState(['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']);
+
   const appendPlaceTypeQuery = (query, placeTypesEnabled) => {
     let result = [query];
     for (const placeType of placeTypesEnabled) {
