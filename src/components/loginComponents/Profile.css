@@ -1,6 +1,5 @@
 .profile-wrapper {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
   padding-top: 80px;
   display: grid;
   grid-template-columns: 35% auto;
@@ -94,7 +93,6 @@
 @media (max-width: 767px) {
   .profile-wrapper {
     display: block;
-    height: fit-content;
   }
   .story-lists-wrapper {
     align-items: center;
