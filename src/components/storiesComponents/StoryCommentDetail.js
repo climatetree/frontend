@@ -99,7 +99,8 @@ const StoryCommentDetail = ({
       </span>
 
       <div className="comment-footer">
-        {userId === comment.user_id && (
+        {/* Show delete button if user made the comment or is a moderator */}
+        {(userId === comment.user_id || role <= 2) && (
           <button onClick={deleteComment} className="delete-comment-btn">
             Delete
           </button>
