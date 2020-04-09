@@ -86,17 +86,19 @@ const StoryCommentDetail = ({
 
   return (
     <div className="comment-detail">
-      <div>
+      <span className="comment-hours-ago">
+        {timeSince + timeSinceAlphabet}
+        {" "}
+      </span>
+
+      <span>
         <span className="user-name">
           <strong>{comment.user_name} </strong>
         </span>
         <span className="comment-content">{comment.content}</span>
-      </div>
+      </span>
+
       <div className="comment-footer">
-        <span className="comment-hours-ago">
-          {timeSince + timeSinceAlphabet}
-        </span>
-        <span className="comment-likes-count">6 likes</span>
         {userId === comment.user_id && (
           <button onClick={deleteComment} className="delete-comment-btn">
             Delete
