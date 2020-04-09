@@ -264,6 +264,19 @@ hr {
   font-weight: bolder;
 }
 
+.delete-story-btn {
+  display: inline-block;
+  border: 1px solid rgba(201, 201, 201, 0.5);
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 1rem;
+  font-size: 14px;
+  text-align: center;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.65);
+  cursor: pointer;
+}
+
 /* SEARCH BAR IN STORIES PAGE */
 
 #search-for-story {
@@ -300,7 +313,7 @@ hr {
   font-size: 20px;
 }
 
-.like-comments-view {
+.like-flag-view {
   margin-bottom: 30px;
 }
 

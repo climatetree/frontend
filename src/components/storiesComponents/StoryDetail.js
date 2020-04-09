@@ -25,7 +25,7 @@ const StoryDetail = ({ story }) => {
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
-  const { role } = user;
+  const { role, jwt } = user;
 
   const onToggleComment = () => {
     setToggleComment((prevToggleCommentState) => !prevToggleCommentState);
@@ -81,6 +81,30 @@ const StoryDetail = ({ story }) => {
     ]);
   };
 
+  /**
+   * Removes a story from the database.
+   */
+  const deleteStoryHandler = async () => {
+    // Ensure delete is supposed to happen
+    let confirmed = confirm("This action cannot be undone.\nProceed with delete comment?");
+    if (!confirmed) {
+      return;
+    }
+
+    // Proceed with delete story
+    let id = story.story_id;
+    const response = await fetch(
+      `https://climatetree-api-gateway.azurewebsites.net/stories/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + jwt,
+          "Content-Type": "application/json"
+        },
+      }
+    );
+  }
+
   return (
     <div className="story-card">
       <div className="heading-card-section">
@@ -103,6 +127,16 @@ const StoryDetail = ({ story }) => {
           />
         </div>
 
+        {/* Must be moderator or admin to view this section */}
+        {role <= 2 && (
+          <div className="mod-controls">
+            <div role="button" className="delete-story-btn" onClick={deleteStoryHandler}>
+              <i className="far fa-trash-alt"></i>
+              Delete Story
+            </div>
+          </div>
+        )}
+
         <div>
           <div className="created-detail">
             Created:{" "}
@@ -112,10 +146,10 @@ const StoryDetail = ({ story }) => {
           </div>
         </div>
 
-        <div className="likes-comments-view">
+        <div className="likes-flag-view">
           <div className="liked-count">{userLikesGroupState.size} Likes</div>
           {comments.length > 0 && (
-            <div className="view-comments-btn" onClick={onToggleViewComment}>
+            <div role="button" className="view-comments-btn" onClick={onToggleViewComment}>
               <span>{comments.length} Comments</span>
             </div>
           )}
