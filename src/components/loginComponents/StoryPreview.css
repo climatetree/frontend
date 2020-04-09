@@ -42,7 +42,6 @@
 @media (max-width: 480px) {
   .story-wrapper {
     display: block;
-    text-decoration: none;
   }
   .story-wrapper .story-image {
     border-radius: 2px 2px 0 0;

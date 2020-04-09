@@ -4,7 +4,7 @@ import { UserContext } from '../context/UserContext';
 import './MapNav.css';
 
 export default function MapNav() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const toggleMapNav = () => {
     document.querySelector(".map-nav-links").classList.toggle("map-nav-active");
     document.querySelectorAll(".map-nav-links li").forEach((link, index) => {
@@ -16,6 +16,19 @@ export default function MapNav() {
     });
     document.querySelector(".map-burger").classList.toggle("toggle");
   };
+  const logOut = () => {
+    setUser({
+      ...user,
+      isLoggedIn: false,
+      username: "Loggedout",
+      email: "NA",
+      url: "NA",
+      userId: "NA",
+      error: "",
+      jwt: "",
+      role: 4,
+    });
+  };
   return (
     <>
       <div className="map-burger" onClick={toggleMapNav}>
@@ -24,17 +37,44 @@ export default function MapNav() {
         <div className="map-line3"></div>
       </div>
       <ul className="map-nav-links">
-        <li>
-          <Link to="/" className="underline-hover">HOME</Link>
-        </li>
-        <li>
-          <Link to="/about" className="underline-hover">ABOUT</Link>
-        </li>
-        {user.isLoggedIn && (
           <li>
-            <Link to="/login" className="underline-hover">PROFILE</Link>
+            <Link to="/" className="underline-hover">
+              HOME
+            </Link>
           </li>
-        )}
+          <li>
+            <Link to="/maps" className="underline-hover">
+              MAP
+            </Link>
+          </li>
+          <li>
+            <Link to="/stories" className="underline-hover">
+              STORIES
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="underline-hover">
+              <span>ABOUT</span>
+            </Link>
+          </li>
+          {user.isLoggedIn && (
+            <li>
+              <Link to="/login" className="underline-hover">
+                <span>PROFILE</span>
+              </Link>
+            </li>
+          )}
+          <li>
+            {user.isLoggedIn ? (
+              <Link to="/login" onClick={logOut} className="underline-hover">
+                <span>LOGOUT</span>
+              </Link>
+            ) : (
+              <Link to="/login" className="underline-hover">
+                <span>LOGIN</span>
+              </Link>
+            )}
+          </li>
       </ul>
     </>
   );
