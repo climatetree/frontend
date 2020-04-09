@@ -15,7 +15,7 @@ export default function SuggestionDropdown({
       ) : placeSuggestions.length > 0 ? (
         <>
           {placeSuggestions.map(({ properties }, index) => {
-            const { place_id, name, state_name, nation_name } = properties;
+            const { place_id, name, state_name, nation_name, type } = properties;
             return (
               <p
                 className={`place-name-dropdown${place_id === selectedSuggestion[0] ? ' highlight' : ''}`}
@@ -24,9 +24,11 @@ export default function SuggestionDropdown({
                   handleSuggestionClick(place_id, name, index);
                 }}
               >
-                {name}
+                {name} - <small>{type.toLowerCase()}</small>
                 <span className="state-nation-name-dropdown">
-                  {state_name} {state_name ? ',' : ''} {nation_name}
+                  {(type === "NATION" || type === "STATE") ? "" : state_name}
+                  {(type === "NATION" || type === "STATE") ? "" : ', '}
+                  {type === "NATION" ? "Earth" : nation_name}
                 </span>
               </p>
             );
@@ -37,8 +39,8 @@ export default function SuggestionDropdown({
       ) : debouncedSearchTerm.length > 0 ? (
         <p>No suggestion</p>
       ) : (
-        <p>User Search History</p>
-      )}
+                <p>User Search History</p>
+              )}
     </div>
   );
 }
