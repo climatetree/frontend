@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { percentiStringify, goToStories } from '../mapsComponents/helpers/popupHandler';
-import MapStoryPreview from './MapStoryPreview';
+import StoryPreview from '../generalComponents/StoryPreview';
 import { generateStoryImage } from '../loginComponents/helper';
 import UpIcon from '../../images/chevron-up.svg';
 import DownIcon from '../../images/chevron-down.svg';
@@ -136,7 +136,11 @@ export default function StoryDashboard({
         </div>
       )}
       {stories.map(story => (
-        <MapStoryPreview key={story.story_id} story={story} />
+        <StoryPreview
+          key={story.story_id}
+          story={story}
+          cssScope="map"
+        />
       ))}
     </section>
   );

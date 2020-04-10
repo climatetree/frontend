@@ -5,7 +5,7 @@ import React, { useContext, useState, useEffect } from "react";
 import PostStoryForm from "./PostStoryForm";
 import plusIcon from "../../images/plus.svg";
 import { UserContext } from "../context/UserContext";
-import StoryPreview from './StoryPreview';
+import StoryPreview from '../generalComponents/StoryPreview';
 import { generateStoryImage } from './helper';
 import "./Profile.css";
 
@@ -55,7 +55,11 @@ export default function Profile() {
           ) : (
             <>
               {trendingStories.map(story => (
-                <StoryPreview key={story.story_id} story={story} />
+                <StoryPreview
+                  key={story.story_id}
+                  story={story}
+                  cssScope="profile"
+                />
               ))}
             </>
           )}
