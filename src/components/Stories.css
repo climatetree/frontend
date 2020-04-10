@@ -28,6 +28,13 @@
   align-items: flex-end;
 }
 
+#recent-stories {
+  color: #bababa;
+  font-weight: 500;
+  margin-top: 30px;
+  font-size: 30px;
+}
+
 .click-filter {
   display: none;
   color: #d9d9d9;
