@@ -88,6 +88,9 @@ export default function Maps() {
       })();
     }
   }, []);
+  useEffect(() => {
+    setComparePlaceProps(null);
+  }, [targetPlace]);
   return (
     <div id="maps-page">
       <OlMap mapId="map"
@@ -112,6 +115,7 @@ export default function Maps() {
         placeTypesEnabled={placeTypesEnabled}
         setPlaceTypesEnabled={setPlaceTypesEnabled}
         appendPlaceTypeQuery={appendPlaceTypeQuery}
+        setComparePlaceProps={setComparePlaceProps}
       />
       <MapNav />
       <StoryDashboard

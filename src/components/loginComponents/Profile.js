@@ -5,7 +5,8 @@ import React, { useContext, useState, useEffect } from "react";
 import PostStoryForm from "./PostStoryForm";
 import plusIcon from "../../images/plus.svg";
 import { UserContext } from "../context/UserContext";
-import StoryPreview from './StoryPreview';
+import StoryPreview from '../generalComponents/StoryPreview';
+import { generateStoryImage } from './helper';
 import "./Profile.css";
 
 export default function Profile() {
@@ -13,19 +14,8 @@ export default function Profile() {
   const [openPostStoryForm, setOpenPostStoryForm] = useState(false);
   const [myStories, setMyStories] = useState([]);
   const [trendingStories, setTrendingStories] = useState([]);
-  async function* generateStoryImage(stories) {
-    for (const story of stories) {
-      const response = await fetch(`https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(story.hyperlink)}`);
-      const preview = await response.json();
-      yield {
-        ...story,
-        image: preview.image,
-      };
-    }
-  }
   useEffect(() => {
     (async () => {
-      // const res = await fetch('https://backend-mongo-stories.azurewebsites.net/stories/topStories/3'); // for development
       const res = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3');
       const topStories = await res.json();
       const results = [];
@@ -65,7 +55,11 @@ export default function Profile() {
           ) : (
             <>
               {trendingStories.map(story => (
-                <StoryPreview key={story.story_id} story={story} />
+                <StoryPreview
+                  key={story.story_id}
+                  story={story}
+                  cssScope="profile"
+                />
               ))}
             </>
           )}

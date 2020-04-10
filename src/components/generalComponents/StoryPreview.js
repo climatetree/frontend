@@ -1,10 +1,11 @@
 import React from 'react';
-import './StoryPreview.css';
+import './StoryPreview.Profile.css';
+import './StoryPreview.Map.css'
 
-export default function StoryPreview({ story }) {
+export default function StoryPreview({ story, cssScope }) {
   return (
     <a
-      className="story-wrapper"
+      className={`${cssScope}-story-wrapper`}
       href={story.hyperlink}
       target="_blank"
     >
