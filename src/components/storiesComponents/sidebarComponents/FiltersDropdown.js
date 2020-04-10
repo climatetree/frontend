@@ -68,7 +68,11 @@ const FiltersDropdown = ({
       : "sector-dropdown-container";
   };
 
-  return <div className={decideClassName()}>{renderContent()}</div>;
+  return (
+    <div id="selectFromDropdown" className={decideClassName()}>
+      {renderContent()}
+    </div>
+  );
 };
 
 export default FiltersDropdown;
