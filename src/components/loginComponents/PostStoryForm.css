@@ -15,7 +15,7 @@
   width: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #181818;
   border-radius: 4px;
   padding: 1rem 2rem 1.5rem;
@@ -103,7 +103,6 @@ button.post-story {
   background-color: rgba(0, 0, 0, 0.85);
   font-weight: 300;
   z-index: 1;
-  /* display: block !important; */
 }
 #place-suggestions .place-name-dropdown {
   cursor: pointer;
@@ -121,10 +120,6 @@ button.post-story {
 }
 .strategy-checkbox-group div:not(:last-child) {
   margin-right: 1rem;
-}
-input#sector::-webkit-calendar-picker-indicator {
-  background-color: inherit;
-  cursor: pointer;
 }
 #sector-list,
 #solution-list {
@@ -149,4 +144,15 @@ input#sector::-webkit-calendar-picker-indicator {
 #sector-list p:hover,
 #solution-list p:hover {
   background-color: rgba(51, 51, 51, 0.85);
+}
+
+@media (max-width: 480px) {
+  .story-form-wrapper {
+    padding: 0;
+  }
+  .story-form-wrapper form {
+    height: 100%;
+    width: 100%;
+    box-shadow: none;
+  }
 }

@@ -12,7 +12,10 @@
   transition: opacity 0.4s;
   display: none;
 }
-
+.story-dashboard.active {
+  display: block;
+  opacity: 1;
+}
 .card {
   background-color: rgba(255, 255, 255, 0.95);
   color: #333333;
@@ -22,30 +25,24 @@
   font-size: 14px;
   box-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
 }
-
 .card .title {
   font-size: 16px;
   font-weight: 400;
 }
-
 .target-title {
   /* If this is changed it should also be changed in  olStyles.js */
   color: rgb(66, 173, 16);
 }
-
 .card .item-name {
   font-weight: 400;
 }
-
 .card .item-name+p {
   font-weight: 100;
   padding-left: 1rem;
 }
-
 .positive {
   color: #ff3862;
 }
-
 .negative {
   color: #38c8ff;
 }
@@ -56,8 +53,55 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px) and (min-width: 481px) {
+  .ol-zoom,
+  .ol-attribution {
+    display: none;
+  }
   .story-dashboard {
-    display: none !important;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    padding: 1rem;
+    height: fit-content;
+    top: unset;
+  }
+  .story-dashboard.active {
+    display: flex;
+  }
+  .story-dashboard .card {
+    width: 50%;
+  }
+  .story-dashboard .card:not(:last-child) {
+    margin-right: 1rem;
+  }
+  .card.mobile-hide {
+    display: block;
+  }
+  .card {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .ol-zoom,
+  .ol-attribution {
+    display: none;
+  }
+  .story-dashboard {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    padding: 1rem;
+    height: fit-content;
+    top: unset;
+  }
+  .card.mobile-hide {
+    display: none;
+  }
+  .card {
+    margin-bottom: 0;
   }
 }

@@ -31,8 +31,12 @@
 .tab-input {
   display: flex;
   position: relative;
-  width: 80%;
+  width: 90%;
   max-width: 700px;
+}
+#stories-tab .tab-input,
+#map-tab .tab-input {
+  align-items: center;
 }
 .tab-input input {
   width: 100%;
@@ -192,7 +196,7 @@
   margin-right: 8px;
 }
 
-@media (max-width: 959px) and (min-width: 768px) {
+@media (max-width: 1023px) and (min-width: 768px) {
   .tab-input input {
     width: 100%;
     padding: 0.8rem 1.4rem;
@@ -245,7 +249,7 @@
 }
 
 @media (max-width: 480px) {
-  .tab-input {
+  #research-tab .tab-input {
     flex-direction: column;
   }
   .research-input-wrapper {

@@ -71,6 +71,9 @@ export const popUpHandler = (
           <p>
             <strong>{placeProps.name}</strong>&nbsp;-&nbsp;
             <small>{placeProps.type_name}</small>
+            <button id="popup-btn" onClick={() => goToStories(placeProps, history)}>
+              View Stories
+          </button>
           </p>
         </>
       );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { percentiStringify, goToStories } from '../mapsComponents/helpers/popupHandler';
 import './StoryDashboard.css';
 
@@ -7,10 +7,26 @@ export default function StoryDashboard({
   comparePlaceProps,
   history,
 }) {
+  useEffect(() => {
+    const targetCard = document.querySelector('.card.target');
+    if (targetCard) {
+      if (comparePlaceProps) {
+        if (targetPlaceProps.place_id === comparePlaceProps.place_id) {
+          targetCard.classList.remove('mobile-hide');
+          document.querySelector('.card.comparison').classList.add('mobile-hide');
+        } else {
+          targetCard.classList.add('mobile-hide');
+          document.querySelector('.card.comparison').classList.remove('mobile-hide');
+        }
+      } else {
+        targetCard.classList.remove('mobile-hide');
+      }
+    }
+  }, [comparePlaceProps]);
   return (
     <section className="story-dashboard">
       {targetPlaceProps && (
-        <div className="card">
+        <div className="card target">
           <p className="title target-title">
             {targetPlaceProps.name}
           </p>
@@ -32,7 +48,7 @@ export default function StoryDashboard({
         </div>
       )}
       {comparePlaceProps && (
-        <div className="card">
+        <div className="card comparison">
           <p className="title">
             {comparePlaceProps.name} - <small>{comparePlaceProps.type_name}</small>
           </p>
