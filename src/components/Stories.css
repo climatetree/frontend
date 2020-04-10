@@ -340,7 +340,7 @@ hr {
 
 .comment-detail {
   border-bottom: 0.4px solid rgba(201, 201, 201, 0.5);
-  padding: 5px 10px;
+  padding: 10px 10px;
   height: auto;
 }
 
@@ -358,18 +358,21 @@ hr {
   color: white;
   font-size: 15px;
   font-weight: 300;
+  word-break: break-all;
 }
 
 .comment-footer {
-  margin-top: 16px;
-  margin-bottom: 4px;
-  color: #d6d6d6;
-  font-size: 14px;
+  /* margin-top: 16px;
+  margin-bottom: 4px; */
+  margin-left: 8px;
+  font-size: 12px;
+  display: inline;
 }
 
 .comment-hours-ago {
-  font-weight: lighter;
-  color: white;
+  /* margin-left: 8px; */
+  font-weight: 800;
+  color: #9c9c9c;
   margin-right: 5px;
 }
 
@@ -385,8 +388,8 @@ hr {
   background: transparent;
   border: none;
   outline: none;
-  color: #d6d6d6;
-  font-size: 14px;
+  color: #9c9c9c;
+  font-size: 12px;
   cursor: pointer;
   overflow: hidden;
   background-repeat: no-repeat;
