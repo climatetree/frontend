@@ -62,6 +62,8 @@ const AdvancedSearch = ({
     setStoriesBasedOnFilter(response.data);
   };
 
+  console.log(allSectors);
+
   return (
     <div
       id="advanced-search-container"

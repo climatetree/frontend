@@ -36,14 +36,11 @@ const SectorFilter = ({
           value={sectorTerm}
           onChange={(e) => setSectorTerm(e.target.value)}
           onFocus={() => {
-            document.querySelector(".sector-dropdown-container").style.display =
-              "block";
+            document.querySelector("#sector").style.display = "block";
           }}
           onBlur={() => {
             setTimeout(() => {
-              document.querySelector(
-                ".sector-dropdown-container"
-              ).style.display = "none";
+              document.querySelector("#sector").style.display = "none";
             }, 100);
           }}
         />

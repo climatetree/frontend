@@ -13,14 +13,16 @@ const StrategyFilter = ({ setStrategyChosen }) => {
           className="choices-inline"
           onClick={() => setStrategyChosen(true)}
         >
-          <input type="radio" name="strategy" value="ADAPTATION" /> Adaptation
+          <input type="checkbox" name="strategy" value="ADAPTATION" />{" "}
+          Adaptation
         </label>
 
         <label
           className="choices-inline"
           onClick={() => setStrategyChosen(true)}
         >
-          <input type="radio" name="strategy" value="MITIGATION" /> Mitigation
+          <input type="checkbox" name="strategy" value="MITIGATION" />{" "}
+          Mitigation
         </label>
       </div>
     </FilterFieldContainer>

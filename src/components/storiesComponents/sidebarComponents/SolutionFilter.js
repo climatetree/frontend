@@ -32,15 +32,11 @@ const SolutionFilter = ({
           value={solutionTerm}
           onChange={(e) => onChangeSolutionTerm(e.target.value)}
           onFocus={() => {
-            document.querySelector(
-              ".solution-dropdown-container"
-            ).style.display = "block";
+            document.querySelector("#solution").style.display = "block";
           }}
           onBlur={() => {
             setTimeout(() => {
-              document.querySelector(
-                ".solution-dropdown-container"
-              ).style.display = "none";
+              document.querySelector("#solution").style.display = "none";
             }, 200);
           }}
         />
