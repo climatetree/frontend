@@ -30,7 +30,7 @@ export default function NavLinks({ cssScope }) {
       }
     });
     document.querySelector(`.${cssScope}burger`).classList.toggle("toggle");
-  };
+  }
   
   function navSlide() {
     document.querySelector(".nav-links").classList.toggle("nav-active");
