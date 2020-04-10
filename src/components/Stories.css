@@ -198,12 +198,7 @@ hr {
   width: 100%;
   border: 0;
   height: 1px;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.75),
-    rgba(255, 255, 255, 0)
-  );
+  background-image: linear-gradient( to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
 
 /* COMMENT AND LIKE CARD SECTION */
@@ -265,8 +260,7 @@ hr {
   margin-right: 5px;
 }
 
-.liked,
-.reported {
+.liked, .reported {
   color: #fc0037;
 }
 
@@ -406,6 +400,10 @@ hr {
   cursor: pointer;
   overflow: hidden;
   background-repeat: no-repeat;
+}
+
+.delete-comment-btn:hover {
+  text-decoration: underline;
 }
 
 /* COMMENT COMPONENT */
