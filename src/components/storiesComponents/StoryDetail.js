@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ReactTinyLink } from "react-tiny-link";
+import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
 import LikeFlagButtonGroup from "./LikeCommentButtonGroup";
 import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
+import StoryPreview from "../generalComponents/StoryPreview";
 
-const StoryDetail = ({ story }) => {
+const StoryDetail = ({ story, deleteStoryHandler }) => {
   let userLikesGroup = new Set();
   for (let userId of story.liked_by_users) {
     userLikesGroup.add(userId);
@@ -22,10 +23,30 @@ const StoryDetail = ({ story }) => {
   let [userLikesGroupState, setUserLikesGroup] = useState(userLikesGroup);
   let [userFlagGroupState, setUserFlagGroup] = useState(userFlagGroup);
   let [comments, setComments] = useState(story.comments);
+  let [storyView, setStoryView] = useState({});
+  let [doneLoading, setDoneLoading] = useState(false);
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
-  const { role, jwt } = user;
+  const { role } = user;
+
+  useEffect(() => {
+    (async () => {
+      const storyPreview = await axios.get(
+        `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+          story.hyperlink
+        )}`
+      );
+
+      setStoryView({
+        ...storyPreview.data,
+        story_title: storyPreview.data["title"],
+        hyperlink: story.hyperlink,
+      });
+
+      setDoneLoading(true);
+    })();
+  }, []);
 
   const onToggleComment = () => {
     setToggleComment((prevToggleCommentState) => !prevToggleCommentState);
@@ -81,30 +102,6 @@ const StoryDetail = ({ story }) => {
     ]);
   };
 
-  /**
-   * Removes a story from the database.
-   */
-  const deleteStoryHandler = async () => {
-    // Ensure delete is supposed to happen
-    let confirmed = confirm("This action cannot be undone.\nProceed with delete comment?");
-    if (!confirmed) {
-      return;
-    }
-
-    // Proceed with delete story
-    let id = story.story_id;
-    const response = await fetch(
-      `https://climatetree-api-gateway.azurewebsites.net/stories/delete/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer " + jwt,
-          "Content-Type": "application/json"
-        },
-      }
-    );
-  }
-
   return (
     <div className="story-card">
       <div className="heading-card-section">
@@ -118,19 +115,21 @@ const StoryDetail = ({ story }) => {
         </a>
 
         <div className="link-preview-container">
-          <ReactTinyLink
-            cardSize="small"
-            showGraphic={true}
-            maxLine={3}
-            minLine={1}
-            url={story.hyperlink}
+          <StoryPreview
+            key={story.story_id}
+            story={storyView}
+            cssScope="profile"
           />
         </div>
 
         {/* Must be moderator or admin to view this section */}
-        {role <= 2 && (
+        {(role <= 2 && doneLoading) && (
           <div className="mod-controls">
-            <div role="button" className="delete-story-btn" onClick={deleteStoryHandler}>
+            <div
+              role="button"
+              className="delete-story-btn"
+              onClick={() => deleteStoryHandler(story.story_id, user.jwt)}
+            >
               <i className="far fa-trash-alt"></i>
               Delete Story
             </div>

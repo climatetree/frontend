@@ -28,6 +28,13 @@
   align-items: flex-end;
 }
 
+#recent-stories {
+  color: #bababa;
+  font-weight: 500;
+  margin-top: 30px;
+  font-size: 30px;
+}
+
 .click-filter {
   display: none;
   color: #d9d9d9;
@@ -191,7 +198,12 @@ hr {
   width: 100%;
   border: 0;
   height: 1px;
-  background-image: linear-gradient( to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 /* COMMENT AND LIKE CARD SECTION */
@@ -253,7 +265,8 @@ hr {
   margin-right: 5px;
 }
 
-.liked, .reported {
+.liked,
+.reported {
   color: #fc0037;
 }
 
@@ -340,7 +353,7 @@ hr {
 
 .comment-detail {
   border-bottom: 0.4px solid rgba(201, 201, 201, 0.5);
-  padding: 5px 10px;
+  padding: 10px 10px;
   height: auto;
 }
 
@@ -358,16 +371,21 @@ hr {
   color: white;
   font-size: 15px;
   font-weight: 300;
+  word-break: break-all;
 }
 
 .comment-footer {
-  color: #d6d6d6;
-  font-size: 14px;
+  /* margin-top: 16px;
+  margin-bottom: 4px; */
+  margin-left: 8px;
+  font-size: 12px;
+  display: inline;
 }
 
 .comment-hours-ago {
-  font-weight: lighter;
-  color: white;
+  /* margin-left: 8px; */
+  font-weight: 800;
+  color: #9c9c9c;
   margin-right: 5px;
 }
 
@@ -383,8 +401,8 @@ hr {
   background: transparent;
   border: none;
   outline: none;
-  color: #d6d6d6;
-  font-size: 14px;
+  color: #9c9c9c;
+  font-size: 12px;
   cursor: pointer;
   overflow: hidden;
   background-repeat: no-repeat;
