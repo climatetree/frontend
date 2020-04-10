@@ -63,12 +63,18 @@ const FiltersDropdown = ({
   };
 
   const decideClassName = () => {
-    return status === "solution"
-      ? "solution-dropdown-container"
-      : "sector-dropdown-container";
+    return status === "solution" ? "solution" : "sector";
   };
 
-  return <div className={decideClassName()}>{renderContent()}</div>;
+  return (
+    <div
+      id="selectFromDropdown"
+      className={"filter-dropdown-container"}
+      id={decideClassName()}
+    >
+      {renderContent()}
+    </div>
+  );
 };
 
 export default FiltersDropdown;

@@ -4,7 +4,6 @@ import axios from "axios";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
-import useDebounce from "../../customHooks/useDebounce";
 import "./AdvancedSearch.css";
 
 const AdvancedSearch = ({
@@ -15,28 +14,25 @@ const AdvancedSearch = ({
 }) => {
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionTerm, setSolutionTerm] = useState("");
-  const [isSearchingSolution, setIsSearchingSolution] = useState(false);
 
-  const debouncedSolutionTerm = useDebounce(solutionTerm, 500);
+  const [allSectors, setAllSectors] = useState([]);
+  const [sectorTerm, setSectorTerm] = useState("");
+
+  const [strategyChosen, setStrategyChosen] = useState(false);
+  const [sectorChosen, setSectorChosen] = useState(false);
 
   useEffect(() => {
     (async () => {
-      // if (debouncedSolutionTerm) {
-      //   // API call
-      //   // setSolutions([]);
-      //   setIsSearchingSolution(true);
-      //   const response = await axios.get(
-      //     `https://backend-mongo-stories.azurewebsites.net/stories/all/solution/${debouncedSolutionTerm}`
-      //   );
-
-      //   setAllSolutions(response.data);
-      //   setIsSearchingSolution(false);
-      // } else {
-      const response = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/all/solution`
+      const sectorResponse = await axios.get(
+        "https://backend-mongo-stories.azurewebsites.net/stories/all/sector"
       );
-      setAllSolutions(response.data);
-      // }
+
+      const solutionResponse = await axios.get(
+        "https://backend-mongo-stories.azurewebsites.net/stories/all/solution"
+      );
+
+      setAllSectors(sectorResponse.data);
+      setAllSolutions(solutionResponse.data);
     })();
   }, []);
 
@@ -87,16 +83,21 @@ const AdvancedSearch = ({
       </div>
 
       <div id="filters">
+        <StrategyFilter setStrategyChosen={setStrategyChosen} />
+        <SectorFilter
+          strategyChosen={strategyChosen}
+          setSectorChosen={setSectorChosen}
+          allSectors={allSectors}
+          sectorTerm={sectorTerm}
+          setSectorTerm={setSectorTerm}
+        />
         <SolutionFilter
+          strategyChosen={strategyChosen}
+          sectorChosen={sectorChosen}
           solutionTerm={solutionTerm}
           onChangeSolutionTerm={onChangeSolutionTerm}
-          // debouncedSolutionTerm={debouncedSolutionTerm}
-          isSearchingSolution={isSearchingSolution}
-          // solutions={solutions}
           allSolutions={allSolutions}
         />
-        <SectorFilter />
-        <StrategyFilter />
       </div>
     </div>
   );

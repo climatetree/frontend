@@ -1,6 +1,6 @@
-import React from 'react';
-import './StoryPreview.Profile.css';
-import './StoryPreview.Map.css'
+import React from "react";
+import "./StoryPreview.Profile.css";
+import "./StoryPreview.Map.css";
 
 export default function StoryPreview({ story, cssScope }) {
   return (

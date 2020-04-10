@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ReactTinyLink } from "react-tiny-link";
+import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
 import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
 import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
+import StoryPreview from "../generalComponents/StoryPreview";
 
 const StoryDetail = ({ story }) => {
   let userLikesGroup = new Set();
@@ -22,10 +23,27 @@ const StoryDetail = ({ story }) => {
   let [userLikesGroupState, setUserLikesGroup] = useState(userLikesGroup);
   let [userFlagGroupState, setUserFlagGroup] = useState(userFlagGroup);
   let [comments, setComments] = useState(story.comments);
+  let [storyView, setStoryView] = useState({});
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
   const { role } = user;
+
+  useEffect(() => {
+    (async () => {
+      const storyPreview = await axios.get(
+        `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+          story.hyperlink
+        )}`
+      );
+
+      setStoryView({
+        ...storyPreview.data,
+        story_title: storyPreview.data["title"],
+        hyperlink: story.hyperlink,
+      });
+    })();
+  }, []);
 
   const onToggleComment = () => {
     setToggleComment((prevToggleCommentState) => !prevToggleCommentState);
@@ -94,12 +112,10 @@ const StoryDetail = ({ story }) => {
         </a>
 
         <div className="link-preview-container">
-          <ReactTinyLink
-            cardSize="small"
-            showGraphic={true}
-            maxLine={3}
-            minLine={1}
-            url={story.hyperlink}
+          <StoryPreview
+            key={story.story_id}
+            story={storyView}
+            cssScope="profile"
           />
         </div>
 
@@ -108,7 +124,7 @@ const StoryDetail = ({ story }) => {
             Created:{" "}
             {`${
               story.date.getUTCMonth() + 1
-              }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+            }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
         </div>
 
