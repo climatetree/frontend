@@ -4,7 +4,7 @@
  * userId (the user who wrote the comment)
  * likes-count (numbers of likes on that given comment)
  * additional option regarding the type of user -> delete comment
- * 
+ *
  */
 import React, { useContext, useState, useEffect } from "react";
 
@@ -14,14 +14,14 @@ import {
   doesConvertToMonth,
   doesConvertToDay,
   doesConvertToHour,
-  doesConvertToMinutes
+  doesConvertToMinutes,
 } from "./helper/timeConversion";
 
 const StoryCommentDetail = ({
   comment,
   storyId,
   commentId,
-  onChangeDeleteComment
+  onChangeDeleteComment,
 }) => {
   useEffect(() => {
     (() => {
@@ -40,7 +40,7 @@ const StoryCommentDetail = ({
       storyId,
       userId,
       role,
-      commentId
+      commentId,
     };
 
     const response = await fetch(
@@ -49,9 +49,9 @@ const StoryCommentDetail = ({
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + jwt,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(comment)
+        body: JSON.stringify(comment),
       }
     );
 
@@ -86,17 +86,17 @@ const StoryCommentDetail = ({
 
   return (
     <div className="comment-detail">
-      <div>
+      <span>
         <span className="user-name">
           <strong>{comment.user_name} </strong>
         </span>
         <span className="comment-content">{comment.content}</span>
-      </div>
+      </span>
+
       <div className="comment-footer">
         <span className="comment-hours-ago">
-          {timeSince + timeSinceAlphabet}
+          {timeSince + timeSinceAlphabet}{" "}
         </span>
-        <span className="comment-likes-count">6 likes</span>
         {userId === comment.user_id && (
           <button onClick={deleteComment} className="delete-comment-btn">
             Delete

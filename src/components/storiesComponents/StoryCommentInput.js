@@ -46,8 +46,6 @@ const StoryCommentInput = ({
         options
       );
 
-      console.log(response);
-
       onChangeAddComment(response.data);
       openViewComment();
       setCommentContent("");

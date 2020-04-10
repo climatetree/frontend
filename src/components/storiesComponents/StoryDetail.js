@@ -1,27 +1,49 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ReactTinyLink } from "react-tiny-link";
+import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
 import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
 import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
+import StoryPreview from "../generalComponents/StoryPreview";
 
 const StoryDetail = ({ story }) => {
-  let userLikesSet = new Set();
-
+  let userLikesGroup = new Set();
   for (let userId of story.liked_by_users) {
-    userLikesSet.add(userId);
+    userLikesGroup.add(userId);
+  }
+  let userFlagGroup = new Set();
+  for (let userId of story.flagged_by_users) {
+    userFlagGroup.add(userId);
   }
 
   let [toggleComment, setToggleComment] = useState(false);
   let [toggleViewComment, setToggleViewComment] = useState(false);
-  let [userLikesSetState, setUserLikesSet] = useState(userLikesSet);
+  let [userLikesGroupState, setUserLikesGroup] = useState(userLikesGroup);
+  let [userFlagGroupState, setUserFlagGroup] = useState(userFlagGroup);
   let [comments, setComments] = useState(story.comments);
+  let [storyView, setStoryView] = useState({});
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
   const { role } = user;
+
+  useEffect(() => {
+    (async () => {
+      const storyPreview = await axios.get(
+        `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+          story.hyperlink
+        )}`
+      );
+
+      setStoryView({
+        ...storyPreview.data,
+        story_title: storyPreview.data["title"],
+        hyperlink: story.hyperlink,
+      });
+    })();
+  }, []);
 
   const onToggleComment = () => {
     setToggleComment((prevToggleCommentState) => !prevToggleCommentState);
@@ -33,17 +55,32 @@ const StoryDetail = ({ story }) => {
     );
   };
 
-  const onChangeUsersLikesSet = (action, userId) => {
+  const onChangeUsersLikesGroup = (action, userId) => {
     if (action === "like") {
-      setUserLikesSet((prevUserLikesSetState) =>
-        new Set(prevUserLikesSetState).add(parseInt(userId))
+      setUserLikesGroup((prevUserLikesGroupState) =>
+        new Set(prevUserLikesGroupState).add(parseInt(userId))
       );
     } else {
-      setUserLikesSet((prevUserLikesSetState) => {
-        const newUserLikesSetState = new Set(prevUserLikesSetState);
-        newUserLikesSetState.delete(parseInt(userId));
+      setUserLikesGroup((prevUserLikesGroupState) => {
+        const newUserLikesGroupState = new Set(prevUserLikesGroupState);
+        newUserLikesGroupState.delete(parseInt(userId));
 
-        return newUserLikesSetState;
+        return newUserLikesGroupState;
+      });
+    }
+  };
+
+  const onChangeUsersFlagGroup = (action, userId) => {
+    if (action === "flag") {
+      setUserFlagGroup((prevUserFlagGroupState) =>
+        new Set(prevUserFlagGroupState).add(parseInt(userId))
+      );
+    } else {
+      setUserFlagGroup((prevUserFlagGroupState) => {
+        const newUserFlagGroupState = new Set(prevUserFlagGroupState);
+        newUserFlagGroupState.delete(parseInt(userId));
+
+        return newUserFlagGroupState;
       });
     }
   };
@@ -75,12 +112,10 @@ const StoryDetail = ({ story }) => {
         </a>
 
         <div className="link-preview-container">
-          <ReactTinyLink
-            cardSize="small"
-            showGraphic={true}
-            maxLine={3}
-            minLine={1}
-            url={story.hyperlink}
+          <StoryPreview
+            key={story.story_id}
+            story={storyView}
+            cssScope="profile"
           />
         </div>
 
@@ -94,7 +129,7 @@ const StoryDetail = ({ story }) => {
         </div>
 
         <div className="likes-comments-view">
-          <div className="liked-count">{userLikesSetState.size} Likes</div>
+          <div className="liked-count">{userLikesGroupState.size} Likes</div>
           {comments.length > 0 && (
             <div className="view-comments-btn" onClick={onToggleViewComment}>
               <span>{comments.length} Comments</span>
@@ -110,13 +145,10 @@ const StoryDetail = ({ story }) => {
         yes={() => (
           <LikeCommentButtonGroup
             story={story}
-            onToggleComment={onToggleComment}
-            onChangeUsersLikesSet={onChangeUsersLikesSet}
-            onChangeAddComment={onChangeAddComment}
-            userLikesSetState={userLikesSetState}
-            toggleComment={toggleComment}
-            toggleViewComment={toggleViewComment}
-            comments={comments}
+            onChangeUsersLikesGroup={onChangeUsersLikesGroup}
+            onChangeUsersFlagGroup={onChangeUsersFlagGroup}
+            userLikesGroupState={userLikesGroupState}
+            userFlagGroupState={userFlagGroupState}
           />
         )}
       />

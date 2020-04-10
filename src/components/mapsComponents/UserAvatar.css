@@ -41,3 +41,8 @@
     right: 55px;
   }
 }
+@media (max-width: 480px) {
+  .user-info {
+    display: none !important;
+  }
+}

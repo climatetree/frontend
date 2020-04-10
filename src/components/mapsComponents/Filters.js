@@ -27,6 +27,7 @@ export default function Filters({
   placeTypesEnabled,
   setPlaceTypesEnabled,
   appendPlaceTypeQuery,
+  setComparePlaceProps,
 }) {
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [isSearchingSuggestions, setIsSearchingSuggestions] = useState(false);
@@ -152,9 +153,10 @@ export default function Filters({
             <div className="divisor"></div>
             <button
               onClick={() => {
-                document.getElementById("advanced-filters").style.display =
-                  "none";
                 if (targetPlace) {
+                  document.getElementById("advanced-filters").style.display =
+                    "none";
+                  setComparePlaceProps(null);
                   getSimilarPlaces(
                     appendPlaceTypeQuery(
                       factory(targetPlace, filterArray),
