@@ -189,7 +189,7 @@ export default function PostStoryForm({
                       <p
                         className={`place-name-dropdown${
                           place_id === selectedPlaceID[0] ? " highlight" : ""
-                        }`}
+                          }`}
                         key={place_id}
                         onClick={() => {
                           setPlace(name);
@@ -209,8 +209,8 @@ export default function PostStoryForm({
               ) : debouncedSearchTerm.length > 0 ? (
                 <p className="hint">No suggestion</p>
               ) : (
-                <p className="hint">Place Suggestions</p>
-              )}
+                        <p className="hint">Place Suggestions</p>
+                      )}
             </div>
           </div>
           <label htmlFor="strategy">
@@ -257,7 +257,7 @@ export default function PostStoryForm({
             onClick={async () => {
               if (selectedPlaceID) {
                 const response = await fetch(
-                  `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+                  `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
                     hyperlink
                   )}`
                 );

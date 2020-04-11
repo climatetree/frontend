@@ -12,21 +12,26 @@
   margin-top: 5px;
   display: none;
 }
+
 #suggestions p {
   padding: 5px 20px;
   cursor: pointer;
   font-size: 0.9rem;
 }
+
 #suggestions p:hover {
   background-color: #eeeeee;
 }
+
 .place-name-dropdown {
   font-weight: 400;
   font-size: 0.9rem;
 }
+
 .place-name-dropdown.highlight {
   background-color: #eeeeee;
 }
+
 .state-nation-name-dropdown {
   font-size: 0.7rem;
   color: #bdbdbd;
