@@ -55,7 +55,7 @@ export default function Login() {
         "Content-Type": "application/json"
       }
     };
-    console.log("Google RESPONSE token==== : ", response.tokenId);
+    //console.log("Google RESPONSE token==== : ", response.tokenId);
     setGoogleUser(response, data, options);
   };
   async function setFacebookUser(response, data, options) {
