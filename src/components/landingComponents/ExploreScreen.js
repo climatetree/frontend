@@ -3,7 +3,6 @@
  */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ReactTinyLink } from "react-tiny-link";
 
 import "./ExploreScreen.css";
 
@@ -15,13 +14,13 @@ function ExploreScreen() {
     (async () => {
       const numberOfStories = 3;
       const response = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/topStories/${numberOfStories}`
+        `https://backend-mongo-stories.azurewebsites.net/stories/v1/topStories/${numberOfStories}`
       );
 
       for (let i = 0; i < numberOfStories; i++) {
         const encodedUrl = encodeURIComponent(response.data[i]["hyperlink"]);
         const resp = await axios.get(
-          `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodedUrl}`
+          `https://backend-mongo-stories.azurewebsites.net/stories/v1/getPreview?hyperlink=${encodedUrl}`
         );
 
         newPopularStoriesWithLinkPreview[i] = resp.data;
