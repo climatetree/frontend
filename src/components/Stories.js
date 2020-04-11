@@ -19,6 +19,7 @@ const Stories = (props) => {
   const [loadSpinner, setLoadSpinner] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sideBarVisible, setSideBarVisible] = useState(false);
+  const [removedStories, setRemovedStories] = useState([])
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -76,7 +77,7 @@ const Stories = (props) => {
         await fetchRecentStories();
       })();
     }
-  }, []);
+  }, [removedStories]);
 
   useEffect(() => {
     let { history } = props;
@@ -96,7 +97,7 @@ const Stories = (props) => {
         })();
       }
     }
-  }, [query.get("storyTitle")]);
+  }, [query.get("storyTitle"), removedStories]);
 
   const fetchRecentStories = async () => {
     setLoadSpinner(true);
@@ -136,6 +137,30 @@ const Stories = (props) => {
     }
   };
 
+  /**
+   * Removes a story from the database.
+   */
+  const deleteStoryHandler = async (story_id, jwt) => {
+    // Ensure delete is supposed to happen
+    let confirmed = confirm("This action cannot be undone.\nProceed with delete story?");
+    if (!confirmed) {
+      return;
+    }
+
+    // Proceed with delete story
+    await fetch(
+      `https://climatetree-api-gateway.azurewebsites.net/stories/delete/${story_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + jwt,
+        },
+      }
+    );
+
+    setRemovedStories(prevStories => prevStories.push(story_id));
+  }
+
   const openSideBar = () => {
     setSideBarVisible(true);
   };
@@ -172,8 +197,8 @@ const Stories = (props) => {
         ) : generalSearchTerm ? (
           <ResultsFor searchTerm={query.get("storyTitle")} />
         ) : (
-          <h2 id="recent-stories">Recent Stories</h2>
-        )}
+              <h2 id="recent-stories">Recent Stories</h2>
+            )}
         <div className="click-filter" onClick={openSideBar}>
           Advanced search
         </div>
@@ -192,6 +217,7 @@ const Stories = (props) => {
               story={story}
               key={story.story_id}
               generalSearchTerm={generalSearchTerm}
+              deleteStoryHandler={deleteStoryHandler}
             />
           ))}
         {!stories.length && !loadSpinner && (

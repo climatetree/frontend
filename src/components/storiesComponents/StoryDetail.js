@@ -3,12 +3,12 @@ import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
-import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
+import LikeFlagButtonGroup from "./LikeCommentButtonGroup";
 import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
 import StoryPreview from "../generalComponents/StoryPreview";
 
-const StoryDetail = ({ story }) => {
+const StoryDetail = ({ story, deleteStoryHandler }) => {
   let userLikesGroup = new Set();
   for (let userId of story.liked_by_users) {
     userLikesGroup.add(userId);
@@ -24,6 +24,7 @@ const StoryDetail = ({ story }) => {
   let [userFlagGroupState, setUserFlagGroup] = useState(userFlagGroup);
   let [comments, setComments] = useState(story.comments);
   let [storyView, setStoryView] = useState({});
+  let [doneLoading, setDoneLoading] = useState(false);
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
@@ -42,6 +43,8 @@ const StoryDetail = ({ story }) => {
         story_title: storyPreview.data["title"],
         hyperlink: story.hyperlink,
       });
+
+      setDoneLoading(true);
     })();
   }, []);
 
@@ -119,6 +122,20 @@ const StoryDetail = ({ story }) => {
           />
         </div>
 
+        {/* Must be moderator or admin to view this section */}
+        {(role <= 2 && doneLoading) && (
+          <div className="mod-controls">
+            <div
+              role="button"
+              className="delete-story-btn"
+              onClick={() => deleteStoryHandler(story.story_id, user.jwt)}
+            >
+              <i className="far fa-trash-alt"></i>
+              Delete Story
+            </div>
+          </div>
+        )}
+
         <div>
           <div className="created-detail">
             Created:{" "}
@@ -128,10 +145,10 @@ const StoryDetail = ({ story }) => {
           </div>
         </div>
 
-        <div className="likes-comments-view">
+        <div className="likes-flag-view">
           <div className="liked-count">{userLikesGroupState.size} Likes</div>
           {comments.length > 0 && (
-            <div className="view-comments-btn" onClick={onToggleViewComment}>
+            <div role="button" className="view-comments-btn" onClick={onToggleViewComment}>
               <span>{comments.length} Comments</span>
             </div>
           )}
@@ -143,7 +160,7 @@ const StoryDetail = ({ story }) => {
         role={role}
         perform="posts:like"
         yes={() => (
-          <LikeCommentButtonGroup
+          <LikeFlagButtonGroup
             story={story}
             onChangeUsersLikesGroup={onChangeUsersLikesGroup}
             onChangeUsersFlagGroup={onChangeUsersFlagGroup}
