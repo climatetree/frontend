@@ -22,7 +22,7 @@ export default function SuggestionOverlay({
           />
         </header>
         {placeSuggestions.map(({ properties }, index) => {
-          const { place_id, name, state_name, nation_name } = properties;
+          const { place_id, name, state_name, nation_name, type } = properties;
           return (
             <div
               className="confirmation-item"
@@ -32,9 +32,11 @@ export default function SuggestionOverlay({
                 closeConfirmationPanel();
               }}
             >
-              <p>{name}</p>
+              <p>{name} - <small>{type}</small></p>
               <p className="state-nation-name-dropdown">
-                {state_name} {state_name ? "," : ""} {nation_name}
+                {(type === "NATION" || type === "STATE") ? "" : state_name}
+                {(type === "NATION" || type === "STATE") ? "" : ', '}
+                {type === "NATION" ? "Earth" : nation_name}
               </p>
             </div>
           );
