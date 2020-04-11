@@ -15,13 +15,13 @@ function ExploreScreen() {
     (async () => {
       const numberOfStories = 3;
       const response = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/topStories/${numberOfStories}`
+        `https://climatetree-api-gateway.azurewebsites.net/stories/topStories/${numberOfStories}`
       );
 
       for (let i = 0; i < numberOfStories; i++) {
         const encodedUrl = encodeURIComponent(response.data[i]["hyperlink"]);
         const resp = await axios.get(
-          `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodedUrl}`
+          `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodedUrl}`
         );
 
         newPopularStoriesWithLinkPreview[i] = resp.data;
@@ -68,8 +68,8 @@ function ExploreScreen() {
             {ps.description ? (
               <p className="ps-description">{ps.description}</p>
             ) : (
-              <p className="ps-description">{ps.hyperlink}</p>
-            )}
+                <p className="ps-description">{ps.hyperlink}</p>
+              )}
           </a>
         ))}
       </section>

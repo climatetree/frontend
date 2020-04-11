@@ -32,7 +32,7 @@ const StoryDetail = ({ story }) => {
   useEffect(() => {
     (async () => {
       const storyPreview = await axios.get(
-        `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+        `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
           story.hyperlink
         )}`
       );
@@ -124,7 +124,7 @@ const StoryDetail = ({ story }) => {
             Created:{" "}
             {`${
               story.date.getUTCMonth() + 1
-            }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+              }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
         </div>
 

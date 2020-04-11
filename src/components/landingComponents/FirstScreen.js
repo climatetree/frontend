@@ -221,8 +221,8 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                <p>No suggestion</p>
-              )}
+                      <p>No suggestion</p>
+                    )}
             </div>
           </div>
           <div className="tab-description">
