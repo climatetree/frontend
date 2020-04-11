@@ -24,11 +24,11 @@ const AdvancedSearch = ({
   useEffect(() => {
     (async () => {
       const sectorResponse = await axios.get(
-        "https://backend-mongo-stories.azurewebsites.net/stories/v1/all/sector"
+        "https://backend-mongo-stories.azurewebsites.net/stories/all/sector"
       );
 
       const solutionResponse = await axios.get(
-        "https://backend-mongo-stories.azurewebsites.net/stories/v1/all/solution"
+        "https://backend-mongo-stories.azurewebsites.net/stories/all/solution"
       );
 
       setAllSectors(sectorResponse.data);

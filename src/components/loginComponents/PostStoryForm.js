@@ -85,12 +85,12 @@ export default function PostStoryForm({
   useEffect(() => {
     (async () => {
       const solutionResponse = await fetch(
-        "https://climatetree-api-gateway.azurewebsites.net/stories/v1/all/solution"
+        "https://climatetree-api-gateway.azurewebsites.net/stories/all/solution"
       );
       const solutions = await solutionResponse.json();
       setAllSolutions(solutions);
       const sectorResponse = await fetch(
-        "https://climatetree-api-gateway.azurewebsites.net/stories/v1/all/sector"
+        "https://climatetree-api-gateway.azurewebsites.net/stories/all/sector"
       );
       const sectors = await sectorResponse.json();
       setAllSectors(sectors);
