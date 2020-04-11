@@ -67,8 +67,8 @@ function ExploreScreen() {
             {ps.description ? (
               <p className="ps-description">{ps.description}</p>
             ) : (
-              <p className="ps-description">{ps.hyperlink}</p>
-            )}
+                <p className="ps-description">{ps.hyperlink}</p>
+              )}
           </a>
         ))}
       </section>

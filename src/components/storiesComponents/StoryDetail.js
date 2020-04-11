@@ -124,7 +124,7 @@ const StoryDetail = ({ story }) => {
             Created:{" "}
             {`${
               story.date.getUTCMonth() + 1
-            }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+              }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
         </div>
 
