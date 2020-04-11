@@ -19,10 +19,13 @@ const ChangeUserRoleForm = ({
     };
 
     async function searchUserEmail(email) {
-        fetch("https://climatetree-api-gateway.azurewebsites.net/user/searchname", {
+        console.log(JSON.stringify({
+            "email": email,
+        }));
+        fetch("https://climatetree-api-gateway.azurewebsites.net/user/searchemail", {
             method: "GET",
             headers: {
-                Authorization: "Bearer " + user.jwt,
+                "Authorization": "Bearer " + user.jwt,
                 "Content-Type": "application/json",
             },
             // convert the data to json
