@@ -4,7 +4,11 @@ import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
 import "./StrategyFilter.css";
 
-const StrategyFilter = ({ setStrategyChosen, setStrategyTerm }) => {
+const StrategyFilter = ({
+  setStrategyChosen,
+  setStrategyTerm,
+  strategyTerm,
+}) => {
   return (
     <FilterFieldContainer>
       <FilterLabel for="strategy-filter">By Strategy</FilterLabel>
@@ -17,6 +21,7 @@ const StrategyFilter = ({ setStrategyChosen, setStrategyTerm }) => {
             type="radio"
             name="strategy"
             value="ADAPTATION"
+            checked={"ADAPTATION" === strategyTerm}
             onChange={() => setStrategyTerm("ADAPTATION")}
           />{" "}
           Adaptation
@@ -30,6 +35,7 @@ const StrategyFilter = ({ setStrategyChosen, setStrategyTerm }) => {
             type="radio"
             name="strategy"
             value="MITIGATION"
+            checked={"MITIGATION" === strategyTerm}
             onChange={() => setStrategyTerm("MITIGATION")}
           />{" "}
           Mitigation
