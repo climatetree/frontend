@@ -128,6 +128,16 @@ button.post-change {
     background-color: rgba(51, 51, 51, 0.85);
 }
 
+.error-msg {
+    margin-top: 3rem;
+    color: #fc0037;
+}
+
+.success-msg {
+    margin-top: 3rem;
+    color: #42ad10;
+}
+
 @media (max-width: 480px) {
     .role-change-form-wrapper {
         padding: 0;
