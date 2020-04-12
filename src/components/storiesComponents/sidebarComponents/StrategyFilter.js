@@ -8,6 +8,7 @@ const StrategyFilter = ({
   setStrategyChosen,
   setStrategyTerm,
   strategyTerm,
+  setTaxonomyForSector,
 }) => {
   return (
     <FilterFieldContainer>
@@ -15,7 +16,12 @@ const StrategyFilter = ({
       <div id="strategy-choices">
         <label
           className="choices-inline"
-          onClick={() => setStrategyChosen(true)}
+          onClick={() => {
+            setStrategyChosen(true);
+            if (strategyTerm !== "ADAPTATION") {
+              setTaxonomyForSector("ADAPTATION");
+            }
+          }}
         >
           <input
             type="radio"
@@ -29,7 +35,12 @@ const StrategyFilter = ({
 
         <label
           className="choices-inline"
-          onClick={() => setStrategyChosen(true)}
+          onClick={() => {
+            setStrategyChosen(true);
+            if (strategyTerm !== "MITIGATION") {
+              setTaxonomyForSector("MITIGATION");
+            }
+          }}
         >
           <input
             type="radio"

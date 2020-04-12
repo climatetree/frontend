@@ -14,48 +14,17 @@ const AdvancedSearch = ({
 }) => {
   const [strategyTerm, setStrategyTerm] = useState("");
 
+  // THIS IS FOR SECTOR FILTER
   const [allSectors, setAllSectors] = useState([]);
   const [sectorTerm, setSectorTerm] = useState("");
+  const [loadingSector, setLoadingSector] = useState(false);
 
+  // THIS IS FOR SOLUTION FILTER
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionTerm, setSolutionTerm] = useState("");
 
   const [strategyChosen, setStrategyChosen] = useState(false);
   const [sectorChosen, setSectorChosen] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      if (strategyTerm) {
-        const taxonomyBasedOnStrategy = await axios.get(
-          `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/strategy/${strategyTerm}`
-        );
-
-        setTaxonomySectionBasedOn(
-          "sector",
-          taxonomyBasedOnStrategy.data,
-          setAllSectors
-        );
-        setSectorTerm("");
-      }
-    })();
-  }, [strategyTerm]);
-
-  useEffect(() => {
-    (async () => {
-      if (sectorTerm) {
-        const taxonomyBasedOnSector = await axios.get(
-          `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/sector/${sectorTerm}`
-        );
-
-        setTaxonomySectionBasedOn(
-          "solution",
-          taxonomyBasedOnSector.data,
-          setAllSolutions
-        );
-        setSolutionTerm("");
-      }
-    })();
-  }, [sectorTerm]);
 
   useEffect(() => {
     document.addEventListener("keydown", escapeButtonPress);
@@ -65,16 +34,46 @@ const AdvancedSearch = ({
     };
   }, []);
 
-  const setTaxonomySectionBasedOn = (section, taxonomy, setFunction) => {
-    let filterFields = taxonomy.map((t) =>
-      section === "sector" ? t.sector : t.solution
+  // SET TAXONOMY FOR SECTOR
+  const setTaxonomyForSector = async (strategy) => {
+    setLoadingSector(true);
+    const taxonomyBasedOnStrategy = await axios.get(
+      `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/strategy/${strategy}`
     );
 
-    filterFields = filterFields.filter(
-      (field, i, arr) => arr.indexOf(field) === i
+    setAllSectors(
+      taxonomyBasedOnStrategy.data
+        .map((t) => t.sector)
+        .filter((field, i, arr) => arr.indexOf(field) === i)
     );
 
-    setFunction(filterFields);
+    setAllSolutions(
+      taxonomyBasedOnStrategy.data
+        .map((t) => t.solution)
+        .filter((field, i, arr) => arr.indexOf(field) === i)
+    );
+
+    setLoadingSector(false);
+    setSectorTerm("");
+    setSolutionTerm("");
+  };
+
+  // SET TAXONOMY FOR SECTOR
+  const setTaxonomyForSolution = async (sector) => {
+    setLoadingSector(true);
+    const taxonomyBasedOnSector = await axios.get(
+      `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/sector/${sector}`
+    );
+
+    console.log(taxonomyBasedOnSector.data);
+
+    setAllSolutions(
+      taxonomyBasedOnSector.data
+        .map((t) => t.solution)
+        .filter((field, i, arr) => arr.indexOf(field) === i)
+    );
+    setLoadingSector(false);
+    setSolutionTerm("");
   };
 
   const escapeButtonPress = (event) => {
@@ -120,13 +119,17 @@ const AdvancedSearch = ({
           setStrategyChosen={setStrategyChosen}
           strategyTerm={strategyTerm}
           setStrategyTerm={setStrategyTerm}
+          setTaxonomyForSector={setTaxonomyForSector}
         />
         <SectorFilter
           strategyChosen={strategyChosen}
           setSectorChosen={setSectorChosen}
           allSectors={allSectors}
           sectorTerm={sectorTerm}
+          loadingSector={loadingSector}
           setSectorTerm={setSectorTerm}
+          strategyTerm={strategyTerm}
+          setTaxonomyForSolution={setTaxonomyForSolution}
         />
         <SolutionFilter
           strategyChosen={strategyChosen}

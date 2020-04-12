@@ -12,8 +12,12 @@ const SectorFilter = ({
   allSectors,
   sectorTerm,
   setSectorTerm,
+  strategyTerm,
+  loadingSector,
+  setTaxonomyForSolution,
 }) => {
   const setSectorTermOnClick = (sol) => {
+    setTaxonomyForSolution(sol);
     setSectorTerm(sol);
     setSectorChosen(true);
   };
@@ -48,6 +52,8 @@ const SectorFilter = ({
         <FiltersDropdown
           allResults={allSectors}
           filterTerm={sectorTerm}
+          strategyTerm={strategyTerm}
+          loadingSector={loadingSector}
           setTermOnClick={setSectorTermOnClick}
           setTermOnEnter={setSectorTermOnEnter}
           status="sector"

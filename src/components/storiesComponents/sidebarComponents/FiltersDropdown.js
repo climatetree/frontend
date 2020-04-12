@@ -8,50 +8,80 @@ const FiltersDropdown = ({
   filterTerm,
   setTermOnClick,
   status,
+  strategyTerm,
+  loadingSector,
 }) => {
   const debouncedTerm = useDebounce(filterTerm, 200);
   const [solutionsBasedOnTerm, setSolutionsBasedOnTerm] = useState([]);
 
   useEffect(() => {
-    allResults &&
-      setSolutionsBasedOnTerm(
-        allResults.filter((option) =>
-          option.toLowerCase().includes(debouncedTerm.toLowerCase())
-        )
-      );
+    setSolutionsBasedOnTerm([]);
+  }, []);
+
+  useEffect(() => {
+    setSolutionsBasedOnTerm([]);
+  }, [strategyTerm]);
+
+  useEffect(() => {
+    setSolutionsBasedOnTerm([]);
+  }, [filterTerm]);
+
+  useEffect(() => {
+    if (filterTerm) {
+      allResults &&
+        setSolutionsBasedOnTerm(
+          allResults.filter((option) =>
+            option.toLowerCase().includes(debouncedTerm.toLowerCase())
+          )
+        );
+    }
   }, [debouncedTerm]);
 
   const renderContent = () => {
-    if (solutionsBasedOnTerm.length > 0) {
-      return (
-        <>
-          {solutionsBasedOnTerm.map((solution, index) => (
-            <div
-              className={`filter-entry`}
-              key={index}
-              onClick={() => setTermOnClick(solution)}
-            >
-              <span>{solution}</span>
-            </div>
-          ))}
-        </>
-      );
-    }
-
-    if (!debouncedTerm) {
-      return (
-        <>
-          {allResults &&
-            allResults.map((solution, index) => (
+    if (!loadingSector) {
+      if (solutionsBasedOnTerm.length > 0) {
+        return (
+          <>
+            {solutionsBasedOnTerm.map((solution, index) => (
               <div
                 className={`filter-entry`}
                 key={index}
-                onClick={() => setTermOnClick(solution)}
+                onClick={() => {
+                  if (filterTerm !== solution) {
+                    setTermOnClick(solution);
+                  }
+                }}
               >
                 <span>{solution}</span>
               </div>
             ))}
-        </>
+          </>
+        );
+      }
+
+      if (!debouncedTerm) {
+        return (
+          <>
+            {allResults &&
+              allResults.map((solution, index) => (
+                <div
+                  className={`filter-entry`}
+                  key={index}
+                  onClick={() => setTermOnClick(solution)}
+                >
+                  <span>{solution}</span>
+                </div>
+              ))}
+          </>
+        );
+      }
+    }
+
+    if (loadingSector) {
+      return (
+        <div className="filter-entry">
+          <span>Loading...</span>
+        </div>
       );
     }
 
