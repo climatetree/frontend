@@ -42,7 +42,7 @@ export default function Profile() {
       <div className="story-lists-wrapper">
         {/* Admin Functionality */}
         {user.role === 1 && (
-          <div className="admin-wrapper">
+          <>
             <h2>User Mangement</h2>
             <div className="story-list">
               <div
@@ -53,9 +53,8 @@ export default function Profile() {
                 <p>Update User Role</p>
               </div>
             </div>
-          </div>
+          </>
         )}
-
         {/* User Stories and Post Story */}
         <h2>My stories</h2>
         <div className="personal story-list">
