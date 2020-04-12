@@ -16,3 +16,15 @@
 #sector-filter:focus {
   outline: none;
 }
+
+#show-chosen-sectors {
+  font-size: 10px;
+  margin-left: 25px;
+  margin-top: 5px;
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
+#show-chosen-sectors:hover {
+  text-decoration: underline;
+}

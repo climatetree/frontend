@@ -12,6 +12,9 @@ const AdvancedSearch = ({
   windowWidth,
   setStoriesBasedOnFilter,
 }) => {
+  const [advancedSearchHeight, setAdvancedSearchHeight] = useState(0);
+
+  // THIS IS FOR STRATEGY FILTER
   const [strategyTerm, setStrategyTerm] = useState("");
 
   // THIS IS FOR SECTOR FILTER
@@ -26,6 +29,9 @@ const AdvancedSearch = ({
   const [strategyChosen, setStrategyChosen] = useState(false);
   const [sectorChosen, setSectorChosen] = useState(false);
 
+  // ARRAY OF SECTORS THAT ARE CHOSEN
+  const [sectorsChosenArr, setSectorsChosenArr] = useState([]);
+
   useEffect(() => {
     document.addEventListener("keydown", escapeButtonPress);
 
@@ -33,6 +39,16 @@ const AdvancedSearch = ({
       document.removeEventListener("keydown", escapeButtonPress);
     };
   }, []);
+
+  useEffect(() => {
+    document
+      .getElementById("advanced-search-container")
+      .addEventListener("resize", () => {
+        setAdvancedSearchHeight(
+          document.getElementById("advanced-search-container").offsetHeight
+        );
+      });
+  }, [advancedSearchHeight]);
 
   // SET TAXONOMY FOR SECTOR
   const setTaxonomyForSector = async (strategy) => {
@@ -65,8 +81,6 @@ const AdvancedSearch = ({
       `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/sector/${sector}`
     );
 
-    console.log(taxonomyBasedOnSector.data);
-
     setAllSolutions(
       taxonomyBasedOnSector.data
         .map((t) => t.solution)
@@ -94,10 +108,22 @@ const AdvancedSearch = ({
     setStoriesBasedOnFilter(response.data);
   };
 
+  const pushSectorValue = (newSector) => {
+    let sectorFound = sectorsChosenArr.find((sector) => sector === newSector);
+    if (sectorFound) {
+      alert(newSector + " is already added");
+    } else {
+      setSectorsChosenArr((prevState) => [...prevState, newSector]);
+    }
+  };
+
+  console.log(advancedSearchHeight);
+
   return (
     <div
       id="advanced-search-container"
       className={sideBarVisible ? "unhide-filters" : "hide-filters"}
+      onR
     >
       <div id="btn-filter-container">
         <span id="title-as">Filters</span>
@@ -130,6 +156,8 @@ const AdvancedSearch = ({
           setSectorTerm={setSectorTerm}
           strategyTerm={strategyTerm}
           setTaxonomyForSolution={setTaxonomyForSolution}
+          pushSectorValue={pushSectorValue}
+          sectorsChosenArr={sectorsChosenArr}
         />
         <SolutionFilter
           strategyChosen={strategyChosen}

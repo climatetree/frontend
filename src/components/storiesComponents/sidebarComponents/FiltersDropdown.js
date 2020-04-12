@@ -10,6 +10,7 @@ const FiltersDropdown = ({
   status,
   strategyTerm,
   loadingSector,
+  pushFilter,
 }) => {
   const debouncedTerm = useDebounce(filterTerm, 200);
   const [solutionsBasedOnTerm, setSolutionsBasedOnTerm] = useState([]);
@@ -37,6 +38,13 @@ const FiltersDropdown = ({
     }
   }, [debouncedTerm]);
 
+  const onFilterClick = (term) => {
+    pushFilter(term);
+    if (filterTerm !== term) {
+      setTermOnClick(term);
+    }
+  };
+
   const renderContent = () => {
     if (!loadingSector) {
       if (solutionsBasedOnTerm.length > 0) {
@@ -46,11 +54,7 @@ const FiltersDropdown = ({
               <div
                 className={`filter-entry`}
                 key={index}
-                onClick={() => {
-                  if (filterTerm !== solution) {
-                    setTermOnClick(solution);
-                  }
-                }}
+                onClick={() => onFilterClick(solution)}
               >
                 <span>{solution}</span>
               </div>
@@ -67,7 +71,7 @@ const FiltersDropdown = ({
                 <div
                   className={`filter-entry`}
                   key={index}
-                  onClick={() => setTermOnClick(solution)}
+                  onClick={() => onFilterClick(solution)}
                 >
                   <span>{solution}</span>
                 </div>

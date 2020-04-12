@@ -1,0 +1,28 @@
+.filter-value-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+#filter-entries-wrapper {
+  border: 1px solid white;
+  width: 300px;
+  height: min-content;
+}
+
+.chosen-sector {
+  font-size: 15px;
+  padding: 15px 7px;
+  background-color: #000000;
+}
+
+.chosen-sector:nth-child(2n) {
+  background-color: #4f4f4f;
+}
