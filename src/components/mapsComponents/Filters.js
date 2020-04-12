@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import SuggestionDropdown from "./SuggestionDropdown";
 import SuggestionOverlay from "./SuggestionOverlay";
 import MinMaxRange from "./MinMaxRange";
-import CheckboxGroup from "./CheckboxGroup";
+import CheckboxGroup from "../generalComponents/CheckboxGroup";
 import useDebounce from "../customHooks/useDebounce";
 import { factory } from "./helpers/data";
 import "./Filters.css";

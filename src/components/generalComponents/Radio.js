@@ -1,13 +1,21 @@
 import React from 'react';
 import './Radio.css';
 
-function Radio({
+export default function Radio({
   name,
   id,
   value,
   checked,
   onChange,
+  filled,
 }) {
+  const handleClick = () => {
+    if (checked) {
+      onChange('');
+    } else {
+      onChange(value);
+    }
+  }
   return (
     <div className="radio-container">
       <input
@@ -17,19 +25,17 @@ function Radio({
         id={id}
         value={value}
         checked={checked}
-        onChange={() => onChange(value)}
+        onChange={handleClick}
       />
       <span
-        className="radio-custom"
-        onClick={() => onChange(value)}
+        className={`radio-custom${filled ? ' filled' : ''}`}
+        onClick={handleClick}
       ></span>
       <label
         htmlFor={name}
         className="radio-label"
-        onClick={() => onChange(value)}
+        onClick={handleClick}
       >{id}</label>
     </div>
   )
 }
-
-export default Radio;

@@ -69,7 +69,6 @@ export default function Profile() {
             <p>post a story</p>
           </div>
         </div>
-
         {/* Trending Stories */}
         <h2>Trending</h2>
         <div className="trending story-list">
@@ -95,7 +94,6 @@ export default function Profile() {
           setMyStories={setMyStories}
         />
       )}
-
       {openChangeUserRoleForm && (
         <ChangeUserRoleForm
           setOpenChangeUserRoleForm={setOpenChangeUserRoleForm}

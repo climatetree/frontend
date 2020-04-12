@@ -10,7 +10,7 @@ export default function DropdownInput({
   allOptions,
   searchTerm,
   setSearchTerm,
-  optional
+  optional,
 }) {
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
   const [options, setOptions] = useState([]);
@@ -68,8 +68,8 @@ export default function DropdownInput({
             ))}
           </>
         ) : (
-              <p>No {name} suggestions</p>
-            )}
+          <p>No {name} suggestions</p>
+        )}
       </div>
     </div>
   );
