@@ -115,11 +115,8 @@ button.post-story {
 .hint {
   padding: 8px 20px;
 }
-.strategy-checkbox-group {
+.strategy-radio-group {
   margin: 8px 0 1rem;
-}
-.strategy-checkbox-group div:not(:last-child) {
-  margin-right: 1rem;
 }
 #sector-list,
 #solution-list {

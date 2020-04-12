@@ -10,6 +10,7 @@ export default function DropdownInput({
   allOptions,
   searchTerm,
   setSearchTerm,
+  optional,
 }) {
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
   const [options, setOptions] = useState([]);
@@ -26,7 +27,9 @@ export default function DropdownInput({
     <div className="dropdown-input">
       <label htmlFor={`${name}`}>
         {label}
-        <small className="optional-label"> - Optional</small>
+        {optional && (
+          <small className="optional-label"> - Optional</small>
+        )}
       </label>
       <input
         id={`${name}`}
