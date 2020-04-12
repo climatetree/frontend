@@ -4,7 +4,7 @@ import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
 import "./StrategyFilter.css";
 
-const StrategyFilter = ({ setStrategyChosen }) => {
+const StrategyFilter = ({ setStrategyChosen, setStrategyTerm }) => {
   return (
     <FilterFieldContainer>
       <FilterLabel for="strategy-filter">By Strategy</FilterLabel>
@@ -13,7 +13,12 @@ const StrategyFilter = ({ setStrategyChosen }) => {
           className="choices-inline"
           onClick={() => setStrategyChosen(true)}
         >
-          <input type="checkbox" name="strategy" value="ADAPTATION" />{" "}
+          <input
+            type="radio"
+            name="strategy"
+            value="ADAPTATION"
+            onChange={() => setStrategyTerm("ADAPTATION")}
+          />{" "}
           Adaptation
         </label>
 
@@ -21,7 +26,12 @@ const StrategyFilter = ({ setStrategyChosen }) => {
           className="choices-inline"
           onClick={() => setStrategyChosen(true)}
         >
-          <input type="checkbox" name="strategy" value="MITIGATION" />{" "}
+          <input
+            type="radio"
+            name="strategy"
+            value="MITIGATION"
+            onChange={() => setStrategyTerm("MITIGATION")}
+          />{" "}
           Mitigation
         </label>
       </div>

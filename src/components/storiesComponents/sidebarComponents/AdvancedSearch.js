@@ -12,29 +12,48 @@ const AdvancedSearch = ({
   windowWidth,
   setStoriesBasedOnFilter,
 }) => {
-  const [allSolutions, setAllSolutions] = useState([]);
-  const [solutionTerm, setSolutionTerm] = useState("");
+  const [strategyTerm, setStrategyTerm] = useState("");
 
   const [allSectors, setAllSectors] = useState([]);
   const [sectorTerm, setSectorTerm] = useState("");
+
+  const [allSolutions, setAllSolutions] = useState([]);
+  const [solutionTerm, setSolutionTerm] = useState("");
 
   const [strategyChosen, setStrategyChosen] = useState(false);
   const [sectorChosen, setSectorChosen] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const sectorResponse = await axios.get(
-        "https://backend-mongo-stories.azurewebsites.net/stories/all/sector"
-      );
+      if (strategyTerm) {
+        const taxonomyBasedOnStrategy = await axios.get(
+          `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/strategy/${strategyTerm}`
+        );
 
-      const solutionResponse = await axios.get(
-        "https://backend-mongo-stories.azurewebsites.net/stories/all/solution"
-      );
-
-      setAllSectors(sectorResponse.data);
-      setAllSolutions(solutionResponse.data);
+        setTaxonomySectionBasedOn(
+          "sector",
+          taxonomyBasedOnStrategy.data,
+          setAllSectors
+        );
+      }
     })();
-  }, []);
+  }, [strategyTerm]);
+
+  useEffect(() => {
+    (async () => {
+      if (sectorTerm) {
+        const taxonomyBasedOnSector = await axios.get(
+          `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/sector/${sectorTerm}`
+        );
+
+        setTaxonomySectionBasedOn(
+          "solution",
+          taxonomyBasedOnSector.data,
+          setAllSolutions
+        );
+      }
+    })();
+  }, [sectorTerm]);
 
   useEffect(() => {
     document.addEventListener("keydown", escapeButtonPress);
@@ -43,6 +62,18 @@ const AdvancedSearch = ({
       document.removeEventListener("keydown", escapeButtonPress);
     };
   }, []);
+
+  const setTaxonomySectionBasedOn = (section, taxonomy, setFunction) => {
+    let filterFields = taxonomy.map((t) =>
+      section === "sector" ? t.sector : t.solution
+    );
+
+    filterFields = filterFields.filter(
+      (field, i, arr) => arr.indexOf(field) === i
+    );
+
+    setFunction(filterFields);
+  };
 
   const escapeButtonPress = (event) => {
     if (event.keyCode === 27) {
@@ -83,7 +114,11 @@ const AdvancedSearch = ({
       </div>
 
       <div id="filters">
-        <StrategyFilter setStrategyChosen={setStrategyChosen} />
+        <StrategyFilter
+          setStrategyChosen={setStrategyChosen}
+          strategyTerm={strategyTerm}
+          setStrategyTerm={setStrategyTerm}
+        />
         <SectorFilter
           strategyChosen={strategyChosen}
           setSectorChosen={setSectorChosen}
