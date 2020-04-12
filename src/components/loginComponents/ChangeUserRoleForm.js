@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from "../context/UserContext";
 import CloseIcon from "../../images/x.svg";
 import DropdownInput from "./DropdownInput";
@@ -12,7 +12,6 @@ const ChangeUserRoleForm = ({
     const [roleInput, setRoleInput] = useState("");
     const [submitMsg, setSubmitMsg] = useState("");
     const [msgIsError, setMsgIsError] = useState(true);
-
 
     // Role ids for user service = index + 1
     const roles = ["administrator", "moderator", "standard user"];
