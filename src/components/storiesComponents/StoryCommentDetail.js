@@ -86,23 +86,22 @@ const StoryCommentDetail = ({
 
   return (
     <div className="comment-detail">
-      <span>
-        <span className="user-name">
-          <strong>{comment.user_name} </strong>
-        </span>
-        <span className="comment-content">{comment.content}</span>
+      <span className="user-name">
+        <strong>{comment.user_name}</strong>
       </span>
 
-      <div className="comment-footer">
-        <span className="comment-hours-ago">
-          {timeSince + timeSinceAlphabet}{" "}
-        </span>
-        {userId === comment.user_id && (
-          <button onClick={deleteComment} className="delete-comment-btn">
-            Delete
-          </button>
-        )}
-      </div>
+      <span className="comment-hours-ago">
+        {timeSince + timeSinceAlphabet}{" "}
+      </span>
+
+      {/* Show delete button if user made the comment or is a moderator */}
+      {(userId === comment.user_id || role <= 2) && (
+        <button onClick={deleteComment} className="delete-comment-btn">
+          Delete
+        </button>
+      )}
+
+      <div className="comment-content">{comment.content}</div>
     </div>
   );
 };

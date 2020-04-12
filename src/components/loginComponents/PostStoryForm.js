@@ -259,7 +259,7 @@ export default function PostStoryForm({
             onClick={async () => {
               if (selectedPlaceID) {
                 const response = await fetch(
-                  `https://backend-mongo-stories.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+                  `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
                     hyperlink
                   )}`
                 );
