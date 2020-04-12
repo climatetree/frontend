@@ -35,6 +35,7 @@ const AdvancedSearch = ({
           taxonomyBasedOnStrategy.data,
           setAllSectors
         );
+        setSectorTerm("");
       }
     })();
   }, [strategyTerm]);
@@ -51,6 +52,7 @@ const AdvancedSearch = ({
           taxonomyBasedOnSector.data,
           setAllSolutions
         );
+        setSolutionTerm("");
       }
     })();
   }, [sectorTerm]);
