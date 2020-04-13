@@ -4,9 +4,10 @@ import CloseIcon from "../../../images/x.svg";
 import "./ListOfChosenFilterValue.css";
 
 const ListOfChosenFilterValue = ({
-  sectorsChosenArr,
-  setShowChosenSectors,
-  removeSectorValue,
+  filtersChosenArr,
+  setShowChosenFilters,
+  removeFilterValue,
+  section,
 }) => {
   useEffect(() => {
     document.addEventListener("keydown", escapeButtonPress);
@@ -17,14 +18,16 @@ const ListOfChosenFilterValue = ({
   }, []);
 
   useEffect(() => {
-    if (!sectorsChosenArr.length) {
-      setShowChosenSectors(false);
+    if (!filtersChosenArr.length) {
+      setShowChosenFilters(false);
+      document.body.style.overflow = "auto";
     }
-  }, [sectorsChosenArr]);
+  }, [filtersChosenArr]);
 
   const escapeButtonPress = (event) => {
     if (event.keyCode === 27) {
-      setShowChosenSectors(false);
+      setShowChosenFilters(false);
+      document.body.style.overflow = "auto";
     }
   };
 
@@ -32,21 +35,24 @@ const ListOfChosenFilterValue = ({
     <div className="filter-value-container">
       <div id="filter-entries-wrapper">
         <div id="values-list-header">
-          <h2 id="filter-type">Sectors Chosen</h2>
+          <h2 id="filter-type">{section} Chosen</h2>
           <img
             src={CloseIcon}
             id="close-chosen-filters"
-            onClick={() => setShowChosenSectors(false)}
+            onClick={() => {
+              setShowChosenFilters(false);
+              document.body.style.overflow = "auto";
+            }}
           />
         </div>
         <div className="sectors-entries">
-          {sectorsChosenArr.map((sector) => (
+          {filtersChosenArr.map((sector) => (
             <div className="chosen-sector">
               <p>{sector}</p>
               <img
                 src={CloseIcon}
                 className="delete-chosen-filter"
-                onClick={() => removeSectorValue(sector)}
+                onClick={() => removeFilterValue(sector)}
               />
             </div>
           ))}

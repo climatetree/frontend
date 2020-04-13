@@ -30,6 +30,9 @@ const AdvancedSearch = ({
   // ARRAY OF SECTORS THAT ARE CHOSEN
   const [sectorsChosenArr, setSectorsChosenArr] = useState([]);
 
+  // ARRAY OF SOLUTIONS THAT ARE CHOSEN
+  const [solutionsChosenArr, setSolutionsChosenArr] = useState([]);
+
   useEffect(() => {
     document.addEventListener("keydown", escapeButtonPress);
 
@@ -111,6 +114,23 @@ const AdvancedSearch = ({
     );
   };
 
+  const pushSolutionValue = (newSolution) => {
+    let solutionFound = solutionsChosenArr.find(
+      (solution) => solution === newSolution
+    );
+    if (solutionFound) {
+      alert(newSolution + " is already added");
+    } else {
+      setSolutionsChosenArr((prevState) => [...prevState, newSolution]);
+    }
+  };
+
+  const removeSolutionValue = (curSolution) => {
+    setSolutionsChosenArr((prevState) =>
+      prevState.filter((solution) => solution !== curSolution)
+    );
+  };
+
   return (
     <div
       id="advanced-search-container"
@@ -149,8 +169,8 @@ const AdvancedSearch = ({
           strategyTerm={strategyTerm}
           setTaxonomyForSolution={setTaxonomyForSolution}
           pushSectorValue={pushSectorValue}
-          sectorsChosenArr={sectorsChosenArr}
           removeSectorValue={removeSectorValue}
+          sectorsChosenArr={sectorsChosenArr}
         />
         <SolutionFilter
           strategyChosen={strategyChosen}
@@ -158,6 +178,9 @@ const AdvancedSearch = ({
           solutionTerm={solutionTerm}
           onChangeSolutionTerm={onChangeSolutionTerm}
           allSolutions={allSolutions}
+          pushSolutionValue={pushSolutionValue}
+          removeSolutionValue={removeSolutionValue}
+          solutionsChosenArr={solutionsChosenArr}
         />
       </div>
     </div>

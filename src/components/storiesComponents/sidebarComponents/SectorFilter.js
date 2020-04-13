@@ -42,6 +42,7 @@ const SectorFilter = ({
           <FilterLabel for="sector-filter">By Sector</FilterLabel>
           <input
             id="sector-filter"
+            autoComplete="off"
             className="filter-btn"
             placeholder="Enter a sector"
             value={sectorTerm}
@@ -81,9 +82,10 @@ const SectorFilter = ({
         )}
         {showChosenSectors && (
           <ListOfChosenFilterValue
-            sectorsChosenArr={sectorsChosenArr}
-            setShowChosenSectors={setShowChosenSectors}
-            removeSectorValue={removeSectorValue}
+            filtersChosenArr={sectorsChosenArr}
+            setShowChosenFilters={setShowChosenSectors}
+            removeFilterValue={removeSectorValue}
+            section={"Sectors"}
           />
         )}
       </>
