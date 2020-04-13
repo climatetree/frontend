@@ -18,6 +18,7 @@ const SectorFilter = ({
   setTaxonomyForSolution,
   pushSectorValue,
   sectorsChosenArr,
+  removeSectorValue,
 }) => {
   const [showChosenSectors, setShowChosenSectors] = useState(false);
 
@@ -79,7 +80,11 @@ const SectorFilter = ({
           ""
         )}
         {showChosenSectors && (
-          <ListOfChosenFilterValue sectorsChosenArr={sectorsChosenArr} />
+          <ListOfChosenFilterValue
+            sectorsChosenArr={sectorsChosenArr}
+            setShowChosenSectors={setShowChosenSectors}
+            removeSectorValue={removeSectorValue}
+          />
         )}
       </>
     )

@@ -12,8 +12,6 @@ const AdvancedSearch = ({
   windowWidth,
   setStoriesBasedOnFilter,
 }) => {
-  const [advancedSearchHeight, setAdvancedSearchHeight] = useState(0);
-
   // THIS IS FOR STRATEGY FILTER
   const [strategyTerm, setStrategyTerm] = useState("");
 
@@ -39,16 +37,6 @@ const AdvancedSearch = ({
       document.removeEventListener("keydown", escapeButtonPress);
     };
   }, []);
-
-  useEffect(() => {
-    document
-      .getElementById("advanced-search-container")
-      .addEventListener("resize", () => {
-        setAdvancedSearchHeight(
-          document.getElementById("advanced-search-container").offsetHeight
-        );
-      });
-  }, [advancedSearchHeight]);
 
   // SET TAXONOMY FOR SECTOR
   const setTaxonomyForSector = async (strategy) => {
@@ -117,7 +105,11 @@ const AdvancedSearch = ({
     }
   };
 
-  console.log(advancedSearchHeight);
+  const removeSectorValue = (curSector) => {
+    setSectorsChosenArr((prevState) =>
+      prevState.filter((sector) => sector !== curSector)
+    );
+  };
 
   return (
     <div
@@ -158,6 +150,7 @@ const AdvancedSearch = ({
           setTaxonomyForSolution={setTaxonomyForSolution}
           pushSectorValue={pushSectorValue}
           sectorsChosenArr={sectorsChosenArr}
+          removeSectorValue={removeSectorValue}
         />
         <SolutionFilter
           strategyChosen={strategyChosen}
