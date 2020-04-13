@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import useDebounce from "../../customHooks/useDebounce";
+import AddedFilterNotification from "./AddedFilterNotification";
 import "./FiltersDropdown.css";
 
 const FiltersDropdown = ({
@@ -9,28 +10,28 @@ const FiltersDropdown = ({
   setTermOnClick,
   status,
   strategyTerm,
-  loadingSector,
+  loadingFilter,
   pushFilter,
 }) => {
   const debouncedTerm = useDebounce(filterTerm, 200);
-  const [solutionsBasedOnTerm, setSolutionsBasedOnTerm] = useState([]);
+  const [filtersBasedOnTerm, setFiltersBasedOnTerm] = useState([]);
 
   useEffect(() => {
-    setSolutionsBasedOnTerm([]);
+    setFiltersBasedOnTerm([]);
   }, []);
 
   useEffect(() => {
-    setSolutionsBasedOnTerm([]);
+    setFiltersBasedOnTerm([]);
   }, [strategyTerm]);
 
   useEffect(() => {
-    setSolutionsBasedOnTerm([]);
+    setFiltersBasedOnTerm([]);
   }, [filterTerm]);
 
   useEffect(() => {
     if (filterTerm) {
       allResults &&
-        setSolutionsBasedOnTerm(
+        setFiltersBasedOnTerm(
           allResults.filter((option) =>
             option.toLowerCase().includes(debouncedTerm.toLowerCase())
           )
@@ -40,23 +41,21 @@ const FiltersDropdown = ({
 
   const onFilterClick = (term) => {
     pushFilter(term);
-    if (filterTerm !== term) {
-      setTermOnClick(term);
-    }
+    setTermOnClick(term);
   };
 
   const renderContent = () => {
-    if (!loadingSector) {
-      if (solutionsBasedOnTerm.length > 0) {
+    if (!loadingFilter) {
+      if (filtersBasedOnTerm.length > 0) {
         return (
           <>
-            {solutionsBasedOnTerm.map((solution, index) => (
+            {filtersBasedOnTerm.map((filterValue, index) => (
               <div
                 className={`filter-entry`}
                 key={index}
-                onClick={() => onFilterClick(solution)}
+                onClick={() => onFilterClick(filterValue)}
               >
-                <span>{solution}</span>
+                <span>{filterValue}</span>
               </div>
             ))}
           </>
@@ -67,13 +66,13 @@ const FiltersDropdown = ({
         return (
           <>
             {allResults &&
-              allResults.map((solution, index) => (
+              allResults.map((filterValue, index) => (
                 <div
                   className={`filter-entry`}
                   key={index}
-                  onClick={() => onFilterClick(solution)}
+                  onClick={() => onFilterClick(filterValue)}
                 >
-                  <span>{solution}</span>
+                  <span>{filterValue}</span>
                 </div>
               ))}
           </>
@@ -81,7 +80,7 @@ const FiltersDropdown = ({
       }
     }
 
-    if (loadingSector) {
+    if (loadingFilter) {
       return (
         <div className="filter-entry">
           <span>Loading...</span>
@@ -101,13 +100,15 @@ const FiltersDropdown = ({
   };
 
   return (
-    <div
-      id="selectFromDropdown"
-      className={"filter-dropdown-container"}
-      id={decideClassName()}
-    >
-      {renderContent()}
-    </div>
+    <>
+      <div
+        id="selectFromDropdown"
+        className={"filter-dropdown-container"}
+        id={decideClassName()}
+      >
+        {renderContent()}
+      </div>
+    </>
   );
 };
 

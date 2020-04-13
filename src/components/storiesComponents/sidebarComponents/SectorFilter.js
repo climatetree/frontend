@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
 import FiltersDropdown from "./FiltersDropdown";
 import ListOfChosenFilterValue from "./ListOfChosenFilterValue";
+import AddedFilterNotification from "./AddedFilterNotification";
 
 import "./SectorFilter.css";
 
@@ -21,16 +22,26 @@ const SectorFilter = ({
   removeSectorValue,
 }) => {
   const [showChosenSectors, setShowChosenSectors] = useState(false);
+  const [addedSector, setAddedSector] = useState("");
+  const [isSectorAdded, setIsSectorAdded] = useState(false);
 
-  const setSectorTermOnClick = (sol) => {
-    setTaxonomyForSolution(sol);
-    setSectorTerm(sol);
+  useEffect(() => {
+    if (addedSector) {
+      setIsSectorAdded(true);
+      setTimeout(() => setIsSectorAdded(false), 1000);
+    }
+  }, [addedSector]);
+
+  const setSectorTermOnClick = (filterVal) => {
+    setTaxonomyForSolution(filterVal);
+    setSectorTerm("");
     setSectorChosen(true);
+    setAddedSector(filterVal);
   };
 
-  const setSectorTermOnEnter = (sol, event) => {
+  const setSectorTermOnEnter = (event) => {
     if (event.keyCode === 13) {
-      setSectorTerm(sol);
+      setSectorTerm("");
       setSectorChosen(true);
     }
   };
@@ -39,7 +50,14 @@ const SectorFilter = ({
     strategyChosen && (
       <>
         <FilterFieldContainer>
-          <FilterLabel for="sector-filter">By Sector</FilterLabel>
+          <div id="sector-filter-header">
+            <FilterLabel for="sector-filter">By Sector</FilterLabel>
+            {isSectorAdded ? (
+              <AddedFilterNotification filterValue={addedSector} />
+            ) : (
+              ""
+            )}
+          </div>
           <input
             id="sector-filter"
             autoComplete="off"
@@ -60,7 +78,7 @@ const SectorFilter = ({
             allResults={allSectors}
             filterTerm={sectorTerm}
             strategyTerm={strategyTerm}
-            loadingSector={loadingSector}
+            loadingFilter={loadingSector}
             setTermOnClick={setSectorTermOnClick}
             setTermOnEnter={setSectorTermOnEnter}
             pushFilter={pushSectorValue}

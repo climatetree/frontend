@@ -4,6 +4,7 @@ import axios from "axios";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
+import AddedFilterNotification from "./AddedFilterNotification";
 import "./AdvancedSearch.css";
 
 const AdvancedSearch = ({
@@ -23,6 +24,7 @@ const AdvancedSearch = ({
   // THIS IS FOR SOLUTION FILTER
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionTerm, setSolutionTerm] = useState("");
+  const [loadingSolution, setLoadingSolution] = useState(false);
 
   const [strategyChosen, setStrategyChosen] = useState(false);
   const [sectorChosen, setSectorChosen] = useState(false);
@@ -67,7 +69,7 @@ const AdvancedSearch = ({
 
   // SET TAXONOMY FOR SECTOR
   const setTaxonomyForSolution = async (sector) => {
-    setLoadingSector(true);
+    setLoadingSolution(true);
     const taxonomyBasedOnSector = await axios.get(
       `https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/sector/${sector}`
     );
@@ -77,7 +79,7 @@ const AdvancedSearch = ({
         .map((t) => t.solution)
         .filter((field, i, arr) => arr.indexOf(field) === i)
     );
-    setLoadingSector(false);
+    setLoadingSolution(false);
     setSolutionTerm("");
   };
 
@@ -85,10 +87,6 @@ const AdvancedSearch = ({
     if (event.keyCode === 27) {
       closeSideBar();
     }
-  };
-
-  const onChangeSolutionTerm = (solTerm) => {
-    setSolutionTerm(solTerm);
   };
 
   const applyFilterOnClick = async (solTerm) => {
@@ -103,8 +101,10 @@ const AdvancedSearch = ({
     let sectorFound = sectorsChosenArr.find((sector) => sector === newSector);
     if (sectorFound) {
       alert(newSector + " is already added");
+      return 0;
     } else {
       setSectorsChosenArr((prevState) => [...prevState, newSector]);
+      return 1;
     }
   };
 
@@ -176,7 +176,8 @@ const AdvancedSearch = ({
           strategyChosen={strategyChosen}
           sectorChosen={sectorChosen}
           solutionTerm={solutionTerm}
-          onChangeSolutionTerm={onChangeSolutionTerm}
+          loadingSolution={loadingSolution}
+          setSolutionTerm={setSolutionTerm}
           allSolutions={allSolutions}
           pushSolutionValue={pushSolutionValue}
           removeSolutionValue={removeSolutionValue}
