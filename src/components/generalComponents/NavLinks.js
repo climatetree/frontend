@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import './NavLinks.Map.css';
 import './NavLinks.css'
 
-export default function NavLinks({ cssScope }) {
+export default function NavLinks({ cssScope, activeLink }) {
   const { user, setUser } = useContext(UserContext);
+  const { location } = useHistory();
   const logOut = () => {
     setUser({
       ...user,
@@ -55,41 +56,61 @@ export default function NavLinks({ cssScope }) {
       </div>
       <ul className={`${cssScope}nav-links`}>
           <li>
-            <Link to="/" className="underline-hover">
-              HOME
-            </Link>
+            <Link
+              to="/"
+              className={`underline-hover ${
+                location.pathname === '/' ? 'active' : ''
+              }`}
+            >HOME</Link>
           </li>
           <li>
-            <Link to="/maps" className="underline-hover">
-              MAP
-            </Link>
+            <Link
+              to="/maps" 
+              className={`underline-hover ${
+                location.pathname === '/maps' ? 'active' : ''
+              }`}
+            >MAP</Link>
           </li>
           <li>
-            <Link to="/stories" className="underline-hover">
-              STORIES
-            </Link>
+            <Link
+              to="/stories" 
+              className={`underline-hover ${
+                location.pathname === '/stories' ? 'active' : ''
+              }`}
+            >STORIES</Link>
           </li>
           <li>
-            <Link to="/about" className="underline-hover">
-              <span>ABOUT</span>
-            </Link>
+            <Link
+              to="/about"
+              className={`underline-hover ${
+                location.pathname === '/about' ? 'active' : ''
+              }`}
+            >ABOUT</Link>
           </li>
           {user.isLoggedIn && (
             <li>
-              <Link to="/login" className="underline-hover">
-                <span>PROFILE</span>
-              </Link>
+              <Link
+                to="/login"
+                className={`underline-hover ${
+                  location.pathname === '/login' ? 'active' : ''
+                }`}
+              >PROFILE</Link>
             </li>
           )}
           <li>
             {user.isLoggedIn ? (
-              <Link to="/login" onClick={logOut} className="underline-hover">
-                <span>LOGOUT</span>
-              </Link>
+              <Link
+                to="/login"
+                onClick={logOut}
+                className="underline-hover"
+              >LOGOUT</Link>
             ) : (
-              <Link to="/login" className="underline-hover">
-                <span>LOGIN</span>
-              </Link>
+              <Link
+                to="/login"
+                className={`underline-hover ${
+                  location.pathname === '/login' ? 'active' : ''
+                }`}
+              >LOGIN</Link>
             )}
           </li>
       </ul>

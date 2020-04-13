@@ -28,7 +28,7 @@
   grid-area: 2 / 2 / auto / auto;
   align-items: center;
   margin-top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   height: 100px;
 }
 .spinner-explore {
