@@ -63,7 +63,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "stories" ? "active" : ""
-            }`}
+          }`}
         >
           Explore climate stories
           <br />
@@ -72,7 +72,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "map" ? "active" : ""
-            }`}
+          }`}
         >
           Discover similar places
           <br />
@@ -81,7 +81,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "research" ? "active" : ""
-            }`}
+          }`}
         >
           Find climate actions
           <br />
@@ -114,7 +114,7 @@ export default function FirstScreen() {
           id="stories-tab"
           className={`tab-container animate-opacity ${
             activeTab === "stories" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <input
@@ -150,13 +150,13 @@ export default function FirstScreen() {
           id="map-tab"
           className={`tab-container animate-opacity ${
             activeTab === "map" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <input
               type="text"
               id="map-input"
-              placeholder="Enter the name of your city, state, or country"
+              placeholder="Enter the name of your city, county, state, or country"
               value={mapSearchTerm}
               onChange={(event) => setMapSearchTerm(event.target.value)}
               onFocus={() => {
@@ -196,6 +196,7 @@ export default function FirstScreen() {
                       name,
                       state_name,
                       nation_name,
+                      type,
                     } = place.properties;
                     return (
                       <p
@@ -210,9 +211,11 @@ export default function FirstScreen() {
                           }, 2000);
                         }}
                       >
-                        {name}
+                        {name} - <small>{type}</small>
                         <span>
-                          {state_name} {state_name ? "," : ""} {nation_name}
+                          {(type === "NATION" || type === "STATE") ? "" : state_name}
+                          {(type === "NATION" || type === "STATE") ? "" : ', '}
+                          {type === "NATION" ? "Earth" : nation_name}
                         </span>
                       </p>
                     );
@@ -221,8 +224,8 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                      <p>No suggestion</p>
-                    )}
+                <p>No suggestion</p>
+              )}
             </div>
           </div>
           <div className="tab-description">
@@ -237,7 +240,7 @@ export default function FirstScreen() {
           id="research-tab"
           className={`tab-container animate-opacity ${
             activeTab === "research" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <div className="research-input-wrapper">
