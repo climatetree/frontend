@@ -9,9 +9,9 @@
     transparent,
     transparent 250px,
     #0d0d0d 250px,
-    #0d0d0d
+    transparent
   );
-  padding-bottom: 250px;
+  padding-bottom: 200px;
 }
 #explore-header {
   opacity: 0;
