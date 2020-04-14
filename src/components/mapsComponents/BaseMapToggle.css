@@ -1,7 +1,7 @@
 .radio-wrapper {
     height: 5.5rem;
     position: absolute;
-    top: calc(36.5rem + 3px);
+    bottom: .55rem;
     right: 50px;
     display: inline;;
     align-items: center;
