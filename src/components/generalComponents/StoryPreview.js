@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import './StoryPreview.css';
 
 export default function StoryPreview({ story, cssScope }) {
   useEffect(() => {
@@ -10,7 +11,7 @@ export default function StoryPreview({ story, cssScope }) {
   }, []);
   return (
     <a
-      className={`${cssScope}-story-wrapper`}
+      className={`story-wrapper ${cssScope}-story-wrapper`}
       href={story.hyperlink}
       target="_blank"
     >
