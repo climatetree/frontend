@@ -45,7 +45,7 @@ const SolutionFilter = ({
       <>
         <FilterFieldContainer>
           <div id="solution-filter-header">
-            <FilterLabel for="solution-filter">By Solution</FilterLabel>
+            <FilterLabel for="solution-filter">By Climate Solution</FilterLabel>
             {isSolutionAdded ? (
               <AddedFilterNotification filterValue={addedSolution} />
             ) : (

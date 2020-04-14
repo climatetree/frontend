@@ -12,7 +12,7 @@ const StrategyFilter = ({
 }) => {
   return (
     <FilterFieldContainer>
-      <FilterLabel for="strategy-filter">By Strategy</FilterLabel>
+      <FilterLabel for="strategy-filter">By Climate Strategy</FilterLabel>
       <div id="strategy-choices">
         <label
           className="choices-inline"

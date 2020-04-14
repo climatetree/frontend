@@ -51,7 +51,7 @@ const SectorFilter = ({
       <>
         <FilterFieldContainer>
           <div id="sector-filter-header">
-            <FilterLabel for="sector-filter">By Sector</FilterLabel>
+            <FilterLabel for="sector-filter">By Climate Sector</FilterLabel>
             {isSectorAdded ? (
               <AddedFilterNotification filterValue={addedSector} />
             ) : (
