@@ -26,7 +26,7 @@ const StorySearchBar = ({
 
   return (
     <div className="search-bar-container">
-      <h2 id="search-for-stories-title">Search For Stories</h2>
+      <h2 id="search-for-stories-title">Search For ClimateTree Stories</h2>
       <form onSubmit={(e) => onSubmitForm(e)} style={{ position: "relative" }}>
         <input
           autoComplete="off"
@@ -34,7 +34,7 @@ const StorySearchBar = ({
           id="search-for-story"
           value={searchTerm}
           disabled={loadSpinner}
-          placeholder="Enter Story Title"
+          placeholder="E.g. Solar, Electric bikes, etc."
           onChange={(e) => setGeneralSearchTerm(e.target.value)}
         />
 
