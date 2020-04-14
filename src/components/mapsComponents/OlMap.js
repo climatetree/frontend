@@ -4,6 +4,7 @@ import "ol/ol.css";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
+import BaseLayer from 'ol/layer/Base';
 import Cluster from "ol/source/Cluster";
 import VectorSource from "ol/source/Vector";
 import XYZ from "ol/source/XYZ";
@@ -15,9 +16,12 @@ import { popUpHandler } from "./helpers/popupHandler";
 import { createPopupOverlay } from "./helpers/popups";
 
 class OlMap extends Component {
-  state = { map: null };
+  state = { map: null, baseMap: null};
+  setUpMap() {
 
+  }
   componentDidMount() {
+    this.setUpMap();
     // Enable clustering for points
     const clusterDist = 20;
     let clusterSource = new Cluster({
@@ -58,8 +62,7 @@ class OlMap extends Component {
       style: targetStyle,
     });
 
-    // Basemap layer, via ESRI API
-    let basemap = new TileLayer({
+    let baseMapDark = new TileLayer({
       source: new XYZ({
         attributions:
           'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
@@ -68,8 +71,19 @@ class OlMap extends Component {
           "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/" +
           "World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
       })
-    });
+    })
 
+    let baseMapGeo = new TileLayer({
+      source: new XYZ({
+        attributions:
+          'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+          'rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>',
+        url:
+          "https://server.arcgisonline.com/ArcGIS/rest/services/" +
+          "NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}"
+      })
+    });
+    
     // An overlay for the map that allows popups on points
     let overlay = createPopupOverlay();
 
@@ -77,14 +91,14 @@ class OlMap extends Component {
     let map = new Map({
       // Div id to put map in
       target: this.props.mapId,
-      layers: [basemap, placesLayer, targetPlaceLayer],
+      layers: [baseMapDark, baseMapGeo, placesLayer, targetPlaceLayer],
       overlays: [overlay],
       view: new View({
         center: fromLonLat([0, 0]),
         zoom: 1
       })
     });
-
+    baseMapGeo.setVisible(false);
     // Open popups when a point is clicked on
     map.on("singleclick", evt =>
       popUpHandler(evt, map, overlay, this.props.history, this.props.setComparePlaceProps)
@@ -107,6 +121,66 @@ class OlMap extends Component {
   }
 
   componentDidUpdate(prevProps) {
+        // Let basemap = this.props.basemap
+      if (this.props.baseMap != prevProps.baseMap) {
+        let baseMap;
+        if (this.props.baseMap == 'dark') {
+          // Basemap layer, via ESRI API
+          baseMap = new TileLayer({
+            source: new XYZ({
+              attributions:
+                'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+                'rest/services/Canvas/World_Dark_Gray_Base/MapServer">ArcGIS</a>',
+              url:
+                "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/" +
+                "World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+            })
+          })
+        } else if (this.props.basemap == 'natGeo') {
+          baseMap = new TileLayer({
+            source: new XYZ({
+              attributions:
+                'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+                'rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>',
+              url:
+                "https://server.arcgisonline.com/ArcGIS/rest/services/" +
+                "NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}"
+            })
+          });
+        }
+     // The map and view
+    // let map = new Map({
+    //   // Div id to put map in
+    //   target: this.props.mapId,
+    //   layers: [baseMap, placesLayer, targetPlaceLayer],
+    //   overlays: [overlay],
+    //   view: new View({
+    //     center: fromLonLat([0, 0]),
+    //     zoom: 1
+    //   })
+    // });
+    this.state.map.getLayers().forEach((ele, index, arr) => {
+      console.log(ele.getVisible() + "index: " + index);
+      console.log(this.props.baseMap);
+      // ele.setVisible(true);
+      if (this.props.baseMap == 'natGeo' && index == 0) {
+        console.log("SETTING NatGeo")
+        ele.setVisible(false);
+      } else if (this.props.baseMap == 'natGeo' && index == 1) {
+        console.log("SETTING NAT GEO")
+        ele.setVisible(true)
+      }
+      if (this.props.baseMap == 'dark' && index == 0) {
+        console.log("SETTING Dark")
+        ele.setVisible(true);
+      } else if (this.props.baseMap == 'dark' && index == 1) {
+        console.log("SETTING Dark")
+        ele.setVisible(false);
+      }
+     });
+      // this.state.map.getLayers().insertAt(0);
+    }
+    console.log(this.state.map.getLayers())
     if (this.props.places !== prevProps.places) {
       // Close any open popups
       this.state.overlay.setPosition(undefined);

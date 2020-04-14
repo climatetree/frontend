@@ -1,0 +1,26 @@
+.radio-wrapper {
+    height: 5.5rem;
+    position: absolute;
+    top: calc(36.5rem + 3px);
+    right: 50px;
+    display: inline;;
+    align-items: center;
+    border-radius: 4px;
+    width: 9rem;
+    color: white;
+    padding-top: .5rem;
+    text-align: center;
+    background-color: black;
+    opacity: .7;
+  }
+.radio-input {
+    display: block;
+    word-wrap: break-word;
+    margin-top: .2rem;
+    width: 7rem;
+    padding-left: 1rem;
+    text-align: justify;
+}
+.map-label {
+    float: right;
+}
