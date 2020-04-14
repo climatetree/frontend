@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from "../context/UserContext";
 import CloseIcon from "../../images/x.svg";
-import DropdownInput from "./DropdownInput";
+import DropdownInput from "../generalComponents/DropdownInput";
 import "./ChangeUserRoleForm.css";
 
 const ChangeUserRoleForm = ({
