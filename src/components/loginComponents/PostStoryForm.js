@@ -10,8 +10,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from "../context/UserContext";
 import useDebounce from "../customHooks/useDebounce";
 import CloseIcon from "../../images/x.svg";
-import DropdownInput from "./DropdownInput";
+import DropdownInput from "../generalComponents/DropdownInput";
 import RadioGroup from '../generalComponents/RadioGroup';
+import Select from '../generalComponents/Select';
 import "./PostStoryForm.css";
 
 export default function PostStoryForm({
@@ -47,16 +48,16 @@ export default function PostStoryForm({
       // convert the data to json
       body: JSON.stringify(newStory),
     })
-      .then(() => {
-        // Add that new story to the user profile
-        setMyStories([
-          ...myStories,
-          newStory,
-        ]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then(() => {
+      // Add that new story to the user profile
+      setMyStories([
+        ...myStories,
+        newStory,
+      ]);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
     closeForm();
   }
   const [strategy, setStrategy] = useState("");
@@ -106,6 +107,22 @@ export default function PostStoryForm({
       setSelectedPlaceID(null);
     }
   }, [debouncedSearchTerm]);
+  const handleStrategySelection = async (value) => {
+    setStrategy(value);
+    setSector('');
+    setSolution('');
+    if (value) {
+      const res = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/taxonomy/strategy/${value}`);
+      const data = await res.json();
+      const sectors = new Set(data.map(({ sector }) => sector));
+      const solutions = new Set(data.map(({ solution }) => solution));
+      setAllSectors([...sectors]);
+      setAllSolutions([...solutions]);
+    } else {
+      // setAllSectors([]); // set to all sectors
+      // setAllSolutions([]); // set to all solutions
+    }
+  }
   return (
     <section className="story-form-wrapper">
       <form autoComplete="off">
@@ -201,11 +218,11 @@ export default function PostStoryForm({
               radio={["Mitigation", "Adaptation"]}
               name="strategy"
               selectRadioOption={strategy}
-              onChange={setStrategy}
+              onChange={handleStrategySelection}
               filled
             />
           </div>
-          <DropdownInput
+          {/* <DropdownInput
             name="sector"
             type="text"
             placeholder="Story Sector"
@@ -214,6 +231,17 @@ export default function PostStoryForm({
             searchTerm={sector}
             setSearchTerm={setSector}
             optional={true}
+            direction="below"
+          /> */}
+          <Select
+            name="sector"
+            label="Sector"
+            placeholder="Select Sector"
+            value={sector}
+            onChange={setSector}
+            options={allSectors}
+            optional={true}
+            direction="below"
           />
           <DropdownInput
             name="solution"
@@ -224,7 +252,18 @@ export default function PostStoryForm({
             searchTerm={solution}
             setSearchTerm={setSolution}
             optional={true}
+            direction="above"
           />
+          {/* <Select
+            name="solution"
+            label="Solution"
+            placeholder="Select Solution"
+            value={solution}
+            onChange={setSolution}
+            options={allSolutions}
+            optional={true}
+            direction="below"
+          /> */}
         </div>
         <footer>
           <button

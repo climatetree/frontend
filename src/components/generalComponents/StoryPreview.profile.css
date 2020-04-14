@@ -1,58 +1,42 @@
 .profile-story-wrapper {
   width: 100%;
+  position: relative;
   display: grid;
   grid-template-columns: 30% 70%;
-  text-decoration: none;
-  color: #ededed;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
-  background: rgba(0, 0, 0, 0.3);
 }
 .profile-story-wrapper:not(:last-child) {
   margin-bottom: 1rem;
 }
 .profile-story-wrapper .story-image {
-  height: 200px;
-  width: 100%;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   border-radius: 2px 0 0 2px;
 }
-.profile-story-wrapper .story-image img {
-  height: 100%;
-  /* ADDED BY THEODORE */
-  width: 100%;
-  object-fit: cover;
-  /* ----------------- */
+.profile-story-wrapper .story-detail header span:not(:last-child) {
+  margin-right: 8px;
 }
-
-/* ADDED BY THEODORE */
-/* .profile-story-wrapper .story-title {
-  font-size: 20px;
-  font-weight: 500;
-} */
-/* .profile-story-wrapper .story-title:hover {
-  text-decoration: underline;
-} */
-/* ----------------- */
-
-.profile-story-wrapper .story-detail {
+.profile-story-wrapper .story-detail article p:not(:last-child) {
+  margin-bottom: 10px;
+}
+.profile-story-wrapper .story-detail .story-description {
+  max-height: 3.6rem;
+  background: linear-gradient(
+    to bottom,
+    #ededed,
+    #ededed 2.2rem,
+    transparent
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.profile-story-wrapper .story-detail footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 8px 1rem;
-}
-.profile-story-wrapper .story-detail p:not(:last-child) {
-  margin-bottom: 1rem;
-}
-.profile-story-wrapper .story-detail p:not(.story-title) {
-  font-size: 14px;
-  font-weight: 300;
-}
-.profile-story-wrapper .story-detail .story-hyperlink {
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow-x: hidden;
 }
 
 @media (max-width: 480px) {
@@ -66,5 +50,10 @@
   .profile-story-wrapper .story-image img {
     width: 100%;
     height: auto;
+  }
+  .profile-story-wrapper .story-detail footer {
+    position: relative;
+    padding: 0;
+    padding-top: 1rem;
   }
 }
