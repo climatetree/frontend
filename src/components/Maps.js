@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import OlMap from "./mapsComponents/OlMap";
 import Filters from "./mapsComponents/Filters";
+import BaseMap from "./mapsComponents/BaseMapToggle";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
 import MapSignIn from "./mapsComponents/MapSignIn";
@@ -23,6 +24,7 @@ export default function Maps() {
   const [places, setPlaces] = useState([]);
   const [searchTerm, setSearchTerm] = useState(location.state && location.state.place ? location.state.place.properties.name : '');
   const [targetPlace, setTargetPlace] = useState(null);
+  const [baseMap, setBaseMap] = useState('dark')
 
   // Filter State
   const [populationRange, setPopulationRange] = useState({
@@ -98,6 +100,7 @@ export default function Maps() {
         history={history}
         targetPlace={targetPlace}
         setComparePlaceProps={setComparePlaceProps}
+        baseMap={baseMap}
       />
       <Filters
         getSimilarPlaces={getSimilarPlaces}
@@ -118,6 +121,9 @@ export default function Maps() {
         setComparePlaceProps={setComparePlaceProps}
       />
       <MapNav />
+      <BaseMap
+        setBaseMap={setBaseMap}
+      />
       <StoryDashboard
         targetPlaceProps={targetPlace ? targetPlace.properties : null}
         comparePlaceProps={comparePlaceProps}
