@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import searchIcon from "../../images/search.svg";
 
 const StorySearchBar = ({
+  setGeneralSearchTerm,
   termForSearchBar,
   history,
   loadSpinner,
@@ -34,7 +35,7 @@ const StorySearchBar = ({
           value={searchTerm}
           disabled={loadSpinner}
           placeholder="Enter Story Title"
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => setGeneralSearchTerm(e.target.value)}
         />
 
         <img

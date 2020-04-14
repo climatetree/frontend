@@ -8,6 +8,8 @@ import CloseIcon from "../../../images/x.svg";
 import "./SideBar.css";
 
 const SideBar = ({
+  generalSearchTerm,
+  setGeneralSearchTerm,
   sideBarVisible,
   windowWidth,
   closeSideBar,
@@ -37,6 +39,8 @@ const SideBar = ({
         {!isLoggedIn && <StorySignIn />}
         {isLoggedIn && <AvatarStories />}
         <AdvancedSearch
+          generalSearchTerm={generalSearchTerm}
+          setGeneralSearchTerm={setGeneralSearchTerm}
           sideBarVisible={sideBarVisible}
           windowWidth={windowWidth}
           closeSideBar={closeSideBar}

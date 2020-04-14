@@ -4,10 +4,11 @@ import axios from "axios";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
-import AddedFilterNotification from "./AddedFilterNotification";
+
 import "./AdvancedSearch.css";
 
 const AdvancedSearch = ({
+  generalSearchTerm,
   sideBarVisible,
   closeSideBar,
   windowWidth,
@@ -89,12 +90,36 @@ const AdvancedSearch = ({
     }
   };
 
-  const applyFilterOnClick = async (solTerm) => {
-    const response = await axios.get(
-      `https://climatetree-api-gateway.azurewebsites.net/stories/solution/${solTerm}`
-    );
+  const checkingRequestBody = (searchTerm, sectors, solutions) => {
+    let requestBody = {};
 
-    setStoriesBasedOnFilter(response.data);
+    if (searchTerm) {
+      requestBody["title"] = searchTerm;
+    }
+
+    if (sectors.length) {
+      requestBody["sector"] = sectors;
+    }
+
+    if (solutions.length) {
+      requestBody["solution"] = solutions;
+    }
+
+    return requestBody;
+  };
+
+  const applyFilterOnClick = async () => {
+    let reqBody = checkingRequestBody(
+      generalSearchTerm,
+      sectorsChosenArr,
+      solutionsChosenArr
+    );
+    console.log(reqBody);
+    // const response = await axios.get(
+    //   `https://climatetree-api-gateway.azurewebsites.net/stories/solution/${solTerm}`
+    // );
+
+    // setStoriesBasedOnFilter(response.data);
   };
 
   const pushSectorValue = (newSector) => {
@@ -144,7 +169,7 @@ const AdvancedSearch = ({
         <button
           id="apply-filters"
           onClick={() => {
-            applyFilterOnClick(solutionTerm);
+            applyFilterOnClick();
             if (windowWidth < 951) {
               closeSideBar();
             }

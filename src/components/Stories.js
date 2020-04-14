@@ -20,6 +20,8 @@ const Stories = (props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sideBarVisible, setSideBarVisible] = useState(false);
 
+  const [resultFor, setResultFor] = useState("");
+
   // Retrieve query name from URL with React Router
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -83,6 +85,7 @@ const Stories = (props) => {
     setStories([]);
 
     setGeneralSearchTerm(query.get("storyTitle") || placeName || "");
+    setResultFor(query.get("storyTitle"));
     if (generalSearchTerm) {
       if (history.location.state) {
         setStories(
@@ -115,7 +118,7 @@ const Stories = (props) => {
   const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
     if (searchTerm) {
       setLoadSpinner(true);
-      setGeneralSearchTerm(searchTerm);
+      // setResultFor(searchTerm);
 
       const response = await axios.get(
         `https://climatetree-api-gateway.azurewebsites.net/stories/title/${searchTerm}`
@@ -171,7 +174,7 @@ const Stories = (props) => {
       <div className="result-for-and-filter">
         {placeId ? (
           <ResultForPlaceId placeId={placeId} placeName={placeName} />
-        ) : generalSearchTerm ? (
+        ) : resultFor ? (
           <ResultsFor searchTerm={query.get("storyTitle")} />
         ) : (
           <h2 id="recent-stories">Recent Stories</h2>
@@ -225,6 +228,7 @@ const Stories = (props) => {
       <div className={`stories-grid`}>
         <div className={`${loadSpinner ? "hide" : ""} main-stories`}>
           <StorySearchBar
+            setGeneralSearchTerm={setGeneralSearchTerm}
             termForSearchBar={generalSearchTerm}
             {...props}
             loadSpinner={loadSpinner}
@@ -240,6 +244,8 @@ const Stories = (props) => {
           windowWidth={windowWidth}
           closeSideBar={closeSideBar}
           setStoriesBasedOnFilter={setStoriesBasedOnFilter}
+          generalSearchTerm={generalSearchTerm}
+          setGeneralSearchTerm={setGeneralSearchTerm}
         />
       </div>
     </div>

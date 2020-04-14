@@ -26,8 +26,6 @@ const SolutionFilter = ({
   const [isSolutionAdded, setIsSolutionAdded] = useState(false);
 
   useEffect(() => {
-    console.log("GOES SOL FIL");
-    console.log(addedSolution);
     if (addedSolution) {
       setIsSolutionAdded(true);
       setTimeout(() => setIsSolutionAdded(false), 1000);

@@ -37,8 +37,12 @@
   cursor: pointer;
 }
 
-#apply-filters:focus {
+#apply-filters:hover {
   outline: none;
+}
+
+#apply-filters:active {
+  background-color: rgba(103, 161, 255, 1);
 }
 
 #filters {
