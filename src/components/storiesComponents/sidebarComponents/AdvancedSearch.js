@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { UserContext } from "../context/UserContext";
+// import { UserContext } from "../context/UserContext";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
@@ -15,8 +15,8 @@ const AdvancedSearch = ({
   windowWidth,
   setStoriesBasedOnFilter,
 }) => {
-  const { user } = useContext(UserContext);
-  const { jwt } = user;
+  // const { user } = useContext(UserContext);
+  // const { jwt } = user;
 
   // THIS IS FOR STRATEGY FILTER
   const [strategyTerm, setStrategyTerm] = useState("");
