@@ -5,6 +5,7 @@ import React, { useContext, useState, useEffect } from "react";
 import PostStoryForm from "./PostStoryForm";
 import ChangeUserRoleForm from "./ChangeUserRoleForm";
 import plusIcon from "../../images/plus.svg";
+import userIcon from "../../images/user.svg";
 import { UserContext } from "../context/UserContext";
 import StoryPreview from '../generalComponents/StoryPreview';
 import { generateStoryImage } from './helper';
@@ -65,7 +66,7 @@ export default function Profile() {
                 className="post-form"
                 onClick={() => setOpenChangeUserRoleForm(true)}
               >
-                <img src={plusIcon} alt="update user icon" />
+                <img src={userIcon} alt="update user icon" />
                 <p>Update User Role</p>
               </div>
             </div>
