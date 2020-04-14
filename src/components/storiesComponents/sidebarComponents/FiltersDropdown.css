@@ -69,6 +69,10 @@
     right: 16px;
   }
 
+  #solution {
+    max-height: 157px;
+  }
+
   .sector-dropdown-container {
     border: 0.5px solid rgba(201, 201, 201, 0.5);
     left: 16px;

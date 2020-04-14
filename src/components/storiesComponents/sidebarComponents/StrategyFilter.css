@@ -17,13 +17,3 @@
   margin-left: -20px;
   line-height: normal;
 }
-
-@media (max-width: 950px) {
-  #strategy-choices {
-    display: block;
-  }
-
-  .choices-inline {
-    display: block;
-  }
-}
