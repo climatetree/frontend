@@ -15,28 +15,16 @@ import "./Maps.css";
 export default function Maps() {
   const history = useHistory();
   const location = useLocation();
-  const [searchTerm, setSearchTerm] = useState(location.state && location.state.place ? location.state.place.properties.name : '');
-  const [places, setPlaces] = useState([]);
-  const [targetPlace, setTargetPlace] = useState(null);
-  const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
-  const [comparePlaceProps, setComparePlaceProps] = useState(null);
   const { user } = useContext(UserContext);
-  const getSimilarPlaces = async (queryParams) => {
-    setIsLoadingSimilarPlaces(true);
-    let features = await getGeoServerData(queryParams);
-    if (features !== undefined) {
-      setPlaces(features);
-    }
-    setIsLoadingSimilarPlaces(false);
-  };
 
-  const openMapDashboard = () => {
-    const mapDashboard = document.querySelector('.story-dashboard');
-    if (mapDashboard) {
-      mapDashboard.style.display = 'block';
-      mapDashboard.style.opacity = 1;
-    }
-  }
+  // General State
+  const [comparePlaceProps, setComparePlaceProps] = useState(null);
+  const [isLoadingSimilarPlaces, setIsLoadingSimilarPlaces] = useState(false);
+  const [places, setPlaces] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(location.state && location.state.place ? location.state.place.properties.name : '');
+  const [targetPlace, setTargetPlace] = useState(null);
+
+  // Filter State
   const [populationRange, setPopulationRange] = useState({
     name: 'population',
     min: 90,
@@ -49,8 +37,25 @@ export default function Maps() {
     max: 110,
     apply: false,
   });
-  const filterArray = [populationRange, carbonRange];
   const [placeTypesEnabled, setPlaceTypesEnabled] = useState(['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']);
+  const filterArray = [populationRange, carbonRange];
+
+  const getSimilarPlaces = async (queryParams) => {
+    setIsLoadingSimilarPlaces(true);
+    let features = await getGeoServerData(queryParams);
+    if (features !== undefined) {
+      setPlaces(features);
+    }
+    setIsLoadingSimilarPlaces(false);
+  };
+
+  const openMapDashboard = () => {
+    const mapDashboard = document.querySelector('.story-dashboard');
+    if (mapDashboard) {
+      mapDashboard.classList.add('active');
+    }
+  }
+
   const appendPlaceTypeQuery = (query, placeTypesEnabled) => {
     let result = [query];
     for (const placeType of placeTypesEnabled) {
@@ -83,6 +88,9 @@ export default function Maps() {
       })();
     }
   }, []);
+  useEffect(() => {
+    setComparePlaceProps(null);
+  }, [targetPlace]);
   return (
     <div id="maps-page">
       <OlMap mapId="map"
@@ -107,6 +115,7 @@ export default function Maps() {
         placeTypesEnabled={placeTypesEnabled}
         setPlaceTypesEnabled={setPlaceTypesEnabled}
         appendPlaceTypeQuery={appendPlaceTypeQuery}
+        setComparePlaceProps={setComparePlaceProps}
       />
       <MapNav />
       <StoryDashboard

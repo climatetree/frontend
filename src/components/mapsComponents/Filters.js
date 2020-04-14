@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import SuggestionDropdown from "./SuggestionDropdown";
 import SuggestionOverlay from "./SuggestionOverlay";
 import MinMaxRange from "./MinMaxRange";
-import CheckboxGroup from "./CheckboxGroup";
+import CheckboxGroup from "../generalComponents/CheckboxGroup";
 import useDebounce from "../customHooks/useDebounce";
 import { factory } from "./helpers/data";
 import "./Filters.css";
@@ -27,6 +27,7 @@ export default function Filters({
   placeTypesEnabled,
   setPlaceTypesEnabled,
   appendPlaceTypeQuery,
+  setComparePlaceProps,
 }) {
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [isSearchingSuggestions, setIsSearchingSuggestions] = useState(false);
@@ -76,8 +77,7 @@ export default function Filters({
   const closeMapDashboard = () => {
     const mapDashboard = document.querySelector(".story-dashboard");
     if (mapDashboard) {
-      mapDashboard.style.display = "none";
-      mapDashboard.style.opacity = 0;
+      mapDashboard.classList.remove('active');
     }
   };
 
@@ -153,9 +153,10 @@ export default function Filters({
             <div className="divisor"></div>
             <button
               onClick={() => {
-                document.getElementById("advanced-filters").style.display =
-                  "none";
                 if (targetPlace) {
+                  document.getElementById("advanced-filters").style.display =
+                    "none";
+                  setComparePlaceProps(null);
                   getSimilarPlaces(
                     appendPlaceTypeQuery(
                       factory(targetPlace, filterArray),

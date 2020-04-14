@@ -1,10 +1,14 @@
-import React from 'react';
-import './StoryPreview.css';
+import React, { useEffect } from "react";
 
-export default function StoryPreview({ story }) {
+export default function StoryPreview({ story, cssScope }) {
+  useEffect(() => {
+    (async () => {
+      require(`./StoryPreview.${cssScope}.css`);
+    })();
+  }, []);
   return (
     <a
-      className="story-wrapper"
+      className={`${cssScope}-story-wrapper`}
       href={story.hyperlink}
       target="_blank"
     >

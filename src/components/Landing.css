@@ -22,7 +22,7 @@ h3 {
   nav,
   section,
   .footer-landing {
-    padding: 0 6rem;
+    padding: 0 4rem;
   }
   h1 {
     font-size: 3.2rem;
@@ -36,9 +36,6 @@ h3 {
 }
 
 @media (max-width: 767px) {
-  body {
-    overflow-x: hidden;
-  }
   nav,
   section,
   .footer-landing {

@@ -2,7 +2,7 @@
  * Filter range for the advanced filter (in %)
  */
 import React from 'react';
-import Checkbox from './Checkbox';
+import Checkbox from '../generalComponents/Checkbox';
 import './MinMaxRange.css';
 
 export default function MinMaxRange({

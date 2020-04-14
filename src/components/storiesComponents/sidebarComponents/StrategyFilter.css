@@ -11,7 +11,7 @@
   margin-bottom: 0;
 }
 
-.choices-inline input[type="radio"] {
+.choices-inline input[type="checkbox"] {
   position: absolute;
   margin: 4px 0 0;
   margin-left: -20px;

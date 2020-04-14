@@ -14,24 +14,23 @@
   width: 20px;
   background-color: transparent;
   border-radius: 50%;
-  border: 2px solid #dddddd;
+  border: 1px solid #dddddd;
   position: relative;
-  margin-right: 5px;
+  margin-right: 10px;
 }
-.radio-custom::after {
+.radio:checked+.radio-custom::after {
   content: "";
   position: absolute;
   width: 4px;
   height: 8px;
   border: solid #ffffff;
-  border-width: 0 2px 2px 0;
+  border-width: 0 1px 1px 0;
   transform: rotate(45deg);
   left: 7px;
   top: 4px;
 }
-.radio:checked + .radio-custom {
-  background-color: rgba(0,60,136,0.5);
-  border: none;
+.radio:checked+.radio-custom.filled {
+  background-color: #666666;
 }
 .radio {
   display: none;

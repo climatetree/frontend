@@ -10,7 +10,6 @@
   width: 30px;
   height: 30px;
 }
-
 #first-screen {
   height: 100vh;
   color: #ededed;
@@ -31,8 +30,12 @@
 .tab-input {
   display: flex;
   position: relative;
-  width: 80%;
+  width: 90%;
   max-width: 700px;
+}
+#stories-tab .tab-input,
+#map-tab .tab-input {
+  align-items: center;
 }
 .tab-input input {
   width: 100%;
@@ -40,6 +43,7 @@
   background-color: rgba(255, 255, 255, 0.85);
   border: none;
   padding: 1rem 1.6rem;
+  padding-right: 3rem !important;
   font-size: 1.2rem;
   font-weight: 300;
 }
@@ -192,7 +196,7 @@
   margin-right: 8px;
 }
 
-@media (max-width: 959px) and (min-width: 768px) {
+@media (max-width: 1023px) and (min-width: 768px) {
   .tab-input input {
     width: 100%;
     padding: 0.8rem 1.4rem;
@@ -237,7 +241,7 @@
     cursor: pointer;
   }
   .tab-title {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
   }
   .tab-description {
     font-size: 14px;
@@ -245,10 +249,29 @@
 }
 
 @media (max-width: 480px) {
-  .tab-input {
-    flex-direction: column;
+  .tabs {
+    padding-top: 30vh;
+  }
+  .tab-title {
+    font-size: 1.4rem;
   }
   .research-input-wrapper {
     width: 100%;
+  }
+  .research-input-wrapper label {
+    font-size: 95%;
+    margin-top: 0;
+  }
+  .research-btn-wrapper {
+    margin-top: 0;
+  }
+  #research-tab .tab-input {
+    flex-direction: column;
+  }
+  #research-tab .tab-input input {
+    font-size: 95%;
+  }
+  #research-tab .tab-description {
+    margin-top: 8px;
   }
 }
