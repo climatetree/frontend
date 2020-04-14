@@ -94,7 +94,7 @@ const AdvancedSearch = ({
     let requestBody = {};
 
     if (searchTerm) {
-      requestBody["title"] = searchTerm;
+      requestBody["story_title"] = searchTerm;
     }
 
     if (sectors.length) {
