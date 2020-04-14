@@ -219,14 +219,14 @@ const Stories = (props) => {
       <div className={`stories-background`}></div>
 
       {loadSpinner && <Spinner />}
-      {windowWidth < 951 && (
+      {/* {windowWidth < 951 && (
         <SideBar
           sideBarVisible={sideBarVisible}
           windowWidth={windowWidth}
           closeSideBar={closeSideBar}
           setStoriesBasedOnFilter={setStoriesBasedOnFilter}
         />
-      )}
+      )} */}
 
       <div className={`stories-grid`}>
         <div className={`${loadSpinner ? "hide" : ""} main-stories`}>
@@ -241,14 +241,14 @@ const Stories = (props) => {
           {renderResultFor()}
           {!loadSpinner && renderContent()}
         </div>
-        {windowWidth > 950 && (
-          <SideBar
-            sideBarVisible={sideBarVisible}
-            windowWidth={windowWidth}
-            closeSideBar={closeSideBar}
-            setStoriesBasedOnFilter={setStoriesBasedOnFilter}
-          />
-        )}
+        {/* {windowWidth > 950 && ( */}
+        <SideBar
+          sideBarVisible={sideBarVisible}
+          windowWidth={windowWidth}
+          closeSideBar={closeSideBar}
+          setStoriesBasedOnFilter={setStoriesBasedOnFilter}
+        />
+        {/* )} */}
       </div>
     </div>
   );

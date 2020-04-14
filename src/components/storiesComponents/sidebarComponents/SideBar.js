@@ -20,7 +20,9 @@ const SideBar = ({
     <div
       id="side-bar-container"
       className={`${
-        sideBarVisible ? "when-filter-is-clicked make-z-index-one" : ""
+        sideBarVisible
+          ? "when-filter-is-clicked make-z-index-one unhide-sidebar"
+          : ""
       } ${windowWidth > 950 ? "make-z-index-one" : ""} ${
         !sideBarVisible && windowWidth < 950 ? "not-apparent" : ""
       }`}

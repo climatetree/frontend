@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import useDebounce from "../../customHooks/useDebounce";
-import AddedFilterNotification from "./AddedFilterNotification";
 import "./FiltersDropdown.css";
 
 const FiltersDropdown = ({
@@ -40,8 +39,9 @@ const FiltersDropdown = ({
   }, [debouncedTerm]);
 
   const onFilterClick = (term) => {
-    pushFilter(term);
-    setTermOnClick(term);
+    if (pushFilter(term)) {
+      setTermOnClick(term);
+    }
   };
 
   const renderContent = () => {

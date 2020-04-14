@@ -35,8 +35,10 @@ const SolutionFilter = ({
   }, [addedSolution]);
 
   const setSolutionTermOnClick = (solution) => {
+    setSolutionTerm(solution);
     setAddedSolution(solution);
-    setSolutionTerm("");
+    setIsSolutionAdded(true);
+    setTimeout(() => setIsSolutionAdded(false), 1000);
   };
 
   return (

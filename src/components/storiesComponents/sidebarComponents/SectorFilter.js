@@ -34,7 +34,7 @@ const SectorFilter = ({
 
   const setSectorTermOnClick = (filterVal) => {
     setTaxonomyForSolution(filterVal);
-    setSectorTerm("");
+    setSectorTerm(filterVal);
     setSectorChosen(true);
     setAddedSector(filterVal);
   };

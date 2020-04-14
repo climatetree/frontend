@@ -120,8 +120,10 @@ const AdvancedSearch = ({
     );
     if (solutionFound) {
       alert(newSolution + " is already added");
+      return 0;
     } else {
       setSolutionsChosenArr((prevState) => [...prevState, newSolution]);
+      return 1;
     }
   };
 
