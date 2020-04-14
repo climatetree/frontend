@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import { UserContext } from "../context/UserContext";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
@@ -14,6 +15,9 @@ const AdvancedSearch = ({
   windowWidth,
   setStoriesBasedOnFilter,
 }) => {
+  const { user } = useContext(UserContext);
+  const { jwt } = user;
+
   // THIS IS FOR STRATEGY FILTER
   const [strategyTerm, setStrategyTerm] = useState("");
 
@@ -115,11 +119,25 @@ const AdvancedSearch = ({
       solutionsChosenArr
     );
     console.log(reqBody);
-    // const response = await axios.get(
-    //   `https://climatetree-api-gateway.azurewebsites.net/stories/solution/${solTerm}`
-    // );
 
-    // setStoriesBasedOnFilter(response.data);
+    // try {
+    //   const options = {
+    //     headers: {
+    //       Authorization: "Bearer " + jwt,
+    //       "Content-Type": "application/json",
+    //     },
+    //   };
+
+    //   const response = await axios.post(
+    //     "https://climatetree-api-gateway.azurewebsites.net/stories/search",
+    //     reqBody,
+    //     options
+    //   );
+
+    //   setStoriesBasedOnFilter(response.data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const pushSectorValue = (newSector) => {
