@@ -12,47 +12,82 @@
   margin-bottom: 1rem;
 }
 .profile-story-wrapper .story-image {
-  height: 200px;
+  height: 250px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   border-radius: 2px 0 0 2px;
+  position: relative;
+  font-size: 14px;
 }
 .profile-story-wrapper .story-image img {
   height: 100%;
-  /* ADDED BY THEODORE */
   width: 100%;
   object-fit: cover;
-  /* ----------------- */
 }
-
-/* ADDED BY THEODORE */
-/* .profile-story-wrapper .story-title {
-  font-size: 20px;
-  font-weight: 500;
-} */
-/* .profile-story-wrapper .story-title:hover {
-  text-decoration: underline;
-} */
-/* ----------------- */
-
+.profile-story-wrapper .story-image .story-rating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #5274C8;
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+}
 .profile-story-wrapper .story-detail {
   padding: 8px 1rem;
+  position: relative;
 }
-.profile-story-wrapper .story-detail p:not(:last-child) {
-  margin-bottom: 1rem;
+.profile-story-wrapper .story-detail header {
+  margin-bottom: 8px;
+}
+.profile-story-wrapper .story-detail header span {
+  text-transform: uppercase;
+  font-size: 95%;
+  color: #0d0d0d;
+  background-color: #ededed;
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+.profile-story-wrapper .story-detail header span:not(:last-child) {
+  margin-right: 8px;
+}
+.profile-story-wrapper .story-detail article p:not(:last-child) {
+  margin-bottom: 10px;
 }
 .profile-story-wrapper .story-detail p:not(.story-title) {
   font-size: 14px;
   font-weight: 300;
 }
-.profile-story-wrapper .story-detail .story-hyperlink {
+.profile-story-wrapper .story-detail .story-hyperlink,
+.profile-story-wrapper .story-detail .story-post-info {
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
+}
+.profile-story-wrapper .story-detail .story-description {
+  max-height: 3.6rem;
+  background: linear-gradient(
+    to bottom,
+    #ededed,
+    #ededed 2.2rem,
+    transparent
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.profile-story-wrapper .story-detail footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 1rem;
 }
 
 @media (max-width: 480px) {
@@ -66,5 +101,10 @@
   .profile-story-wrapper .story-image img {
     width: 100%;
     height: auto;
+  }
+  .profile-story-wrapper .story-detail footer {
+    position: relative;
+    padding: 0;
+    padding-top: 1rem;
   }
 }

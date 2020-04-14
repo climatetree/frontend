@@ -60,7 +60,7 @@ export default function Profile() {
         {/* Admin Functionality */}
         {user.role === 1 && (
           <>
-            <h2>User Mangement</h2>
+            <h2>User Management</h2>
             <div className="story-list">
               <div
                 className="post-form"
