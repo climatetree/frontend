@@ -121,20 +121,6 @@ class OlMap extends Component {
   }
 
   componentDidUpdate(prevProps) {
-      if (this.props.baseMap != prevProps.baseMap) {
-        this.state.map.getLayers().forEach((ele, index, arr) => {
-          if (this.props.baseMap == 'natGeo' && index == 0) {
-            ele.setVisible(false);
-          } else if (this.props.baseMap == 'natGeo' && index == 1) {
-            ele.setVisible(true)
-          }
-          if (this.props.baseMap == 'dark' && index == 0) {
-            ele.setVisible(true);
-          } else if (this.props.baseMap == 'dark' && index == 1) {
-            ele.setVisible(false);
-          }
-        });
-    }
     if (this.props.places !== prevProps.places) {
       // Close any open popups
       this.state.overlay.setPosition(undefined);
@@ -142,7 +128,7 @@ class OlMap extends Component {
       // Swap out places data points with new search results
       let collection = this.state.map.getLayers();
       let placesSource = collection
-        .getArray()[1]  // placesLayer
+        .getArray()[2]  // placesLayer
         .getSource()    // cluster source
         .getSource();   // vector source
       placesSource.clear({ fast: true });
@@ -150,7 +136,7 @@ class OlMap extends Component {
 
       // Swap out target place data point
       let targetSource = collection
-        .getArray()[2]  // targetPlaceLayer
+        .getArray()[3]  // targetPlaceLayer
         .getSource();   // vector source (no cluster for this layer)
       targetSource.clear({ fast: true });
       targetSource.addFeatures(getGeoJson(
@@ -175,6 +161,20 @@ class OlMap extends Component {
         }
       });
     }
+    if (this.props.baseMap != prevProps.baseMap) {
+      this.state.map.getLayers().forEach((ele, index, arr) => {
+        if (this.props.baseMap == 'natGeo' && index == 0) {
+          ele.setVisible(false);
+        } else if (this.props.baseMap == 'natGeo' && index == 1) {
+          ele.setVisible(true)
+        }
+        if (this.props.baseMap == 'dark' && index == 0) {
+          ele.setVisible(true);
+        } else if (this.props.baseMap == 'dark' && index == 1) {
+          ele.setVisible(false);
+        }
+      });
+  }
   }
 
   render() {
