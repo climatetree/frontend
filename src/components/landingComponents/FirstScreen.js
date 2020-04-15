@@ -63,16 +63,16 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "stories" ? "active" : ""
-          }`}
+            }`}
         >
-          Explore climate stories
+          Explore climate change solution
           <br />
-          anywhere in the world
+          stories anywhere in the world
         </h2>
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "map" ? "active" : ""
-          }`}
+            }`}
         >
           Discover similar places
           <br />
@@ -81,7 +81,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "research" ? "active" : ""
-          }`}
+            }`}
         >
           Find climate actions
           <br />
@@ -114,7 +114,7 @@ export default function FirstScreen() {
           id="stories-tab"
           className={`tab-container animate-opacity ${
             activeTab === "stories" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <input
@@ -150,7 +150,7 @@ export default function FirstScreen() {
           id="map-tab"
           className={`tab-container animate-opacity ${
             activeTab === "map" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <input
@@ -224,8 +224,8 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                <p>No suggestion</p>
-              )}
+                      <p>No suggestion</p>
+                    )}
             </div>
           </div>
           <div className="tab-description">
@@ -240,7 +240,7 @@ export default function FirstScreen() {
           id="research-tab"
           className={`tab-container animate-opacity ${
             activeTab === "research" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <div className="research-input-wrapper">
