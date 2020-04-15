@@ -200,7 +200,7 @@ const Stories = (props) => {
               <h2 id="recent-stories">Recent Stories</h2>
             )}
         <div className="click-filter" onClick={openSideBar}>
-          Advanced search
+          Filters
         </div>
       </div>
     );
