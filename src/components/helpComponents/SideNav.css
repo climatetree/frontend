@@ -1,0 +1,34 @@
+.help-sidebar {
+  top: 0;
+  height: 100%;
+  padding-top: 7rem;
+  width: 250px;
+  position: fixed;
+  background-color: rgba(10, 10, 10, 0.7);
+  box-shadow: 3px 0 6px rgba(10, 10, 10, 0.5);
+}
+
+/* WILL BE GONE FOR GOOD !!! */
+.help-sidenav-item {
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  height: 52px;
+  font-size: 20px;
+}
+
+.help-sidenav-item:hover {
+  color: rgba(255, 255, 255, 1);
+}
+/*----------------------------*/
+
+.sidenav-link-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sidenav-link-item:hover {
+  color: rgba(255, 255, 255, 1);
+}
