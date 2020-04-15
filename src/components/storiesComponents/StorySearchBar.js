@@ -55,7 +55,7 @@ const StorySearchBar = ({
         Not all solution stories, however, are relevant to all places because of
         geographic and demographic characteristics. Thus, we have suggested a
         “taxonomy”, or organizational hierarchy, for the branches of the ClimateTree.
-        You can explore the taxonomy further with {" "}
+        You can explore the taxonomy further using {" "}
         <a href="https://drawdown.org/" target="_blank">Project Drawdown</a>.
       </p>
     </div>
