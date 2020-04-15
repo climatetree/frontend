@@ -1,0 +1,90 @@
+#help-container {
+  z-index: 1;
+}
+
+.help-topic {
+  padding-top: 7rem;
+  padding-left: 3rem;
+  margin-left: 250px;
+  padding-right: 5.5rem;
+  padding-bottom: 10rem;
+}
+
+.help-sidebar {
+  top: 0;
+  height: 100%;
+  padding-top: 7rem;
+  width: 250px;
+  position: fixed;
+  background-color: rgba(10, 10, 10, 0.7);
+  box-shadow: 3px 0 6px rgba(10, 10, 10, 0.5);
+}
+
+#help-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  background-image: url("../images/book.jpg");
+  background-size: cover;
+  filter: brightness(40%);
+}
+
+.help-header {
+  margin-bottom: 50px;
+}
+
+.help-title {
+  color: white;
+  font-weight: 400;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+#help-hr {
+  margin-bottom: 30px;
+  height: 1px;
+  border: 0.4px solid rgba(255, 255, 255, 0.5);
+}
+
+#understand-climate-tree {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+}
+
+.help-sidenav-item {
+  padding: 10px 20px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.topic-explanation {
+  color: white;
+  font-weight: 400;
+  margin-bottom: 20px;
+  line-height: 30px;
+}
+
+.help-content-paragraph {
+  margin-bottom: 80px;
+}
+
+.list-videos-link {
+  margin-left: 30px;
+  color: #ffffff;
+}
+
+.bullet-point {
+  margin-bottom: 10px;
+}
+
+.link-item {
+  color: white;
+  text-decoration: none;
+}
+
+.link-item:hover {
+  text-decoration: underline;
+}
