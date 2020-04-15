@@ -45,3 +45,18 @@
   visibility: visible;
   opacity: 1;
 }
+
+@media (max-width: 768px) {
+  .tooltip-text {
+    transform: translate(-50%, 30px);
+    max-width: 240px;
+  }
+  .tooltip-text::after {
+    top: -16px;
+    left: calc(50%);
+    border-color: transparent transparent rgba(255, 255, 255, 0.9) transparent;
+  }
+  .tooltip-text.dark::after {
+    border-color: transparent transparent rgba(0, 0, 0, 0.9) transparent;
+  }
+}
