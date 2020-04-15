@@ -1,7 +1,7 @@
 import React from "react";
 
 import Nav from "./Nav";
-
+import logo from "../images/white-logo.png";
 import "./HelpPage.css";
 
 const HelpPage = () => {
@@ -11,9 +11,43 @@ const HelpPage = () => {
       <div id="help-background"></div>
       <div id="help-container">
         <div className="help-sidebar">
-          <div className="help-sidenav-item">General</div>
-          <div className="help-sidenav-item">Map</div>
-          <div className="help-sidenav-item">Stories</div>
+          <div
+            className="help-sidenav-item"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <div className="help-logo">
+              <img
+                style={{ height: "2rem", marginRight: "5px" }}
+                src={logo}
+                alt="climate tree logo"
+              />
+            </div>
+            General
+          </div>
+          <div
+            className="help-sidenav-item"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <img
+              style={{ height: "2rem", marginRight: "5px" }}
+              className="help-logo"
+              src={logo}
+              alt="climate tree logo"
+            />
+            Map
+          </div>
+          <div
+            className="help-sidenav-item"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <img
+              style={{ height: "2rem", marginRight: "5px" }}
+              className="help-logo"
+              src={logo}
+              alt="climate tree logo"
+            />
+            Stories
+          </div>
         </div>
         <div className="help-topic">
           <div className="help-header">
