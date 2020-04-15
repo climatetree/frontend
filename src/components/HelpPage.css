@@ -44,7 +44,7 @@
 }
 
 #help-hr {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   height: 1px;
   border: 0.4px solid rgba(255, 255, 255, 0.5);
 }
@@ -67,6 +67,11 @@
 
 .help-content-paragraph {
   margin-bottom: 80px;
+}
+
+.topic-explanation {
+  color: #ffffff;
+  line-height: 30px;
 }
 
 .list-videos-link {
