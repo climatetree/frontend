@@ -81,8 +81,8 @@ export default function Maps() {
       searchString = searchString.slice(0, -1);
 
       searchString += ` similar to ${searchTerm}`
-      searchString += populationLow != '' ? ` filtering Population between ${populationLow}` : ""
-      searchString += populationHigh != '' ? ` and ${populationHigh}` : ""
+      searchString += populationLow != '' ? ` filtering Population between ${Math.round(populationLow).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} people` : ""
+      searchString += populationHigh != '' ? ` and ${Math.round(populationHigh).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} people` : ""
       searchString += carbonLow != '' && carbonHigh != ''? ", and" : "";
       searchString += carbonLow != '' ? ` filtering Carbon Emissions between ${carbonLow} kg/year` : ""
       searchString += carbonHigh != '' ? ` and ${carbonHigh} kg/year` : ""
