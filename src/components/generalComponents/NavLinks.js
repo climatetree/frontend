@@ -76,16 +76,6 @@ export default function NavLinks({ cssScope, activeLink }) {
         </li>
         <li>
           <Link
-            to="/help"
-            className={`underline-hover ${
-              location.pathname === "/help" ? "active" : ""
-            }`}
-          >
-            HELP
-          </Link>
-        </li>
-        <li>
-          <Link
             to="/maps"
             className={`underline-hover ${
               location.pathname === "/maps" ? "active" : ""
@@ -112,6 +102,16 @@ export default function NavLinks({ cssScope, activeLink }) {
             }`}
           >
             ABOUT
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/help"
+            className={`underline-hover ${
+              location.pathname.includes("/help") ? "active" : ""
+            }`}
+          >
+            HELP
           </Link>
         </li>
         {user.isLoggedIn && (
