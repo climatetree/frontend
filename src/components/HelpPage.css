@@ -1,0 +1,111 @@
+#help-container {
+  z-index: 1;
+}
+
+.help-topic {
+  padding-top: 7rem;
+  padding-left: 3rem;
+  margin-left: 250px;
+  padding-right: 5.5rem;
+  padding-bottom: 5rem;
+}
+
+#help-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 100%;
+  background-image: url("../images/book.jpg");
+  background-size: cover;
+  filter: brightness(35%);
+}
+
+.big-title {
+  color: #ffffff;
+  font-weight: 200;
+  font-size: 46px;
+  margin-bottom: 30px;
+}
+
+.help-header {
+  margin-bottom: 35px;
+}
+
+.help-title {
+  color: white;
+  font-weight: 400;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.help-hr {
+  margin-bottom: 20px;
+  height: 1px;
+  border: 0.4px solid rgba(255, 255, 255, 0.5);
+}
+
+.objective {
+  padding-left: 20px;
+  border-left: solid 5px rgba(255, 255, 255, 0.4);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-size: 25px;
+  color: #d6d6d6;
+  font-weight: 200;
+  font-style: italic;
+  margin-left: 5px;
+}
+
+.help-content-paragraph {
+  margin-bottom: 50px;
+}
+
+.topic-explanation {
+  color: #ffffff;
+  line-height: 27px;
+}
+
+.important {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.video-link {
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 3px;
+}
+
+.video-link:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.list-videos-link {
+  margin-left: 30px;
+  color: #ffffff;
+}
+
+.bullet-point {
+  margin-bottom: 10px;
+}
+
+.bullet-point:last-child {
+  margin-bottom: 0;
+}
+
+.link-item {
+  color: white;
+  text-decoration: none;
+}
+
+.link-item:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 870px) {
+  .help-topic {
+    margin-left: 0;
+  }
+}

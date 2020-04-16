@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import OlMap from "./mapsComponents/OlMap";
 import Filters from "./mapsComponents/Filters";
+import HelpBtn from "./mapsComponents/HelpBtn";
 import BaseMap from "./mapsComponents/BaseMapToggle";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
@@ -77,13 +78,13 @@ export default function Maps() {
       searchString += queryParams.includes("TYPE_ID_1:1") ? " States," : "";
       searchString += queryParams.includes("TYPE_ID_2:2") ? " Nations," : "";
       searchString += queryParams.includes("TYPE_ID_3:3") ? " Counties," : "";
-      searchString += queryParams.includes("TYPE_ID_4:4") ? " Urban Extents,": "";
+      searchString += queryParams.includes("TYPE_ID_4:4") ? " Urban Extents," : "";
       searchString = searchString.slice(0, -1);
 
       searchString += ` similar to ${searchTerm}`
-      searchString += populationLow != '' ? ` filtering Population between ${populationLow}` : ""
-      searchString += populationHigh != '' ? ` and ${populationHigh}` : ""
-      searchString += carbonLow != '' && carbonHigh != ''? ", and" : "";
+      searchString += populationLow != '' ? ` filtering Population between ${Math.round(populationLow).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} people` : ""
+      searchString += populationHigh != '' ? ` and ${Math.round(populationHigh).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} people` : ""
+      searchString += carbonLow != '' && carbonHigh != '' ? ", and" : "";
       searchString += carbonLow != '' ? ` filtering Carbon Emissions between ${carbonLow} kg/year` : ""
       searchString += carbonHigh != '' ? ` and ${carbonHigh} kg/year` : ""
     } else {
@@ -142,7 +143,7 @@ export default function Maps() {
         setComparePlaceProps={setComparePlaceProps}
         baseMap={baseMap}
       />
-      <CurrentSearchNotification searchMessage={searchMessage} />
+      {/* <CurrentSearchNotification searchMessage={searchMessage} /> */}
       <Filters
         getSimilarPlaces={getSimilarPlaces}
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
@@ -161,6 +162,7 @@ export default function Maps() {
         appendPlaceTypeQuery={appendPlaceTypeQuery}
         setComparePlaceProps={setComparePlaceProps}
       />
+      <HelpBtn />
       <MapNav />
       <BaseMap
         setBaseMap={setBaseMap}

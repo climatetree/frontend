@@ -77,6 +77,20 @@
   text-decoration: underline;
 }
 
+.story-info {
+  color: white;
+  font-size: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.story-info a {
+  color: white;
+}
+
+.story-info a:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .spinner {
   border: 3px solid #575757;
   border-radius: 50%;
@@ -191,14 +205,19 @@
 
 /* HORIZONTAL LINE */
 
-hr {
+.story-detail-hr {
   visibility: visible;
   margin: 0px auto;
   margin-top: 10px;
   width: 100%;
   border: 0;
   height: 1px;
-  background-image: linear-gradient( to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 /* COMMENT AND LIKE CARD SECTION */
@@ -260,7 +279,8 @@ hr {
   margin-right: 5px;
 }
 
-.liked, .reported {
+.liked,
+.reported {
   color: #fc0037;
 }
 

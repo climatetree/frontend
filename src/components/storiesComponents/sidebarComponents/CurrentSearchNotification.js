@@ -6,7 +6,9 @@ const CurrentSearchNotification = ({
   }) => {
       const [displayMessage, setDisplayMessage] = useState(false);
       const switchDisplay = () => {
-        setDisplayMessage(!displayMessage);
+        if (searchMessage.length > 0) {
+            setDisplayMessage(!displayMessage);
+        }
       }
       return (
           <div>
@@ -15,7 +17,7 @@ const CurrentSearchNotification = ({
             ?  <div className="searchMessageContainer message">
                     <span className="searchMessage">{searchMessage}</span>
                </div>
-            : ""
+            : null
           }
          
           </div>
