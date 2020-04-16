@@ -22,7 +22,13 @@ export default function Profile() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `https://backend-mongo-stories.azurewebsites.net/v1/stories/user/${user.userId}`
+        `https://climatetree-api-gateway.azurewebsites.net/stories/user/${user.userId}`,
+        {
+          headers: {
+            "Authorization": `Bearer ${user.jwt}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
       const userStories = await res.json();
       const results = [];
@@ -75,10 +81,17 @@ export default function Profile() {
         {/* User Stories and Post Story */}
         <h2>My stories</h2>
         <div className="personal story-list">
-          {myStories.map((story) => (
+          {myStories.map((story, index) => (
             <StoryPreview
               key={story.story_id}
               story={story}
+              updateStories={(updated) => {
+                setMyStories([
+                  ...myStories.slice(0, index),
+                  updated,
+                  ...myStories.slice(index + 1),
+                ])
+              }}
               cssScope="profile"
             />
           ))}
@@ -97,10 +110,17 @@ export default function Profile() {
             <p className="loading">loading...</p>
           ) : (
             <>
-              {trendingStories.map(story => (
+              {trendingStories.map((story, index) => (
                 <StoryPreview
                   key={story.story_id}
                   story={story}
+                  updateStories={(updated) => {
+                    setTrendingStories([
+                      ...trendingStories.slice(0, index),
+                      updated,
+                      ...trendingStories.slice(index + 1),
+                    ])
+                  }}
                   cssScope="profile"
                 />
               ))}

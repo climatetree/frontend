@@ -43,6 +43,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 40px;
+  height: calc(100vh - 80px);
 }
 
 .story-lists-wrapper h2 {
@@ -67,15 +68,6 @@
   margin-bottom: 1rem;
 }
 
-/* .personal footer {
-  height: 4rem;
-  width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-} */
-
 .post-form {
   display: flex;
   flex-direction: column;
@@ -86,7 +78,7 @@
   border: 1px dashed rgba(255, 255, 255, 0.3);
   width: 100%;
   border-radius: 4px;
-  padding: 1rem 5rem;
+  padding: 1rem;
 }
 
 .story-list .loading {
