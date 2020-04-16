@@ -4,6 +4,7 @@ import { none } from "ol/centerconstraint";
 const StoriesTopic = () => {
   return (
     <div className="help-topic">
+      <h1 className="big-title">Stories</h1>
       <div className="help-header">
         <p className="objective">
           "Explore any kind of climate change solutions anywhere in the world"

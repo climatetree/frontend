@@ -3,6 +3,7 @@ import React from "react";
 const ResearchTopic = () => {
   return (
     <div className="help-topic">
+      <h1 className="big-title">Research</h1>
       <div className="help-header">
         <p className="objective">
           “Join the effort by sharing stories you know about Climate Change
@@ -11,7 +12,7 @@ const ResearchTopic = () => {
       </div>
       <div className="help-body">
         <div className="help-content-paragraph">
-          <h2 className="help-title">Research</h2>
+          <h2 className="help-title">ClimateTree Research</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
             The ClimateTree Research Tool helps you Tell The Story about Climate

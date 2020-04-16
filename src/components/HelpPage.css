@@ -15,21 +15,28 @@
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: -1;
   height: 100%;
   background-image: url("../images/book.jpg");
   background-size: cover;
-  filter: brightness(40%);
+  filter: brightness(35%);
+}
+
+.big-title {
+  color: #ffffff;
+  font-weight: 200;
+  margin-bottom: 30px;
 }
 
 .help-header {
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 }
 
 .help-title {
   color: white;
   font-weight: 400;
-  font-size: 40px;
+  font-size: 35px;
   margin-bottom: 10px;
 }
 
@@ -40,8 +47,15 @@
 }
 
 .objective {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 20px;
+  padding-left: 20px;
+  border-left: solid 5px rgba(255, 255, 255, 0.4);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-size: 25px;
+  color: #d6d6d6;
+  font-weight: 200;
+  font-style: italic;
+  margin-left: 5px;
 }
 
 .help-content-paragraph {
@@ -87,4 +101,10 @@
 
 .link-item:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 870px) {
+  .help-topic {
+    margin-left: 0;
+  }
 }

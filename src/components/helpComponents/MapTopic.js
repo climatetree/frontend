@@ -3,6 +3,7 @@ import React from "react";
 const MapTopic = () => {
   return (
     <div className="help-topic">
+      <h1 className="big-title">Map</h1>
       <div className="help-header">
         <p className="objective">
           “How are people solving Climate Change where you live, and how are
