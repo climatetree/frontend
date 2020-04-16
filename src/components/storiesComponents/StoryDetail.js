@@ -123,7 +123,7 @@ const StoryDetail = ({ story, deleteStoryHandler }) => {
         </div>
 
         {/* Must be moderator or admin to view this section */}
-        {((role <= 2 || user.userId === story.user_id) && doneLoading) && (
+        {(role <= 2 || user.userId === story.user_id) && doneLoading && (
           <div className="mod-controls">
             <div
               role="button"
@@ -141,21 +141,25 @@ const StoryDetail = ({ story, deleteStoryHandler }) => {
             Created:{" "}
             {`${
               story.date.getUTCMonth() + 1
-              }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
+            }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
           </div>
         </div>
 
         <div className="likes-flag-view">
           <div className="liked-count">{userLikesGroupState.size} Likes</div>
           {comments.length > 0 && (
-            <div role="button" className="view-comments-btn" onClick={onToggleViewComment}>
+            <div
+              role="button"
+              className="view-comments-btn"
+              onClick={onToggleViewComment}
+            >
               <span>{comments.length} Comments</span>
             </div>
           )}
         </div>
       </div>
 
-      <hr></hr>
+      <hr className="story-detail-hr"></hr>
       <Can
         role={role}
         perform="posts:like"
