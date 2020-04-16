@@ -77,6 +77,20 @@
   text-decoration: underline;
 }
 
+.story-info {
+  color: white;
+  font-size: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.story-info a {
+  color: white;
+}
+
+.story-info a:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .spinner {
   border: 3px solid #575757;
   border-radius: 50%;
