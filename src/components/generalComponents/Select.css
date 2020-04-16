@@ -1,0 +1,22 @@
+select {
+  font-size: 1rem;
+  padding: 12px 20px;
+  appearance: none;
+  background-color: #454545;
+  color: #ededed;
+  border: none;
+  border-radius: 2px;
+  margin-top: 8px;
+  margin-bottom: 1rem;
+}
+
+option {
+  position: absolute;
+  background-color: #454545;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+option:first-child {
+  color: #454545;
+}

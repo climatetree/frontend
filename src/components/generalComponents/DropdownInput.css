@@ -1,0 +1,34 @@
+.dropdown-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.dropdown {
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  font-weight: 300;
+  z-index: 1;
+}
+.dropdown.below {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+  top: 75px;
+  border-radius: 0 0 4px 4px;
+}
+.dropdown.above {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: none;
+  bottom: 60px;
+  border-radius: 4px 4px 0 0;
+}
+.dropdown p {
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 8px 20px;
+}
+.dropdown p:hover {
+  background-color: rgba(51, 51, 51, 0.85);
+}

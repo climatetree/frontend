@@ -123,7 +123,7 @@ const StoryDetail = ({ story, deleteStoryHandler }) => {
         </div>
 
         {/* Must be moderator or admin to view this section */}
-        {role <= 2 && doneLoading && (
+        {(role <= 2 || user.userId === story.user_id) && doneLoading && (
           <div className="mod-controls">
             <div
               role="button"

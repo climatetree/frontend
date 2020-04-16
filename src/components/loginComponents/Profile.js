@@ -5,6 +5,7 @@ import React, { useContext, useState, useEffect } from "react";
 import PostStoryForm from "./PostStoryForm";
 import ChangeUserRoleForm from "./ChangeUserRoleForm";
 import plusIcon from "../../images/plus.svg";
+import userIcon from "../../images/user.svg";
 import { UserContext } from "../context/UserContext";
 import StoryPreview from '../generalComponents/StoryPreview';
 import { generateStoryImage } from './helper';
@@ -16,6 +17,22 @@ export default function Profile() {
   const [openChangeUserRoleForm, setOpenChangeUserRoleForm] = useState(false);
   const [myStories, setMyStories] = useState([]);
   const [trendingStories, setTrendingStories] = useState([]);
+
+  // Retrieve user stories
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        `https://backend-mongo-stories.azurewebsites.net/v1/stories/user/${user.userId}`
+      );
+      const userStories = await res.json();
+      const results = [];
+      const storyImageGenerator = generateStoryImage(userStories);
+      for await (const updatedStory of storyImageGenerator) {
+        results.push(updatedStory);
+      }
+      setMyStories(results);
+    })();
+  }, []);
 
   // Retrieve top stories
   useEffect(() => {
@@ -43,13 +60,13 @@ export default function Profile() {
         {/* Admin Functionality */}
         {user.role === 1 && (
           <>
-            <h2>User Mangement</h2>
+            <h2>User Management</h2>
             <div className="story-list">
               <div
                 className="post-form"
                 onClick={() => setOpenChangeUserRoleForm(true)}
               >
-                <img src={plusIcon} alt="update user icon" />
+                <img src={userIcon} alt="update user icon" />
                 <p>Update User Role</p>
               </div>
             </div>
@@ -58,8 +75,12 @@ export default function Profile() {
         {/* User Stories and Post Story */}
         <h2>My stories</h2>
         <div className="personal story-list">
-          {myStories.map((story, index) => (
-            <StoryPreview key={index} story={story} />
+          {myStories.map((story) => (
+            <StoryPreview
+              key={story.story_id}
+              story={story}
+              cssScope="profile"
+            />
           ))}
           <div
             className="post-form"
@@ -75,16 +96,16 @@ export default function Profile() {
           {trendingStories.length === 0 ? (
             <p className="loading">loading...</p>
           ) : (
-              <>
-                {trendingStories.map(story => (
-                  <StoryPreview
-                    key={story.story_id}
-                    story={story}
-                    cssScope="profile"
-                  />
-                ))}
-              </>
-            )}
+            <>
+              {trendingStories.map(story => (
+                <StoryPreview
+                  key={story.story_id}
+                  story={story}
+                  cssScope="profile"
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
       {openPostStoryForm && (

@@ -86,11 +86,6 @@ button.post-story {
   float: right;
   outline: none;
 }
-.dropdown-input {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
 #place-suggestions {
   max-height: 200px;
   overflow-y: auto;
@@ -120,27 +115,7 @@ button.post-story {
 }
 #sector-list,
 #solution-list {
-  max-height: 200px;
-  overflow-y: auto;
   display: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top: none;
-  position: absolute;
-  width: 100%;
-  top: 75px;
-  background-color: rgba(0, 0, 0, 0.85);
-  font-weight: 300;
-  z-index: 1;
-}
-#sector-list p,
-#solution-list p {
-  cursor: pointer;
-  transition: all 0.2s;
-  padding: 8px 20px;
-}
-#sector-list p:hover,
-#solution-list p:hover {
-  background-color: rgba(51, 51, 51, 0.85);
 }
 
 @media (max-width: 480px) {

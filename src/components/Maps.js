@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import OlMap from "./mapsComponents/OlMap";
 import Filters from "./mapsComponents/Filters";
+import HelpBtn from "./mapsComponents/HelpBtn";
 import BaseMap from "./mapsComponents/BaseMapToggle";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
@@ -12,6 +13,7 @@ import { getGeoServerData } from './mapsComponents/helpers/data';
 import { factory } from './mapsComponents/helpers/data';
 import "./mapsComponents/OlMap.css";
 import "./Maps.css";
+import CurrentSearchNotification from "./storiesComponents/sidebarComponents/CurrentSearchNotification";
 
 export default function Maps() {
   const history = useHistory();
@@ -41,6 +43,7 @@ export default function Maps() {
   });
   const [placeTypesEnabled, setPlaceTypesEnabled] = useState(['STATE', 'NATION', 'COUNTY', 'URBANEXTENT']);
   const filterArray = [populationRange, carbonRange];
+  const [searchMessage, setSearchMessage] = useState('');
 
   const getSimilarPlaces = async (queryParams) => {
     setIsLoadingSimilarPlaces(true);
@@ -48,9 +51,47 @@ export default function Maps() {
     if (features !== undefined) {
       setPlaces(features);
     }
+    formatSearchString(queryParams)
     setIsLoadingSimilarPlaces(false);
   };
+  const formatSearchString = (queryParams) => {
+    const paramArray = queryParams.split(';');
+    let populationLow = '';
+    let populationHigh = '';
+    let carbonLow = '';
+    let carbonHigh = '';
+    for (let i = 0; i < paramArray.length; i++) {
+      let filterStr = paramArray[i];
+      if (filterStr.includes("POPULATION_LOW:")) {
+        populationLow = filterStr.split(':')[1];
+      } else if (filterStr.includes("POPULATION_HIGH:")) {
+        populationHigh = filterStr.split(':')[1];
+      } else if (filterStr.includes("CARBON_LOW:")) {
+        carbonLow = filterStr.split(':')[1];
+      } else if (filterStr.includes("CARBON_HIGH:")) {
+        carbonHigh = filterStr.split(':')[1];
+      }
+    }
+    let searchString;
+    if (queryParams.includes("TYPE_ID_")) {
+      searchString = "Your current search is for"
+      searchString += queryParams.includes("TYPE_ID_1:1") ? " States," : "";
+      searchString += queryParams.includes("TYPE_ID_2:2") ? " Nations," : "";
+      searchString += queryParams.includes("TYPE_ID_3:3") ? " Counties," : "";
+      searchString += queryParams.includes("TYPE_ID_4:4") ? " Urban Extents," : "";
+      searchString = searchString.slice(0, -1);
 
+      searchString += ` similar to ${searchTerm}`
+      searchString += populationLow != '' ? ` filtering Population between ${Math.round(populationLow).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} people` : ""
+      searchString += populationHigh != '' ? ` and ${Math.round(populationHigh).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} people` : ""
+      searchString += carbonLow != '' && carbonHigh != '' ? ", and" : "";
+      searchString += carbonLow != '' ? ` filtering Carbon Emissions between ${carbonLow} kg/year` : ""
+      searchString += carbonHigh != '' ? ` and ${carbonHigh} kg/year` : ""
+    } else {
+      searchString = "You at least one of the 'State', 'Nation', 'County', and 'Urban Extent' filters must be selected";
+    }
+    setSearchMessage(searchString);
+  }
   const openMapDashboard = () => {
     const mapDashboard = document.querySelector('.story-dashboard');
     if (mapDashboard) {
@@ -102,6 +143,7 @@ export default function Maps() {
         setComparePlaceProps={setComparePlaceProps}
         baseMap={baseMap}
       />
+      {/* <CurrentSearchNotification searchMessage={searchMessage} /> */}
       <Filters
         getSimilarPlaces={getSimilarPlaces}
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
@@ -120,6 +162,7 @@ export default function Maps() {
         appendPlaceTypeQuery={appendPlaceTypeQuery}
         setComparePlaceProps={setComparePlaceProps}
       />
+      <HelpBtn />
       <MapNav />
       <BaseMap
         setBaseMap={setBaseMap}
