@@ -4,6 +4,8 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Nav from "./Nav";
 import SideNav from "./helpComponents/SideNav";
 import GeneralTopic from "./helpComponents/GeneralTopic";
+import MapTopic from "./helpComponents/MapTopic";
+import ResearchTopic from "./helpComponents/ResearchTopic";
 import StoriesTopic from "./helpComponents/StoriesTopic";
 
 import "./HelpPage.css";
@@ -25,6 +27,12 @@ const HelpPage = () => {
           </Route>
           <Route exact path={`${path}/stories`}>
             <StoriesTopic />
+          </Route>
+          <Route path={`${path}/map`}>
+            <MapTopic />
+          </Route>
+          <Route path={`${path}/research`}>
+            <ResearchTopic />
           </Route>
         </Switch>
       </div>

@@ -12,11 +12,6 @@ const SideNav = () => {
         style={{ display: "flex", alignItems: "center" }}
       >
         <Link to="/help" className="sidenav-link-item">
-          <img
-            style={{ height: "2rem", marginRight: "5px" }}
-            src={logo}
-            alt="climate tree logo"
-          />
           General
         </Link>
       </div>
@@ -24,26 +19,24 @@ const SideNav = () => {
         className="help-sidenav-item"
         style={{ display: "flex", alignItems: "center" }}
       >
-        <img
-          style={{ height: "2rem", marginRight: "5px" }}
-          className="help-logo"
-          src={logo}
-          alt="climate tree logo"
-        />
-        Map
+        <Link to="/help/map" className="sidenav-link-item">
+          Map
+        </Link>
       </div>
       <div
         className="help-sidenav-item"
         style={{ display: "flex", alignItems: "center" }}
       >
         <Link to="/help/stories" className="sidenav-link-item">
-          <img
-            style={{ height: "2rem", marginRight: "5px" }}
-            className="help-logo"
-            src={logo}
-            alt="climate tree logo"
-          />
           Stories
+        </Link>
+      </div>
+      <div
+        className="help-sidenav-item"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <Link to="/help/research" className="sidenav-link-item">
+          Research
         </Link>
       </div>
     </div>

@@ -7,7 +7,7 @@
   padding-left: 3rem;
   margin-left: 250px;
   padding-right: 5.5rem;
-  padding-bottom: 10rem;
+  padding-bottom: 5rem;
 }
 
 #help-background {
@@ -45,12 +45,26 @@
 }
 
 .help-content-paragraph {
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 .topic-explanation {
   color: #ffffff;
-  line-height: 30px;
+  line-height: 27px;
+}
+
+.important {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.video-link {
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 3px;
+}
+
+.video-link:hover {
+  color: rgba(255, 255, 255, 1);
 }
 
 .list-videos-link {
@@ -60,6 +74,10 @@
 
 .bullet-point {
   margin-bottom: 10px;
+}
+
+.bullet-point:last-child {
+  margin-bottom: 0;
 }
 
 .link-item {
