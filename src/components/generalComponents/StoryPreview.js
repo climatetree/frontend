@@ -11,6 +11,7 @@ export default function StoryPreview({
   story,
   index,
   updateStories,
+  removeStory,
   cssScope,
 }) {
   const [openEditForm, setOpenEditForm] = useState(false);
@@ -29,8 +30,28 @@ export default function StoryPreview({
   function closeOperations(event) {
     event.target.parentNode.parentNode.parentNode.classList.remove('open');
   }
-  function handleDelete() {
-
+  function handleDelete(story_id, jwt) {
+    const confirmed = confirm(
+      "This action cannot be undone.\nProceed with delete story?"
+    );
+    if (!confirmed) {
+      return;
+    }
+    fetch(
+      `https://climatetree-api-gateway.azurewebsites.net/stories/delete/${story_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    )
+    .then(() => {
+      removeStory();
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
   return (
     <>
@@ -98,7 +119,7 @@ export default function StoryPreview({
             </div>
             <div
               className="story-operation"
-              onClick={handleDelete}
+              onClick={() => handleDelete(story.story_id, user.jwt)}
             >
               <img src={deleteIcon} alt="delete story" />
               <p>Delete Story</p>

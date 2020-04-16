@@ -8,7 +8,7 @@ import plusIcon from "../../images/plus.svg";
 import userIcon from "../../images/user.svg";
 import { UserContext } from "../context/UserContext";
 import StoryPreview from '../generalComponents/StoryPreview';
-import { generateStoryImage } from './helper';
+import { fetchAllUserStories, fetchTopStories } from './helper';
 import "./Profile.css";
 
 export default function Profile() {
@@ -18,39 +18,10 @@ export default function Profile() {
   const [myStories, setMyStories] = useState([]);
   const [trendingStories, setTrendingStories] = useState([]);
 
-  // Retrieve user stories
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        `https://climatetree-api-gateway.azurewebsites.net/stories/user/${user.userId}`,
-        {
-          headers: {
-            "Authorization": `Bearer ${user.jwt}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const userStories = await res.json();
-      const results = [];
-      const storyImageGenerator = generateStoryImage(userStories);
-      for await (const updatedStory of storyImageGenerator) {
-        results.push(updatedStory);
-      }
-      setMyStories(results);
-    })();
-  }, []);
-
-  // Retrieve top stories
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3');
-      const topStories = await res.json();
-      const results = [];
-      const storyImageGenerator = generateStoryImage(topStories);
-      for await (const updatedStory of storyImageGenerator) {
-        results.push(updatedStory);
-      }
-      setTrendingStories(results);
+      setMyStories(await fetchAllUserStories(user));
+      setTrendingStories(await fetchTopStories(3));
     })();
   }, []);
 
@@ -92,6 +63,12 @@ export default function Profile() {
                   ...myStories.slice(index + 1),
                 ])
               }}
+              removeStory={() => {
+                setMyStories([
+                  ...myStories.slice(0, index),
+                  ...myStories.slice(index + 1),
+                ])
+              }}
               cssScope="profile"
             />
           ))}
@@ -120,6 +97,11 @@ export default function Profile() {
                       updated,
                       ...trendingStories.slice(index + 1),
                     ])
+                  }}
+                  removeStory={async () => {
+                    setTrendingStories([]);
+                    const results = await fetchTopStories(3);
+                    setTrendingStories(results);
                   }}
                   cssScope="profile"
                 />

@@ -45,3 +45,33 @@ function capitalize(s) {
     .map(word => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
     .join(' ');
 }
+
+export async function fetchTopStories(num) {
+  const res = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/topStories/${num}`);
+  const topStories = await res.json();
+  const results = [];
+  const storyImageGenerator = generateStoryImage(topStories);
+  for await (const updatedStory of storyImageGenerator) {
+    results.push(updatedStory);
+  }
+  return results;
+}
+
+export async function fetchAllUserStories({userId, jwt}) {
+  const res = await fetch(
+    `https://climatetree-api-gateway.azurewebsites.net/stories/user/${userId}`,
+    {
+      headers: {
+        "Authorization": `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const userStories = await res.json();
+  const results = [];
+  const storyImageGenerator = generateStoryImage(userStories);
+  for await (const updatedStory of storyImageGenerator) {
+    results.push(updatedStory);
+  }
+  return results;
+}

@@ -54,20 +54,6 @@ export default function PostStoryForm({
     }
   }, [debouncedSearchTerm]);
   async function handleSubmit(hyperlink, preview, place_id) {
-    const newStory = {
-      user_id: user.userId,
-      posted_by: user.username,
-      hyperlink,
-      story_title: preview.title || hyperlink,
-      description: preview.description || hyperlink,
-      image: preview.image || "",
-      place_ids: [place_id],
-      date: Date().toString(),
-      media_type: mediaType,
-      strategy: strategy ? [strategy] : ["Other"],
-      sector: sector.length ? [sector] : ["Other"],
-      solution: solution.length ? [solution] : ["Other"],
-    };
     // the new story is stored on the backend-mongo-stories db
     fetch("https://climatetree-api-gateway.azurewebsites.net/stories/create", {
       method: "POST",
@@ -76,13 +62,30 @@ export default function PostStoryForm({
         "Content-Type": "application/json",
       },
       // convert the data to json
-      body: JSON.stringify(newStory),
+      body: JSON.stringify({
+        user_id: user.userId,
+        posted_by: user.username,
+        hyperlink,
+        story_title: preview.title || hyperlink,
+        description: preview.description || hyperlink,
+        image: preview.image || "",
+        place_ids: [place_id],
+        date: Date().toString(),
+        media_type: mediaType,
+        strategy: strategy ? [strategy] : ["Other"],
+        sector: sector.length ? [sector] : ["Other"],
+        solution: solution.length ? [solution] : ["Other"],
+      }),
     })
-    .then(() => {
+    .then(response => response.json())
+    .then(story => {
       // Add that new story to the user profile
       setMyStories([
         ...myStories,
-        newStory,
+        {
+          ...story,
+          image: preview.image || "",
+        },
       ]);
       closeForm();
       setSubmitStatus('idle');
