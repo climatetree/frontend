@@ -22,7 +22,7 @@ const MapTopic = () => {
         </div>
 
         <div className="help-content-paragraph">
-          <h2 className="help-title">200 Nations</h2>
+          <h2 className="help-title">230 Nations</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
             These are the countries of the world, there are about 200 on the
@@ -31,7 +31,7 @@ const MapTopic = () => {
         </div>
 
         <div className="help-content-paragraph">
-          <h2 className="help-title">4,000 States</h2>
+          <h2 className="help-title">3,200 States</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
             Every country divides itself into smaller areas. In the United
@@ -54,7 +54,7 @@ const MapTopic = () => {
         </div>
 
         <div className="help-content-paragraph">
-          <h2 className="help-title">50,000 Urban Extents</h2>
+          <h2 className="help-title">26,000 Urban Extents</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
             These are the major cities of the world and the area of their
