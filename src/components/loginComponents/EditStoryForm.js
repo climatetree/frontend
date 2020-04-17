@@ -47,7 +47,7 @@ export default function EditStoryForm({
       {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${user.jwt}`,
+        // Authorization: `Bearer ${user.jwt}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedStory),

@@ -49,6 +49,9 @@
   white-space: nowrap;
   overflow-x: hidden;
 }
+.story-wrapper .story-detail header span:not(:last-child) {
+  margin-right: 4px;
+}
 .story-wrapper .story-detail header .story-more {
   position: absolute;
   right: 2%;

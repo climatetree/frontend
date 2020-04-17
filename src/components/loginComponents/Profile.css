@@ -98,6 +98,7 @@
   .story-lists-wrapper {
     align-items: center;
     padding-top: 0;
+    height: fit-content;
   }
   .story-list {
     width: 85%;
