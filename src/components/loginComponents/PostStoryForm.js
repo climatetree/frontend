@@ -14,7 +14,7 @@ import AlertIcon from "../../images/alert-triangle.svg";
 import RadioGroup from '../generalComponents/RadioGroup';
 import Select from '../generalComponents/Select';
 import useStoryForm from './useStoryForm';
-import "./PostStoryForm.css";
+import "./StoryForm.css";
 
 export default function PostStoryForm({
   setOpenPostStoryForm,

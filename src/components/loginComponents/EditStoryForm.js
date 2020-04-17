@@ -5,7 +5,7 @@ import AlertIcon from "../../images/alert-triangle.svg";
 import RadioGroup from '../generalComponents/RadioGroup';
 import Select from '../generalComponents/Select';
 import useStoryForm from './useStoryForm';
-import "./EditStoryForm.css";
+import "./StoryForm.css";
 
 export default function EditStoryForm({
   story,
