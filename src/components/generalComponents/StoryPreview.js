@@ -4,12 +4,11 @@ import MoreIcon from '../../images/more-horizontal.svg';
 import DeleteIcon from '../../images/trash.svg';
 import CloseIcon from '../../images/x.svg';
 import EditIcon from '../../images/edit-3.svg';
-import './StoryPreview.css';
 import EditStoryForm from "../loginComponents/EditStoryForm";
+import './StoryPreview.css';
 
 export default function StoryPreview({
   story,
-  index,
   updateStories,
   removeStory,
   cssScope,
@@ -145,7 +144,6 @@ export default function StoryPreview({
         <EditStoryForm
           story={story}
           toggleForm={setOpenEditForm}
-          index={index}
           updateStories={updateStories}
         />
       )}

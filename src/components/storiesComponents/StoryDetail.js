@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
@@ -7,7 +7,13 @@ import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
 import StoryPreview from "../generalComponents/StoryPreview";
 
-const StoryDetail = ({ story }) => {
+const StoryDetail = ({
+  story,
+  deleteStoryHandler,
+  index,
+  stories,
+  setStories,
+}) => {
   let userLikesGroup = new Set();
   for (let userId of story.liked_by_users) {
     userLikesGroup.add(userId);
@@ -22,7 +28,6 @@ const StoryDetail = ({ story }) => {
   let [userLikesGroupState, setUserLikesGroup] = useState(userLikesGroup);
   let [userFlagGroupState, setUserFlagGroup] = useState(userFlagGroup);
   let [comments, setComments] = useState(story.comments);
-  let [doneLoading, setDoneLoading] = useState(false);
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
@@ -98,31 +103,16 @@ const StoryDetail = ({ story }) => {
           <StoryPreview
             key={story.story_id}
             story={story}
+            updateStories={(updated) => {
+              setStories([
+                ...stories.slice(0, index),
+                updated,
+                ...stories.slice(index + 1),
+              ]);
+            }}
+            removeStory={() => deleteStoryHandler(story.story_id, user.jwt)}
             cssScope="profile"
           />
-        </div>
-
-        {/* Must be moderator or admin to view this section */}
-        {(role <= 2 || user.userId === story.user_id) && doneLoading && (
-          <div className="mod-controls">
-            <div
-              role="button"
-              className="delete-story-btn"
-              onClick={() => deleteStoryHandler(story.story_id, user.jwt)}
-            >
-              <i className="far fa-trash-alt"></i>
-              Delete Story
-            </div>
-          </div>
-        )}
-
-        <div>
-          <div className="created-detail">
-            Created:{" "}
-            {`${
-              story.date.getUTCMonth() + 1
-            }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
-          </div>
         </div>
 
         <div className="likes-flag-view">
