@@ -42,12 +42,12 @@ export default function EditStoryForm({
       solution: [solution === "" ? "Other" : solution],
     };
     fetch(
-      // `https://climatetree-api-gateway.azurewebsites.net/stories/update/${story.story_id}`,
-      `https://backend-mongo-stories.azurewebsites.net/v1/stories/update/${story.story_id}`,
+      `https://climatetree-api-gateway.azurewebsites.net/stories/update/${story.story_id}`,
+      // `https://backend-mongo-stories.azurewebsites.net/v1/stories/update/${story.story_id}`,
       {
       method: "PUT",
       headers: {
-        // Authorization: `Bearer ${user.jwt}`,
+        Authorization: `Bearer ${user.jwt}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedStory),
