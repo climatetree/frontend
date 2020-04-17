@@ -30,6 +30,16 @@
   padding: 8px 1rem;
 }
 
+@media (max-width: 1366px) and (min-width: 768px) {
+  .landing-story-wrapper .operations-overlay {
+    flex-direction: column;
+  }
+  .landing-story-wrapper .story-operation:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+}
+
 @media (min-width: 768px) {
   .landing-story-wrapper {
     display: block;

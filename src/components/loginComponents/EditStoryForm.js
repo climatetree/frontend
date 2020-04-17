@@ -52,9 +52,8 @@ export default function EditStoryForm({
       },
       body: JSON.stringify(updatedStory),
     })
-    .then((response) => {
+    .then(() => {
       updateStories(updatedStory);
-      // console.log(response);
       toggleForm(false);
       setSubmitStatus('idle');
     })
