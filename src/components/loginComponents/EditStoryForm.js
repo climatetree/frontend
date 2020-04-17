@@ -43,7 +43,6 @@ export default function EditStoryForm({
     };
     fetch(
       `https://climatetree-api-gateway.azurewebsites.net/stories/update/${story.story_id}`,
-      // `https://backend-mongo-stories.azurewebsites.net/v1/stories/update/${story.story_id}`,
       {
       method: "PUT",
       headers: {
