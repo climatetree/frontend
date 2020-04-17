@@ -6,23 +6,8 @@ import "./SideNav.css";
 const SideNav = () => {
   const { location } = useHistory();
 
-  const toggleSidebar = () => {
-    document
-      .querySelector(".help-sidebar")
-      .classList.toggle("help-sidebar-active");
-    document
-      .querySelector(".sidebar-burger")
-      .classList.toggle("sidebar-burger-active");
-    document.querySelector(".sidebar-burger").classList.toggle("toggle-help");
-  };
-
   return (
     <>
-      <div className="sidebar-burger" onClick={toggleSidebar}>
-        <div className="sidebar-line1"></div>
-        <div className="sidebar-line2"></div>
-        <div className="sidebar-line3"></div>
-      </div>
       <div className="help-sidebar">
         <div className="help-sidenav-item">
           <Link
@@ -30,7 +15,6 @@ const SideNav = () => {
             className={`sidenav-link-item ${
               location.pathname === "/help" ? "sidenav-active" : ""
             }`}
-            onClick={toggleSidebar}
           >
             General
           </Link>
@@ -41,7 +25,6 @@ const SideNav = () => {
             className={`sidenav-link-item ${
               location.pathname === "/help/map" ? "sidenav-active" : ""
             }`}
-            onClick={toggleSidebar}
           >
             Map
           </Link>
@@ -52,7 +35,6 @@ const SideNav = () => {
             className={`sidenav-link-item ${
               location.pathname === "/help/stories" ? "sidenav-active" : ""
             }`}
-            onClick={toggleSidebar}
           >
             Stories
           </Link>
@@ -63,7 +45,6 @@ const SideNav = () => {
             className={`sidenav-link-item ${
               location.pathname === "/help/research" ? "sidenav-active" : ""
             }`}
-            onClick={toggleSidebar}
           >
             Research
           </Link>
