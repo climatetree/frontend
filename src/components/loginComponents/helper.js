@@ -1,14 +1,3 @@
-export async function* generateStoryImage(stories) {
-  for (const story of stories) {
-    const response = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(story.hyperlink)}`);
-    const preview = await response.json();
-    yield {
-      ...story,
-      image: preview.image,
-    };
-  }
-}
-
 export async function fetchAllMediaTypes() {
   const mediaResponse = await fetch(
     "https://climatetree-api-gateway.azurewebsites.net/stories/mediaTypes"
@@ -48,13 +37,7 @@ function capitalize(s) {
 
 export async function fetchTopStories(num) {
   const res = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/topStories/${num}`);
-  const topStories = await res.json();
-  const results = [];
-  const storyImageGenerator = generateStoryImage(topStories);
-  for await (const updatedStory of storyImageGenerator) {
-    results.push(updatedStory);
-  }
-  return results;
+  return await res.json();
 }
 
 export async function fetchAllUserStories({userId, jwt}) {
@@ -67,11 +50,5 @@ export async function fetchAllUserStories({userId, jwt}) {
       },
     }
   );
-  const userStories = await res.json();
-  const results = [];
-  const storyImageGenerator = generateStoryImage(userStories);
-  for await (const updatedStory of storyImageGenerator) {
-    results.push(updatedStory);
-  }
-  return results;
+  return await res.json();
 }

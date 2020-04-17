@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
@@ -8,7 +7,7 @@ import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
 import StoryPreview from "../generalComponents/StoryPreview";
 
-const StoryDetail = ({ story, deleteStoryHandler }) => {
+const StoryDetail = ({ story }) => {
   let userLikesGroup = new Set();
   for (let userId of story.liked_by_users) {
     userLikesGroup.add(userId);
@@ -23,30 +22,11 @@ const StoryDetail = ({ story, deleteStoryHandler }) => {
   let [userLikesGroupState, setUserLikesGroup] = useState(userLikesGroup);
   let [userFlagGroupState, setUserFlagGroup] = useState(userFlagGroup);
   let [comments, setComments] = useState(story.comments);
-  let [storyView, setStoryView] = useState({});
   let [doneLoading, setDoneLoading] = useState(false);
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
   const { role } = user;
-
-  useEffect(() => {
-    (async () => {
-      const storyPreview = await axios.get(
-        `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
-          story.hyperlink
-        )}`
-      );
-
-      setStoryView({
-        ...storyPreview.data,
-        story_title: storyPreview.data["title"],
-        hyperlink: story.hyperlink,
-      });
-
-      setDoneLoading(true);
-    })();
-  }, []);
 
   const onToggleComment = () => {
     setToggleComment((prevToggleCommentState) => !prevToggleCommentState);
@@ -117,7 +97,7 @@ const StoryDetail = ({ story, deleteStoryHandler }) => {
         <div className="link-preview-container">
           <StoryPreview
             key={story.story_id}
-            story={storyView}
+            story={story}
             cssScope="profile"
           />
         </div>

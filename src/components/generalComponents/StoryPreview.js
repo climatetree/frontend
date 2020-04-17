@@ -1,9 +1,9 @@
 import React, { useEffect, useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import moreIcon from '../../images/more-horizontal.svg';
-import deleteIcon from '../../images/trash.svg';
-import closeIcon from '../../images/x.svg';
-import editIcon from '../../images/edit-3.svg';
+import MoreIcon from '../../images/more-horizontal.svg';
+import DeleteIcon from '../../images/trash.svg';
+import CloseIcon from '../../images/x.svg';
+import EditIcon from '../../images/edit-3.svg';
 import './StoryPreview.css';
 import EditStoryForm from "../loginComponents/EditStoryForm";
 
@@ -15,6 +15,7 @@ export default function StoryPreview({
   cssScope,
 }) {
   const [openEditForm, setOpenEditForm] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
   const { user } = useContext(UserContext);
   useEffect(() => {
     if (cssScope) {
@@ -22,6 +23,11 @@ export default function StoryPreview({
         require(`./StoryPreview.${cssScope}.css`);
       })();
     }
+    (async () => {
+      const response = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(story.hyperlink)}`);
+      const preview = await response.json();
+      setImageUrl(preview.image);
+    })();
   }, []);
   function openOperations(event) {
     event.preventDefault();
@@ -61,7 +67,7 @@ export default function StoryPreview({
         target="_blank"
       >
         <div className="story-image">
-          <img src={story.image} alt={story.story_title} />
+          <img src={imageUrl} alt={story.story_title} />
           <div className="story-rating" title="ClimateTree quality rating">
             {story.rating === 0 ? (
               <p>Unrated</p>
@@ -87,7 +93,7 @@ export default function StoryPreview({
             )}
             {(user.role <= 2 || story.user_id === user.userId) && (
               <img
-                src={moreIcon}
+                src={MoreIcon}
                 alt="more"
                 className="story-more"
                 onClick={(event) => {
@@ -114,21 +120,21 @@ export default function StoryPreview({
               className="story-operation"
               onClick={() => setOpenEditForm(true)}
             >
-              <img src={editIcon} alt="edit" />
+              <img src={EditIcon} alt="edit" />
               <p>Edit Story</p>
             </div>
             <div
               className="story-operation"
               onClick={() => handleDelete(story.story_id, user.jwt)}
             >
-              <img src={deleteIcon} alt="delete story" />
+              <img src={DeleteIcon} alt="delete story" />
               <p>Delete Story</p>
             </div>
             <div
               className="story-operation" 
               onClick={closeOperations}
             >
-              <img src={closeIcon} alt="cancel" />
+              <img src={CloseIcon} alt="cancel" />
               <p>Cancel</p>
             </div>
           </div>
