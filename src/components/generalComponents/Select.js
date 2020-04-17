@@ -9,7 +9,6 @@ export default function Select({
   optional,
   onChange,
 }) {
-  console.log(options);
   return (
     <>
       <label htmlFor={name}>
@@ -24,13 +23,14 @@ export default function Select({
         value={value}
         onChange={(event) => onChange(event.target.value)}
       >
-        <option value="" selected>Select a {label}</option>
-        {options.length > 0 && (
+        {options.length > 0 ? (
           <>
             {options.map((option, index) => (
               <option key={index} value={option}>{option}</option>
             ))}
           </>
+        ) : (
+          <option value="" disabled>Select a {label}</option>
         )}
       </select>
     </>

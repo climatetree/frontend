@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { percentiStringify, goToStories } from '../mapsComponents/helpers/popupHandler';
 import StoryPreview from '../generalComponents/StoryPreview';
-import { generateStoryImage } from '../loginComponents/helper';
 import UpIcon from '../../images/chevron-up.svg';
 import DownIcon from '../../images/chevron-down.svg';
 import './StoryDashboard.css';
@@ -34,12 +33,7 @@ export default function StoryDashboard({
       (async () => {
         const response = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/place/${comparePlaceProps.place_id}`);
         const placeStories = await response.json();
-        const results = [];
-        const storyImageGenerator = generateStoryImage(placeStories);
-        for await (const updatedStory of storyImageGenerator) {
-          results.push(updatedStory);
-        }
-        setStories(results);
+        setStories(placeStories);
       })();
     } else {
       setStories([]);

@@ -19,7 +19,7 @@ const Stories = (props) => {
   const [loadSpinner, setLoadSpinner] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sideBarVisible, setSideBarVisible] = useState(false);
-  const [removedStories, setRemovedStories] = useState([])
+  const [removedStory, setRemovedStory] = useState('')
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -77,7 +77,7 @@ const Stories = (props) => {
         await fetchRecentStories();
       })();
     }
-  }, [removedStories]);
+  }, [removedStory]);
 
   useEffect(() => {
     let { history } = props;
@@ -97,7 +97,7 @@ const Stories = (props) => {
         })();
       }
     }
-  }, [query.get("storyTitle"), removedStories]);
+  }, [query.get("storyTitle"), removedStory]);
 
   const fetchRecentStories = async () => {
     setLoadSpinner(true);
@@ -141,24 +141,16 @@ const Stories = (props) => {
    * Removes a story from the database.
    */
   const deleteStoryHandler = async (story_id, jwt) => {
-    // Ensure delete is supposed to happen
-    let confirmed = confirm("This action cannot be undone.\nProceed with delete story?");
-    if (!confirmed) {
-      return;
-    }
-
-    // Proceed with delete story
     await fetch(
       `https://climatetree-api-gateway.azurewebsites.net/stories/delete/${story_id}`,
       {
         method: "DELETE",
         headers: {
-          Authorization: "Bearer " + jwt,
+          Authorization: `Bearer ${jwt}`,
         },
       }
     );
-
-    setRemovedStories(prevStories => prevStories.push(story_id));
+    setRemovedStory(story_id);
   }
 
   const openSideBar = () => {
@@ -212,12 +204,14 @@ const Stories = (props) => {
       <>
         {/* {renderResultFor()} */}
         {stories.length &&
-          stories.map((story) => (
+          stories.map((story, index) => (
             <StoryDetail
               story={story}
               key={story.story_id}
-              generalSearchTerm={generalSearchTerm}
               deleteStoryHandler={deleteStoryHandler}
+              index={index}
+              stories={stories}
+              setStories={setStories}
             />
           ))}
         {!stories.length && !loadSpinner && (

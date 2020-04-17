@@ -1,6 +1,5 @@
 .profile-story-wrapper {
   width: 100%;
-  position: relative;
   display: grid;
   grid-template-columns: 30% 70%;
 }
@@ -13,9 +12,6 @@
   justify-content: center;
   align-items: center;
   border-radius: 2px 0 0 2px;
-}
-.profile-story-wrapper .story-detail header span:not(:last-child) {
-  margin-right: 8px;
 }
 .profile-story-wrapper .story-detail article p:not(:last-child) {
   margin-bottom: 10px;
