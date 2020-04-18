@@ -12,10 +12,10 @@ const ResearchTopic = () => {
       </div>
       <div className="help-body">
         <div className="help-content-paragraph">
-          <h2 className="help-title">ClimateTree Research</h2>
+          <h2 className="help-title">ClimateTree&trade; Research</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
-            The ClimateTree Research Tool helps you Tell The Story about Climate
+            The ClimateTree&trade; Research Tool helps you Tell The Story about Climate
             Change Solutions. Upload a solution story you have heard.
           </p>
           <br />
@@ -27,7 +27,7 @@ const ResearchTopic = () => {
           <br />
           <p className="topic-explanation">
             Either way, our “Research” tool allows you to tag with the same
-            “Place” and “Strategies, Sectors, Solutions” tags ClimateTree uses
+            “Place” and “Strategies, Sectors, Solutions” tags ClimateTree&trade; uses
             for its “Map” and “Stories” filters.
           </p>
           <br />
