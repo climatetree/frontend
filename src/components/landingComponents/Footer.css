@@ -1,21 +1,51 @@
-/* footer */
-
 .footer-landing {
-  height: 150px;
+  max-width: 100%;
   padding: 0 10rem;
-  display: flex;
-  justify-content: space-between;
   position: relative;
   color: #ededed;
 }
-
-.footer-landing div {
-  flex: 1;
+.footer-landing a {
+  color: #ededed;
+  text-decoration: none;
+  cursor: pointer;
+}
+.logo-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
-
+.footer-landing h2 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.ct-logo-text {
+  font-family: serif;
+  font-weight: 100;
+  transform: translate(-8px, 14px);
+  font-size: 21px;
+  color: white;
+  letter-spacing: 1px;
+}
+.ct-logo {
+  height: 4rem;
+}
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+}
+.footer-col.links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.footer-col.links h2 {
+  grid-column: 1 / span 2;
+}
+.footer-col a {
+  margin-top: 5px;
+}
 #footer-background {
   height: 500px;
   width: 100%;
@@ -26,9 +56,14 @@
   background: url("../../images/footer-dark-map.png");
   background-size: cover;
   z-index: -1;
-  box-shadow: 0 350px 500px 0px #0d0d0d inset;
+  box-shadow: 0 360px 500px 0px #0d0d0d inset;
 }
 
-.logo {
-  height: 4rem;
+@media (max-width: 480px) {
+  .footer-cols {
+    display: block;
+  }
+  .footer-col:not(.links) h2 {
+    margin-top: 3rem;
+  }
 }
