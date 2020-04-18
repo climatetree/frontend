@@ -1,7 +1,6 @@
 #spinner-landing {
   border: 3px solid #575757;
   border-radius: 50%;
-  /* border-top: 3px solid #dbdbdb; */
   border-bottom: 3px solid #dbdbdb;
   animation: spin 2s linear infinite;
   position: absolute;
@@ -10,16 +9,13 @@
   width: 30px;
   height: 30px;
 }
-
 #first-screen {
-  height: 100vh;
+  min-height: 100vh;
   color: #ededed;
 }
-
 #animation-first {
   animation: firstScreen 1s ease-in-out 0s forwards;
 }
-
 @keyframes firstScreen {
   from {
     opacity: 0;
@@ -30,18 +26,16 @@
     transform: translateY(0px);
   }
 }
-
 .tab-input {
   display: flex;
   position: relative;
   width: 90%;
   max-width: 700px;
 }
-
-#stories-tab .tab-input, #map-tab .tab-input {
+#stories-tab .tab-input,
+#map-tab .tab-input {
   align-items: center;
 }
-
 .tab-input input {
   width: 100%;
   color: #0d0d0d;
@@ -52,22 +46,18 @@
   font-size: 1.2rem;
   font-weight: 300;
 }
-
 .tab-input img {
   cursor: pointer;
   position: absolute;
   right: 0;
   transform: translateX(-1.6rem);
 }
-
 .tab-input a {
   color: white;
 }
-
 .tab-input a:hover {
   color: rgba(255, 255, 255, 0.95);
 }
-
 .primary-btn {
   background-color: rgba(255, 255, 255, 0.9);
   width: 10rem;
@@ -81,37 +71,35 @@
   display: inline-block;
   text-align: center;
 }
-
-.primary-btn:link, .primary-btn:active, .primary-btn:visited {
+.primary-btn:link,
+.primary-btn:active,
+.primary-btn:visited {
   color: #0d0d0d;
 }
-
 #background {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: calc(100vh + 300px);
-  background-image: url("../../images/nasa-Q1p7bh3SHj8-unsplash.jpg");
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../../images/nasa-Q1p7bh3SHj8-unsplash.jpg");
   background-size: cover;
   z-index: -1;
   box-shadow: 1vw -50vh 50vh 0 #0d0d0d inset;
 }
-
 .tabs {
-  padding-top: 32vh;
+  padding-top: 30vh;
 }
-
 .tab-btn {
   display: inline-block;
   position: relative;
   font-weight: 300;
 }
-
 .tab-btn.active {
   font-weight: 400;
 }
-
 .tab-btn::after {
   content: "";
   display: inline-block;
@@ -123,51 +111,39 @@
   bottom: -2px;
   left: 0;
 }
-
 .tab-btn.active::after {
   width: 100%;
 }
-
 .tab-btn:not(:last-child) {
   margin-right: 2rem;
 }
-
 .tab-container {
   display: none;
   position: relative;
   margin-top: 1rem;
 }
-
-.tab-container.active {
+.tab-container.active,
+.tab-title.active {
   display: block;
 }
-
 .tab-title {
   font-size: 2.2rem;
   font-weight: 400;
   display: none;
   margin-bottom: 1rem;
 }
-
-.tab-title.active {
-  display: block;
-}
-
 .tab-description {
   /* Same width as search bar */
   max-width: 700px;
   margin-top: 1rem;
 }
-
 .tab-description p:first-child {
   font-weight: 400;
 }
-
 .tab-description p {
   font-weight: 300;
   margin-bottom: 0.5rem;
 }
-
 .place-suggestions {
   position: absolute;
   top: 100%;
@@ -182,45 +158,36 @@
   overflow-y: auto;
   display: none;
 }
-
 .place-suggestions p {
   cursor: pointer;
   font-weight: 400;
 }
-
 .place-suggestions p:not(:last-child) {
   margin-bottom: 0.8rem;
 }
-
 .place-suggestions p span {
   display: block;
   font-size: 14px;
   font-weight: 300;
 }
-
 .research-input-wrapper {
   width: 50%;
 }
-
 .research-input-wrapper:not(:last-child) {
   margin-right: 1rem;
 }
-
 .research-input-wrapper label {
   margin: 8px;
   display: inline-block;
 }
-
 .research-input-wrapper label span {
   margin-left: 8px;
   font-size: 14px;
   font-weight: 300;
 }
-
 .research-btn-wrapper {
   margin-top: 1rem;
 }
-
 .research-btn-wrapper button {
   border: 1px solid #ededed;
   border-radius: 4px;
@@ -231,7 +198,6 @@
   font-weight: 300;
   cursor: pointer;
 }
-
 .research-btn-wrapper button:not(:last-child) {
   margin-right: 8px;
 }
@@ -289,8 +255,11 @@
 }
 
 @media (max-width: 480px) {
+  #first-screen {
+    margin-bottom: 3rem;
+  }
   .tabs {
-    padding-top: 30vh;
+    padding-top: 24vh;
   }
   .tab-title {
     font-size: 1.4rem;
