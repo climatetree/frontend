@@ -6,7 +6,7 @@
   background: rgba(0, 0, 0, 0.3);
   height: min-content;
   overflow-y: visible;
-  z-index: 99;
+  z-index: 1;
   padding-bottom: 70px;
   padding-right: 10px;
 }

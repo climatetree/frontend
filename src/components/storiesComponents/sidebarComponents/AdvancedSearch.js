@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Tooltip from "../../generalComponents/Tooltip";
 
-// import { UserContext } from "../context/UserContext";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
@@ -101,19 +100,19 @@ const AdvancedSearch = ({
     let requestBody = {};
 
     if (strategyTerm) {
-      requestBody["strategy"] = [strategyTerm.toLowerCase()];
+      requestBody["strategy"] = [strategyTerm];
     }
 
     if (searchTerm) {
-      requestBody["story_title"] = searchTerm.toLowerCase();
+      requestBody["story_title"] = searchTerm;
     }
 
     if (sectorTerm.length) {
-      requestBody["sector"] = [sector.toLowerCase()];
+      requestBody["sector"] = [sector];
     }
 
     if (solutionTerm.length) {
-      requestBody["solution"] = [solution.toLowerCase()];
+      requestBody["solution"] = [solution];
     }
 
     return requestBody;

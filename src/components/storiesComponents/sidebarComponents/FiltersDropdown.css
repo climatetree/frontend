@@ -11,11 +11,10 @@
   right: 16px;
   display: none;
   margin-bottom: 20px;
-  /* transform: rotate(180deg); */
 }
 
 #solution {
-  top: -145%;
+  max-height: 120px;
 }
 
 .searching {
