@@ -127,7 +127,7 @@ const AdvancedSearch = ({
 
     try {
       const response = await axios.post(
-        "https://backend-mongo-stories.azurewebsites.net/v1/stories/search",
+        "https://climatetree-api-gateway.azurewebsites.net/stories/search",
         reqBody
       );
 
