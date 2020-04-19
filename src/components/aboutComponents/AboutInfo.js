@@ -9,12 +9,12 @@ import harman from "../../images/team/harman.jpeg"
 import abdul from "../../images/team/abdul.jpeg"
 import shweta from "../../images/team/shweta.jpg"
 import sam from "../../images/team/sam.jpeg"
-import saurabha from  "../../images/team/saurabha.jpeg"
-import neha from  "../../images/team/neha.jpeg"
-import pierre from  "../../images/team/pierre.jpg"
-import priyanka from  "../../images/team/priyanka.png"
-import vishal from  "../../images/team/vishal.jpeg"
-import theodore from  "../../images/team/theodore.jpeg"
+import saurabha from "../../images/team/saurabha.jpeg"
+import neha from "../../images/team/neha.jpeg"
+import pierre from "../../images/team/pierre.jpg"
+import priyanka from "../../images/team/priyanka.png"
+import vishal from "../../images/team/vishal.jpeg"
+import theodore from "../../images/team/theodore.jpeg"
 import wanjia from "../../images/team/wanjia.jpeg"
 /**
  * AboutInfo is handling the html code for the About section. 
@@ -33,17 +33,17 @@ export default function AboutInfo() {
       </p>
 
       <p>
-        ClimateTree is an innovative project that empowers communities of all scales and types to find, share, and discuss climate change solutions using the latest in Geographic Information Systems (GIS), web-platform, and social media technologies.
+        ClimateTree&trade; is an innovative project that empowers communities of all scales and types to find, share, and discuss climate change solutions using the latest in Geographic Information Systems (GIS), web-platform, and social media technologies.
       </p>
       <p>
         Spin the globe and explore what’s happening anywhere, find stories by climate change mitigation or adaptation solution, search for comparables of your place, upload and tag content, comment on what you see, or meet a new friend across the world!
       </p>
-      <h2>ClimateTree Story</h2>
+      <h2>ClimateTree&trade; Story</h2>
       <p>
-        ClimateTree was launched in 2020 by Northeastern University Master’s students in Advanced Software Development. Their Professor, Dr. Ian Gorton, Chair of Computer Science, found the project through the “tech for good” organization DemocracyLab.org founded by Mark Frischmuth.
+        ClimateTree&trade; was launched in 2020 by Northeastern University Master’s students in Advanced Software Development. Their Professor, Dr. Ian Gorton, Chair of Computer Science, found the project through the “tech for good” organization DemocracyLab.org founded by Mark Frischmuth.
       </p>
       <p>
-        ClimateTree was conceived in 2019 by Greg Schundler and Abby Ruskey in response to global-scale ecological crisis, global climate strikes, and the inertia of international climate politics. The first research was done with high school students in Olympia, Washington, who, having helped demand and pass a City-wide climate change resolution, were asked to advise their city government on the adoption of appropriate climate change mitigation and adaptation solutions.
+        ClimateTree&trade; was conceived in 2019 by Greg Schundler and Abby Ruskey in response to global-scale ecological crisis, global climate strikes, and the inertia of international climate politics. The first research was done with high school students in Olympia, Washington, who, having helped demand and pass a City-wide climate change resolution, were asked to advise their city government on the adoption of appropriate climate change mitigation and adaptation solutions.
       </p>
       <p>
         Please send us a note at{" "}
@@ -51,7 +51,7 @@ export default function AboutInfo() {
       </p>
       <h2>A Reflection from Space</h2>
       <p>
-        ClimateTree was inspired by a desire to help Earthlings live in harmony. You humans have always pondered ways to flourish and improve, while reducing suffering and avoiding disaster. Innovation, violence, and migration have been rotating solutions to your limits and problems. Yet, modern global-scale threats such as nuclear annihilation and ecological collapse have made conflict and migration increasingly untenable. Here you are. The time is now.
+        ClimateTree&trade; was inspired by a desire to help Earthlings live in harmony. You humans have always pondered ways to flourish and improve, while reducing suffering and avoiding disaster. Innovation, violence, and migration have been rotating solutions to your limits and problems. Yet, modern global-scale threats such as nuclear annihilation and ecological collapse have made conflict and migration increasingly untenable. Here you are. The time is now.
       </p>
       <p>
         Some of humanity’s brightest minds have contemplated a planetary migration and began searching for Plan-et B in the sky centuries ago - in recent decades with the NASA Keppler mission. Whether searching for planets like yours or researching what it would take to seed a barren planet in your own star system (you call it Mars), you have developed a deep scientific understanding of the very special parameters, and their relationships, that make life, and humanity’s flourishing, possible on Earth: solar energy, water, geothermal heat, and the presence of special elements, to name a few. This has been termed the Goldilocks effect – Earth seems to be just right.
@@ -66,7 +66,7 @@ export default function AboutInfo() {
         GIS technology, Big Data, the Internet, social media, and global travel have given you all, at once, an ability to search your own planet for people just like you and places just like yours. So while the telescopes and satellites keep searching out there, you have the ability to search around here, and within yourselves, to learn from people and places just like you.
       </p>
       <p>
-        ClimateTree gives any Earthling the ability to adjust Goldilocks parameters at any scale to find a village, city, county, state, or nation just like theirs. With a lead, you might just find a story, a civilization, a community, an individual that has a solution to a problem you have now. How did they do it?
+        ClimateTree&trade; gives any Earthling the ability to adjust Goldilocks parameters at any scale to find a village, city, county, state, or nation just like theirs. With a lead, you might just find a story, a civilization, a community, an individual that has a solution to a problem you have now. How did they do it?
       </p>
       <p>
         No human seems to be able to believe in a solution without first seeing - or believing - that it is possible. If you ever find a planet like yours or a way to make Mars green, you know that most of you would not board a spaceship flying there without some assurances that you would survive. And so it on Earth and in your lives.
@@ -75,7 +75,7 @@ export default function AboutInfo() {
         Such an inquisitive, practical, and cautious species will likely have a few more questions along the way. How much does it cost? What resources will we need? How long will it take? Are we there yet?
       </p>
       <p>
-        ClimateTree creates the tools for your planet’s inhabitants to dive deep into discussion and collaborative research, sharing the data and stories that describe the practical and plausible paths to a better way of life, across all parameters and at all scales.
+        ClimateTree&trade; creates the tools for your planet’s inhabitants to dive deep into discussion and collaborative research, sharing the data and stories that describe the practical and plausible paths to a better way of life, across all parameters and at all scales.
       </p>
       <p>
         Forget the pie in the sky - what are your favorite recipes here on Earth?
@@ -88,36 +88,36 @@ export default function AboutInfo() {
         <div class="our_team">
           <div class="team_member">
             <div class="member_img">
-               <img src={greg} alt="our_team"/>
+              <img src={greg} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/gregschundler/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/gregschundler/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Greg <br></br> Schundler</h3>
             <span>Founder</span>
-            
-          </div> 
+
+          </div>
 
           <div class="team_member">
             <div class="member_img">
-               <img src={abby} alt="our_team"/>
+              <img src={abby} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/abbyruskey/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/abbyruskey/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Abby <br></br> Ruskey</h3>
             <span>Founder</span>
-            
-          </div> 
+
+          </div>
 
 
 
           <div class="team_member">
             <div class="member_img">
-               <img src={aayushi} alt="our_team"/>
+              <img src={aayushi} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/aayushimaheshwari/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/aayushimaheshwari/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Aayushi Maheshwari </h3>
             <span>Developer</span>
@@ -125,10 +125,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={abdul} alt="our_team"/>
+              <img src={abdul} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/abdul-kadir-olia-3a898712b/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/abdul-kadir-olia-3a898712b/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Abdul  <br></br> Kadir Olia</h3>
             <span>Developer</span>
@@ -138,22 +138,22 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={evan} alt="our_team"/>
+              <img src={evan} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/evandouglass/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/evandouglass/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Evan  <br></br> Douglass</h3>
             <span>Developer</span>
-          </div> 
+          </div>
 
 
           <div class="team_member">
             <div class="member_img">
-               <img src={harman} alt="our_team"/>
+              <img src={harman} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/harmanpreets1ngh/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/harmanpreets1ngh/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Harman  <br></br> Preet</h3>
             <span>Developer</span>
@@ -161,10 +161,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={kanika} alt="our_team"/>
+              <img src={kanika} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/kanika-rana-34a95859/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/kanika-rana-34a95859/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Kanika  <br></br> Rana</h3>
             <span>Developer</span>
@@ -172,10 +172,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={neha} alt="our_team"/>
+              <img src={neha} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/neha-gundecha/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/neha-gundecha/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Neha  <br></br> Gundecha</h3>
             <span>Developer</span>
@@ -183,10 +183,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={pierre} alt="our_team"/>
+              <img src={pierre} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/pierrealexandremousset/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/pierrealexandremousset/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Pierre-Alexandre Mousset</h3>
             <span>Developer</span>
@@ -194,10 +194,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={priyanka} alt="our_team"/>
+              <img src={priyanka} alt="our_team" />
               <div class="social_media">
-               <a href="www.linkedin.com/in/priyanka-debnath-96311171" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="www.linkedin.com/in/priyanka-debnath-96311171" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Priyanka Debnath</h3>
             <span>Developer</span>
@@ -206,10 +206,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={saurabha} alt="our_team"/>
+              <img src={saurabha} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/saurabha-jirgi/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/saurabha-jirgi/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Saurabha  <br></br> Jirgi</h3>
             <span>Developer</span>
@@ -218,10 +218,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={shweta} alt="our_team"/>
+              <img src={shweta} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/shweta-mandavgane/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/shweta-mandavgane/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Shweta Mandavgane</h3>
             <span>Developer</span>
@@ -229,10 +229,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={sam} alt="our_team"/>
+              <img src={sam} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/siddhant-varyambat-232596106/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/siddhant-varyambat-232596106/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Siddhant Varyambat</h3>
             <span>Developer</span>
@@ -240,10 +240,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={theodore} alt="our_team"/>
+              <img src={theodore} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/theodore-andrew/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/theodore-andrew/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Theodore Andrew</h3>
             <span>Developer</span>
@@ -252,10 +252,10 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={vishal} alt="our_team"/>
+              <img src={vishal} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/vishal-patel-66082b159" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/vishal-patel-66082b159" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Vishal  <br></br> Patel</h3>
             <span>Developer</span>
@@ -264,17 +264,17 @@ export default function AboutInfo() {
 
           <div class="team_member">
             <div class="member_img">
-               <img src={wanjia} alt="our_team"/>
+              <img src={wanjia} alt="our_team" />
               <div class="social_media">
-               <a href="https://www.linkedin.com/in/wanjia-tang-b97378117/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
-               </div>
+                <a href="https://www.linkedin.com/in/wanjia-tang-b97378117/" target="_blank"><i class="linkedin fab fa-linkedin"></i></a>
+              </div>
             </div>
             <h3>Wanjia  <br></br> Tang</h3>
             <span>Developer</span>
           </div>
 
         </div>
-    </div>
+      </div>
     </section>
   );
 }

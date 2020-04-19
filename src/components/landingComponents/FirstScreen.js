@@ -92,7 +92,7 @@ export default function FirstScreen() {
         >
           Find climate change solution stories and
           <br />
-          share them with the ClimateTree community
+          share them with the ClimateTree&trade; community
         </h2>
         <header>
           <span
@@ -146,9 +146,9 @@ export default function FirstScreen() {
             {isLoading && <div id="spinner-landing"></div>}
           </div>
           <div className="tab-description">
-            <p>Search climate change solutions with ClimateTree</p>
+            <p>Search climate change solutions with ClimateTree&trade;</p>
             <p>
-              ClimateTree’s fundamental units are called <strong>solution stories</strong>.
+              ClimateTree’s&trade; fundamental units are called <strong>solution stories</strong>.
               They include content describing climate change adaptation and mitigation strategies
               from across the world. Our database contains a collection of solution stories
               searchable by solution type and by where the solutions come from in the world.
@@ -246,7 +246,7 @@ export default function FirstScreen() {
           <div className="tab-description">
             <p>View similar places on the map</p>
             <p>
-              The ClimateTree "Map" feature allows you to find places like yours around the world
+              The ClimateTree&trade; "Map" feature allows you to find places like yours around the world
               to explore what people there are doing about climate change. When you type in a place you
               will be given a number of places around the world that are similar, according
               to our default search based on population.
@@ -314,7 +314,7 @@ export default function FirstScreen() {
           <div className="tab-description">
             <p>Discover and share climate solutions</p>
             <p>
-              Investigate climate change solution stories on the web and ClimateTree
+              Investigate climate change solution stories on the web and ClimateTree&trade;
               will help you share with the world.
             </p>
           </div>
