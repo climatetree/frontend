@@ -149,20 +149,15 @@ class OlMap extends Component {
         }
       ));
 
-      // Find target place to highlight on map
-      // Get the target place search ID
-      let targetId = this.props.targetPlace.properties.place_id;
-      this.props.places.forEach(feature => {
-        // Look for the feature that represents the searched place
-        if (feature.values_.place_id === targetId) {
-          let targetCoordinates = feature.values_.geometry.flatCoordinates;
-          let view = this.state.map.getView();
+      // Find target place coordinates to highlight on map
+      let targetLonLat = this.props.targetPlace.geometry.coordinates;
+      let targetCoordinates = fromLonLat(targetLonLat);
+      let view = this.state.map.getView();
 
-          // Center map on searched for place and zoom in
-          view.setCenter(targetCoordinates);
-          view.setZoom(4.5);
-        }
-      });
+      // Center map on searched for place and zoom in
+      view.setCenter(targetCoordinates);
+      view.setZoom(4.5);
+
     }
     if (this.props.baseMap != prevProps.baseMap) {
       this.state.map.getLayers().forEach((ele, index, arr) => {
