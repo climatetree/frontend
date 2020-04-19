@@ -152,10 +152,7 @@ class OlMap extends Component {
       // Find target place to highlight on map
       // Get the target place search ID
       let targetId = this.props.targetPlace.properties.place_id;
-      console.log(this.props.places.length);
-      let count = 0
       this.props.places.forEach(feature => {
-        count += 1
         // Look for the feature that represents the searched place
         if (feature.values_.place_id === targetId) {
           let targetCoordinates = feature.values_.geometry.flatCoordinates;
@@ -166,7 +163,6 @@ class OlMap extends Component {
           view.setZoom(4.5);
         }
       });
-      console.log(count);
     }
     if (this.props.baseMap != prevProps.baseMap) {
       this.state.map.getLayers().forEach((ele, index, arr) => {
