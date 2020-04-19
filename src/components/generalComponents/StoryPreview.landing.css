@@ -11,6 +11,11 @@
 .landing-story-wrapper .story-detail article p:not(:last-child) {
   margin-bottom: 10px;
 }
+.landing-story-wrapper .story-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 .landing-story-wrapper .story-detail .story-description {
   max-height: 3.6rem;
   background: linear-gradient(
