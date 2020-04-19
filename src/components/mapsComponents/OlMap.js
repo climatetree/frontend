@@ -83,7 +83,7 @@ class OlMap extends Component {
           "NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}"
       })
     });
-    
+
     // An overlay for the map that allows popups on points
     let overlay = createPopupOverlay();
 
@@ -91,6 +91,9 @@ class OlMap extends Component {
     let map = new Map({
       // Div id to put map in
       target: this.props.mapId,
+      // Beware of adding to this list! You will also have to change the
+      // indices referenced in componentDidMount in order swap out data
+      // in the correct layers. This needs fixing to be more dynamic.
       layers: [baseMapDark, baseMapGeo, placesLayer, targetPlaceLayer],
       overlays: [overlay],
       view: new View({
@@ -174,7 +177,7 @@ class OlMap extends Component {
           ele.setVisible(false);
         }
       });
-  }
+    }
   }
 
   render() {
