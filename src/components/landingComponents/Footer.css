@@ -9,32 +9,40 @@
   text-decoration: none;
   cursor: pointer;
 }
-.logo-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .footer-landing h2 {
   font-size: 1.2rem;
   font-weight: 300;
   margin-bottom: 1rem;
+  margin-top: 4rem;
 }
 .ct-logo-text {
   font-family: serif;
   font-weight: 100;
-  transform: translate(-8px, 14px);
-  font-size: 21px;
+  font-size: 18px;
   color: white;
   letter-spacing: 1px;
+  display: inline-block;
+  transform: translate(-12px, -26px);
 }
 .ct-logo {
+  height: 5rem;
+  transform: translateY(-12px);
+}
+.neu-logo {
   height: 4rem;
 }
 .footer-cols {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding-top: 1rem;
+  padding-top: 4rem;
   padding-bottom: 4rem;
+}
+.footer-col {
+  position: relative;
+}
+.footer-col:first-child {
+  justify-self: end;
+  padding-right: 1rem;
 }
 .footer-col.links {
   display: grid;
@@ -63,7 +71,13 @@
   .footer-cols {
     display: block;
   }
-  .footer-col:not(.links) h2 {
-    margin-top: 3rem;
+  .footer-col:first-child {
+    margin-bottom: 0;
+  }
+  .footer-col {
+    margin-bottom: 3rem;
+  }
+  .footer-landing h2 {
+    margin-top: 0;
   }
 }
