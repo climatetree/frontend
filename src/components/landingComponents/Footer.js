@@ -8,7 +8,7 @@ function Footer() {
     <footer className="footer-landing">
       <div className="logo-wrapper">
         <img src={logo} alt="climatetree logo" className="ct-logo" />
-        <span className="ct-logo-text">ClimateTree</span>
+        <span className="ct-logo-text">ClimateTree&trade;</span>
         <img src={NEUlogo} alt="NEU logo" className="neu-logo" />
       </div>
       <div className="footer-cols">

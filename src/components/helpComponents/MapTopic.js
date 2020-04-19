@@ -15,7 +15,7 @@ const MapTopic = () => {
           <h2 className="help-title">Places On The Map</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
-            ClimateTree has gathered many geographic units at many scales: the
+            ClimateTree&trade; has gathered many geographic units at many scales: the
             Nations of the world along with their “States”, “Counties”, and
             “Urban Extents”
           </p>

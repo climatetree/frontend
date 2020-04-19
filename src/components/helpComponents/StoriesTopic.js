@@ -12,10 +12,10 @@ const StoriesTopic = () => {
       </div>
       <div className="help-body">
         <div className="help-content-paragraph">
-          <h2 className="help-title">ClimateTree Stories Organization</h2>
+          <h2 className="help-title">ClimateTree&trade; Stories Organization</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
-            ClimateTree’s fundamental units are called “solution stories”. By
+            ClimateTree’s&trade; fundamental units are called “solution stories”. By
             sharing this content, users will gain hope, insight, and practical
             information about how to approach climate change solutions in their
             own locale.
@@ -25,7 +25,7 @@ const StoriesTopic = () => {
             Not all solution stories, however, are relevant to all places
             because of geographic and demographic characteristics. Thus, we have
             suggested a “taxonomy”, or organizational hierarchy, for the
-            branches of the ClimateTree. We also have our “Map” function if you
+            branches of the ClimateTree&trade;. We also have our “Map” function if you
             would like to filter by geography.
           </p>
         </div>
@@ -35,7 +35,7 @@ const StoriesTopic = () => {
           </h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
-            At the highest level of organization, ClimateTree has a split trunk,
+            At the highest level of organization, ClimateTree&trade; has a split trunk,
             each representing one of two overarching strategies: mitigation and
             adaptation. Mitigation describes efforts and ideas that reduce the
             amount of carbon in the atmosphere, whereas Adaptation describes the
@@ -120,8 +120,8 @@ const StoriesTopic = () => {
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
             Finally, the solution stories are the units of content of the
-            ClimateTree - leaves, buds, flowers, and fruits if you will Some of
-            these are produced by ClimateTree’s automated tools and team, and
+            ClimateTree&trade; - leaves, buds, flowers, and fruits if you will Some of
+            these are produced by ClimateTree’s&trade; automated tools and team, and
             others are brought in by users using the “Upload” function. All
             stories are essentially hyperlinks tagged by location and solution.
           </p>
@@ -171,7 +171,7 @@ const StoriesTopic = () => {
             <strong>
               STORIES: Any content from the worldwide web uploaded by YOU and
               <span style={{ textTransform: "none", marginLeft: "5px" }}>
-                ClimateTree
+                ClimateTree&trade;
               </span>
               , curated by our experts.
             </strong>
