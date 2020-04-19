@@ -27,7 +27,7 @@ const StorySearchBar = ({
   return (
     <div className="search-bar-container">
       <h2 id="search-for-stories-title">
-        Search For ClimateTree Stories
+        Search For ClimateTree&trade; Stories
         <Tooltip
           id="title-tip"
           dark={false}
