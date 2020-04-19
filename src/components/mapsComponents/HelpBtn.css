@@ -1,20 +1,16 @@
 .map-help-btn {
-    position: absolute;
-    left: 503px;
-    top: 0.5rem;
-    display: inline;
     color: #333333;
     background-color: #fefefe;
+    box-shadow: 0 0 5px 0 #999999;
     border: none;
     border-radius: 3px;
-    line-height: 1.5rem;
+    line-height: 35px;
     font-size: 1rem;
     font-weight: 300;
-    padding: 8px 20px;
+    padding: 0 10px;
     cursor: pointer;
     z-index: 1;
 }
-
 .help-content-container {
     position: fixed;
     top: 0;
@@ -29,10 +25,10 @@
     align-items: center;
     z-index: 1;
 }
-
 .help-content {
     min-height: 300px;
-    width: 50%;
+    overflow-y: auto;
+    max-width: 700px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,41 +38,29 @@
     box-shadow: 1px 1px 16px 4px rgba(255, 255, 255, 0.5);
     position: relative;
 }
-
 .help-content .close-btn {
     cursor: pointer;
-    border-radius: 50%;
-    height: 2rem;
-    width: 2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
 }
-
-.help-content .close-btn:hover {
-    background-color: #454545;
+.help-content .close-btn img {
+    height: 1.5rem;
+    width: 1.5rem;
 }
-
 .help-content p {
-    margin: 1rem;
+    margin: 1rem 0;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 812px) {
     .help-content-container {
         padding: 0;
     }
     .help-content {
         height: 100%;
+        max-width: 100vw;
         width: 100%;
         box-shadow: none;
-        overflow: scroll;
-    }
-    .help-content .close-btn {
-        position: relative;
-        margin: 0px auto 10px auto;
+        justify-content: start;
     }
 }
 
@@ -88,8 +72,6 @@
 
 @media (max-width: 767px) {
     .map-help-btn {
-        top: 3.5rem;
-        left: 150px;
         font-size: 90%;
         padding: 0 20px;
         height: 2.2rem;

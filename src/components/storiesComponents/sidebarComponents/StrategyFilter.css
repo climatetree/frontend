@@ -11,19 +11,9 @@
   margin-bottom: 0;
 }
 
-.choices-inline input[type="checkbox"] {
+.choices-inline input[type="radio"] {
   position: absolute;
   margin: 4px 0 0;
   margin-left: -20px;
   line-height: normal;
-}
-
-@media (max-width: 950px) {
-  #strategy-choices {
-    display: block;
-  }
-
-  .choices-inline {
-    display: block;
-  }
 }

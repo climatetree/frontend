@@ -14,7 +14,6 @@
 }
 .filters-wrapper {
   display: flex;
-  /* margin-left: 0.5rem; */
   margin-left: 1rem;
   height: 2.5rem;
 }
@@ -32,15 +31,17 @@
   height: 100%;
   display: flex;
   align-items: center;
+  position: relative;
+}
+.advanced-filters-wrapper .adv-btn {
+  user-select: none;
+  cursor: pointer;
+  padding: 0 10px;
   background-color: #fefefe;
   border-radius: 4px;
   box-shadow: 0 0 5px 0 #999999;
-  padding: 0 10px;
-  position: relative;
-}
-.advanced-filters-wrapper p {
-  user-select: none;
-  cursor: pointer;
+  line-height: 35px;
+  margin-right: 8px;
 }
 #advanced-filters {
   position: absolute;

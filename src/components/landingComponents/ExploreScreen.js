@@ -2,14 +2,16 @@
  * The function ExporeScreen() is displaying the HTML that highlights the most popular stories of the application
  */
 import React, { useEffect, useState } from "react";
-import StoryPreview from '../generalComponents/StoryPreview';
+import StoryPreview from "../generalComponents/StoryPreview";
 import "./ExploreScreen.css";
 
 export default function ExploreScreen() {
   const [popularStories, setPopularStories] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3');
+      const res = await fetch(
+        "https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3"
+      );
       const topStories = await res.json();
       setPopularStories(topStories);
     })();
@@ -22,12 +24,8 @@ export default function ExploreScreen() {
           <div className="spinner-explore"></div>
         </div>
       )}
-      {popularStories.map(story => (
-        <StoryPreview
-          key={story.story_id}
-          story={story}
-          cssScope="landing"
-        />
+      {popularStories.map((story) => (
+        <StoryPreview key={story.story_id} story={story} cssScope="landing" />
       ))}
     </section>
   );

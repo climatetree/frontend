@@ -3,6 +3,7 @@ import React from "react";
 import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
 import FiltersDropdown from "./FiltersDropdown";
+import Tooltip from "../../generalComponents/Tooltip";
 
 import "./SectorFilter.css";
 
@@ -12,25 +13,32 @@ const SectorFilter = ({
   allSectors,
   sectorTerm,
   setSectorTerm,
+  strategyTerm,
+  loadingSector,
+  setTaxonomyForSolution,
 }) => {
-  const setSectorTermOnClick = (sol) => {
-    setSectorTerm(sol);
+  const setSectorTermOnClick = (filterVal) => {
+    setTaxonomyForSolution(filterVal);
+    setSectorTerm(filterVal);
     setSectorChosen(true);
-  };
-
-  const setSectorTermOnEnter = (sol, event) => {
-    if (event.keyCode === 13) {
-      setSectorTerm(sol);
-      setSectorChosen(true);
-    }
   };
 
   return (
     strategyChosen && (
       <FilterFieldContainer>
-        <FilterLabel for="sector-filter">By Sector</FilterLabel>
+        <div id="sector-filter-header">
+          <FilterLabel for="sector-filter">
+            By Climate Sector
+            <Tooltip
+              id="title-tip"
+              dark={false}
+              description="ClimateTree sector"
+            />
+          </FilterLabel>
+        </div>
         <input
           id="sector-filter"
+          autoComplete="off"
           className="filter-btn"
           placeholder="Enter a sector"
           value={sectorTerm}
@@ -44,12 +52,12 @@ const SectorFilter = ({
             }, 100);
           }}
         />
-        {/* STILL NEED TO IMPLEMENT THIS */}
         <FiltersDropdown
           allResults={allSectors}
           filterTerm={sectorTerm}
+          strategyTerm={strategyTerm}
+          loadingFilter={loadingSector}
           setTermOnClick={setSectorTermOnClick}
-          setTermOnEnter={setSectorTermOnEnter}
           status="sector"
         />
       </FilterFieldContainer>

@@ -8,10 +8,14 @@ import CloseIcon from "../../../images/x.svg";
 import "./SideBar.css";
 
 const SideBar = ({
+  generalSearchTerm,
+  setGeneralSearchTerm,
   sideBarVisible,
   windowWidth,
   closeSideBar,
   setStoriesBasedOnFilter,
+  loadSpinner,
+  setClickFilter,
 }) => {
   const { user } = useContext(UserContext);
   const { isLoggedIn } = user;
@@ -20,7 +24,9 @@ const SideBar = ({
     <div
       id="side-bar-container"
       className={`${
-        sideBarVisible ? "when-filter-is-clicked make-z-index-one" : ""
+        sideBarVisible
+          ? "when-filter-is-clicked make-z-index-one unhide-sidebar"
+          : ""
       } ${windowWidth > 950 ? "make-z-index-one" : ""} ${
         !sideBarVisible && windowWidth < 950 ? "not-apparent" : ""
       }`}
@@ -35,10 +41,14 @@ const SideBar = ({
         {!isLoggedIn && <StorySignIn />}
         {isLoggedIn && <AvatarStories />}
         <AdvancedSearch
+          generalSearchTerm={generalSearchTerm}
+          setGeneralSearchTerm={setGeneralSearchTerm}
           sideBarVisible={sideBarVisible}
           windowWidth={windowWidth}
           closeSideBar={closeSideBar}
           setStoriesBasedOnFilter={setStoriesBasedOnFilter}
+          loadSpinner={loadSpinner}
+          setClickFilter={setClickFilter}
         />
       </div>
     </div>

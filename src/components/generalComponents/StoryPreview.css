@@ -21,7 +21,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #5274C8;
+  background-color: #5274c8;
   padding: 4px 8px;
   display: flex;
   flex-direction: column;
@@ -35,6 +35,8 @@
 }
 .story-wrapper .story-detail header {
   margin-bottom: 8px;
+  display: flex;
+  padding-right: 21px;
 }
 .story-wrapper .story-detail header span {
   text-transform: capitalize;
@@ -44,7 +46,7 @@
   border-radius: 2px;
   padding: 1px 5px;
   display: inline-block;
-  max-width: 30%;
+  max-width: 40%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;

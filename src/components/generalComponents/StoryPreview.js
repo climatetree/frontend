@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import MoreIcon from '../../images/more-horizontal.svg';
-import DeleteIcon from '../../images/trash.svg';
-import CloseIcon from '../../images/x.svg';
-import EditIcon from '../../images/edit-3.svg';
+import MoreIcon from "../../images/more-horizontal.svg";
+import DeleteIcon from "../../images/trash.svg";
+import CloseIcon from "../../images/x.svg";
+import EditIcon from "../../images/edit-3.svg";
 import EditStoryForm from "../loginComponents/EditStoryForm";
-import './StoryPreview.css';
+import "./StoryPreview.css";
 
 export default function StoryPreview({
   story,
@@ -14,7 +14,7 @@ export default function StoryPreview({
   cssScope,
 }) {
   const [openEditForm, setOpenEditForm] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
   const { user } = useContext(UserContext);
   useEffect(() => {
     if (cssScope) {
@@ -23,17 +23,21 @@ export default function StoryPreview({
       })();
     }
     (async () => {
-      const response = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(story.hyperlink)}`);
+      const response = await fetch(
+        `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+          story.hyperlink
+        )}`
+      );
       const preview = await response.json();
       setImageUrl(preview.image);
     })();
   }, []);
   function openOperations(event) {
     event.preventDefault();
-    event.target.parentNode.parentNode.parentNode.classList.add('open');
+    event.target.parentNode.parentNode.parentNode.classList.add("open");
   }
   function closeOperations(event) {
-    event.target.parentNode.parentNode.parentNode.classList.remove('open');
+    event.target.parentNode.parentNode.parentNode.classList.remove("open");
   }
   function handleDelete(story_id, jwt) {
     const confirmed = confirm(
@@ -54,7 +58,7 @@ export default function StoryPreview({
     .then(() => {
       removeStory();
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
   }
@@ -78,13 +82,13 @@ export default function StoryPreview({
         <div className="story-detail">
           <header>
             {story.strategy && story.strategy.length > 0 && (
-              <span title={`Strategy: ${story.strategy.join('|')}`}>
-                {story.strategy.join('|')}
+              <span title={`Strategy: ${story.strategy.join("|")}`}>
+                {story.strategy.join("|")}
               </span>
             )}
             {story.sector && story.sector.length > 0 && (
-              <span title={`Sector: ${story.sector.join('|')}`}>
-                {story.sector.join('|')}
+              <span title={`Sector: ${story.sector.join("|")}`}>
+                {story.sector.join("|")}
               </span>
             )}
             {story.media_type && (
@@ -107,13 +111,18 @@ export default function StoryPreview({
             <p className="story-hyperlink">{story.hyperlink}</p>
           </article>
           <footer>
-            <p className="story-post-info">Posted by {story.posted_by} - {new Date(story.date).toDateString()}</p>
+            <p className="story-post-info">
+              Posted by {story.posted_by} -{" "}
+              {new Date(story.date).toDateString()}
+            </p>
           </footer>
         </div>
         {(user.role <= 2 || story.user_id === user.userId) && (
           <div
             className="operations-overlay"
-            onClick={(event) => { event.preventDefault(); }}
+            onClick={(event) => {
+              event.preventDefault();
+            }}
           >
             <div
               className="story-operation"
@@ -129,18 +138,14 @@ export default function StoryPreview({
               <img src={DeleteIcon} alt="delete story" />
               <p>Delete Story</p>
             </div>
-            <div
-              className="story-operation" 
-              onClick={closeOperations}
-            >
+            <div className="story-operation" onClick={closeOperations}>
               <img src={CloseIcon} alt="cancel" />
               <p>Cancel</p>
             </div>
           </div>
         )}
       </a>
-      {(user.role <= 2 || story.user_id === user.userId) && 
-        openEditForm && (
+      {(user.role <= 2 || story.user_id === user.userId) && openEditForm && (
         <EditStoryForm
           story={story}
           toggleForm={setOpenEditForm}

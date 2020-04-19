@@ -4,10 +4,9 @@
   border: 0.5px solid rgba(201, 201, 201, 0.5);
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.3);
-  /* height: 63vh; */
-  height: max-content;
+  height: min-content;
   overflow-y: visible;
-  z-index: 99;
+  z-index: 1;
   padding-bottom: 70px;
   padding-right: 10px;
 }
@@ -37,8 +36,18 @@
   cursor: pointer;
 }
 
-#apply-filters:focus {
+#apply-filters:disabled {
+  background-color: #d9d9d9;
+  color: #a1a1a1;
+  cursor: auto;
+}
+
+#apply-filters:hover {
   outline: none;
+}
+
+#apply-filters:active {
+  background-color: rgba(103, 161, 255, 1);
 }
 
 #filters {

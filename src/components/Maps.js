@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import OlMap from "./mapsComponents/OlMap";
 import Filters from "./mapsComponents/Filters";
-import HelpBtn from "./mapsComponents/HelpBtn";
 import BaseMap from "./mapsComponents/BaseMapToggle";
 import MapNav from "./mapsComponents/MapNav";
 import UserAvatar from "./mapsComponents/UserAvatar";
@@ -13,7 +12,6 @@ import { getGeoServerData } from './mapsComponents/helpers/data';
 import { factory } from './mapsComponents/helpers/data';
 import "./mapsComponents/OlMap.css";
 import "./Maps.css";
-import CurrentSearchNotification from "./storiesComponents/sidebarComponents/CurrentSearchNotification";
 
 export default function Maps() {
   const history = useHistory();
@@ -143,7 +141,6 @@ export default function Maps() {
         setComparePlaceProps={setComparePlaceProps}
         baseMap={baseMap}
       />
-      {/* <CurrentSearchNotification searchMessage={searchMessage} /> */}
       <Filters
         getSimilarPlaces={getSimilarPlaces}
         targetPlaceID={targetPlace ? targetPlace.properties.place_id : null}
@@ -162,7 +159,6 @@ export default function Maps() {
         appendPlaceTypeQuery={appendPlaceTypeQuery}
         setComparePlaceProps={setComparePlaceProps}
       />
-      <HelpBtn />
       <MapNav />
       <BaseMap
         setBaseMap={setBaseMap}
