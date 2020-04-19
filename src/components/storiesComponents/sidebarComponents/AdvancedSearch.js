@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Tooltip from "../../generalComponents/Tooltip";
 
-// import { UserContext } from "../context/UserContext";
 import SolutionFilter from "./SolutionFilter";
 import SectorFilter from "./SectorFilter";
 import StrategyFilter from "./StrategyFilter";
