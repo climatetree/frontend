@@ -109,6 +109,7 @@ export default function Login() {
         <FacebookLogin
           appId="149701679676715"
           fields="name,email,picture"
+          disableMobileRedirect={true}
           onClick={componentClicked}
           callback={responseFacebook}
           cssClass="facebook-login-button"

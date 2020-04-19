@@ -20,19 +20,16 @@ export const popUpHandler = (
   let pixel = evt.pixel;
   let features = map.getFeaturesAtPixel(pixel);
 
-  // Ignore clicks on map that aren't on a feature
-  if (features.length === 0) {
+  // Get places contained in area of click
+  let places = [];
+  if (!features || features.length === 0) {
+    // No features => close any open popups and return
     overlay.setPosition(undefined);
     return;
-  }
-
-  // Get places contained in the feature list
-  let featureList = map.getFeaturesAtPixel(pixel);
-  let places = [];
-  if (featureList.length === 1) {
+  } else if (features.length === 1) {
     // Use the first element in the list if the place is not
     // the targetPlace.
-    places = featureList[0].getProperties().features;
+    places = features[0].getProperties().features;
   } else {
     // If the place is the target place, there will be more than
     // one element due to the combination of the main places layer
@@ -40,7 +37,7 @@ export const popUpHandler = (
     // place layer will be the first element in the featuresList
     // and will cause an error if clicked on because it is not
     // a clustered layer and has no features property.
-    places = featureList[1].getProperties().features;
+    places = features[1].getProperties().features;
   }
 
   // Set a div for popup content

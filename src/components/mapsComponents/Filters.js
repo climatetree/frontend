@@ -7,6 +7,7 @@ import SuggestionDropdown from "./SuggestionDropdown";
 import SuggestionOverlay from "./SuggestionOverlay";
 import MinMaxRange from "./MinMaxRange";
 import CheckboxGroup from "../generalComponents/CheckboxGroup";
+import HelpBtn from './HelpBtn';
 import useDebounce from "../customHooks/useDebounce";
 import { factory } from "./helpers/data";
 import "./Filters.css";
@@ -127,7 +128,10 @@ export default function Filters({
       </div>
       <div className="filters-wrapper">
         <div className="advanced-filters-wrapper">
-          <p onClick={openAdvancedFilters}>Advanced Search</p>
+          <p
+            className="adv-btn"
+            onClick={openAdvancedFilters}
+          >Advanced Search</p>
           <div id="advanced-filters">
             <MinMaxRange
               label="Population (%)"
@@ -169,6 +173,7 @@ export default function Filters({
               Apply
             </button>
           </div>
+          <HelpBtn />
         </div>
       </div>
     </div>

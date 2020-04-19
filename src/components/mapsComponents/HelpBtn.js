@@ -6,7 +6,7 @@ const HelpBtn = () => {
     const [helpHidden, setHelpHidden] = useState(true);
 
     return (
-        <div className="map-help-container">
+        <>
             <button
                 className="map-help-btn"
                 onClick={() => setHelpHidden(prev => !prev)}
@@ -16,12 +16,12 @@ const HelpBtn = () => {
             {!helpHidden && (
                 <div className="help-content-container">
                     <div className="help-content">
-                        <div className="close-btn">
-                            <img
-                                src={CloseIcon}
-                                alt="close help"
-                                onClick={() => setHelpHidden(true)}
-                            />
+                        <div
+                            className="close-btn" 
+                            onClick={() => setHelpHidden(true)}
+                        >
+                            <img src={CloseIcon} alt="close help" />
+                            <p>Close Help Message</p>
                         </div>
                         <p>
                             The ClimateTree&trade; Map feature allows you to find places like yours around the world to explore what they are doing about climate change. When you search for a place you will be shown a number of places around the world that are similar based on our default search parameters.
@@ -35,7 +35,7 @@ const HelpBtn = () => {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

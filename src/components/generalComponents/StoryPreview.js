@@ -55,12 +55,12 @@ export default function StoryPreview({
         },
       }
     )
-      .then(() => {
-        removeStory();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then(() => {
+      removeStory();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
   return (
     <>

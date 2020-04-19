@@ -52,6 +52,13 @@ export default function Profile() {
         {/* User Stories and Post Story */}
         <h2>My stories</h2>
         <div className="personal story-list">
+          <div
+            className="post-form"
+            onClick={() => setOpenPostStoryForm(true)}
+          >
+            <img src={plusIcon} alt="post story icon" />
+            <p>post a story</p>
+          </div>
           {myStories.map((story, index) => (
             <StoryPreview
               key={story.story_id}
@@ -72,13 +79,6 @@ export default function Profile() {
               cssScope="profile"
             />
           ))}
-          <div
-            className="post-form"
-            onClick={() => setOpenPostStoryForm(true)}
-          >
-            <img src={plusIcon} alt="post story icon" />
-            <p>post a story</p>
-          </div>
         </div>
         {/* Trending Stories */}
         <h2>Trending</h2>
