@@ -166,7 +166,7 @@ const Stories = (props) => {
     document.body.style.overflow = "auto";
   };
 
-  const setStoriesBasedOnFilter = (filteredStories) => {
+  const setStoriesBasedOnFilter = (searchTerm, filteredStories) => {
     let { history } = props;
 
     setStories(
@@ -175,14 +175,26 @@ const Stories = (props) => {
       })
     );
 
-    history.push({
-      pathname: "/stories",
-      state: {
-        storiesResult: filteredStories.map((story) => {
-          return { ...story, date: new Date(story.date) };
-        }),
-      },
-    });
+    if (searchTerm) {
+      history.push({
+        pathname: "/stories",
+        search: `?storyTitle=${searchTerm}`,
+        state: {
+          storiesResult: filteredStories.map((story) => {
+            return { ...story, date: new Date(story.date) };
+          }),
+        },
+      });
+    } else {
+      history.push({
+        pathname: "/stories",
+        state: {
+          storiesResult: filteredStories.map((story) => {
+            return { ...story, date: new Date(story.date) };
+          }),
+        },
+      });
+    }
   };
 
   const renderHeaderBelowSearchBar = () => {
@@ -192,8 +204,12 @@ const Stories = (props) => {
     if (resultFor) {
       return (
         <>
-          {clickFilter && <h2 className="recent-stories">Filtered Stories</h2>}
-          <ResultsFor searchTerm={query.get("storyTitle")} />
+          <div>
+            <ResultsFor searchTerm={query.get("storyTitle")} />
+            {clickFilter && (
+              <h2 className="recent-stories">Filtered Stories</h2>
+            )}
+          </div>
         </>
       );
     }
@@ -206,12 +222,14 @@ const Stories = (props) => {
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
     return (
-      <div className="result-for-and-filter">
-        {renderHeaderBelowSearchBar()}
-        <div className="click-filter" onClick={openSideBar}>
-          Filters
+      <>
+        <div className="result-for-and-filter">
+          {renderHeaderBelowSearchBar()}
+          <div className="click-filter" onClick={openSideBar}>
+            Filters
+          </div>
         </div>
-      </div>
+      </>
     );
   };
 

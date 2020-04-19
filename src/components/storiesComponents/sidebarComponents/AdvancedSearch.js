@@ -134,7 +134,7 @@ const AdvancedSearch = ({
         reqBody
       );
 
-      setStoriesBasedOnFilter(response.data);
+      setStoriesBasedOnFilter(generalSearchTerm, response.data);
       setClickFilter(true);
     } catch (error) {
       console.log(error);
