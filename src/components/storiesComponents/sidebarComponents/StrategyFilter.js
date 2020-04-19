@@ -2,6 +2,8 @@ import React from "react";
 
 import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
+import Tooltip from "../../generalComponents/Tooltip";
+
 import "./StrategyFilter.css";
 
 const StrategyFilter = ({
@@ -12,7 +14,14 @@ const StrategyFilter = ({
 }) => {
   return (
     <FilterFieldContainer>
-      <FilterLabel for="strategy-filter">By Climate Strategy</FilterLabel>
+      <FilterLabel for="strategy-filter">
+        By Climate Strategy
+        <Tooltip
+          id="title-tip"
+          dark={false}
+          description={`ClimateTree strategy`}
+        />
+      </FilterLabel>
       <div id="strategy-choices">
         <label
           className="choices-inline"

@@ -3,6 +3,7 @@ import React from "react";
 import FilterFieldContainer from "./FilterFieldContainer";
 import FilterLabel from "./FilterLabel";
 import FiltersDropdown from "./FiltersDropdown";
+import Tooltip from "../../generalComponents/Tooltip";
 
 import "./SolutionFilter.css";
 
@@ -23,7 +24,14 @@ const SolutionFilter = ({
     sectorChosen && (
       <FilterFieldContainer>
         <div id="solution-filter-header">
-          <FilterLabel for="solution-filter">By Climate Solution</FilterLabel>
+          <FilterLabel for="solution-filter">
+            By Climate Solution
+            <Tooltip
+              id="title-tip"
+              dark={false}
+              description={`ClimateTree solution`}
+            />
+          </FilterLabel>
         </div>
         <input
           autoComplete="off"
