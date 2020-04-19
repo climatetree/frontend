@@ -19,7 +19,10 @@ const Stories = (props) => {
   const [loadSpinner, setLoadSpinner] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sideBarVisible, setSideBarVisible] = useState(false);
-  const [removedStory, setRemovedStory] = useState('')
+  const [removedStory, setRemovedStory] = useState("");
+
+  const [resultFor, setResultFor] = useState("");
+  const [clickFilter, setClickFilter] = useState(false);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -84,6 +87,7 @@ const Stories = (props) => {
     setStories([]);
 
     setGeneralSearchTerm(query.get("storyTitle") || placeName || "");
+    setResultFor(query.get("storyTitle"));
     if (generalSearchTerm) {
       if (history.location.state) {
         setStories(
@@ -116,7 +120,6 @@ const Stories = (props) => {
   const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
     if (searchTerm) {
       setLoadSpinner(true);
-      setGeneralSearchTerm(searchTerm);
 
       const response = await axios.get(
         `https://climatetree-api-gateway.azurewebsites.net/stories/title/${searchTerm}`
@@ -151,17 +154,19 @@ const Stories = (props) => {
       }
     );
     setRemovedStory(story_id);
-  }
+  };
 
   const openSideBar = () => {
     setSideBarVisible(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closeSideBar = () => {
     setSideBarVisible(false);
+    document.body.style.overflow = "auto";
   };
 
-  const setStoriesBasedOnFilter = (filteredStories) => {
+  const setStoriesBasedOnFilter = (searchTerm, filteredStories) => {
     let { history } = props;
 
     setStories(
@@ -170,31 +175,61 @@ const Stories = (props) => {
       })
     );
 
-    history.push({
-      pathname: "/stories",
-      state: {
-        storiesResult: filteredStories.map((story) => {
-          return { ...story, date: new Date(story.date) };
-        }),
-      },
-    });
+    if (searchTerm) {
+      history.push({
+        pathname: "/stories",
+        search: `?storyTitle=${searchTerm}`,
+        state: {
+          storiesResult: filteredStories.map((story) => {
+            return { ...story, date: new Date(story.date) };
+          }),
+        },
+      });
+    } else {
+      history.push({
+        pathname: "/stories",
+        state: {
+          storiesResult: filteredStories.map((story) => {
+            return { ...story, date: new Date(story.date) };
+          }),
+        },
+      });
+    }
+  };
+
+  const renderHeaderBelowSearchBar = () => {
+    if (placeId) {
+      return <ResultForPlaceId placeId={placeId} placeName={placeName} />;
+    }
+    if (resultFor) {
+      return (
+        <>
+          <div>
+            <ResultsFor searchTerm={query.get("storyTitle")} />
+            {clickFilter && (
+              <h2 className="recent-stories">Filtered Stories</h2>
+            )}
+          </div>
+        </>
+      );
+    }
+    if (clickFilter) {
+      return <h2 className="recent-stories">Filtered Stories</h2>;
+    }
+    return <h2 className="recent-stories">Recent Stories</h2>;
   };
 
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
     return (
-      <div className="result-for-and-filter">
-        {placeId ? (
-          <ResultForPlaceId placeId={placeId} placeName={placeName} />
-        ) : generalSearchTerm ? (
-          <ResultsFor searchTerm={query.get("storyTitle")} />
-        ) : (
-              <h2 id="recent-stories">Recent Stories</h2>
-            )}
-        <div className="click-filter" onClick={openSideBar}>
-          Filters
+      <>
+        <div className="result-for-and-filter">
+          {renderHeaderBelowSearchBar()}
+          <div className="click-filter" onClick={openSideBar}>
+            Filters
+          </div>
         </div>
-      </div>
+      </>
     );
   };
 
@@ -202,7 +237,6 @@ const Stories = (props) => {
   const renderContent = () => {
     return (
       <>
-        {/* {renderResultFor()} */}
         {stories.length &&
           stories.map((story, index) => (
             <StoryDetail
@@ -217,15 +251,19 @@ const Stories = (props) => {
         {!stories.length && !loadSpinner && (
           <div className="no-found-msg">
             No stories were found.
-            {generalSearchTerm.length && (
+            {query.get("storyTitle") ? (
               <a
-                href={`https://www.google.com/search?q=${generalSearchTerm}`}
+                href={`https://www.google.com/search?q=${query.get(
+                  "storyTitle"
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 id="direct-to-google-search"
               >
                 Would you like to help look for one?
               </a>
+            ) : (
+              ""
             )}
           </div>
         )}
@@ -239,18 +277,11 @@ const Stories = (props) => {
       <div className={`stories-background`}></div>
 
       {loadSpinner && <Spinner />}
-      {windowWidth < 951 && (
-        <SideBar
-          sideBarVisible={sideBarVisible}
-          windowWidth={windowWidth}
-          closeSideBar={closeSideBar}
-          setStoriesBasedOnFilter={setStoriesBasedOnFilter}
-        />
-      )}
 
       <div className={`stories-grid`}>
         <div className={`${loadSpinner ? "hide" : ""} main-stories`}>
           <StorySearchBar
+            setGeneralSearchTerm={setGeneralSearchTerm}
             termForSearchBar={generalSearchTerm}
             {...props}
             loadSpinner={loadSpinner}
@@ -261,14 +292,16 @@ const Stories = (props) => {
           {renderResultFor()}
           {!loadSpinner && renderContent()}
         </div>
-        {windowWidth > 950 && (
-          <SideBar
-            sideBarVisible={sideBarVisible}
-            windowWidth={windowWidth}
-            closeSideBar={closeSideBar}
-            setStoriesBasedOnFilter={setStoriesBasedOnFilter}
-          />
-        )}
+        <SideBar
+          sideBarVisible={sideBarVisible}
+          windowWidth={windowWidth}
+          closeSideBar={closeSideBar}
+          setStoriesBasedOnFilter={setStoriesBasedOnFilter}
+          generalSearchTerm={generalSearchTerm}
+          setGeneralSearchTerm={setGeneralSearchTerm}
+          loadSpinner={loadSpinner}
+          setClickFilter={setClickFilter}
+        />
       </div>
     </div>
   );

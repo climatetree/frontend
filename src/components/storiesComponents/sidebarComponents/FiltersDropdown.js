@@ -8,50 +8,80 @@ const FiltersDropdown = ({
   filterTerm,
   setTermOnClick,
   status,
+  strategyTerm,
+  loadingFilter,
 }) => {
   const debouncedTerm = useDebounce(filterTerm, 200);
-  const [solutionsBasedOnTerm, setSolutionsBasedOnTerm] = useState([]);
+  const [filtersBasedOnTerm, setFiltersBasedOnTerm] = useState([]);
 
   useEffect(() => {
-    allResults &&
-      setSolutionsBasedOnTerm(
-        allResults.filter((option) =>
-          option.toLowerCase().includes(debouncedTerm.toLowerCase())
-        )
-      );
+    setFiltersBasedOnTerm([]);
+  }, []);
+
+  useEffect(() => {
+    setFiltersBasedOnTerm([]);
+  }, [strategyTerm]);
+
+  useEffect(() => {
+    setFiltersBasedOnTerm([]);
+  }, [filterTerm]);
+
+  useEffect(() => {
+    if (filterTerm) {
+      allResults &&
+        setFiltersBasedOnTerm(
+          allResults.filter((option) =>
+            option.toLowerCase().includes(debouncedTerm.toLowerCase())
+          )
+        );
+    }
   }, [debouncedTerm]);
 
-  const renderContent = () => {
-    if (solutionsBasedOnTerm.length > 0) {
-      return (
-        <>
-          {solutionsBasedOnTerm.map((solution, index) => (
-            <div
-              className={`filter-entry`}
-              key={index}
-              onClick={() => setTermOnClick(solution)}
-            >
-              <span>{solution}</span>
-            </div>
-          ))}
-        </>
-      );
-    }
+  const onFilterClick = (term) => {
+    setTermOnClick(term);
+  };
 
-    if (!debouncedTerm) {
-      return (
-        <>
-          {allResults &&
-            allResults.map((solution, index) => (
+  const renderContent = () => {
+    if (!loadingFilter) {
+      if (filtersBasedOnTerm.length > 0) {
+        return (
+          <>
+            {filtersBasedOnTerm.map((filterValue, index) => (
               <div
                 className={`filter-entry`}
                 key={index}
-                onClick={() => setTermOnClick(solution)}
+                onClick={() => onFilterClick(filterValue)}
               >
-                <span>{solution}</span>
+                <span>{filterValue}</span>
               </div>
             ))}
-        </>
+          </>
+        );
+      }
+
+      if (!debouncedTerm) {
+        return (
+          <>
+            {allResults &&
+              allResults.map((filterValue, index) => (
+                <div
+                  className={`filter-entry`}
+                  key={index}
+                  onClick={() => onFilterClick(filterValue)}
+                >
+                  <span>{filterValue}</span>
+                </div>
+              ))}
+          </>
+        );
+      }
+    }
+
+    if (loadingFilter) {
+      return (
+        <div className="filter-entry">
+          <span>Loading...</span>
+        </div>
       );
     }
 
@@ -67,13 +97,15 @@ const FiltersDropdown = ({
   };
 
   return (
-    <div
-      id="selectFromDropdown"
-      className={"filter-dropdown-container"}
-      id={decideClassName()}
-    >
-      {renderContent()}
-    </div>
+    <>
+      <div
+        id="selectFromDropdown"
+        className={"filter-dropdown-container"}
+        id={decideClassName()}
+      >
+        {renderContent()}
+      </div>
+    </>
   );
 };
 

@@ -15,9 +15,9 @@ const MapTopic = () => {
           <h2 className="help-title">Places On The Map</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
-            ClimateTree&trade; has gathered many geographic units at many scales: the
-            Nations of the world along with their “States”, “Counties”, and
-            “Urban Extents”
+            ClimateTree&trade; has gathered many geographic units at many
+            scales: the Nations of the world along with their “States”,
+            “Counties”, and “Urban Extents”
           </p>
         </div>
 
@@ -99,6 +99,17 @@ const MapTopic = () => {
                 rel="noopener noreferrer"
               >
                 NASA SEDAC
+              </a>
+            </li>
+            <li className="bullet-point">
+              Carbon Emissions -
+              <a
+                className="video-link bullet-point"
+                href="http://ffdas.rc.nau.edu/About.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                FFDAS
               </a>
             </li>
             <li className="bullet-point">

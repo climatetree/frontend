@@ -21,7 +21,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #5274C8;
+  background-color: #5274c8;
   padding: 4px 8px;
   display: flex;
   flex-direction: column;
@@ -60,6 +60,15 @@
   font-size: 14px;
   font-weight: 300;
 }
+
+/* THEO'S CHANGE */
+.story-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* ------------- */
+
 .story-wrapper .story-detail .story-hyperlink,
 .story-wrapper .story-detail .story-post-info {
   width: 100%;
