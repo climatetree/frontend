@@ -35,6 +35,8 @@
 }
 .story-wrapper .story-detail header {
   margin-bottom: 8px;
+  display: flex;
+  padding-right: 21px;
 }
 .story-wrapper .story-detail header span {
   text-transform: capitalize;
@@ -44,7 +46,7 @@
   border-radius: 2px;
   padding: 1px 5px;
   display: inline-block;
-  max-width: 30%;
+  max-width: 40%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
@@ -60,15 +62,6 @@
   font-size: 14px;
   font-weight: 300;
 }
-
-/* THEO'S CHANGE */
-.story-title {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-/* ------------- */
-
 .story-wrapper .story-detail .story-hyperlink,
 .story-wrapper .story-detail .story-post-info {
   width: 100%;

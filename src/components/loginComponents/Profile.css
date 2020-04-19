@@ -79,6 +79,7 @@
   width: 100%;
   border-radius: 4px;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .story-list .loading {
