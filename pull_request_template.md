@@ -1,7 +1,7 @@
 ### Change type:
 - Bug fix / New feature
 
-###Description:
+### Description:
 - Fixes a bug by changing some code
 - Implements a new screen
 - Note to reviewers: <note goes here>

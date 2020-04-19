@@ -19,6 +19,7 @@ const Stories = (props) => {
   const [loadSpinner, setLoadSpinner] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sideBarVisible, setSideBarVisible] = useState(false);
+  const [removedStory, setRemovedStory] = useState('')
 
   const [resultFor, setResultFor] = useState("");
 
@@ -78,7 +79,7 @@ const Stories = (props) => {
         await fetchRecentStories();
       })();
     }
-  }, []);
+  }, [removedStory]);
 
   useEffect(() => {
     let { history } = props;
@@ -99,7 +100,7 @@ const Stories = (props) => {
         })();
       }
     }
-  }, [query.get("storyTitle")]);
+  }, [query.get("storyTitle"), removedStory]);
 
   const fetchRecentStories = async () => {
     setLoadSpinner(true);
@@ -137,6 +138,22 @@ const Stories = (props) => {
       setLoadSpinner(false);
     }
   };
+
+  /**
+   * Removes a story from the database.
+   */
+  const deleteStoryHandler = async (story_id, jwt) => {
+    await fetch(
+      `https://climatetree-api-gateway.azurewebsites.net/stories/delete/${story_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    setRemovedStory(story_id);
+  }
 
   const openSideBar = () => {
     setSideBarVisible(true);
@@ -176,10 +193,10 @@ const Stories = (props) => {
         ) : resultFor ? (
           <ResultsFor searchTerm={query.get("storyTitle")} />
         ) : (
-          <h2 id="recent-stories">Recent Stories</h2>
-        )}
+              <h2 id="recent-stories">Recent Stories</h2>
+            )}
         <div className="click-filter" onClick={openSideBar}>
-          Advanced search
+          Filters
         </div>
       </div>
     );
@@ -191,11 +208,14 @@ const Stories = (props) => {
       <>
         {/* {renderResultFor()} */}
         {stories.length &&
-          stories.map((story) => (
+          stories.map((story, index) => (
             <StoryDetail
               story={story}
               key={story.story_id}
-              generalSearchTerm={generalSearchTerm}
+              deleteStoryHandler={deleteStoryHandler}
+              index={index}
+              stories={stories}
+              setStories={setStories}
             />
           ))}
         {!stories.length && !loadSpinner && (

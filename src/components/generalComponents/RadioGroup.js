@@ -1,11 +1,12 @@
 import React from 'react';
 import Radio from './Radio';
 
-function RadioGroup({
+export default function RadioGroup({
   radio,
   name,
   selectRadioOption,
   onChange,
+  filled,
 }) {
   return (
     <>
@@ -17,10 +18,9 @@ function RadioGroup({
           value={r}
           checked={r === selectRadioOption}
           onChange={onChange}
+          filled={filled}
         />
       ))}
     </>
   );
 }
-
-export default RadioGroup;

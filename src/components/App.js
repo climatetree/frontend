@@ -6,6 +6,7 @@ import About from "./About";
 import Maps from "./Maps";
 import Stories from "./Stories";
 import LoginPage from "./LoginPage";
+import HelpPage from "./HelpPage";
 import { UserProvider } from "./context/UserContext";
 import "./App.css";
 
@@ -22,6 +23,7 @@ const App = () => (
           <LoginPage />
         </Route>
         <Route path="/stories" render={(props) => <Stories {...props} />} />
+        <Route path="/help" component={HelpPage} />
       </Switch>
     </BrowserRouter>
   </UserProvider>

@@ -77,6 +77,20 @@
   text-decoration: underline;
 }
 
+.story-info {
+  color: white;
+  font-size: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.story-info a {
+  color: white;
+}
+
+.story-info a:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .spinner {
   border: 3px solid #575757;
   border-radius: 50%;
@@ -191,7 +205,7 @@
 
 /* HORIZONTAL LINE */
 
-hr {
+.story-detail-hr {
   visibility: visible;
   margin: 0px auto;
   margin-top: 10px;
@@ -277,6 +291,19 @@ hr {
   font-weight: bolder;
 }
 
+.delete-story-btn {
+  display: inline-block;
+  border: 1px solid rgba(201, 201, 201, 0.5);
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 1rem;
+  font-size: 14px;
+  text-align: center;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.65);
+  cursor: pointer;
+}
+
 /* SEARCH BAR IN STORIES PAGE */
 
 #search-for-story {
@@ -313,7 +340,7 @@ hr {
   font-size: 20px;
 }
 
-.like-comments-view {
+.like-flag-view {
   margin-bottom: 30px;
 }
 
@@ -393,6 +420,10 @@ hr {
   cursor: pointer;
   overflow: hidden;
   background-repeat: no-repeat;
+}
+
+.delete-comment-btn:hover {
+  text-decoration: underline;
 }
 
 /* COMMENT COMPONENT */

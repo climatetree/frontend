@@ -1,21 +1,59 @@
-/* footer */
-
 .footer-landing {
-  height: 150px;
+  max-width: 100%;
   padding: 0 10rem;
-  display: flex;
-  justify-content: space-between;
   position: relative;
   color: #ededed;
 }
-
-.footer-landing div {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.footer-landing a {
+  color: #ededed;
+  text-decoration: none;
+  cursor: pointer;
 }
-
+.footer-landing h2 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  margin-top: 4rem;
+}
+.ct-logo-text {
+  font-family: serif;
+  font-weight: 100;
+  font-size: 18px;
+  color: white;
+  letter-spacing: 1px;
+  display: inline-block;
+  transform: translate(-12px, -26px);
+}
+.ct-logo {
+  height: 5rem;
+  transform: translateY(-12px);
+}
+.neu-logo {
+  height: 4rem;
+}
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.footer-col {
+  position: relative;
+}
+.footer-col:first-child {
+  justify-self: end;
+  padding-right: 1rem;
+}
+.footer-col.links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.footer-col.links h2 {
+  grid-column: 1 / span 2;
+}
+.footer-col a {
+  margin-top: 5px;
+}
 #footer-background {
   height: 500px;
   width: 100%;
@@ -26,9 +64,20 @@
   background: url("../../images/footer-dark-map.png");
   background-size: cover;
   z-index: -1;
-  box-shadow: 0 350px 500px 0px #0d0d0d inset;
+  box-shadow: 0 360px 500px 0px #0d0d0d inset;
 }
 
-.logo {
-  height: 4rem;
+@media (max-width: 480px) {
+  .footer-cols {
+    display: block;
+  }
+  .footer-col:first-child {
+    margin-bottom: 0;
+  }
+  .footer-col {
+    margin-bottom: 3rem;
+  }
+  .footer-landing h2 {
+    margin-top: 0;
+  }
 }

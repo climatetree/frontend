@@ -10,9 +10,11 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from "../context/UserContext";
 import useDebounce from "../customHooks/useDebounce";
 import CloseIcon from "../../images/x.svg";
-import Checkbox from "../mapsComponents/Checkbox";
-import DropdownInput from "./DropdownInput";
-import "./PostStoryForm.css";
+import AlertIcon from "../../images/alert-triangle.svg";
+import RadioGroup from '../generalComponents/RadioGroup';
+import Select from '../generalComponents/Select';
+import useStoryForm from './useStoryForm';
+import "./StoryForm.css";
 
 export default function PostStoryForm({
   setOpenPostStoryForm,
@@ -23,79 +25,6 @@ export default function PostStoryForm({
   const closeForm = () => {
     setOpenPostStoryForm(false);
   };
-  async function handleSubmit(hyperlink, preview, place_id) {
-    // the new story is stored on the backend-mongo-stories db
-    fetch("https://climatetree-api-gateway.azurewebsites.net/stories/create", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + user.jwt,
-        "Content-Type": "application/json",
-      },
-      // convert the data to json
-      body: JSON.stringify({
-        user_id: user.userId,
-        posted_by: user.username,
-        hyperlink,
-        story_title: preview.title || hyperlink,
-        description: preview.description || hyperlink,
-        image: preview.image || "",
-        place_ids: [place_id],
-        date: Date().toString(),
-        strategy: strategies.length ? strategies : ["Other"],
-        sector: sector.length ? [sector] : ["Other"],
-        solution: solution.length ? [solution] : ["Other"],
-      }),
-    })
-      .then(() => {
-        // Add that new story to the user profile
-        setMyStories([
-          ...myStories,
-          {
-            user_id: user.userId,
-            posted_by: user.username,
-            hyperlink,
-            story_title: preview.title || hyperlink,
-            description: preview.description || hyperlink,
-            image: preview.image || "",
-            place_ids: [place_id],
-            date: Date().toString(),
-            strategy: strategies.length ? strategies : ["Other"],
-            sector: sector.length ? [sector] : ["Other"],
-            solution: solution.length ? [solution] : ["Other"],
-          },
-        ]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    closeForm();
-  }
-  const [strategies, setStrategies] = useState([]);
-  const toggleStrategy = (strategyName) => {
-    if (strategies.includes(strategyName)) {
-      setStrategies(strategies.filter((s) => s !== strategyName));
-    } else {
-      setStrategies([...strategies, strategyName]);
-    }
-  };
-  const [sector, setSector] = useState("");
-  const [allSectors, setAllSectors] = useState([]);
-  const [solution, setSolution] = useState("");
-  const [allSolutions, setAllSolutions] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const solutionResponse = await fetch(
-        "https://climatetree-api-gateway.azurewebsites.net/stories/all/solution"
-      );
-      const solutions = await solutionResponse.json();
-      setAllSolutions(solutions);
-      const sectorResponse = await fetch(
-        "https://climatetree-api-gateway.azurewebsites.net/stories/all/sector"
-      );
-      const sectors = await sectorResponse.json();
-      setAllSectors(sectors);
-    })();
-  }, []);
   const [hyperlink, setHyperlink] = useState("");
   const [place, setPlace] = useState("");
   const debouncedSearchTerm = useDebounce(place, 1000);
@@ -124,6 +53,59 @@ export default function PostStoryForm({
       setSelectedPlaceID(null);
     }
   }, [debouncedSearchTerm]);
+  async function handleSubmit(hyperlink, preview, place_id) {
+    // the new story is stored on the backend-mongo-stories db
+    fetch("https://climatetree-api-gateway.azurewebsites.net/stories/create", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${user.jwt}`,
+        "Content-Type": "application/json",
+      },
+      // convert the data to json
+      body: JSON.stringify({
+        user_id: user.userId,
+        posted_by: user.username,
+        hyperlink,
+        story_title: preview.title || hyperlink,
+        description: preview.description || hyperlink,
+        image: preview.image || "",
+        place_ids: [place_id],
+        date: Date().toString(),
+        media_type: mediaType,
+        strategy: strategy ? [strategy] : ["Other"],
+        sector: sector.length ? [sector] : ["Other"],
+        solution: solution.length ? [solution] : ["Other"],
+      }),
+    })
+    .then(response => response.json())
+    .then(story => {
+      // Add that new story to the user profile
+      setMyStories([
+        ...myStories,
+        {
+          ...story,
+          image: preview.image || "",
+        },
+      ]);
+      closeForm();
+      setSubmitStatus('idle');
+    })
+    .catch((error) => {
+      setErroMsg(error.toString());
+      console.log(error);
+    });
+  }
+  const {
+    submitStatus, setSubmitStatus,
+    errorMsg, setErroMsg,
+    strategy,
+    sector, allSectors,
+    solution, allSolutions,
+    mediaType, setMediaType, allMediaTypes,
+    handleStrategySelection,
+    handleSectorSelection,
+    handleSolutionSelection,
+  } = useStoryForm();
   return (
     <section className="story-form-wrapper">
       <form autoComplete="off">
@@ -132,11 +114,16 @@ export default function PostStoryForm({
           <div className="close-btn">
             <img
               src={CloseIcon}
-              alt="close post story form"
+              alt="close"
               onClick={closeForm}
             />
           </div>
         </header>
+        {errorMsg && (
+          <div className='error'>
+            <img src={AlertIcon} alt="Alert" />{errorMsg}
+          </div>
+        )}
         <div className="form-body">
           <label htmlFor="hyperlink">Link</label>
           <input
@@ -159,14 +146,11 @@ export default function PostStoryForm({
               value={place}
               onChange={(event) => setPlace(event.target.value)}
               onFocus={() => {
-                document.querySelector("#place-suggestions").style.display =
-                  "block";
+                document.querySelector("#place-suggestions").style.display = "block";
               }}
               onBlur={() => {
                 setTimeout(() => {
-                  const suggestions = document.querySelector(
-                    "#place-suggestions"
-                  );
+                  const suggestions = document.querySelector("#place-suggestions");
                   if (suggestions) {
                     suggestions.style.display = "none";
                   }
@@ -189,7 +173,7 @@ export default function PostStoryForm({
                       <p
                         className={`place-name-dropdown${
                           place_id === selectedPlaceID[0] ? " highlight" : ""
-                          }`}
+                        }`}
                         key={place_id}
                         onClick={() => {
                           setPlace(name);
@@ -209,45 +193,49 @@ export default function PostStoryForm({
               ) : debouncedSearchTerm.length > 0 ? (
                 <p className="hint">No suggestion</p>
               ) : (
-                        <p className="hint">Place Suggestions</p>
-                      )}
+                <p className="hint">Place Suggestions</p>
+              )}
             </div>
           </div>
+          <Select
+            name="media-type"
+            label="Media Type"
+            placeholder="Select Sector"
+            value={mediaType}
+            onChange={setMediaType}
+            options={allMediaTypes}
+            direction="below"
+          />
           <label htmlFor="strategy">
             Strategy
             <small className="optional-label"> - Optional</small>
           </label>
-          <div className="strategy-checkbox-group">
-            <Checkbox
-              key="Mitigation"
-              label="Mitigation"
-              checked={strategies.includes("Mitigation")}
-              onChange={() => toggleStrategy("Mitigation")}
-            />
-            <Checkbox
-              key="Adaptation"
-              label="Adaptation"
-              checked={strategies.includes("Adaptation")}
-              onChange={() => toggleStrategy("Adaptation")}
+          <div className="strategy-radio-group">
+            <RadioGroup
+              radio={["Mitigation", "Adaptation"]}
+              name="strategy"
+              selectRadioOption={strategy}
+              onChange={handleStrategySelection}
+              filled
             />
           </div>
-          <DropdownInput
+          <Select
             name="sector"
-            type="text"
-            placeholder="Story Sector"
             label="Sector"
-            allOptions={allSectors}
-            searchTerm={sector}
-            setSearchTerm={setSector}
+            placeholder="Select Sector"
+            value={sector}
+            onChange={handleSectorSelection}
+            options={[...allSectors, "Other"]}
+            optional={true}
           />
-          <DropdownInput
+          <Select
             name="solution"
-            type="text"
-            placeholder="Story Solution"
             label="Solution"
-            allOptions={allSolutions}
-            searchTerm={solution}
-            setSearchTerm={setSolution}
+            placeholder="Select Solution"
+            value={solution}
+            onChange={handleSolutionSelection}
+            options={[...allSolutions, "Other"]}
+            optional={true}
           />
         </div>
         <footer>
@@ -255,18 +243,31 @@ export default function PostStoryForm({
             className="post-story"
             type="button"
             onClick={async () => {
-              if (selectedPlaceID) {
-                const response = await fetch(
-                  `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
-                    hyperlink
-                  )}`
-                );
-                const preview = await response.json();
-                handleSubmit(hyperlink, preview, selectedPlaceID);
+              setSubmitStatus('submitting');
+              if (submitStatus !== 'idle') {
+                return;
+              }
+              try {
+                const url = new URL(hyperlink);
+                if (selectedPlaceID) {
+                  const response = await fetch(
+                    `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
+                      hyperlink
+                    )}`
+                  );
+                  const preview = await response.json();
+                  handleSubmit(hyperlink, preview, selectedPlaceID);
+                } else {
+                  setErroMsg('Please select a place');
+                  setSubmitStatus('idle');
+                }
+              } catch (error) {
+                setErroMsg('Please enter a valid hyperlink');
+                setSubmitStatus('idle');
               }
             }}
           >
-            Post
+            {submitStatus === 'idle' ? 'Post' : 'Posting...'}
           </button>
         </footer>
       </form>

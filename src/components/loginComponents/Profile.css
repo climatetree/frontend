@@ -3,14 +3,13 @@
   padding-top: 80px;
   display: grid;
   grid-template-columns: 35% auto;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('../../images/actionvance-t7EL2iG3jMc-unsplash.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../images/actionvance-t7EL2iG3jMc-unsplash.jpg');
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
   color: #ededed;
 }
+
 .profile {
   height: fit-content;
   width: 100%;
@@ -20,31 +19,38 @@
   align-items: center;
   padding: 40px 0;
 }
+
 .greeting {
   font-size: 2rem;
   font-weight: 300;
   margin-bottom: 2rem;
 }
+
 .profile-image {
   height: 60px;
   width: 60px;
   border-radius: 50%;
   margin-bottom: 15px;
 }
+
 .profile-details p {
   font-size: 1rem;
   font-weight: 300;
 }
+
 .story-lists-wrapper {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding-top: 40px;
+  height: calc(100vh - 80px);
 }
+
 .story-lists-wrapper h2 {
   font-size: 1.5rem;
   font-weight: 300;
 }
+
 .story-list {
   background-color: rgba(0, 0, 0, 0.1);
   width: 90%;
@@ -57,18 +63,12 @@
   padding: 8px;
   position: relative;
 }
+
 .pending-wrapper:not(:last-child) {
   margin-bottom: 1rem;
 }
-.personal footer {
-  height: 4rem;
-  width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.post-story {
+
+.post-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,8 +78,9 @@
   border: 1px dashed rgba(255, 255, 255, 0.3);
   width: 100%;
   border-radius: 4px;
-  padding: 1rem 5rem;
+  padding: 1rem;
 }
+
 .story-list .loading {
   height: 200px;
   width: 100%;
@@ -97,6 +98,7 @@
   .story-lists-wrapper {
     align-items: center;
     padding-top: 0;
+    height: fit-content;
   }
   .story-list {
     width: 85%;

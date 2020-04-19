@@ -4,6 +4,7 @@ import "ol/ol.css";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
+import BaseLayer from 'ol/layer/Base';
 import Cluster from "ol/source/Cluster";
 import VectorSource from "ol/source/Vector";
 import XYZ from "ol/source/XYZ";
@@ -16,8 +17,11 @@ import { createPopupOverlay } from "./helpers/popups";
 
 class OlMap extends Component {
   state = { map: null };
+  setUpMap() {
 
+  }
   componentDidMount() {
+    this.setUpMap();
     // Enable clustering for points
     const clusterDist = 20;
     let clusterSource = new Cluster({
@@ -58,8 +62,7 @@ class OlMap extends Component {
       style: targetStyle,
     });
 
-    // Basemap layer, via ESRI API
-    let basemap = new TileLayer({
+    let baseMapDark = new TileLayer({
       source: new XYZ({
         attributions:
           'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
@@ -67,6 +70,17 @@ class OlMap extends Component {
         url:
           "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/" +
           "World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+      })
+    })
+
+    let baseMapGeo = new TileLayer({
+      source: new XYZ({
+        attributions:
+          'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+          'rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>',
+        url:
+          "https://server.arcgisonline.com/ArcGIS/rest/services/" +
+          "NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}"
       })
     });
 
@@ -77,14 +91,17 @@ class OlMap extends Component {
     let map = new Map({
       // Div id to put map in
       target: this.props.mapId,
-      layers: [basemap, placesLayer, targetPlaceLayer],
+      // Beware of adding to this list! You will also have to change the
+      // indices referenced in componentDidMount in order swap out data
+      // in the correct layers. This needs fixing to be more dynamic.
+      layers: [baseMapDark, baseMapGeo, placesLayer, targetPlaceLayer],
       overlays: [overlay],
       view: new View({
         center: fromLonLat([0, 0]),
         zoom: 1
       })
     });
-
+    baseMapGeo.setVisible(false);
     // Open popups when a point is clicked on
     map.on("singleclick", evt =>
       popUpHandler(evt, map, overlay, this.props.history, this.props.setComparePlaceProps)
@@ -114,7 +131,7 @@ class OlMap extends Component {
       // Swap out places data points with new search results
       let collection = this.state.map.getLayers();
       let placesSource = collection
-        .getArray()[1]  // placesLayer
+        .getArray()[2]  // placesLayer
         .getSource()    // cluster source
         .getSource();   // vector source
       placesSource.clear({ fast: true });
@@ -122,7 +139,7 @@ class OlMap extends Component {
 
       // Swap out target place data point
       let targetSource = collection
-        .getArray()[2]  // targetPlaceLayer
+        .getArray()[3]  // targetPlaceLayer
         .getSource();   // vector source (no cluster for this layer)
       targetSource.clear({ fast: true });
       targetSource.addFeatures(getGeoJson(
@@ -144,6 +161,20 @@ class OlMap extends Component {
           // Center map on searched for place and zoom in
           view.setCenter(targetCoordinates);
           view.setZoom(4.5);
+        }
+      });
+    }
+    if (this.props.baseMap != prevProps.baseMap) {
+      this.state.map.getLayers().forEach((ele, index, arr) => {
+        if (this.props.baseMap == 'natGeo' && index == 0) {
+          ele.setVisible(false);
+        } else if (this.props.baseMap == 'natGeo' && index == 1) {
+          ele.setVisible(true)
+        }
+        if (this.props.baseMap == 'dark' && index == 0) {
+          ele.setVisible(true);
+        } else if (this.props.baseMap == 'dark' && index == 1) {
+          ele.setVisible(false);
         }
       });
     }

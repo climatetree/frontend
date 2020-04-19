@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import useDebounce from "../customHooks/useDebounce";
+import Tooltip from "../generalComponents/Tooltip";
 import searchIcon from "../../images/search.svg";
 import "./FirstScreen.css";
 
@@ -18,6 +19,12 @@ export default function FirstScreen() {
   const [researchPlaceTerm, setResearchPlaceTerm] = useState('');
   const debouncedSearchTerm = useDebounce(mapSearchTerm, 500);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
+
+  const mapHint = `Hints: Enter the name of your City, County, State, or \
+    Country without words like “county” or “city” (for example) “New York” \
+    instead of “New York City” or “New York State”).If you live in a smaller \
+    city, town or village, try your local regional administrative unit name \
+    (county name or state name, for example: “Thurston” instead of “Olympia”).`;
 
   const searchForStories = async () => {
     if (searchTerm) {
@@ -65,27 +72,27 @@ export default function FirstScreen() {
             activeTab === "stories" ? "active" : ""
             }`}
         >
-          Explore climate stories
+          Explore climate change solution
           <br />
-          anywhere in the world
+          stories anywhere in the world
         </h2>
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "map" ? "active" : ""
             }`}
         >
-          Discover similar places
+          Discover similar places to yours and climate
           <br />
-          and climate actions happened there
+          change solution stories happening there
         </h2>
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "research" ? "active" : ""
             }`}
         >
-          Find climate actions
+          Find climate change solution stories and
           <br />
-          and share with the rest of world
+          share them with the ClimateTree&trade; community
         </h2>
         <header>
           <span
@@ -139,10 +146,18 @@ export default function FirstScreen() {
             {isLoading && <div id="spinner-landing"></div>}
           </div>
           <div className="tab-description">
-            <p>Search climate solutions with ClimateTree</p>
+            <p>Search climate change solutions with ClimateTree&trade;</p>
             <p>
-              Climate change impacts our planet and the lives of people. We are
-              here to help with our research platform.
+              ClimateTree’s&trade; fundamental units are called <strong>solution stories</strong>.
+              They include content describing climate change adaptation and mitigation strategies
+              from across the world. Our database contains a collection of solution stories
+              searchable by solution type and by where the solutions come from in the world.
+            </p>
+            <p>
+              Search "Stories" to find solutions by type. We will show you all the solutions
+              we have containing the given search terms. It is our hope that by sharing this content, users will
+              gain hope, insight, and practical information about how to approach climate
+              change solutions in their own locale.
             </p>
           </div>
         </div>
@@ -156,7 +171,7 @@ export default function FirstScreen() {
             <input
               type="text"
               id="map-input"
-              placeholder="Enter the name of your city, state, or country"
+              placeholder="Enter the name of your city, county, state, or country"
               value={mapSearchTerm}
               onChange={(event) => setMapSearchTerm(event.target.value)}
               onFocus={() => {
@@ -196,6 +211,7 @@ export default function FirstScreen() {
                       name,
                       state_name,
                       nation_name,
+                      type,
                     } = place.properties;
                     return (
                       <p
@@ -210,9 +226,11 @@ export default function FirstScreen() {
                           }, 2000);
                         }}
                       >
-                        {name}
+                        {name} - <small>{type}</small>
                         <span>
-                          {state_name} {state_name ? "," : ""} {nation_name}
+                          {(type === "NATION" || type === "STATE") ? "" : state_name}
+                          {(type === "NATION" || type === "STATE") ? "" : ', '}
+                          {type === "NATION" ? "Earth" : nation_name}
                         </span>
                       </p>
                     );
@@ -228,8 +246,13 @@ export default function FirstScreen() {
           <div className="tab-description">
             <p>View similar places on the map</p>
             <p>
-              We will find similar places based on climate parameters and you
-              can navigate to find climate solutions happened in those places.
+              The ClimateTree&trade; "Map" feature allows you to find places like yours around the world
+              to explore what people there are doing about climate change. When you type in a place you
+              will be given a number of places around the world that are similar, according
+              to our default search based on population.
+            </p>
+            <p>
+              {mapHint}
             </p>
           </div>
         </div>
@@ -251,7 +274,12 @@ export default function FirstScreen() {
               />
               <label htmlFor="research-search-term">
                 Search solution
-                <span>Type in climate solutions OR choose from dropdown</span>
+                <span>
+                  Search climate solutions. See {" "}
+                  <a href="https://drawdown.org/solutions/table-of-solutions" target="_blank">
+                    ProjectDrawdown
+                  </a>
+                  {" "} for more suggestions.</span>
               </label>
             </div>
             <div className="research-input-wrapper">
@@ -265,7 +293,9 @@ export default function FirstScreen() {
               />
               <label htmlFor="research-place-term">
                 Search place
-                <span>Type in the City, County, State, or Country AND choose from dropdown</span>
+                <span>
+                  Type in the City, County, State, or Country AND choose from dropdown.
+                </span>
               </label>
             </div>
           </div>
@@ -274,16 +304,18 @@ export default function FirstScreen() {
               window.open(
                 `https://www.google.com/search?q=${researchSearchTerm}+${researchPlaceTerm}`
               );
-            }}>Research</button>
-            <button onClick={() => {
-              history.push({ pathname: '/login' });
-            }}>Upload Your Research</button>
+            }}>
+              Search The Web
+            </button>
+            <button onClick={() => { history.push({ pathname: '/login' }) }}>
+              Upload Stories
+            </button>
           </div>
           <div className="tab-description">
             <p>Discover and share climate solutions</p>
             <p>
-              Investigate climate actions on the web and ClimateTree will help
-              to share with the world.
+              Investigate climate change solution stories on the web and ClimateTree&trade;
+              will help you share with the world.
             </p>
           </div>
         </div>

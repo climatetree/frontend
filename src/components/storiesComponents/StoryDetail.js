@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 
 import { UserContext } from "../context/UserContext";
 import Can from "../loginComponents/Can";
-import LikeCommentButtonGroup from "./LikeCommentButtonGroup";
+import LikeFlagButtonGroup from "./LikeCommentButtonGroup";
 import StoryCommentsList from "./StoryCommentsList";
 import StoryCommentInput from "./StoryCommentInput";
 import StoryPreview from "../generalComponents/StoryPreview";
 
-const StoryDetail = ({ story }) => {
+const StoryDetail = ({
+  story,
+  deleteStoryHandler,
+  index,
+  stories,
+  setStories,
+}) => {
   let userLikesGroup = new Set();
   for (let userId of story.liked_by_users) {
     userLikesGroup.add(userId);
@@ -23,27 +28,10 @@ const StoryDetail = ({ story }) => {
   let [userLikesGroupState, setUserLikesGroup] = useState(userLikesGroup);
   let [userFlagGroupState, setUserFlagGroup] = useState(userFlagGroup);
   let [comments, setComments] = useState(story.comments);
-  let [storyView, setStoryView] = useState({});
 
   // New updated code to get user and role.
   const { user } = useContext(UserContext);
   const { role } = user;
-
-  useEffect(() => {
-    (async () => {
-      const storyPreview = await axios.get(
-        `https://climatetree-api-gateway.azurewebsites.net/stories/getPreview?hyperlink=${encodeURIComponent(
-          story.hyperlink
-        )}`
-      );
-
-      setStoryView({
-        ...storyPreview.data,
-        story_title: storyPreview.data["title"],
-        hyperlink: story.hyperlink,
-      });
-    })();
-  }, []);
 
   const onToggleComment = () => {
     setToggleComment((prevToggleCommentState) => !prevToggleCommentState);
@@ -114,36 +102,39 @@ const StoryDetail = ({ story }) => {
         <div className="link-preview-container">
           <StoryPreview
             key={story.story_id}
-            story={storyView}
+            story={story}
+            updateStories={(updated) => {
+              setStories([
+                ...stories.slice(0, index),
+                updated,
+                ...stories.slice(index + 1),
+              ]);
+            }}
+            removeStory={() => deleteStoryHandler(story.story_id, user.jwt)}
             cssScope="profile"
           />
         </div>
 
-        <div>
-          <div className="created-detail">
-            Created:{" "}
-            {`${
-              story.date.getUTCMonth() + 1
-              }/${story.date.getUTCDate()}/${story.date.getUTCFullYear()}`}
-          </div>
-        </div>
-
-        <div className="likes-comments-view">
+        <div className="likes-flag-view">
           <div className="liked-count">{userLikesGroupState.size} Likes</div>
           {comments.length > 0 && (
-            <div className="view-comments-btn" onClick={onToggleViewComment}>
+            <div
+              role="button"
+              className="view-comments-btn"
+              onClick={onToggleViewComment}
+            >
               <span>{comments.length} Comments</span>
             </div>
           )}
         </div>
       </div>
 
-      <hr></hr>
+      <hr className="story-detail-hr"></hr>
       <Can
         role={role}
         perform="posts:like"
         yes={() => (
-          <LikeCommentButtonGroup
+          <LikeFlagButtonGroup
             story={story}
             onChangeUsersLikesGroup={onChangeUsersLikesGroup}
             onChangeUsersFlagGroup={onChangeUsersFlagGroup}

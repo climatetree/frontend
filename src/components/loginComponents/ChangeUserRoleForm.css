@@ -1,0 +1,150 @@
+.role-change-form-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.role-change-form-wrapper form {
+    min-height: 300px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #181818;
+    border-radius: 4px;
+    padding: 1rem 2rem 1.5rem;
+    box-shadow: 1px 1px 16px 4px rgba(255, 255, 255, 0.5);
+    position: relative;
+}
+
+.role-change-form-wrapper .form-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.role-change-form-wrapper form header {
+    font-weight: 300;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.role-change-form-wrapper form footer {
+    margin-top: 1rem;
+}
+
+.role-change-form-wrapper .close-btn {
+    cursor: pointer;
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.role-change-form-wrapper .close-btn:hover {
+    background-color: #454545;
+}
+
+.role-change-form-wrapper form label {
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.optional-label {
+    font-size: 14px;
+    font-style: italic;
+    color: #888888;
+}
+
+.role-change-form-wrapper form input {
+    line-height: 1rem;
+    padding: 12px 20px;
+    border: none;
+    background-color: #454545;
+    color: #ededed;
+    border-radius: 2px;
+    outline: none;
+    font-size: 1rem;
+    margin-top: 8px;
+    margin-bottom: 1rem;
+}
+
+.role-change-form-wrapper form input::placeholder {
+    color: #888888;
+    font-weight: 300;
+}
+
+button.post-change {
+    border-radius: 2px;
+    font-size: 1rem;
+    font-weight: 300;
+    color: #fefefe;
+    background: linear-gradient(to right, #60A2DE, #5274C8);
+    border: none;
+    cursor: pointer;
+    padding: 5px 20px;
+    float: right;
+    outline: none;
+}
+
+.dropdown-input {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#role-list {
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
+    position: absolute;
+    width: 100%;
+    top: 75px;
+    background-color: rgba(0, 0, 0, 0.85);
+    font-weight: 300;
+    z-index: 1;
+}
+
+#role-list p {
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 8px 20px;
+}
+
+#role-list p:hover {
+    background-color: rgba(51, 51, 51, 0.85);
+}
+
+.error-msg {
+    margin-top: 3rem;
+    color: #fc0037;
+}
+
+.success-msg {
+    margin-top: 3rem;
+    color: #42ad10;
+}
+
+@media (max-width: 480px) {
+    .role-change-form-wrapper {
+        padding: 0;
+    }
+    .role-change-form-wrapper form {
+        height: 100%;
+        width: 100%;
+        box-shadow: none;
+    }
+}

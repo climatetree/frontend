@@ -1,7 +1,7 @@
 #explore-screen {
   color: #ededed;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, calc((100% - 40px) / 3));
   grid-template-rows: 90px auto;
   column-gap: 30px;
   background: linear-gradient(
@@ -9,58 +9,17 @@
     transparent,
     transparent 250px,
     #0d0d0d 250px,
-    #0d0d0d
+    transparent
   );
-  padding-bottom: 250px;
+  padding-bottom: 100px;
 }
-
 #explore-header {
   opacity: 0;
-  color: #ffffff;
+  color: #ededed;
   text-transform: capitalize;
   grid-area: 1 / 1 / span 1 / span 3;
   font-size: 2rem;
   font-weight: 400;
-}
-
-.explore-tile {
-  opacity: 0;
-  width: 100%;
-  filter: brightness(75%);
-  text-decoration: none;
-  color: #ededed;
-}
-
-.explore-tile:hover {
-  filter: brightness(100%);
-  background-color: inherit;
-}
-
-.explore-tile img {
-  width: 100%;
-  object-fit: cover;
-  height: 190px;
-}
-.popular-stories-title {
-  font-weight: 400;
-  overflow: hidden;
-  width: 25vw;
-  font-size: 20px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  cursor: pointer;
-}
-.ps-title-link {
-  color: #ededed;
-  text-decoration: none;
-}
-.ps-title-link:hover {
-  text-decoration: underline;
-}
-.ps-description {
-  color: #adadad;
-  font-weight: 300;
-  transform: translateY(5px);
 }
 .spinner-explore-container {
   display: flex;
@@ -69,7 +28,8 @@
   grid-area: 2 / 2 / auto / auto;
   align-items: center;
   margin-top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  height: 250px;
 }
 .spinner-explore {
   border: 3px solid #575757;
@@ -80,7 +40,10 @@
   animation: spin 0.5s linear infinite;
 }
 
-@media (max-width: 959px) and (min-width: 768px) {
+@media (max-width: 1023px) and (min-width: 768px) {
+  .tab-title {
+    font-size: 1.8rem;
+  }
   #explore-screen {
     column-gap: 25px;
   }
@@ -90,15 +53,23 @@
   #explore-screen {
     display: flex;
     flex-direction: column;
-    padding-bottom: 200px;
+    padding-bottom: 0;
   }
   #explore-header {
     margin-bottom: 2rem;
+    font-size: 1.8rem;
   }
   .explore-tile {
     margin-bottom: 60px;
   }
   .popular-stories-title {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #explore-header {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
   }
 }

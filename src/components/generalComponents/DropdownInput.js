@@ -10,6 +10,8 @@ export default function DropdownInput({
   allOptions,
   searchTerm,
   setSearchTerm,
+  optional,
+  direction,
 }) {
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
   const [options, setOptions] = useState([]);
@@ -24,14 +26,16 @@ export default function DropdownInput({
   }, [debouncedSearchTerm]);
   return (
     <div className="dropdown-input">
-      <label htmlFor={`${name}`}>
+      <label htmlFor={name}>
         {label}
-        <small className="optional-label"> - Optional</small>
+        {optional && (
+          <small className="optional-label"> - Optional</small>
+        )}
       </label>
       <input
-        id={`${name}`}
-        name={`${name}`}
-        type={`${type}`}
+        id={name}
+        name={name}
+        type={type}
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
         placeholder={`${placeholder}`}
@@ -47,7 +51,10 @@ export default function DropdownInput({
           }, 200);
         }}
       />
-      <div id={`${name}-list`}>
+      <div
+        className={`dropdown ${direction}`}
+        id={`${name}-list`}
+      >
         {debouncedSearchTerm.length === 0 ? (
           <>
             {allOptions.map((option) => (
