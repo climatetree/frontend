@@ -1,7 +1,7 @@
 .filter-dropdown-container {
   color: #d9d9d9;
   min-height: 33px;
-  max-height: 157px;
+  max-height: 160px;
   overflow-y: scroll;
   position: absolute;
   top: 100%;
@@ -11,10 +11,11 @@
   right: 16px;
   display: none;
   margin-bottom: 20px;
+  /* transform: rotate(180deg); */
 }
 
 #solution {
-  max-height: 115px;
+  top: -145%;
 }
 
 .searching {
@@ -71,6 +72,7 @@
 
   #solution {
     max-height: 157px;
+    top: 100%;
   }
 
   .sector-dropdown-container {

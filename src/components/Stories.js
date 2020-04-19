@@ -118,7 +118,6 @@ const Stories = (props) => {
   const searchForStoriesBasedOnSearchTerm = async (searchTerm, history) => {
     if (searchTerm) {
       setLoadSpinner(true);
-      // setResultFor(searchTerm);
 
       const response = await axios.get(
         `https://climatetree-api-gateway.azurewebsites.net/stories/title/${searchTerm}`
@@ -202,7 +201,7 @@ const Stories = (props) => {
         {!stories.length && !loadSpinner && (
           <div className="no-found-msg">
             No stories were found.
-            {generalSearchTerm.length && (
+            {generalSearchTerm.length ? (
               <a
                 href={`https://www.google.com/search?q=${generalSearchTerm}`}
                 target="_blank"
@@ -211,6 +210,8 @@ const Stories = (props) => {
               >
                 Would you like to help look for one?
               </a>
+            ) : (
+              ""
             )}
           </div>
         )}
@@ -246,6 +247,7 @@ const Stories = (props) => {
           setStoriesBasedOnFilter={setStoriesBasedOnFilter}
           generalSearchTerm={generalSearchTerm}
           setGeneralSearchTerm={setGeneralSearchTerm}
+          loadSpinner={loadSpinner}
         />
       </div>
     </div>

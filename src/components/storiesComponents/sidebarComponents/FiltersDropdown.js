@@ -10,7 +10,6 @@ const FiltersDropdown = ({
   status,
   strategyTerm,
   loadingFilter,
-  pushFilter,
 }) => {
   const debouncedTerm = useDebounce(filterTerm, 200);
   const [filtersBasedOnTerm, setFiltersBasedOnTerm] = useState([]);
@@ -39,9 +38,7 @@ const FiltersDropdown = ({
   }, [debouncedTerm]);
 
   const onFilterClick = (term) => {
-    if (pushFilter(term)) {
-      setTermOnClick(term);
-    }
+    setTermOnClick(term);
   };
 
   const renderContent = () => {

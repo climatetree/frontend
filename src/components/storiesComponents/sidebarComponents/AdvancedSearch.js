@@ -14,10 +14,8 @@ const AdvancedSearch = ({
   closeSideBar,
   windowWidth,
   setStoriesBasedOnFilter,
+  loadSpinner,
 }) => {
-  // const { user } = useContext(UserContext);
-  // const { jwt } = user;
-
   // THIS IS FOR STRATEGY FILTER
   const [strategyTerm, setStrategyTerm] = useState("");
 
@@ -34,12 +32,6 @@ const AdvancedSearch = ({
   const [strategyChosen, setStrategyChosen] = useState(false);
   const [sectorChosen, setSectorChosen] = useState(false);
 
-  // ARRAY OF SECTORS THAT ARE CHOSEN
-  const [sectorsChosenArr, setSectorsChosenArr] = useState([]);
-
-  // ARRAY OF SOLUTIONS THAT ARE CHOSEN
-  const [solutionsChosenArr, setSolutionsChosenArr] = useState([]);
-
   useEffect(() => {
     document.addEventListener("keydown", escapeButtonPress);
 
@@ -47,6 +39,14 @@ const AdvancedSearch = ({
       document.removeEventListener("keydown", escapeButtonPress);
     };
   }, []);
+
+  useEffect(() => {
+    setStrategyTerm("");
+    setSectorTerm("");
+    setSolutionTerm("");
+    setStrategyChosen(false);
+    setSectorChosen(false);
+  }, [loadSpinner]);
 
   // SET TAXONOMY FOR SECTOR
   const setTaxonomyForSector = async (strategy) => {
@@ -94,19 +94,23 @@ const AdvancedSearch = ({
     }
   };
 
-  const checkingRequestBody = (searchTerm, sectors, solutions) => {
+  const checkingRequestBody = (strategyTerm, searchTerm, sector, solution) => {
     let requestBody = {};
 
+    if (strategyTerm) {
+      requestBody["strategy"] = [strategyTerm.toLowerCase()];
+    }
+
     if (searchTerm) {
-      requestBody["story_title"] = searchTerm;
+      requestBody["story_title"] = searchTerm.toLowerCase();
     }
 
-    if (sectors.length) {
-      requestBody["sector"] = sectors;
+    if (sectorTerm.length) {
+      requestBody["sector"] = [sector.toLowerCase()];
     }
 
-    if (solutions.length) {
-      requestBody["solution"] = solutions;
+    if (solutionTerm.length) {
+      requestBody["solution"] = [solution.toLowerCase()];
     }
 
     return requestBody;
@@ -114,66 +118,23 @@ const AdvancedSearch = ({
 
   const applyFilterOnClick = async () => {
     let reqBody = checkingRequestBody(
+      strategyTerm,
       generalSearchTerm,
-      sectorsChosenArr,
-      solutionsChosenArr
+      sectorTerm,
+      solutionTerm
     );
     console.log(reqBody);
 
-    // try {
-    //   const options = {
-    //     headers: {
-    //       Authorization: "Bearer " + jwt,
-    //       "Content-Type": "application/json",
-    //     },
-    //   };
+    try {
+      const response = await axios.post(
+        "https://backend-mongo-stories.azurewebsites.net/v1/stories/search",
+        reqBody
+      );
 
-    //   const response = await axios.post(
-    //     "https://climatetree-api-gateway.azurewebsites.net/stories/search",
-    //     reqBody,
-    //     options
-    //   );
-
-    //   setStoriesBasedOnFilter(response.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
-
-  const pushSectorValue = (newSector) => {
-    let sectorFound = sectorsChosenArr.find((sector) => sector === newSector);
-    if (sectorFound) {
-      alert(newSector + " is already added");
-      return 0;
-    } else {
-      setSectorsChosenArr((prevState) => [...prevState, newSector]);
-      return 1;
+      setStoriesBasedOnFilter(response.data);
+    } catch (error) {
+      console.log(error);
     }
-  };
-
-  const removeSectorValue = (curSector) => {
-    setSectorsChosenArr((prevState) =>
-      prevState.filter((sector) => sector !== curSector)
-    );
-  };
-
-  const pushSolutionValue = (newSolution) => {
-    let solutionFound = solutionsChosenArr.find(
-      (solution) => solution === newSolution
-    );
-    if (solutionFound) {
-      alert(newSolution + " is already added");
-      return 0;
-    } else {
-      setSolutionsChosenArr((prevState) => [...prevState, newSolution]);
-      return 1;
-    }
-  };
-
-  const removeSolutionValue = (curSolution) => {
-    setSolutionsChosenArr((prevState) =>
-      prevState.filter((solution) => solution !== curSolution)
-    );
   };
 
   return (
@@ -213,9 +174,6 @@ const AdvancedSearch = ({
           setSectorTerm={setSectorTerm}
           strategyTerm={strategyTerm}
           setTaxonomyForSolution={setTaxonomyForSolution}
-          pushSectorValue={pushSectorValue}
-          removeSectorValue={removeSectorValue}
-          sectorsChosenArr={sectorsChosenArr}
         />
         <SolutionFilter
           strategyChosen={strategyChosen}
@@ -224,9 +182,6 @@ const AdvancedSearch = ({
           loadingSolution={loadingSolution}
           setSolutionTerm={setSolutionTerm}
           allSolutions={allSolutions}
-          pushSolutionValue={pushSolutionValue}
-          removeSolutionValue={removeSolutionValue}
-          solutionsChosenArr={solutionsChosenArr}
         />
       </div>
     </div>
