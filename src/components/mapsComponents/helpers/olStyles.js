@@ -1,6 +1,7 @@
 import { Fill, Stroke, Circle, Style, Text } from 'ol/style';
 
 /* Styles */
+const singleFeatureSize = 8;
 
 // Allows for dynamic style choice based on type and cluster size
 let styleCache = {};
@@ -15,16 +16,16 @@ const primaryStyle = feature => {
     if (!(numInCluster in styleCache)) {
         // Determine a radius size
         let radius;
-        let baseVal = 6;
+        let clusterBaseSize = 7;
         let test = numInCluster / 10;
         if (numInCluster === 1) {        // single feature point
-            radius = baseVal;
+            radius = singleFeatureSize;
         } else if (test < 1) {          // number is < 10
-            radius = baseVal * 2;
+            radius = clusterBaseSize * 2;
         } else if (test < 10) {         // number is < 100
-            radius = baseVal * 3;
+            radius = clusterBaseSize * 3;
         } else {                        // number is >= 100
-            radius = baseVal * 4;
+            radius = clusterBaseSize * 4;
         }
 
         // Create basic Point style
@@ -54,7 +55,7 @@ const primaryStyle = feature => {
 const targetStyle = feature => {
     return new Style({
         image: new Circle({
-            radius: 6,
+            radius: singleFeatureSize,
             // If this is changed, it should also be changed in StoryDashboard.css
             fill: new Fill({ color: 'rgb(66, 173, 16)' }),
             stroke: new Stroke({ color: 'rgba(0, 0, 0, 0.5)', width: 0.5 }),
