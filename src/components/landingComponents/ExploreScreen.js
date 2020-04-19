@@ -3,7 +3,6 @@
  */
 import React, { useEffect, useState } from "react";
 import StoryPreview from '../generalComponents/StoryPreview';
-import { generateStoryImage } from '../loginComponents/helper';
 import "./ExploreScreen.css";
 
 export default function ExploreScreen() {
@@ -12,12 +11,7 @@ export default function ExploreScreen() {
     (async () => {
       const res = await fetch('https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3');
       const topStories = await res.json();
-      const results = [];
-      const storyImageGenerator = generateStoryImage(topStories);
-      for await (const updatedStory of storyImageGenerator) {
-        results.push(updatedStory);
-      }
-      setPopularStories(results);
+      setPopularStories(topStories);
     })();
   }, []);
   return (

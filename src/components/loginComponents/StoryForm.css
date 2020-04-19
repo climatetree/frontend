@@ -5,22 +5,30 @@
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.85);
+  color: #ededed;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 101;
 }
 .story-form-wrapper form {
-  min-height: 300px;
+  max-height: 95%;
+  overflow-y: auto;
   width: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   background-color: #181818;
   border-radius: 4px;
   padding: 1rem 2rem 1.5rem;
   box-shadow: 1px 1px 16px 4px rgba(255, 255, 255, 0.5);
   position: relative;
+}
+.story-form-wrapper form .error {
+  color: #fc0037;
+  display: flex;
+  align-items: center;
+}
+.story-form-wrapper form .error img {
+  height: 1rem;
+  margin-right: 4px;
 }
 .story-form-wrapper .form-body {
   display: flex;
@@ -85,6 +93,7 @@ button.post-story {
   padding: 5px 20px;
   float: right;
   outline: none;
+  width: 100px;
 }
 #place-suggestions {
   max-height: 200px;
@@ -116,6 +125,10 @@ button.post-story {
 #sector-list,
 #solution-list {
   display: none;
+}
+.story-title {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
 }
 
 @media (max-width: 480px) {

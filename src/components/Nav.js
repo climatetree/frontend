@@ -14,7 +14,7 @@ export default function Nav() {
       <nav>
         <Link to="/" className="logo">
           <img src={logo} alt="climate tree logo" />
-          <p id="logo-text">ClimateTree</p>
+          <p id="logo-text">ClimateTree&trade;</p>
         </Link>
         <NavLinks cssScope="" />
       </nav>
