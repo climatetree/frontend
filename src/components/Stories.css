@@ -28,7 +28,7 @@
   align-items: flex-end;
 }
 
-#recent-stories {
+.recent-stories {
   color: #bababa;
   font-weight: 500;
   margin-top: 30px;

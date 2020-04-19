@@ -19,9 +19,10 @@ const Stories = (props) => {
   const [loadSpinner, setLoadSpinner] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sideBarVisible, setSideBarVisible] = useState(false);
-  const [removedStory, setRemovedStory] = useState('')
+  const [removedStory, setRemovedStory] = useState("");
 
   const [resultFor, setResultFor] = useState("");
+  const [clickFilter, setClickFilter] = useState(false);
 
   // Retrieve query name from URL with React Router
   const useQuery = () => {
@@ -153,7 +154,7 @@ const Stories = (props) => {
       }
     );
     setRemovedStory(story_id);
-  }
+  };
 
   const openSideBar = () => {
     setSideBarVisible(true);
@@ -184,17 +185,29 @@ const Stories = (props) => {
     });
   };
 
+  const renderHeaderBelowSearchBar = () => {
+    if (placeId) {
+      return <ResultForPlaceId placeId={placeId} placeName={placeName} />;
+    }
+    if (resultFor) {
+      return (
+        <>
+          {clickFilter && <h2 className="recent-stories">Filtered Stories</h2>}
+          <ResultsFor searchTerm={query.get("storyTitle")} />
+        </>
+      );
+    }
+    if (clickFilter) {
+      return <h2 className="recent-stories">Filtered Stories</h2>;
+    }
+    return <h2 className="recent-stories">Recent Stories</h2>;
+  };
+
   // Conditional rendering based on place id and search term
   const renderResultFor = () => {
     return (
       <div className="result-for-and-filter">
-        {placeId ? (
-          <ResultForPlaceId placeId={placeId} placeName={placeName} />
-        ) : resultFor ? (
-          <ResultsFor searchTerm={query.get("storyTitle")} />
-        ) : (
-              <h2 id="recent-stories">Recent Stories</h2>
-            )}
+        {renderHeaderBelowSearchBar()}
         <div className="click-filter" onClick={openSideBar}>
           Filters
         </div>
@@ -206,7 +219,6 @@ const Stories = (props) => {
   const renderContent = () => {
     return (
       <>
-        {/* {renderResultFor()} */}
         {stories.length &&
           stories.map((story, index) => (
             <StoryDetail
@@ -268,6 +280,7 @@ const Stories = (props) => {
           generalSearchTerm={generalSearchTerm}
           setGeneralSearchTerm={setGeneralSearchTerm}
           loadSpinner={loadSpinner}
+          setClickFilter={setClickFilter}
         />
       </div>
     </div>

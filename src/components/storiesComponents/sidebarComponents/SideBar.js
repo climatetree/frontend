@@ -15,6 +15,7 @@ const SideBar = ({
   closeSideBar,
   setStoriesBasedOnFilter,
   loadSpinner,
+  setClickFilter,
 }) => {
   const { user } = useContext(UserContext);
   const { isLoggedIn } = user;
@@ -47,6 +48,7 @@ const SideBar = ({
           closeSideBar={closeSideBar}
           setStoriesBasedOnFilter={setStoriesBasedOnFilter}
           loadSpinner={loadSpinner}
+          setClickFilter={setClickFilter}
         />
       </div>
     </div>

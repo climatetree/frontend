@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Tooltip from "../../generalComponents/Tooltip";
 
 // import { UserContext } from "../context/UserContext";
 import SolutionFilter from "./SolutionFilter";
@@ -15,6 +16,7 @@ const AdvancedSearch = ({
   windowWidth,
   setStoriesBasedOnFilter,
   loadSpinner,
+  setClickFilter,
 }) => {
   // THIS IS FOR STRATEGY FILTER
   const [strategyTerm, setStrategyTerm] = useState("");
@@ -46,6 +48,7 @@ const AdvancedSearch = ({
     setSolutionTerm("");
     setStrategyChosen(false);
     setSectorChosen(false);
+    setClickFilter(false);
   }, [loadSpinner]);
 
   // SET TAXONOMY FOR SECTOR
@@ -132,6 +135,7 @@ const AdvancedSearch = ({
       );
 
       setStoriesBasedOnFilter(response.data);
+      setClickFilter(true);
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +148,14 @@ const AdvancedSearch = ({
       onR
     >
       <div id="btn-filter-container">
-        <span id="title-as">Filters</span>
+        <div>
+          <span id="title-as">Filters</span>
+          <Tooltip
+            id="title-tip"
+            dark={false}
+            description="Choose at least 1 filter to filter stories"
+          />
+        </div>
         <button
           id="apply-filters"
           onClick={() => {
@@ -153,6 +164,7 @@ const AdvancedSearch = ({
               closeSideBar();
             }
           }}
+          disabled={!strategyTerm && !sectorTerm && !solutionTerm}
         >
           Apply Filters
         </button>
