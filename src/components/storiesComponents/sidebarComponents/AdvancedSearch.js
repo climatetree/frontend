@@ -101,19 +101,19 @@ const AdvancedSearch = ({
     let requestBody = {};
 
     if (strategyTerm) {
-      requestBody["strategy"] = [strategyTerm.toLowerCase()];
+      requestBody["strategy"] = [strategyTerm];
     }
 
     if (searchTerm) {
-      requestBody["story_title"] = searchTerm.toLowerCase();
+      requestBody["story_title"] = searchTerm;
     }
 
     if (sectorTerm.length) {
-      requestBody["sector"] = [sector.toLowerCase()];
+      requestBody["sector"] = [sector];
     }
 
     if (solutionTerm.length) {
-      requestBody["solution"] = [solution.toLowerCase()];
+      requestBody["solution"] = [solution];
     }
 
     return requestBody;
