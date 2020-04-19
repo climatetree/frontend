@@ -251,9 +251,11 @@ const Stories = (props) => {
         {!stories.length && !loadSpinner && (
           <div className="no-found-msg">
             No stories were found.
-            {generalSearchTerm.length ? (
+            {query.get("storyTitle") ? (
               <a
-                href={`https://www.google.com/search?q=${generalSearchTerm}`}
+                href={`https://www.google.com/search?q=${query.get(
+                  "storyTitle"
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 id="direct-to-google-search"
