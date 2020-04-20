@@ -27,7 +27,7 @@ const SideBar = ({
         sideBarVisible
           ? "when-filter-is-clicked make-z-index-one unhide-sidebar"
           : ""
-      } ${windowWidth > 950 ? "make-z-index-one" : ""} ${
+      } ${windowWidth > 950 && !loadSpinner ? "make-z-index-one" : ""} ${
         !sideBarVisible && windowWidth < 950 ? "not-apparent" : ""
       }`}
       onClick={closeSideBar}

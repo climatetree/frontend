@@ -22,7 +22,7 @@
 }
 
 .make-z-index-one {
-  z-index: 100;
+  z-index: 1;
 }
 
 .not-apparent {
@@ -60,6 +60,10 @@
     position: fixed;
     width: 100%;
     align-items: center;
+  }
+
+  .make-z-index-one {
+    z-index: 100;
   }
 
   #side-bar-container #side-bar-absolute {
