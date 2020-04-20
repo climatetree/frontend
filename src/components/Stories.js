@@ -263,8 +263,8 @@ const Stories = (props) => {
                 Would you like to help look for one?
               </a>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
         )}
       </>

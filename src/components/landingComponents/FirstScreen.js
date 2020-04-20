@@ -22,8 +22,8 @@ export default function FirstScreen() {
 
   const mapHint = `Hints: Enter the name of your City, County, State, or Country\
     without words like “county” or “city” (for example: “New York” \
-    instead of “New York City” or “New York State”). If you live in a smaller city\
-    , town or village, try your local regional administrative unit name \
+    instead of “New York City” or “New York State”). If you live in a smaller city, \
+    town or village, try your local regional administrative unit name \
     (county name or state name, for example: “Thurston” instead of “Olympia”).`;
 
   const searchForStories = async () => {
@@ -70,7 +70,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "stories" ? "active" : ""
-          }`}
+            }`}
         >
           Explore climate change solution
           <br />
@@ -79,7 +79,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "map" ? "active" : ""
-          }`}
+            }`}
         >
           Discover similar places to yours and climate
           <br />
@@ -88,7 +88,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "research" ? "active" : ""
-          }`}
+            }`}
         >
           Find climate change solution stories and
           <br />
@@ -118,7 +118,7 @@ export default function FirstScreen() {
           id="stories-tab"
           className={`tab-container animate-opacity ${
             activeTab === "stories" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <input
@@ -161,7 +161,7 @@ export default function FirstScreen() {
           id="map-tab"
           className={`tab-container animate-opacity ${
             activeTab === "map" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <input
@@ -237,8 +237,8 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                <p>No suggestion</p>
-              )}
+                      <p>No suggestion</p>
+                    )}
             </div>
           </div>
           <div className="tab-description">
@@ -261,7 +261,7 @@ export default function FirstScreen() {
           id="research-tab"
           className={`tab-container animate-opacity ${
             activeTab === "research" ? "active" : ""
-          }`}
+            }`}
         >
           <div className="tab-input">
             <div className="research-input-wrapper">
