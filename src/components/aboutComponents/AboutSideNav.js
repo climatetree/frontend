@@ -44,14 +44,14 @@ const AboutSideNav = () => {
         </SideNavItem>
         <SideNavItem>
           <Link
-            to="/about/space-reflection"
+            to="/about/acknowledgement"
             className={`about-sidenav-item ${
-              location.pathname === "/about/space-reflection"
+              location.pathname === "/about/acknowledgement"
                 ? "sidenav-active"
                 : ""
             }`}
           >
-            Reflection from Space
+            Acknowledgement
           </Link>
         </SideNavItem>
       </SideNav>

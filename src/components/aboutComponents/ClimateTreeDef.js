@@ -4,7 +4,8 @@ const ClimateTreeDef = () => {
   return (
     <div className="about-section-container">
       <h2>What is ClimateTree&trade;?</h2>
-      <p>
+      <hr className="about-hr"></hr>
+      <p className="about-paragraph">
         Myriad climate change solutions and resilience stories are bubbling up
         around the world- from people just like you, in places just like yours.
         They are found in neighborhoods, in small businesses, research
@@ -13,7 +14,7 @@ const ClimateTreeDef = () => {
         center of the city to the remote countryside.
       </p>
 
-      <p>
+      <p className="about-paragraph">
         ClimateTree&trade; is a timely climate solutions crowdsourcing project
         that empowers people in communities of all scales and types to find,
         share, discuss and apply climate change solutions through policy,
@@ -24,7 +25,7 @@ const ClimateTreeDef = () => {
         socio-economic position is, you can make a BIG difference when equipped
         with this tool.
       </p>
-      <p>
+      <p className="about-paragraph">
         We invite you to “spin the globe” and explore what’s happening within
         and beyond your community and/or city. Perhaps you are a student who is
         frustrated with the glacial pace of change and would like to see your
@@ -38,7 +39,7 @@ const ClimateTreeDef = () => {
         content, comment on what you see, you may even meet one or more new
         friends from across the world!
       </p>
-      <p>
+      <p className="about-paragraph">
         But this tool is not only for students and concerned community members;
         it is also designed for educators, business leaders and governmental
         agencies and support services dedicated to helping your community become
