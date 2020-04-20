@@ -1,5 +1,5 @@
 import React from 'react';
-import closeIcon from '../../images/x.svg';
+import closeIcon from '../../images/x.dark.svg';
 import './SuggestionOverlay.css';
 
 export default function SuggestionOverlay({
@@ -21,26 +21,28 @@ export default function SuggestionOverlay({
             onClick={closeConfirmationPanel}
           />
         </header>
-        {placeSuggestions.map(({ properties }, index) => {
-          const { place_id, name, state_name, nation_name, type } = properties;
-          return (
-            <div
-              className="confirmation-item"
-              key={place_id}
-              onClick={() => {
-                handleSuggestionClick(place_id, name, index);
-                closeConfirmationPanel();
-              }}
-            >
-              <p>{name} - <small>{type}</small></p>
-              <p className="state-nation-name-dropdown">
-                {(type === "NATION" || type === "STATE") ? "" : state_name}
-                {(type === "NATION" || type === "STATE") ? "" : ', '}
-                {type === "NATION" ? "Earth" : nation_name}
-              </p>
-            </div>
-          );
-        })}
+        <div className="suggestion-list">
+          {placeSuggestions.map(({ properties }, index) => {
+            const { place_id, name, state_name, nation_name, type } = properties;
+            return (
+              <div
+                className="confirmation-item"
+                key={place_id}
+                onClick={() => {
+                  handleSuggestionClick(place_id, name, index);
+                  closeConfirmationPanel();
+                }}
+              >
+                <p>{name} - <small>{type}</small></p>
+                <p className="state-nation-name-dropdown">
+                  {(type === "NATION" || type === "STATE") ? "" : state_name}
+                  {(type === "NATION" || type === "STATE") ? "" : ', '}
+                  {type === "NATION" ? "Earth" : nation_name}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

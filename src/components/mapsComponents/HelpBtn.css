@@ -9,7 +9,6 @@
     font-weight: 300;
     padding: 0 10px;
     cursor: pointer;
-    z-index: 1;
 }
 .help-content-container {
     position: fixed;
