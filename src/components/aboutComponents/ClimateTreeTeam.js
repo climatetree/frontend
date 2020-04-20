@@ -7,6 +7,7 @@ import abby from "../../images/team/abby.jpg";
 import adrienne from "../../images/team/adrienne.png";
 import ian from "../../images/team/ian.jpeg";
 import andrew from "../../images/team/andrew.jpeg";
+import cole from "../../images/team/cole.jpeg";
 import evan from "../../images/team/evan.png";
 import kanika from "../../images/team/kanika.jpeg";
 import aayushi from "../../images/team/aayushi.jpeg";
@@ -156,6 +157,21 @@ const ClimateTreeTeam = () => {
           </div>
           <h3>
             Andrew <br></br> Curtright
+          </h3>
+          <span>Developer</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
+            <img src={cole} alt="our_team" />
+            <div class="social_media">
+              <a href="https://www.linkedin.com/in/coleclark1/" target="_blank">
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Cole <br></br> Clark
           </h3>
           <span>Developer</span>
         </div>
