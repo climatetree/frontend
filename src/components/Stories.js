@@ -263,8 +263,8 @@ const Stories = (props) => {
                 Would you like to help look for one?
               </a>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
         )}
       </>
@@ -289,6 +289,7 @@ const Stories = (props) => {
               searchForStoriesBasedOnSearchTerm
             }
           />
+          <a className="map-help-link" href="/help/stories">Learn More About ClimateTree&trade; Stories</a>
           {renderResultFor()}
           {!loadSpinner && renderContent()}
         </div>

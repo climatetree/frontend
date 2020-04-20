@@ -6,7 +6,7 @@ const MapTopic = () => {
       <h1 className="big-title">Map</h1>
       <div className="help-header">
         <p className="objective">
-          “How are people solving Climate Change where you live, and how are
+          “How are people solving climate change where you live, and how are
           they solving it in places just like yours?”
         </p>
       </div>
@@ -16,8 +16,11 @@ const MapTopic = () => {
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
             ClimateTree&trade; has gathered many geographic units at many
-            scales: the Nations of the world along with their “States”,
-            “Counties”, and “Urban Extents”
+            scales: the Nations of the world along with their "States",
+            "Counties", and "Urban Extents" - from the largest and most densely
+            populated places to the smallest and most rural. Beyond the names
+            and locations of these places, ClimateTree has gathered the carbon
+            emissions and population density of these places
           </p>
         </div>
 
@@ -25,8 +28,7 @@ const MapTopic = () => {
           <h2 className="help-title">230 Nations</h2>
           <hr className="help-hr"></hr>
           <p className="topic-explanation">
-            These are the countries of the world, there are about 200 on the
-            planet
+            These are the countries of the world.
           </p>
         </div>
 

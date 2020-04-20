@@ -12,6 +12,7 @@
 #first-screen {
   min-height: 100vh;
   color: #ededed;
+  margin-bottom: 80px;
 }
 #animation-first {
   animation: firstScreen 1s ease-in-out 0s forwards;
@@ -82,20 +83,20 @@
   left: 0;
   right: 0;
   height: calc(100vh + 300px);
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("../../images/nasa-Q1p7bh3SHj8-unsplash.jpg");
   background-size: cover;
   z-index: -1;
   box-shadow: 1vw -50vh 50vh 0 #0d0d0d inset;
 }
 .tabs {
-  padding-top: 30vh;
+  padding-top: 22vh;
 }
 .tab-btn {
   display: inline-block;
   position: relative;
   font-weight: 300;
+  cursor: pointer;
 }
 .tab-btn.active {
   font-weight: 400;
@@ -143,6 +144,23 @@
 .tab-description p {
   font-weight: 300;
   margin-bottom: 0.5rem;
+}
+.tab-description a {
+  color: #ededed;
+  font-weight: 600;
+}
+.tab-description .btn {
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #ededed;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #0d0d0d;
+  padding: 8px 1rem;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  margin-top: 4px;
 }
 .place-suggestions {
   position: absolute;

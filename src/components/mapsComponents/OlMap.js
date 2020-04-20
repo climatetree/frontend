@@ -4,7 +4,7 @@ import "ol/ol.css";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
-import BaseLayer from 'ol/layer/Base';
+import Feature from 'ol/Feature';
 import Cluster from "ol/source/Cluster";
 import VectorSource from "ol/source/Vector";
 import XYZ from "ol/source/XYZ";
@@ -127,6 +127,28 @@ class OlMap extends Component {
     if (this.props.places !== prevProps.places) {
       // Close any open popups
       this.state.overlay.setPosition(undefined);
+
+      // There is a limit on places returned, so target may not be included if
+      // more matches than limit in database. No good way to know the limit if it
+      // is changed, so have to go through everything (as of writing limit = 200).
+      // Determine if target is included...
+      let targetFound = false;
+      let targetId = this.props.targetPlace.properties.place_id;
+      for (var feature of this.props.places) {
+        if (targetId === feature.values_.place_id) {
+          targetFound = true;
+          break;
+        }
+      }
+
+      // Ensure target place is in the list of similar places
+      // Ensures popup functionality for target place
+      if (!targetFound) {
+        // Name change for attribute required due to API inconsistency
+        this.props.targetPlace.properties.type_name = this.props.targetPlace.properties.type;
+        // Add place to list
+        this.props.places.push(getGeoJson(this.props.targetPlace)[0]);
+      }
 
       // Swap out places data points with new search results
       let collection = this.state.map.getLayers();

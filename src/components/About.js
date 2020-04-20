@@ -1,13 +1,39 @@
 import React from "react";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 import Nav from "./Nav";
-import AboutInfo from "./aboutComponents/AboutInfo";
+import AboutSideNav from "./aboutComponents/AboutSideNav";
+import ClimateTreeDef from "./aboutComponents/ClimateTreeDef";
+import ClimateTreeStory from "./aboutComponents/ClimateTreeStory";
+import ClimateTreeTeam from "./aboutComponents/ClimateTreeTeam";
+import Acknowledgement from "./aboutComponents/Acknowledgement";
+
+import "./About.css";
 
 const About = () => {
+  let { path } = useRouteMatch();
+
   return (
     <>
       <Nav />
-      <AboutInfo />
+      <AboutSideNav />
+      <div id="about-background"></div>
+      <div id="about">
+        <Switch>
+          <Route exact path={`${path}`}>
+            <ClimateTreeStory />
+          </Route>
+          <Route path={`${path}/team`}>
+            <ClimateTreeTeam />
+          </Route>
+          <Route path={`${path}/definition`}>
+            <ClimateTreeDef />
+          </Route>
+          <Route path={`${path}/acknowledgement`}>
+            <Acknowledgement />
+          </Route>
+        </Switch>
+      </div>
     </>
   );
 };

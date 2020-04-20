@@ -20,6 +20,7 @@ const StrategyFilter = ({
           id="title-tip"
           dark={false}
           description={`ClimateTree strategy`}
+          direction="below"
         />
       </FilterLabel>
       <div id="strategy-choices">

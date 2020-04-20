@@ -53,15 +53,9 @@ const StorySearchBar = ({
         />
       </form>
       <p className="story-info">
-        Not all solution stories are relevant to all places because of
-        geographic and demographic characteristics. Thus, we have suggested a
-        “taxonomy”, or organizational hierarchy, for the branches of
-        ClimateTree&trade;. You can filter stories based on this taxonomy to
-        narrow your search. Explore the taxonomy further with{" "}
-        <a href="https://drawdown.org/" target="_blank">
-          Project Drawdown
-        </a>
-        .
+        Search for any theme like "climate action plan", "electric cars",
+        "water", "renewable energy", "women", or "farming". Learn about
+        "Filters" on the right. Or browse recent stories by scrolling down.
       </p>
     </div>
   );
