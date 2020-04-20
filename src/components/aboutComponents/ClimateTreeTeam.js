@@ -269,7 +269,7 @@ const ClimateTreeTeam = () => {
             <img src={priyanka} alt="our_team" />
             <div class="social_media">
               <a
-                href="www.linkedin.com/in/priyanka-debnath-96311171"
+                href="https://www.linkedin.com/in/priyanka-debnath-96311171"
                 target="_blank"
               >
                 <i class="linkedin fab fa-linkedin"></i>
