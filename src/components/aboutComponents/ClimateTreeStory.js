@@ -4,7 +4,8 @@ const ClimateTreeStory = () => {
   return (
     <div className="about-section-container">
       <h2>ClimateTree&trade; Story</h2>
-      <p>
+      <hr className="about-hr"></hr>
+      <p className="about-paragraph">
         ClimateTree&trade; was conceived in 2019 by GIS expert Greg Schundler
         and climate literacy and policy specialist Abby Ruskey in response to
         global-scale ecological crisis, global climate strikes, and the inertia
@@ -14,14 +15,14 @@ const ClimateTreeStory = () => {
         resolution, were asked to advise their city government on the adoption
         of appropriate climate change mitigation and adaptation solutions.
       </p>
-      <p>
+      <p className="about-paragraph">
         The ClimateTree&trade; website was co-designed, developed and launched
         in 2020 by Northeastern University Master’s students in Advanced
         Software Development. Their Professor, Dr. Ian Gorton, Chair of Computer
         Science, discovered ClimateTree&trade; and Greg at a “tech for good”
         event sponsored by Mark Frischmuth’s DemocracyLab.org.
       </p>
-      <p>
+      <p className="about-paragraph">
         Please feel free to send us your questions or interest at{" "}
         <a href="mailto:climatetreecontact@gmail.com">
           climatetreecontact@gmail.com

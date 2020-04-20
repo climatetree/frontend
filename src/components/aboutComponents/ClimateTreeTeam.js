@@ -18,6 +18,7 @@ import priyanka from "../../images/team/priyanka.png";
 import vishal from "../../images/team/vishal.jpeg";
 import theodore from "../../images/team/theodore.jpeg";
 import wanjia from "../../images/team/wanjia.jpeg";
+import xiaoyi from "../../images/team/xiaoyi.jpeg";
 import yuyou from "../../images/team/yuyou.jpeg";
 
 import "./ClimateTreeTeam.css";
@@ -307,6 +308,21 @@ const ClimateTreeTeam = () => {
           </div>
           <h3>
             Wanjia <br></br> Tang
+          </h3>
+          <span>Developer</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
+            <img src={xiaoyi} alt="our_team" />
+            <div class="social_media">
+              <a href="https://www.linkedin.com/in/xiaoyisun/" target="_blank">
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Xiaoyi <br></br> Sun
           </h3>
           <span>Developer</span>
         </div>
