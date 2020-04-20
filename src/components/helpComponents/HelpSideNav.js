@@ -1,15 +1,18 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import "./SideNav.css";
+import SideNav from "../generalComponents/SideNav";
+import SideNavItem from "../generalComponents/SideNavItem";
 
-const SideNav = () => {
+import "./HelpSideNav.css";
+
+const HelpSideNav = () => {
   const { location } = useHistory();
 
   return (
     <>
-      <div className="help-sidebar">
-        <div className="help-sidenav-item">
+      <SideNav>
+        <SideNavItem>
           <Link
             to="/help"
             className={`sidenav-link-item ${
@@ -18,8 +21,8 @@ const SideNav = () => {
           >
             General
           </Link>
-        </div>
-        <div className="help-sidenav-item">
+        </SideNavItem>
+        <SideNavItem>
           <Link
             to="/help/map"
             className={`sidenav-link-item ${
@@ -28,8 +31,8 @@ const SideNav = () => {
           >
             Map
           </Link>
-        </div>
-        <div className="help-sidenav-item">
+        </SideNavItem>
+        <SideNavItem>
           <Link
             to="/help/stories"
             className={`sidenav-link-item ${
@@ -38,8 +41,8 @@ const SideNav = () => {
           >
             Stories
           </Link>
-        </div>
-        <div className="help-sidenav-item">
+        </SideNavItem>
+        <SideNavItem>
           <Link
             to="/help/research"
             className={`sidenav-link-item ${
@@ -48,10 +51,22 @@ const SideNav = () => {
           >
             Research
           </Link>
-        </div>
-      </div>
+        </SideNavItem>
+        <SideNavItem>
+          <Link
+            to="/help/login-profile"
+            className={`sidenav-link-item ${
+              location.pathname === "/help/login-profile"
+                ? "sidenav-active"
+                : ""
+            }`}
+          >
+            Account
+          </Link>
+        </SideNavItem>
+      </SideNav>
     </>
   );
 };
 
-export default SideNav;
+export default HelpSideNav;

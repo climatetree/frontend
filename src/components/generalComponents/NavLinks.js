@@ -98,7 +98,7 @@ export default function NavLinks({ cssScope, activeLink }) {
           <Link
             to="/about"
             className={`underline-hover ${
-              location.pathname === "/about" ? "active" : ""
+              location.pathname.includes("/about") ? "active" : ""
             }`}
           >
             ABOUT
