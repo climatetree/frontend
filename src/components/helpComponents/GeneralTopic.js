@@ -16,6 +16,7 @@ const GeneralTopic = () => {
           <a
             className="video-link"
             href="https://www.youtube.com/watch?v=Ok8rMT2KCy0"
+            target="_blank"
           >
             Climate Change
           </a>
