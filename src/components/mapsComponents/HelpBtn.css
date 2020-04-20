@@ -9,7 +9,6 @@
     font-weight: 300;
     padding: 0 10px;
     cursor: pointer;
-    z-index: 1;
 }
 .help-content-container {
     position: fixed;
@@ -26,12 +25,9 @@
     z-index: 1;
 }
 .help-content {
-    min-height: 300px;
+    max-height: 95%;
     overflow-y: auto;
     max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     background-color: #181818;
     border-radius: 4px;
     padding: 1rem 2rem 1.5rem;
@@ -49,6 +45,19 @@
 }
 .help-content p {
     margin: 1rem 0;
+}
+.map-help-link {
+  color: #333333;
+  background-color: #fefefe;
+  box-shadow: 0 0 5px 0 #999999;
+  border: none;
+  border-radius: 3px;
+  line-height: 35px;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0 10px;
+  text-decoration: none;
+  width: fit-content;
 }
 
 @media (max-width: 812px) {

@@ -289,6 +289,7 @@ const Stories = (props) => {
               searchForStoriesBasedOnSearchTerm
             }
           />
+          <a className="map-help-link" href="/help/map">Learn More About ClimateTree&trade; Stories</a>
           {renderResultFor()}
           {!loadSpinner && renderContent()}
         </div>
