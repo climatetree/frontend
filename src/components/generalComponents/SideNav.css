@@ -6,28 +6,7 @@
   position: fixed;
   background-color: rgba(10, 10, 10, 0.7);
   box-shadow: 3px 0 6px rgba(10, 10, 10, 0.5);
-}
-
-.help-sidenav-item {
-  padding: 10px 20px;
-  height: 52px;
-  font-size: 20px;
-}
-
-.sidenav-link-item {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.4);
-  transition: color 0.2s;
-}
-
-.sidenav-link-item:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-.sidenav-active {
-  color: rgba(255, 255, 255, 1);
+  z-index: 1;
 }
 
 @media (max-width: 870px) {
@@ -39,9 +18,5 @@
     padding-top: 0;
     width: 100%;
     height: auto;
-  }
-
-  .help-sidenav-item {
-    font-size: 15px;
   }
 }

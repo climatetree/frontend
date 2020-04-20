@@ -2,25 +2,24 @@ import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 import Nav from "./Nav";
-import SideNav from "./helpComponents/SideNav";
+import HelpSideNav from "./helpComponents/HelpSideNav";
 import GeneralTopic from "./helpComponents/GeneralTopic";
 import MapTopic from "./helpComponents/MapTopic";
 import ResearchTopic from "./helpComponents/ResearchTopic";
 import StoriesTopic from "./helpComponents/StoriesTopic";
+import LoginProfileTopic from "./helpComponents/LoginProfileTopic";
 
 import "./HelpPage.css";
 
 const HelpPage = () => {
   let { path } = useRouteMatch();
 
-  console.log(path);
-
   return (
     <>
       <Nav />
       <div id="help-background"></div>
       <div id="help-container">
-        <SideNav />
+        <HelpSideNav />
         <Switch>
           <Route exact path={`${path}`}>
             <GeneralTopic />
@@ -33,6 +32,9 @@ const HelpPage = () => {
           </Route>
           <Route path={`${path}/research`}>
             <ResearchTopic />
+          </Route>
+          <Route path={`${path}/login-profile`}>
+            <LoginProfileTopic />
           </Route>
         </Switch>
       </div>

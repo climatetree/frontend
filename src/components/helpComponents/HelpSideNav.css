@@ -1,0 +1,28 @@
+.sidenav-link-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.2s;
+  font-size: 20px;
+}
+
+.sidenav-link-item:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.sidenav-active {
+  color: rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 870px) {
+  .sidenav-link-item {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidenav-link-item {
+    font-size: 12px;
+  }
+}
