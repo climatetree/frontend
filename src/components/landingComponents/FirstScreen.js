@@ -1,5 +1,5 @@
 /**
- * Main component of the landing page 
+ * Main component of the landing page
  */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,14 +16,14 @@ export default function FirstScreen() {
   const [activeTab, setActiveTab] = useState("stories");
   const [mapSearchTerm, setMapSearchTerm] = useState("");
   const [researchSearchTerm, setResearchSearchTerm] = useState("");
-  const [researchPlaceTerm, setResearchPlaceTerm] = useState('');
+  const [researchPlaceTerm, setResearchPlaceTerm] = useState("");
   const debouncedSearchTerm = useDebounce(mapSearchTerm, 500);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
 
-  const mapHint = `Hints: Enter the name of your City, County, State, or \
-    Country without words like “county” or “city” (for example) “New York” \
-    instead of “New York City” or “New York State”).If you live in a smaller \
-    city, town or village, try your local regional administrative unit name \
+  const mapHint = `Hints: Enter the name of your City, County, State, or Country\
+    without words like “county” or “city” (for example: “New York” \
+    instead of “New York City” or “New York State”). If you live in a smaller city\
+    , town or village, try your local regional administrative unit name \
     (county name or state name, for example: “Thurston” instead of “Olympia”).`;
 
   const searchForStories = async () => {
@@ -70,7 +70,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "stories" ? "active" : ""
-            }`}
+          }`}
         >
           Explore climate change solution
           <br />
@@ -79,7 +79,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "map" ? "active" : ""
-            }`}
+          }`}
         >
           Discover similar places to yours and climate
           <br />
@@ -88,7 +88,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "research" ? "active" : ""
-            }`}
+          }`}
         >
           Find climate change solution stories and
           <br />
@@ -121,7 +121,7 @@ export default function FirstScreen() {
           id="stories-tab"
           className={`tab-container animate-opacity ${
             activeTab === "stories" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <input
@@ -148,16 +148,15 @@ export default function FirstScreen() {
           <div className="tab-description">
             <p>Search climate change solutions with ClimateTree&trade;</p>
             <p>
-              ClimateTree’s&trade; fundamental units are called <strong>solution stories</strong>.
-              They include content describing climate change adaptation and mitigation strategies
-              from across the world. Our database contains a collection of solution stories
-              searchable by solution type and by where the solutions come from in the world.
+              Welcome to ClimateTree&trade;, the world's best library of Climate
+              Change Solution Stories. Search for any theme like "climate action
+              plan", "electric cars", "water", "renewable energy", "women", or
+              "farming". Use the "Map" function to explore climate change
+              solution stories for places like yours around the world.
             </p>
             <p>
-              Search "Stories" to find solutions by type. We will show you all the solutions
-              we have containing the given search terms. It is our hope that by sharing this content, users will
-              gain hope, insight, and practical information about how to approach climate
-              change solutions in their own locale.
+              Click the HELP section in the menu bar to learn more about our
+              database
             </p>
           </div>
         </div>
@@ -165,7 +164,7 @@ export default function FirstScreen() {
           id="map-tab"
           className={`tab-container animate-opacity ${
             activeTab === "map" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <input
@@ -228,8 +227,10 @@ export default function FirstScreen() {
                       >
                         {name} - <small>{type}</small>
                         <span>
-                          {(type === "NATION" || type === "STATE") ? "" : state_name}
-                          {(type === "NATION" || type === "STATE") ? "" : ', '}
+                          {type === "NATION" || type === "STATE"
+                            ? ""
+                            : state_name}
+                          {type === "NATION" || type === "STATE" ? "" : ", "}
                           {type === "NATION" ? "Earth" : nation_name}
                         </span>
                       </p>
@@ -239,28 +240,30 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                      <p>No suggestion</p>
-                    )}
+                <p>No suggestion</p>
+              )}
             </div>
           </div>
           <div className="tab-description">
             <p>View similar places on the map</p>
             <p>
-              The ClimateTree&trade; "Map" feature allows you to find places like yours around the world
-              to explore what people there are doing about climate change. When you type in a place you
-              will be given a number of places around the world that are similar, according
-              to our default search based on population.
+              The ClimateTree&trade; "Map" feature allows you to find places
+              like yours around the world to explore what people there are doing
+              about climate change. When you type in a place you will be given a
+              number of places around the world that are similar, according to
+              our default search based on population. The "Advanced Search" in
+              the map window will allow you to adjust parameters around what
+              "similar places" means to you. Click the 3 lines in the upper
+              right corner to navigate back to other ClimateTree pages.
             </p>
-            <p>
-              {mapHint}
-            </p>
+            <p>{mapHint}</p>
           </div>
         </div>
         <div
           id="research-tab"
           className={`tab-container animate-opacity ${
             activeTab === "research" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <div className="research-input-wrapper">
@@ -270,16 +273,20 @@ export default function FirstScreen() {
                 type="text"
                 placeholder="E.g. Solar, Electric bikes, etc."
                 value={researchSearchTerm}
-                onChange={event => setResearchSearchTerm(event.target.value)}
+                onChange={(event) => setResearchSearchTerm(event.target.value)}
               />
               <label htmlFor="research-search-term">
                 Search solution
                 <span>
-                  Search climate solutions. See {" "}
-                  <a href="https://drawdown.org/solutions/table-of-solutions" target="_blank">
+                  Search climate solutions. See{" "}
+                  <a
+                    href="https://drawdown.org/solutions/table-of-solutions"
+                    target="_blank"
+                  >
                     ProjectDrawdown
-                  </a>
-                  {" "} for more suggestions.</span>
+                  </a>{" "}
+                  for more suggestions.
+                </span>
               </label>
             </div>
             <div className="research-input-wrapper">
@@ -289,33 +296,51 @@ export default function FirstScreen() {
                 type="text"
                 placeholder="E.g. Seattle, Washington, etc."
                 value={researchPlaceTerm}
-                onChange={event => setResearchPlaceTerm(event.target.value)}
+                onChange={(event) => setResearchPlaceTerm(event.target.value)}
               />
               <label htmlFor="research-place-term">
                 Search place
                 <span>
-                  Type in the City, County, State, or Country AND choose from dropdown.
+                  Type in the City, County, State, or Country AND choose from
+                  dropdown.
                 </span>
               </label>
             </div>
           </div>
           <div className="research-btn-wrapper">
-            <button onClick={() => {
-              window.open(
-                `https://www.google.com/search?q=${researchSearchTerm}+${researchPlaceTerm}`
-              );
-            }}>
+            <button
+              onClick={() => {
+                window.open(
+                  `https://www.google.com/search?q=${researchSearchTerm}+${researchPlaceTerm}`
+                );
+              }}
+            >
               Search The Web
             </button>
-            <button onClick={() => { history.push({ pathname: '/login' }) }}>
+            <button
+              onClick={() => {
+                history.push({ pathname: "/login" });
+              }}
+            >
               Upload Stories
             </button>
           </div>
           <div className="tab-description">
             <p>Discover and share climate solutions</p>
             <p>
-              Investigate climate change solution stories on the web and ClimateTree&trade;
-              will help you share with the world.
+              ClimateTree&trade;'s Research tool helpl you search the web for
+              climate change solution stories. Once you type in a "search
+              solution" and "search place", ClimateTree will open a new window
+              in your browser with your search terms in Google. Browse through
+              the Google search results.
+            </p>
+            <p>
+              When you find something interesting to share, come back to the
+              ClimateTree Research page and click "Upload Stories". A prompt
+              will ask you to paste the hyperlink to your climate change
+              solution story, as well as tag it with location, media type, and
+              climate change solution type. See HELP in the top menu bar for
+              more information.
             </p>
           </div>
         </div>

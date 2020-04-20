@@ -12,6 +12,7 @@
 #first-screen {
   min-height: 100vh;
   color: #ededed;
+  margin-bottom: 80px;
 }
 #animation-first {
   animation: firstScreen 1s ease-in-out 0s forwards;
@@ -82,8 +83,7 @@
   left: 0;
   right: 0;
   height: calc(100vh + 300px);
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("../../images/nasa-Q1p7bh3SHj8-unsplash.jpg");
   background-size: cover;
   z-index: -1;
