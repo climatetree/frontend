@@ -4,6 +4,9 @@ import logo from "../../images/white-logo.png";
 import NEUlogo from "../../images/Notched N Motto Wordmark Lockup_Nmotto+Northeastern_WWW_KO.png";
 import greg from "../../images/team/greg.jpg";
 import abby from "../../images/team/abby.jpg";
+import adrienne from "../../images/team/adrienne.png";
+import ian from "../../images/team/ian.jpeg";
+import andrew from "../../images/team/andrew.jpeg";
 import evan from "../../images/team/evan.png";
 import kanika from "../../images/team/kanika.jpeg";
 import aayushi from "../../images/team/aayushi.jpeg";
@@ -74,6 +77,39 @@ const ClimateTreeTeam = () => {
 
         <div class="team_member">
           <div class="member_img">
+            <img src={ian} alt="our_team" />
+            <div class="social_media">
+              <a href="https://www.linkedin.com/in/gortonator/" target="_blank">
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Ian <br></br> Gorton
+          </h3>
+          <span>Professor</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
+            <img src={adrienne} alt="our_team" />
+            <div class="social_media">
+              <a
+                href="https://www.linkedin.com/in/adrienne-slaughter-1628452/"
+                target="_blank"
+              >
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Adrienne <br></br> Slaughter
+          </h3>
+          <span>Assistant Professor</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
             <img src={aayushi} alt="our_team" />
             <div class="social_media">
               <a
@@ -102,6 +138,24 @@ const ClimateTreeTeam = () => {
           </div>
           <h3>
             Abdul <br></br> Kadir Olia
+          </h3>
+          <span>Developer</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
+            <img src={andrew} alt="our_team" />
+            <div class="social_media">
+              <a
+                href="https://www.linkedin.com/in/andrewcurtright/"
+                target="_blank"
+              >
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Andrew <br></br> Curtright
           </h3>
           <span>Developer</span>
         </div>

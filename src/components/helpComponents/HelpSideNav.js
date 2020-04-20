@@ -61,7 +61,7 @@ const HelpSideNav = () => {
                 : ""
             }`}
           >
-            Account
+            Login
           </Link>
         </SideNavItem>
       </SideNav>

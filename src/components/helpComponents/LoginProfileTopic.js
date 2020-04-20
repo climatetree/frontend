@@ -3,7 +3,7 @@ import React from "react";
 const LoginProfileTopic = () => {
   return (
     <div className="help-topic">
-      <h1 className="big-title">Account</h1>
+      <h1 className="big-title">Log-in/Profile</h1>
       <div className="help-header">
         <p className="objective">"Be a Part of the ClimateTree Community"</p>
       </div>

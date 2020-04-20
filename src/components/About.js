@@ -6,7 +6,7 @@ import AboutSideNav from "./aboutComponents/AboutSideNav";
 import ClimateTreeDef from "./aboutComponents/ClimateTreeDef";
 import ClimateTreeStory from "./aboutComponents/ClimateTreeStory";
 import ClimateTreeTeam from "./aboutComponents/ClimateTreeTeam";
-import SpaceReflection from "./aboutComponents/SpaceReflection";
+import Acknowledgement from "./aboutComponents/Acknowledgement";
 
 import "./About.css";
 
@@ -29,8 +29,8 @@ const About = () => {
           <Route path={`${path}/definition`}>
             <ClimateTreeDef />
           </Route>
-          <Route path={`${path}/space-reflection`}>
-            <SpaceReflection />
+          <Route path={`${path}/acknowledgement`}>
+            <Acknowledgement />
           </Route>
         </Switch>
       </div>

@@ -70,7 +70,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "stories" ? "active" : ""
-            }`}
+          }`}
         >
           Explore climate change solution
           <br />
@@ -79,7 +79,7 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "map" ? "active" : ""
-            }`}
+          }`}
         >
           Discover similar places to yours and climate
           <br />
@@ -88,11 +88,11 @@ export default function FirstScreen() {
         <h2
           className={`tab-title animate-opacity ${
             activeTab === "research" ? "active" : ""
-            }`}
+          }`}
         >
           Find climate change solution stories and
           <br />
-          share them with the ClimateTree&trade; community
+          share them with the world
         </h2>
         <header>
           <span
@@ -118,7 +118,7 @@ export default function FirstScreen() {
           id="stories-tab"
           className={`tab-container animate-opacity ${
             activeTab === "stories" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <input
@@ -145,23 +145,26 @@ export default function FirstScreen() {
           <div className="tab-description">
             <p>Search climate change solutions with ClimateTree&trade;</p>
             <p>
-              Welcome to ClimateTree&trade;, the world's best library of Climate
+              Welcome to ClimateTree&trade;, the world's library of Climate
               Change Solution Stories. Search for any theme like "climate action
               plan", "electric cars", "water", "renewable energy", "women", or
               "farming". Use the "Map" function to explore climate change
               solution stories for places like yours around the world.
             </p>
             <p>
-              Click the <a href="/help/stories">HELP</a> section in the menu bar to learn more about our database.
+              Click the <a href="/help/stories">HELP</a> section in the menu bar
+              to learn more about our database.
             </p>
-            <a className="btn" href="/help/stories">Learn More</a>
+            <a className="btn" href="/help/stories">
+              Learn More
+            </a>
           </div>
         </div>
         <div
           id="map-tab"
           className={`tab-container animate-opacity ${
             activeTab === "map" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <input
@@ -237,8 +240,8 @@ export default function FirstScreen() {
               ) : debouncedSearchTerm.length <= 1 ? (
                 <p>Please enter more than 1 letter</p>
               ) : (
-                      <p>No suggestion</p>
-                    )}
+                <p>No suggestion</p>
+              )}
             </div>
           </div>
           <div className="tab-description">
@@ -254,14 +257,16 @@ export default function FirstScreen() {
               right corner to navigate back to other ClimateTree pages.
             </p>
             <p>{mapHint}</p>
-            <a className="btn" href="/help/map">Learn More</a>
+            <a className="btn" href="/help/map">
+              Learn More
+            </a>
           </div>
         </div>
         <div
           id="research-tab"
           className={`tab-container animate-opacity ${
             activeTab === "research" ? "active" : ""
-            }`}
+          }`}
         >
           <div className="tab-input">
             <div className="research-input-wrapper">
@@ -340,7 +345,9 @@ export default function FirstScreen() {
               climate change solution type. See HELP in the top menu bar for
               more information.
             </p>
-            <a className="btn" href="/help/research">Learn More</a>
+            <a className="btn" href="/help/research">
+              Learn More
+            </a>
           </div>
         </div>
       </div>
