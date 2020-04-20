@@ -11,14 +11,12 @@
   display: none;
 }
 #confirmation-panel {
-  height: 400px;
   width: 300px;
   color: #333333;
   background-color: #fefefe;
   box-shadow: 0 0 5px 0 #999999;
   border-radius: 4px;
   padding: 20px;
-  overflow-y: auto;
 }
 #confirmation-panel header {
   display: flex;
@@ -38,6 +36,10 @@
 }
 #confirmation-panel .close-btn:hover {
   background-color: #ededed;
+}
+#confirmation-panel .suggestion-list {
+  max-height: 400px;
+  overflow-y: auto;
 }
 #confirmation-panel .confirmation-item {
   margin-bottom: 1rem;

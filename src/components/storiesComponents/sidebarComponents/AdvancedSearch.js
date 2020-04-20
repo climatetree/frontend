@@ -153,6 +153,7 @@ const AdvancedSearch = ({
             id="title-tip"
             dark={false}
             description="Choose at least 1 filter to filter stories"
+            direction="below"
           />
         </div>
         <button
