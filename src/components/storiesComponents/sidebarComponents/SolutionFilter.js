@@ -30,6 +30,7 @@ const SolutionFilter = ({
               id="title-tip"
               dark={false}
               description={`ClimateTree solution`}
+              direction="below"
             />
           </FilterLabel>
         </div>

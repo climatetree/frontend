@@ -33,6 +33,7 @@ const SectorFilter = ({
               id="title-tip"
               dark={false}
               description="ClimateTree sector"
+              direction="below"
             />
           </FilterLabel>
         </div>

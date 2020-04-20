@@ -98,21 +98,18 @@ export default function FirstScreen() {
           <span
             className={`tab-btn ${activeTab === "stories" ? "active" : ""}`}
             onClick={() => setActiveTab("stories")}
-            style={{ cursor: "pointer" }}
           >
             Stories
           </span>
           <span
             className={`tab-btn ${activeTab === "map" ? "active" : ""}`}
             onClick={() => setActiveTab("map")}
-            style={{ cursor: "pointer" }}
           >
             Map
           </span>
           <span
             className={`tab-btn ${activeTab === "research" ? "active" : ""}`}
             onClick={() => setActiveTab("research")}
-            style={{ cursor: "pointer" }}
           >
             Research
           </span>
@@ -155,9 +152,9 @@ export default function FirstScreen() {
               solution stories for places like yours around the world.
             </p>
             <p>
-              Click the HELP section in the menu bar to learn more about our
-              database
+              Click the <a href="/help/stories">HELP</a> section in the menu bar to learn more about our database.
             </p>
+            <a className="btn" href="/help/stories">Learn More</a>
           </div>
         </div>
         <div
@@ -257,6 +254,7 @@ export default function FirstScreen() {
               right corner to navigate back to other ClimateTree pages.
             </p>
             <p>{mapHint}</p>
+            <a className="btn" href="/help/map">Learn More</a>
           </div>
         </div>
         <div
@@ -342,6 +340,7 @@ export default function FirstScreen() {
               climate change solution type. See HELP in the top menu bar for
               more information.
             </p>
+            <a className="btn" href="/help/research">Learn More</a>
           </div>
         </div>
       </div>

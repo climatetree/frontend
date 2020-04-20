@@ -6,9 +6,10 @@ import './Tooltip.css';
 export default function Tooltip({
   dark,
   description,
+  direction,
 }) {
   return (
-    <div className="tooltip">
+    <div className={`tooltip ${direction}`}>
       <img
         src={dark ? blackInfoIcon : whiteInfoIcon}
         alt="info"
