@@ -77,23 +77,23 @@ export default function PostStoryForm({
         solution: solution.length ? [solution] : ["Other"],
       }),
     })
-    .then(response => response.json())
-    .then(story => {
-      // Add that new story to the user profile
-      setMyStories([
-        ...myStories,
-        {
-          ...story,
-          image: preview.image || "",
-        },
-      ]);
-      closeForm();
-      setSubmitStatus('idle');
-    })
-    .catch((error) => {
-      setErroMsg(error.toString());
-      console.log(error);
-    });
+      .then(response => response.json())
+      .then(story => {
+        // Add that new story to the user profile
+        setMyStories([
+          ...myStories,
+          {
+            ...story,
+            image: preview.image || "",
+          },
+        ]);
+        closeForm();
+        setSubmitStatus('idle');
+      })
+      .catch((error) => {
+        setErroMsg(error.toString());
+        console.log(error);
+      });
   }
   const {
     submitStatus, setSubmitStatus,
@@ -168,21 +168,24 @@ export default function PostStoryForm({
                       name,
                       state_name,
                       nation_name,
+                      type,
                     } = properties;
                     return (
                       <p
                         className={`place-name-dropdown${
                           place_id === selectedPlaceID[0] ? " highlight" : ""
-                        }`}
+                          }`}
                         key={place_id}
                         onClick={() => {
                           setPlace(name);
                           setSelectedPlaceID(place_id);
                         }}
                       >
-                        {name}
+                        {name} - <small>{type}</small>
                         <span className="state-nation-name-dropdown">
-                          {state_name} {state_name ? "," : ""} {nation_name}
+                          {(type === "NATION" || type === "STATE") ? "" : state_name}
+                          {(type === "NATION" || type === "STATE") ? "" : ', '}
+                          {type === "NATION" ? "Earth" : nation_name}
                         </span>
                       </p>
                     );
@@ -193,8 +196,8 @@ export default function PostStoryForm({
               ) : debouncedSearchTerm.length > 0 ? (
                 <p className="hint">No suggestion</p>
               ) : (
-                <p className="hint">Place Suggestions</p>
-              )}
+                        <p className="hint">Place Suggestions</p>
+                      )}
             </div>
           </div>
           <Select
