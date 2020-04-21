@@ -4,6 +4,7 @@ import logo from "../../images/white-logo.png";
 import NEUlogo from "../../images/Notched N Motto Wordmark Lockup_Nmotto+Northeastern_WWW_KO.png";
 import greg from "../../images/team/greg.jpg";
 import abby from "../../images/team/abby.jpg";
+import michael from "../../images/team/michael_patrick.jpeg";
 import adrienne from "../../images/team/adrienne.png";
 import ian from "../../images/team/ian.jpeg";
 import andrew from "../../images/team/andrew.jpeg";
@@ -16,6 +17,8 @@ import abdul from "../../images/team/abdul.jpeg";
 import shweta from "../../images/team/shweta.jpg";
 import sam from "../../images/team/sam.jpeg";
 import saurabha from "../../images/team/saurabha.jpeg";
+import sean from "../../images/team/sean.jpeg";
+import nick from "../../images/team/nick.jpeg";
 import neha from "../../images/team/neha.jpeg";
 import pierre from "../../images/team/pierre.jpg";
 import priyanka from "../../images/team/priyanka.png";
@@ -74,6 +77,24 @@ const ClimateTreeTeam = () => {
             Abby <br></br> Ruskey
           </h3>
           <span>Founder</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
+            <img src={michael} alt="our_team" />
+            <div class="social_media">
+              <a
+                href="https://www.linkedin.com/in/michael-patrick-0120783/"
+                target="_blank"
+              >
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Michael <br></br> Patrick
+          </h3>
+          <span>GIS Advisor</span>
         </div>
 
         <div class="team_member">
@@ -207,7 +228,7 @@ const ClimateTreeTeam = () => {
             </div>
           </div>
           <h3>
-            Harman <br></br> Preet
+            Harman Preet<br></br> Singh
           </h3>
           <span>Developer</span>
         </div>
@@ -244,6 +265,24 @@ const ClimateTreeTeam = () => {
           </div>
           <h3>
             Neha <br></br> Gundecha
+          </h3>
+          <span>Developer</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
+            <img src={nick} alt="our_team" />
+            <div class="social_media">
+              <a
+                href="https://www.linkedin.com/in/nicholas-nemetz/"
+                target="_blank"
+              >
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Nicholas <br></br> Nemetz
           </h3>
           <span>Developer</span>
         </div>
@@ -294,6 +333,24 @@ const ClimateTreeTeam = () => {
           </div>
           <h3>
             Saurabha <br></br> Jirgi
+          </h3>
+          <span>Developer</span>
+        </div>
+
+        <div class="team_member">
+          <div class="member_img">
+            <img src={sean} alt="our_team" />
+            <div class="social_media">
+              <a
+                href="https://www.linkedin.com/in/sean-fitzpatrick-892854116/"
+                target="_blank"
+              >
+                <i class="linkedin fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <h3>
+            Sean <br></br> Fitzpatrick
           </h3>
           <span>Developer</span>
         </div>
