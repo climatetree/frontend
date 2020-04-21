@@ -5,6 +5,8 @@ import DeleteIcon from "../../images/trash.svg";
 import CloseIcon from "../../images/x.svg";
 import EditIcon from "../../images/edit-3.svg";
 import EditStoryForm from "../loginComponents/EditStoryForm";
+import defaultImage from "../../images/default.png";
+
 import "./StoryPreview.css";
 
 export default function StoryPreview({
@@ -29,7 +31,12 @@ export default function StoryPreview({
         )}`
       );
       const preview = await response.json();
-      setImageUrl(preview.image);
+
+      if (preview.image) {
+        setImageUrl(preview.image);
+      } else {
+        setImageUrl(defaultImage);
+      }
     })();
   }, []);
   function openOperations(event) {
@@ -55,12 +62,12 @@ export default function StoryPreview({
         },
       }
     )
-    .then(() => {
-      removeStory();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then(() => {
+        removeStory();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <>

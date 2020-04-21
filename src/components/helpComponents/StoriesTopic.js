@@ -159,7 +159,7 @@ const StoriesTopic = () => {
             Chapter 14 (page 845) of the{" "}
             <a
               className="video-link"
-              href="https://www.ipcc.ch/report/ar5/wg2/"
+              href="https://www.ipcc.ch/"
               target="_blank"
               rel="noopener noreferrer"
             >
