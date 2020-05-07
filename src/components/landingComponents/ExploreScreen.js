@@ -3,17 +3,14 @@
  */
 import React, { useEffect, useState } from "react";
 import StoryPreview from "../generalComponents/StoryPreview";
+import { fetchTopStories } from '../loginComponents/helper';
 import "./ExploreScreen.css";
 
 export default function ExploreScreen() {
   const [popularStories, setPopularStories] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "https://climatetree-api-gateway.azurewebsites.net/stories/topStories/3"
-      );
-      const topStories = await res.json();
-      setPopularStories(topStories);
+      setPopularStories(await fetchTopStories(3));
     })();
   }, []);
   return (

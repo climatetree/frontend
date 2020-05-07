@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import useDebounce from "../customHooks/useDebounce";
-import Tooltip from "../generalComponents/Tooltip";
 import searchIcon from "../../images/search.svg";
 import "./FirstScreen.css";
 
