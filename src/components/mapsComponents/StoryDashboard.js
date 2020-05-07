@@ -32,8 +32,12 @@ export default function StoryDashboard({
     if (comparePlaceProps) {
       (async () => {
         const response = await fetch(`https://climatetree-api-gateway.azurewebsites.net/stories/place/${comparePlaceProps.place_id}`);
-        const placeStories = await response.json();
-        setStories(placeStories);
+        if (response.ok) {
+          const placeStories = await response.json();
+          setStories(placeStories);
+        } else {
+          console.error(`${response.status} ${response.statusText}`);
+        }
       })();
     } else {
       setStories([]);
