@@ -292,7 +292,7 @@ const ClimateTreeTeam = () => {
             <img src={pierre} alt="our_team" />
             <div class="social_media">
               <a
-                href="https://www.linkedin.com/in/pierrealexandremousset/"
+                href="https://pierre-alexandre.io/"
                 target="_blank"
               >
                 <i class="linkedin fab fa-linkedin"></i>
